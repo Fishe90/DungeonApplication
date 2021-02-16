@@ -52,6 +52,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Player_Inventory.cs" />
     <Compile Include="Player_Menus.cs" />
+    <Compile Include="Player_Party.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
