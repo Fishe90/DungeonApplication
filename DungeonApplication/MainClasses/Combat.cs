@@ -28,7 +28,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageMonster(defender, defender.Health, 0, GameText, GameBackground);
+            CalcDamageMonster(defender, defender.Health, 0, GameText, GameBackground);
             //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -60,7 +60,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
+            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -91,7 +91,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
+            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             System.Threading.Thread.Sleep(2000);
@@ -117,7 +117,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
+            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -150,7 +150,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, 0, GameText, GameBackground);
+            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, 0, GameText, GameBackground);
             //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -182,7 +182,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
+            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -213,7 +213,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
+            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             System.Threading.Thread.Sleep(2000);
@@ -239,7 +239,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(75);
             }
             System.Threading.Thread.Sleep(1000);
-            //CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
+            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
             //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
             //DISMessageBox(GameBoyColor, GameText, GameBackground);
             Console.SetCursorPosition(9, 22);
@@ -250,6 +250,47 @@ namespace MainClasses
             }
             System.Threading.Thread.Sleep(2000);
             move.Uses -= 1;
+        }
+
+        #endregion
+
+        #region CalcDamage Display Player VS Monster
+
+        public static void CalcDamageMonster(Monster monster, int currentHealth, int damage, ConsoleColor GameText, ConsoleColor GameBackground)
+        {
+            currentHealth = monster.Health;
+            System.Threading.Thread.Sleep(1000);
+            currentHealth -= damage;
+            while (currentHealth < monster.Health)
+            {
+                monster.Health -= 1;
+                //DISMonsterHealthBar(monster, 17, 4, GameText, GameBackground);
+                if (monster.Health <= 0 && currentHealth <= 0)
+                {
+                    monster.Health = 0;
+                    currentHealth = 0;
+                }
+
+                System.Threading.Thread.Sleep(200);
+            }
+        }
+
+        public static void CalcDamageAttacker(Monster attacker, int currentHealth, int damage, ConsoleColor GameText, ConsoleColor GameBackground)
+        {
+            currentHealth = attacker.Health;
+            System.Threading.Thread.Sleep(1000);
+            currentHealth -= damage;
+            while (currentHealth < attacker.Health)
+            {
+                attacker.Health -= 1;
+                //DISMonsterHealthBar(attacker, 43, 15, GameText, GameBackground);
+                if (attacker.Health <= 0 && currentHealth <= 0)
+                {
+                    attacker.Health = 0;
+                    currentHealth = 0;
+                }
+                System.Threading.Thread.Sleep(200);
+            }
         }
 
         #endregion
@@ -714,6 +755,43 @@ namespace MainClasses
             attacker.Type = currentType;
         }
 
+        public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        {
+            string monsterFaint = $@"The wild {monster.Name} fainted!";
+            string playerFaint = $@"{player.MonsterEquipped.Name} fainted!";
+
+            DoAttackPlayer(player, monster, move, GameBoyColor, GameText, GameBackground);
+            if (monster.Health > 0)
+            {
+                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GameBoyColor, GameText, GameBackground);
+                if (player.MonsterEquipped.Health <= 0)
+                {
+                    Console.SetCursorPosition(9, 22);
+                    Console.Write("                                                                ");
+                    Console.SetCursorPosition(9, 22);
+                    foreach (char c in playerFaint)
+                    {
+                        Console.Write(c);
+                        System.Threading.Thread.Sleep(75);
+                    }
+                    System.Threading.Thread.Sleep(2000);
+                }
+            }//end if
+            else
+            {
+                Console.SetCursorPosition(0, 5);
+                //Animation.BattleFaint(monster, GameBoyColor, GameText, GameBackground);
+                Console.SetCursorPosition(9, 22);
+                Console.Write("                                                                ");
+                Console.SetCursorPosition(9, 22);
+                foreach (char c in monsterFaint)
+                {
+                    Console.Write(c);
+                    System.Threading.Thread.Sleep(75);
+                }
+                System.Threading.Thread.Sleep(2000);
+            }
+        }//end 
         #endregion
     }
 }
