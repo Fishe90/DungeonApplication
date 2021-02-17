@@ -766,8 +766,8 @@ namespace MainClasses
                 DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GameBoyColor, GameText, GameBackground);
                 if (player.MonsterEquipped.Health <= 0)
                 {
-                    Console.SetCursorPosition(9, 22);
-                    Console.Write("                                                                ");
+                    //Console.SetCursorPosition(9, 22);
+                    //Console.Write("                                                                ");
                     Console.SetCursorPosition(9, 22);
                     foreach (char c in playerFaint)
                     {
@@ -779,10 +779,10 @@ namespace MainClasses
             }//end if
             else
             {
-                Console.SetCursorPosition(0, 5);
+                //Console.SetCursorPosition(0, 5);
                 //Animation.BattleFaint(monster, GameBoyColor, GameText, GameBackground);
-                Console.SetCursorPosition(9, 22);
-                Console.Write("                                                                ");
+                //Console.SetCursorPosition(9, 22);
+                //Console.Write("                                                                ");
                 Console.SetCursorPosition(9, 22);
                 foreach (char c in monsterFaint)
                 {
