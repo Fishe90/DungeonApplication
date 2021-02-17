@@ -11,28 +11,37 @@ namespace DungeonApplication
     {
         static void Main(string[] args)
         {
-            string message = "Hello and welcome to the wonderful world of POKeFRAUD!";
             Console.SetWindowSize(91, 47);
             ConsoleColor GBText = ConsoleColor.White;
             ConsoleColor GBBackground = ConsoleColor.Black;
             ConsoleColor GBColor = ConsoleColor.DarkRed;
             ASCII.GameBoy(GBColor);
-            ASCII.ResetScreen(ConsoleColor.Black, ConsoleColor.White);
-            //ASCII.StaticMessageBox(GBColor, GBText, GBBackground);
-            //ASCII.ScrollMessage(message, 50, 1000, GBColor, GBText, GBBackground);
-            //ASCII.InstantMessage(message, GBColor, GBText, GBBackground);
-            Monster_Moves defaultMove = new Monster_Moves();
-            Monster_MovesEquipped pyraEquipped = new Monster_MovesEquipped();
-            Monster monster = new Monster();
-            monster.ANIWild = ASCII.pyraANI;
-            monster.ASCIIPlayer = ASCII.pyraAttacker;
-            monster.Name = "Pyra";
+
+            Monster_Moves Empty = new Monster_Moves("EMPTY", Monster_Race.NONE, 0, 0, 0);
+            Monster_Moves fireEmber = new Monster_Moves("Ember", Monster_Race.Fire, 20, 15, 15);
+            Monster_Moves waterWaterGun = new Monster_Moves("Water Gun", Monster_Race.Water, 20, 15, 15);
+
+            Monster_MovesEquipped pyraDefault = new Monster_MovesEquipped(fireEmber, Empty, Empty, Empty);
+            Monster_MovesEquipped douseyDefault = new Monster_MovesEquipped(waterWaterGun, Empty, Empty, Empty);
+
+            Monster firePyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Fire, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, pyraDefault);
+            Monster waterDousey = new Monster("Dousey", "Dousey", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Water, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, douseyDefault);
+
             Player player1 = new Player();
             player1.Name = "Dillon";
-            player1.MonsterEquipped = monster;
-            ASCII.StaticPMScreen(ASCII.PMPokedexSelect, player1, GBText, GBBackground);
-            ASCII.ResetScreen(GBText, GBBackground);
-            ASCII.WildEncounter(player1, monster, GBText, GBBackground);
+            player1.MonsterEquipped = firePyra;
+            player1.Money = 0;
+            Player NPC = new Player();
+            NPC.Name = "Bryan";
+            NPC.MonsterEquipped = waterDousey;
+            NPC.ASCIIDefender = ASCII.npcDefender;
+            NPC.ASCIIProfile = ASCII.npcProfile;
+
+            ASCII.NPCEncounter(player1, NPC, GBText, GBBackground);
+            ASCII.ANIDefenderFaint(NPC.MonsterEquipped, GBText, GBBackground);
+            ASCII.ANIAttackerFaint(player1, GBText, GBBackground);
+            ASCII.ANINPCNext(player1, NPC, GBText, GBBackground);
+            ASCII.ANINPCDefeat(player1, NPC, 500, GBText, GBBackground);
         }
     }
 }

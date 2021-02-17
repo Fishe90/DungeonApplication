@@ -10,7 +10,7 @@ namespace MainClasses
     {
         /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); TO THE END TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
 
-        #region ASCII Screen Control Functions
+        #region METHODS: Screen Control
 
         public static void GameBoy(ConsoleColor GBColor)
         {
@@ -275,9 +275,385 @@ namespace MainClasses
 
         #endregion
 
-        #region ASCII Battle Screen Functions
+        #region METHODS: Battle
 
-        public static void ANIPlayerSwitch()
+        #region BATTLE: Info Displays (NEEDS COORDINATES)
+
+        public static void HealthBar(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.SetCursorPosition(positionX, positionY);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            if (monster.Health == monster.MaxHealth)
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("====================");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.95 * monster.MaxHealth) && monster.Health > (.9 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("=================== ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.9 * monster.MaxHealth) && monster.Health > (.85 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("==================  ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.85 * monster.MaxHealth) && monster.Health > (.8 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("=================   ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.8 * monster.MaxHealth) && monster.Health > (.75 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("================    ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.75 * monster.MaxHealth) && monster.Health > (.7 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("===============     ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.7 * monster.MaxHealth) && monster.Health > (.65 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("==============      ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.65 * monster.MaxHealth) && monster.Health > (.6 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("=============       ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.6 * monster.MaxHealth) && monster.Health > (.55 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("============        ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.55 * monster.MaxHealth) && monster.Health > (.5 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("===========         ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.5 * monster.MaxHealth) && monster.Health > (.45 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("==========          ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.45 * monster.MaxHealth) && monster.Health > (.4 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("=========           ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.4 * monster.MaxHealth) && monster.Health > (.35 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("========            ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.35 * monster.MaxHealth) && monster.Health > (.3 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("=======             ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.3 * monster.MaxHealth) && monster.Health > (.25 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("======              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.25 * monster.MaxHealth) && monster.Health > (.2 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("=====               ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.2 * monster.MaxHealth) && monster.Health > (.15 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("====                ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.15 * monster.MaxHealth) && monster.Health > (.1 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("===                 ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.1 * monster.MaxHealth) && monster.Health > (.05 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("==                  ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= (.05 * monster.MaxHealth) && monster.Health > (0 * monster.MaxHealth))
+            {
+                Console.Write("HP:[");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("=                   ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+            }
+            else if (monster.Health <= 0)
+            {
+                Console.Write("HP:[                    ]");
+            }
+        }
+
+        /****TO BE USED NEXT TO Health BAR DURING COMBAT IF DESIRED****/
+        public static void Health(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {            
+            Console.SetCursorPosition(positionX, positionY);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write($"([{monster.Health}/{monster.MaxHealth}]");
+        }
+
+        public static void Name(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {            
+            Console.SetCursorPosition(positionX, positionY);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(monster.Name.ToUpper());
+        }
+
+        public static void Gender(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {            
+            Console.SetCursorPosition(positionX, positionY);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            if (monster.Gender == '♂')
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(monster.Gender);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write(monster.Gender);
+            }
+            Console.ForegroundColor = GBText;
+        }
+
+        public static void NameANDGender(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(monster.Name.ToUpper());
+            if (monster.Gender == '♂')
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(monster.Gender);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write(monster.Gender);
+            }
+            Console.ForegroundColor = GBText;
+        }
+
+        public static void Level(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write($"Lv.{monster.Lv}");
+        }
+
+        #endregion        
+
+        #region BATTLE: PvP/PvM Displays
+
+        public static void DISDefenderInfoBar(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.SetCursorPosition(15, 2);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            Console.SetCursorPosition(15, 3);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("█                               ▀▄");
+            Console.SetCursorPosition(15, 4);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("█                                 ▀▄");
+            Console.SetCursorPosition(15, 5);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
+            NameANDGender(monster, 17, 3, GBText, GBBackground);
+            Level(monster, 38, 3, GBText, GBBackground);
+            HealthBar(monster, 17, 4, GBText, GBBackground);
+            Console.SetCursorPosition(90, 46);
+
+        }
+
+        public static void DISAttackerInfoBar(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.SetCursorPosition(37, 13);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            Console.SetCursorPosition(37, 14);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("   ▄▀                               █");
+            Console.SetCursorPosition(37, 15);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(" ▄▀                                 █");
+            Console.SetCursorPosition(37, 16);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
+            NameANDGender(player.MonsterEquipped, 43, 14, GBText, GBBackground);
+            Level(player.MonsterEquipped, 64, 14, GBText, GBBackground);
+            HealthBar(player.MonsterEquipped, 43, 15, GBText, GBBackground);
+            Console.SetCursorPosition(90, 46);
+        }
+
+        public static void DISDefender(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(58, 5);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 6);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(58, 7);
+            Console.Write(monster.ASCIIPokedex[2]);
+            Console.SetCursorPosition(58, 8);
+            Console.Write(monster.ASCIIPokedex[3]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[4]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[5]);
+            Console.SetCursorPosition(90, 46);
+            DISDefenderInfoBar(monster, GBText, GBBackground);
+            StaticMessageBox(GBText, GBBackground);
+        }
+
+        public static void DISAttacker(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(4, 15);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 16);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 17);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[5]);
+            Console.SetCursorPosition(90, 46);
+            DISAttackerInfoBar(player, GBText, GBBackground);
+            StaticMessageBox(GBText, GBBackground);
+        }
+
+        public static void DISNPC(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(58, 5);
+            Console.Write(npc.ASCIIProfile[0]);
+            Console.SetCursorPosition(58, 6);
+            Console.Write(npc.ASCIIProfile[1]);
+            Console.SetCursorPosition(58, 7);
+            Console.Write(npc.ASCIIProfile[2]);
+            Console.SetCursorPosition(58, 8);
+            Console.Write(npc.ASCIIProfile[3]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(npc.ASCIIProfile[4]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(npc.ASCIIProfile[5]);
+            Console.SetCursorPosition(90, 46);
+            StaticMessageBox(GBText, GBBackground);
+        }
+
+        public static void DISJustDefender(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            ResetScreen(GBText, GBBackground);
+            DISDefender(monster, GBText, GBBackground);
+        }
+
+        public static void DISJustAttacker(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            ResetScreen(GBText, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
+        }
+
+        public static void DISATTandDEF(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            ResetScreen(GBText, GBBackground);
+            DISDefender(monster, GBText, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
+            StaticMessageBox(GBText, GBBackground);
+        }
+
+        #endregion
+
+        #region BATTLE: Animations
+
+        public static void ANIAttackerSwitch()
         {
             string[] pokeBall = new string[]
         {
@@ -315,7 +691,7 @@ namespace MainClasses
             @"                       ",
             @"                       ",
             @"                       ",
-                                       
+
             @"                       ",
             @"      ▄████▀▄          ",
             @"     █▀▀▀o▀▀▀█         ",
@@ -441,10 +817,372 @@ namespace MainClasses
                 Console.SetCursorPosition(90, 46);
                 frame += 6;
                 System.Threading.Thread.Sleep(25);
-            }            
+            }
         }
 
-        public static void WildDefenderAppear(string[] ScreenDisplay, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIDefenderSwitch()
+        {
+            string[] pokeBall = new string[]
+        {
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"      ▄████▀▄     ",
+            @"     █▀▀▀o▀▀▀█    ",
+            @"      ▀▄▄▄▄▄▀     ",
+
+            @"                  ",
+            @"                  ",
+            @"                  ",
+            @"     ▄█ ▀▀▀ █▄    ",
+            @"    █ ▄▄▄o▄▄▄ █   ",
+            @"     ▀█ ▄▄▄ █▀    ",
+
+            @"                  ",
+            @"                  ",
+            @"        ▄▄▄       ",
+            @"     ▀       ▀    ",
+            @"   █     o     █  ",
+            @"     ▄  ▄▄▄  ▄    ",
+
+            @"                  ",
+            @"         ▄        ",
+            @"   ▀▄    ▀    ▄▀  ",
+            @"                  ",
+            @"▄▄       o      ▄▄",
+            @"     ▄  ▄▄▄  ▄    "
+        };
+            string length = "             ";
+            int frame = 0;
+            foreach (char item in length)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.SetCursorPosition(58, 5);
+                Console.Write(pokeBall[frame]);
+                Console.SetCursorPosition(58, 6);
+                Console.Write(pokeBall[frame + 1]);
+                Console.SetCursorPosition(58, 7);
+                Console.Write(pokeBall[frame + 2]);
+                Console.SetCursorPosition(58, 8);
+                Console.Write(pokeBall[frame + 3]);
+                Console.SetCursorPosition(58, 9);
+                Console.Write(pokeBall[frame + 4]);
+                Console.SetCursorPosition(58, 10);
+                Console.Write(pokeBall[frame + 5]);
+                Console.SetCursorPosition(90, 46);
+                frame += 6;
+                System.Threading.Thread.Sleep(50);
+            }
+        }
+
+        public static void ANIDefenderFaint(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"{monster.Name.ToUpper()} fainted!";
+
+            #region Frames
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(58, 5);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 6);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(58, 7);
+            Console.Write(monster.ASCIIPokedex[2]);
+            Console.SetCursorPosition(58, 8);
+            Console.Write(monster.ASCIIPokedex[3]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[4]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[5]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 7);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(58, 8);
+            Console.Write(monster.ASCIIPokedex[2]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[3]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[4]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 7);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 8);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[2]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[3]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 7);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 8);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[2]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 7);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 8);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[1]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 7);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 8);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 9);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[0]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(58, 5);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 6);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 7);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 8);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 9);
+            Console.Write("                  ");
+            Console.SetCursorPosition(58, 10);
+            Console.Write("                  ");
+            Console.SetCursorPosition(90, 46);
+            #endregion
+
+            System.Threading.Thread.Sleep(1000);
+            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+        }
+
+        public static void ANIAttackerFaint(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"{player.MonsterEquipped.Name.ToUpper()} fainted!";
+
+            #region Frames
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(4, 15);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 16);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 17);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[5]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 17);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 19);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 19);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 20);
+            Console.Write("                       ");
+            Console.SetCursorPosition(90, 46);
+            #endregion
+
+            System.Threading.Thread.Sleep(1000);
+            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+        }
+
+        public static void ANIWildAppear(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             string message = $"A wild {monster.Name} appeared!";
             string distance = "                                                                      ";
@@ -452,17 +1190,44 @@ namespace MainClasses
             foreach (char frame in distance)
             {
                 Console.SetCursorPosition(4, 5);
-                Console.Write(ScreenDisplay[0].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[0].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 6);
-                Console.Write(ScreenDisplay[1].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[1].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 7);
-                Console.Write(ScreenDisplay[2].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[2].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 8);
-                Console.Write(ScreenDisplay[3].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[3].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 9);
-                Console.Write(ScreenDisplay[4].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[4].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 10);
-                Console.Write(ScreenDisplay[5].Substring(startPositionX, 83));
+                Console.Write(monster.ASCIIDefender[5].Substring(startPositionX, 83));
+                Console.SetCursorPosition(90, 46);
+                startPositionX -= 1;
+                System.Threading.Thread.Sleep(1);
+            }
+            DISDefenderInfoBar(monster, GBText, GBBackground);
+            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+        }
+
+        public static void ANINPCAppear(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"{npc.Name} challenged you to a battle!";
+            string distance = "                                                                      ";
+            int startPositionX = 95;
+            foreach (char frame in distance)
+            {
+                Console.SetCursorPosition(4, 5);
+                Console.Write(npc.ASCIIDefender[0].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 6);
+                Console.Write(npc.ASCIIDefender[1].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 7);
+                Console.Write(npc.ASCIIDefender[2].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 8);
+                Console.Write(npc.ASCIIDefender[3].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 9);
+                Console.Write(npc.ASCIIDefender[4].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 10);
+                Console.Write(npc.ASCIIDefender[5].Substring(startPositionX, 83));
                 Console.SetCursorPosition(90, 46);
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
@@ -470,37 +1235,71 @@ namespace MainClasses
             ScrollMessage(message, 50, 2000, GBText, GBBackground);
         }
 
-        public static void PlayerAttackerSwitch(string[] ScreenDisplay, Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANINPCSwitch(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"{npc.Name} sent out {npc.MonsterEquipped.Name}!";
+            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+            ANIDefenderSwitch();
+            DISDefender(npc.MonsterEquipped, GBText, GBBackground);
+        }
+
+        public static void ANIPlayerSwitch(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             string message = $"{player.Name} sent out {player.MonsterEquipped.Name}!";
             ScrollMessage(message, 50, 2000, GBText, GBBackground);
-            ANIPlayerSwitch();
+            ANIAttackerSwitch();
             Console.ForegroundColor = GBText;
-            Console.SetCursorPosition(4, 15);
-            Console.Write(ScreenDisplay[0]);
-            Console.SetCursorPosition(4, 16);
-            Console.Write(ScreenDisplay[1]);
-            Console.SetCursorPosition(4, 17);
-            Console.Write(ScreenDisplay[2]);
-            Console.SetCursorPosition(4, 18);
-            Console.Write(ScreenDisplay[3]);
-            Console.SetCursorPosition(4, 19);
-            Console.Write(ScreenDisplay[4]);
-            Console.SetCursorPosition(4, 20);
-            Console.Write(ScreenDisplay[5]);
-            Console.SetCursorPosition(90, 46);
+            DISAttacker(player, GBText, GBBackground);
+            DISAttackerInfoBar(player, GBText, GBBackground);
         }
 
-        public static void WildEncounter(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANINPCNext(Player player, Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            WildDefenderAppear(monster.ANIWild, monster, GBText, GBBackground);
+            string message1 = $"{npc.Name.ToUpper()} is about to send {npc.MonsterEquipped.Name.ToUpper()}.";
+            string message2 = $"Will you send out another Pokefraud?";
+            DISJustAttacker(player, GBText, GBBackground);
             System.Threading.Thread.Sleep(2000);
-            PlayerAttackerSwitch(player.MonsterEquipped.ASCIIPlayer, player, GBText, GBBackground);
+            ScrollMessage(message1, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message2, 50, 2000, GBText, GBBackground);
+        }
+
+        public static void ANINPCDefeat(Player player, Player npc, int money, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message1 = $"{player.Name.ToUpper()} defeated {npc.Name.ToUpper()}!";
+            string message2 = $"{npc.Name.ToUpper()} rewarded {player.Name.ToUpper()} ${money}.";
+            DISNPC(npc, GBText, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
+            ScrollMessage(message1, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message2, 50, 2000, GBText, GBBackground);
+            player.Money += money;
         }
 
         #endregion
 
-        #region ASCII Object Display Functions
+        #region BATTLE: Situational Encounters
+
+        public static void WildEncounter(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            ResetScreen(GBText, GBBackground);
+            ANIWildAppear(monster, GBText, GBBackground);
+            System.Threading.Thread.Sleep(2000);
+            ANIPlayerSwitch(player, GBText, GBBackground);
+        }
+
+        public static void NPCEncounter(Player player, Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            ResetScreen(GBText, GBBackground);
+            ANINPCAppear(npc, GBText, GBBackground);
+            ANINPCSwitch(npc, GBText, GBBackground);
+            System.Threading.Thread.Sleep(2000);
+            ANIPlayerSwitch(player, GBText, GBBackground);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region METHODS: Display Objects
 
         public static void StaticMessageBox(ConsoleColor GameText, ConsoleColor GameBackground)
         {
@@ -563,7 +1362,7 @@ namespace MainClasses
 
         #endregion
 
-        #region ASCII String[] Displays
+        #region ASCII: String[] Templates
 
         #region Player Menu
 
@@ -711,7 +1510,7 @@ namespace MainClasses
 
         #endregion
 
-        #region ASCII Templates
+        #region ASCII: Art Templates
 
         #region Display Screen Objects
 
@@ -1420,11 +2219,41 @@ namespace MainClasses
 
         #endregion
 
+        #region Player Profile Objects
+
+        public static string[] npcDefender = new string[] {
+        @"                                                                                      ___                                                                                         ",
+        @"                                                                                    _|P__|                                                                                        ",
+        @"                                                                                    _|^-^)_                                                                                       ",
+        @"                                                                                   |_  Y  _|                                                                                      ",
+        @"                                                                                    || _ ||                                                                                       ",
+        @"                                                                                     |/ \|                                                                                        "};
+
+        public static string[] npcProfile = new string[] {
+        @"     ___         ",
+        @"   _|P__|        ",
+        @"   _|^-^)_       ",
+        @"  |_  Y  _|      ",
+        @"   || _ ||       ",
+        @"    |/ \|        "
+        };
+
+        public static string[] npcAttacker = new string[] {
+        @"    |\_/\__      ",
+        @"   _/oYo \/_     ",
+        @"  (_y__-  \/_    ",
+        @"    |      \/    ",
+        @"   _|||_(   \_   ",
+        @"  (_(_|(____|/   "
+        };
+
+        #endregion
+
         #region Display Monster Objects
 
         #region Pyra
 
-        public static string[] pyraANI = new string[] {
+        public static string[] pyraDefender = new string[] {
         @"                                                                                     |\_/\__                                                                                      ",
         @"                                                                                    _/oYo \/_                                                                                     ",
         @"                                                                                   (_y__-  \/_                                                                                    ",
@@ -1432,13 +2261,13 @@ namespace MainClasses
         @"                                                                                    _|||_(   \_                                                                                   ",
         @"                                                                                   (_(_|(____|/                                                                                   "};
 
-        public static string[] pyraDefender = new string[] {
-        @"    |\_/\__      ",
-        @"   _/oYo \/_     ",
-        @"  (_y__-  \/_    ",
-        @"    |      \/    ",
-        @"   _|||_(   \_   ",
-        @"  (_(_|(____|/   "
+        public static string[] pyraPokedex = new string[] {
+        @"     |\_/\__      ",
+        @"    _/oYo \/_     ",
+        @"   (_y__-  \/_    ",
+        @"     |      \/    ",
+        @"    _|||_(   \_   ",
+        @"   (_(_|(____|/   "
         };
 
         public static string[] pyraAttacker = new string[] {
@@ -1454,21 +2283,21 @@ namespace MainClasses
 
         #region Dousey
 
-        public static string[] douseyANI = new string[] {
-        @"                                                                                       __                                                                                         ",
-        @"                                                                                    -=(o `\                                                                                       ",
-        @"                                                                                       '.-.\                                                                                      ",
-        @"                                                                                       /|  \\                                                                                     ",
-        @"                                                                                       '|  ||                                                                                     ",
-        @"                                                                                        _\_):,_                                                                                   "};
-
         public static string[] douseyDefender = new string[] {
-        @"      __         ",
-        @"   -=(o `\       ",
-        @"      '.-.\      ",
-        @"      /|  \\     ",
-        @"      '|  ||     ",
-        @"       _\_):,_   "
+        @"                                                                                      __                                                                                          ",
+        @"                                                                                   -=(o `\                                                                                        ",
+        @"                                                                                      '.-.\                                                                                       ",
+        @"                                                                                      /|  \\                                                                                      ",
+        @"                                                                                      '|  ||                                                                                      ",
+        @"                                                                                       _\_):,_                                                                                    "};
+
+        public static string[] douseyPokedex = new string[] {
+        @"      __          ",
+        @"   -=(o `\        ",
+        @"      '.-.\       ",
+        @"      /|  \\      ",
+        @"      '|  ||      ",
+        @"       _\_):,_    "
         };
 
         public static string[] douseyAttacker = new string[] {
@@ -1484,7 +2313,7 @@ namespace MainClasses
 
         #region Electra
 
-        public static string[] electraANI = new string[] {
+        public static string[] electraDefender = new string[] {
         @"                                                                                     |\_/\__                                                                                      ",
         @"                                                                                    _/oYo \/_                                                                                     ",
         @"                                                                                   (_y__-  \/_                                                                                    ",
@@ -1492,7 +2321,7 @@ namespace MainClasses
         @"                                                                                    _|||_(   \_                                                                                   ",
         @"                                                                                   (_(_|(____|/                                                                                   "};
 
-        public static string[] electraDefender = new string[] {
+        public static string[] electraPokedex = new string[] {
         @"    |\_/\__      ",
         @"   _/oYo \/_     ",
         @"  (_y__-  \/_    ",
@@ -1514,7 +2343,7 @@ namespace MainClasses
 
         #region Cobblet
 
-        public static string[] cobbletANI = new string[] {
+        public static string[] cobbletDefender = new string[] {
         @"                                                                                                                                                                                  ",
         @"                                                                                      _   _                                                                                       ",
         @"                                                                                ___  / \_/ \  ___                                                                                 ",
@@ -1522,7 +2351,7 @@ namespace MainClasses
         @"                                                                                 \\//\_\_/_/\\//                                                                                  ",
         @"                                                                                  \/         \/                                                                                   "};
 
-        public static string[] cobbletDefender = new string[] {
+        public static string[] cobbletPokedex = new string[] {
         @"                 ",
         @"      _   _      ",
         @"___  / \_/ \  ___",
@@ -1544,7 +2373,7 @@ namespace MainClasses
 
         #region Neo
 
-        public static string[] neoANI = new string[] {
+        public static string[] neoDefender = new string[] {
         @"                                                                                     |\_/\__                                                                                      ",
         @"                                                                                    _/oYo \/_                                                                                     ",
         @"                                                                                   (_y__-  \/_                                                                                    ",
@@ -1552,7 +2381,7 @@ namespace MainClasses
         @"                                                                                    _|||_(   \_                                                                                   ",
         @"                                                                                   (_(_|(____|/                                                                                   "};
 
-        public static string[] neoDefender = new string[] {
+        public static string[] neoPokedex = new string[] {
         @"    |\_/\__      ",
         @"   _/oYo \/_     ",
         @"  (_y__-  \/_    ",
@@ -1571,127 +2400,6 @@ namespace MainClasses
         };
 
         #endregion
-
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #region Locations (NEW ASCII)
-
-        public static string HomeTown = $@"
- _______________________________________________________________________________________ 
-|  ___________________________________________________________________________________  |
-| |  _____________________ _ ____________|     |____________________ _ _____________  | |
-| | |            _________|_|_                             _________|_|_            | | |
-| | |           | /=======| | |__________       __________| /=======| | |           | | |
-| | |           |/========|_|\|          |     |          |/========|_|\|           | | |
-| | |           |=============|          |     |          |=============|           | | |
-| | |           | _   ___   _ |          |     |          | _   ___   _ |           | | |
-| | |           ||+| |  o| |+||          |     |          ||+| |  o| |+||           | | |
-| | |           |____|___|____|          |     |          |____|___|____|           | | |
-| | |                |   |_______________|     |_______________|   |                | | |
-| | |                |                                             |                | | |
-| | |                |___________________       ___________________|                | | |
-| | |                      _             |     |                     _              | | |
-| | |            _________|_|_           |     |           _________|_|_            | | |
-| | |           | /=======| | |          |     |          | /=======| | |           | | |
-| | |           |/========|_|\|          |     |          |/========|_|\|           | | |
-| | |           |=============|          |     |          |=============|           | | |
-| | |           | _   ___   _ |          |     |          | _   ___   _ |           | | |
-| | |           ||+| |  o| |+||          |     |          ||+| |  o| |+||           | | |
-| | |           |____|___|____|          |     |          |____|___|____|           | | |
-| | |                |   |_______________|     |_______________|   |                | | |
-| | |                |                                             |                | | |
-| | |                |_____________________________________________|                | | |
-| | |_______________________________________________________________________________| | |
-| |___________________________________________________________________________________| |";
-
-        public static string PlayerHome = $@"
- _______________________________________________________________________________________
-|  ___________________________________________________________________________________  |
-| | o-======-o                      ||             ||    |                            | |
-| |  |______|                       ||             ||    |                            | |
-| |  |      |                       ||             || __ |                            | |
-| |  |      |                       ||______       |||__||                            | |
-| |  |______|                                      |||__||                            | |
-| |                                                ||    |                            | |
-| |                                                ||    |______  _____               | |
-| |                                 ||             ||     | 0 0 ||     |              | |
-| |                                 ||             ||     | 0 0 ||     |              | |
-| |===================================             ====================               | |
-| |                                                                                   | |
-| |                     |                                                             | |
-| |                     |                                                             | |
-| |=====================|       ======                 _A_    _______________         | |
-| ||________||_|                    ||                | X |  |_______________|        | |
-| |                \|||||||/        ||                |===|  |_|___________|_|  ======| |
-| |                |       |        ||                                         /  ____| |
-| |   ____         |       |      __||               ____                      | |    | |
-| |  |    |        |  (o)  |   _ | _||              | |__|                     | |____| |
-| |  |    |        |       |  |=|||_||              | |  |                     \      | |
-| |  |____|        |       |     |__||              | |__|                      ======| |
-| | o|____|o       /|||||||\        ||              |_|__|                            | |
-| |_________________________________||___       ______________________________________| |
-| |______________________________________|_____|______________________________________| |";
-
-        public static string LeaveHomeTown = $@"
- _______________________________________________________________________________________
-|  ___________________________________________________________________________________  |
-| |                                              ||                                   | |
-| |                                              ||                                   | |
-| |                                              ||                                   | |
-| |                                              ||                                   | |
-| |                                              ||                                   | |
-| |                                              ||                                   | |
-| |                                               ====================================| |
-| |                                               vVvvVvVvvVvVvvVvVvvVvVvvvvVvVvvVvVvv| |
-| |                                               VvvVvVvvVvVvvVvVvvVvVvvVvVvVvvVvVvvV| |
-| |                                               vVvvVvVvvVvVvvVvVvvVvVvvvvVvVvvVvVvv| |
-| |                                               VvvVvVvvVvVvvVvVvvVvVvvVvVvVvvVvVvvV| |
-| |                                               vVvvVvVvvVvVvvVvVvvVvVvvvvVvVvvVvVvv| |
-| |                                               VvvVvVvvVvVvvVvVvvVvVvvVvVvVvvVvVvvV| |
-| |                                               vVvvVvVvvVvVvvVvVvvVvVvvvvVvVvvVvVvv| |
-| |                                               VvvVvVvvVvVvvVvVvvVvVvvVvVvVvvVvVvvV| |
-| |                                                                                   | |
-| |                                                                                   | |
-| |                                                                                   | |
-| |                                                                                   | |
-| |                                                                                   | |
-| |                                                                                   | |
-| |                                                                                   | |
-| |______________________________________       ______________________________________| |
-| |______________________________________|_____|______________________________________| |";
 
         #endregion
 

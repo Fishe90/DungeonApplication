@@ -19,9 +19,9 @@ namespace MainClasses
         public bool IsCaught { get; set; }
         public Monster_Race Type { get; set; }
         public string Description { get; set; }
-        public string[] ASCIIPlayer { get; set; }
-        public string[] ASCIIWild { get; set; }
-        public string[] ANIWild { get; set; }
+        public string[] ASCIIAttacker { get; set; }
+        public string[] ASCIIDefender { get; set; }
+        public string[] ASCIIPokedex { get; set; }
         public Monster_MovesEquipped EquippedMoves { get; set; }
 
         public int Health
@@ -44,7 +44,7 @@ namespace MainClasses
 
         public Monster() { }
 
-        public Monster(string defaultName, string name, char gender, bool isBoosted, int maxHealth, int maxExp, int health, int exp, int lv, int slotNum, string pokeIndex, bool isCaught, Monster_Race type, string description, string[] asciiPlayer, string[] asciiWild, string[] aniWild, Monster_MovesEquipped equippedMoves) : base(defaultName, name, gender, isBoosted)
+        public Monster(string defaultName, string name, char gender, bool isBoosted, int maxHealth, int maxExp, int health, int exp, int lv, int slotNum, string pokeIndex, bool isCaught, Monster_Race type, string description, string[] asciiAttacker, string[] asciiDefender, string[] asciiPokedex, Monster_MovesEquipped equippedMoves) : base(defaultName, name, gender, isBoosted)
         {
             MaxHealth = maxHealth;
             MaxExp = maxExp;
@@ -56,9 +56,9 @@ namespace MainClasses
             IsCaught = isCaught;
             Type = type;
             Description = description;
-            ASCIIPlayer = asciiPlayer;
-            ASCIIWild = asciiWild;
-            ANIWild = aniWild;
+            ASCIIAttacker = asciiAttacker;
+            ASCIIDefender = asciiDefender;
+            ASCIIPokedex = asciiPokedex;
             EquippedMoves = equippedMoves;
         }// end FQCTOR        
     }
