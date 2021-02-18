@@ -27,7 +27,7 @@ namespace DungeonApplication
             Monster_Moves groundRockSmash = new Monster_Moves("Rock Smash", Monster_Race.Ground, 40, 15, 15);
             Monster_Moves psychicPsychic = new Monster_Moves("Psychic", Monster_Race.Psychic, 40, 15, 15);
 
-            Monster_MovesEquipped pyraDefault = new Monster_MovesEquipped(fireEmber, Empty, Empty, Empty);
+            Monster_MovesEquipped pyraDefault = new Monster_MovesEquipped(fireEmber, waterWaterGun, electricThunder, psychicPsychic);
             Monster_MovesEquipped douseyDefault = new Monster_MovesEquipped(waterWaterGun, Empty, Empty, Empty);
             Monster_MovesEquipped electraDefault = new Monster_MovesEquipped(electricThunder, Empty, Empty, Empty);
             Monster_MovesEquipped cobbletDefault = new Monster_MovesEquipped(groundRockSmash, Empty, Empty, Empty);

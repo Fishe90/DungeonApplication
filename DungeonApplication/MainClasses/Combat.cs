@@ -638,42 +638,12 @@ namespace MainClasses
 
         public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            string monsterFaint = $@"The wild {monster.Name} fainted!";
-            string playerFaint = $@"{player.MonsterEquipped.Name} fainted!";
-
             DoAttackPlayer(player, monster, move, GBText, GBBackground);
             if (monster.Health > 0)
             {
-                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GBText, GBBackground);
-                if (player.MonsterEquipped.Health <= 0)
-                {
-                    //Console.SetCursorPosition(9, 22);
-                    //Console.Write("                                                                ");
-                    Console.SetCursorPosition(9, 22);
-                    foreach (char c in playerFaint)
-                    {
-                        Console.Write(c);
-                        System.Threading.Thread.Sleep(75);
-                    }
-                    System.Threading.Thread.Sleep(2000);
-                }
+                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GBText, GBBackground);                
             }//end if
-            else
-            {
-                //Console.SetCursorPosition(0, 5);
-                //Animation.BattleFaint(monster, GBText, GBBackground);
-                //Console.SetCursorPosition(9, 22);
-                //Console.Write("                                                                ");
-                Console.SetCursorPosition(9, 22);
-                foreach (char c in monsterFaint)
-                {
-                    Console.Write(c);
-                    System.Threading.Thread.Sleep(75);
-                }
-                System.Threading.Thread.Sleep(2000);
-            }
         }//end 
         #endregion
-
     }
 }
