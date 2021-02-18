@@ -12,27 +12,26 @@ namespace MainClasses
 
         #region Fight Menu
 
-        public static void BattleFightMenu(Player attacker, Monster defender, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void BattleFightMenu(Player attacker, Monster defender, ConsoleKey navPlayerMenu, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             bool reloadBattleFIGHT = false;
             bool reloadBattleBAG = false;
             bool reloadBattlePOKeFRAUD = false;
             bool reloadBattleRUN = false;
-
+            
             do
             {
-                //Displays BattleFIGHT
-                //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                //DISBattleSelectFight(GameBoyColor, GameText, GameBackground);
-                //MESQueUserAttack(attacker, GameText, GameBackground);
+                ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
+                ASCII.DISSelectFight(attacker.MonsterEquipped, GBText, GBBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
                     case ConsoleKey.K:
                     case ConsoleKey.Enter:
-                        FightMenu(attacker, defender, navPlayerMenu, GameBoyColor, GameText, GameBackground);
+                        FightMenu(attacker, defender, navPlayerMenu, GBText, GBBackground);
                         if (defender.Health <= 0)
                         {
+                            ASCII.ANIDefenderFaint(defender, GBText, GBBackground);
                             reloadBattleFIGHT = false;
                             reloadBattleBAG = false;
                             reloadBattlePOKeFRAUD = false;
@@ -51,15 +50,14 @@ namespace MainClasses
                         do
                         {
                             //Displays BattleBAG
-                            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                            //DISBattleSelectBag(GameBoyColor, GameText, GameBackground);
-                            //MESQueUserAttack(attacker, GameText, GameBackground);
+                            ASCII.DISSelectBag(attacker.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
                                 case ConsoleKey.K:
                                 case ConsoleKey.Enter:
-                                    ItemSection(attacker, defender, navPlayerMenu, GameBoyColor, GameText, GameBackground);
+                                    //Insert Battle Menu BAG Functionality HERE
+                                    //ItemSection(attacker, defender, navPlayerMenu, GBText, GBBackground);
                                     if (defender.IsCaught == true)
                                     {
                                         reloadBattleFIGHT = false;
@@ -80,15 +78,14 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays BattleRUN
-                                        //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                                        //DISBattleSelectRun(GameBoyColor, GameText, GameBackground);
-                                        //MESQueUserAttack(attacker, GameText, GameBackground);
+                                        ASCII.DISSelectRun(attacker.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                //MESUserEscape(attacker, GameBoyColor, GameText, GameBackground);
+                                                string message = $"{attacker.Name.ToUpper()} fled to safety!";
+                                                ASCII.ScrollMessage(message, 15, 2000, GBText, GBBackground);
                                                 reloadBattleFIGHT = false;
                                                 reloadBattleBAG = false;
                                                 reloadBattlePOKeFRAUD = false;
@@ -99,15 +96,13 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays BattlePOKeFRAUD
-                                                    //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                                                    //DISBattleSelectPokeParty(GameBoyColor, GameText, GameBackground);
-                                                    //MESQueUserAttack(attacker, GameText, GameBackground);
+                                                    ASCII.DISSelectParty(attacker.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
                                                         case ConsoleKey.K:
                                                         case ConsoleKey.Enter:
-                                                            //MonsterShiftMenu(attacker, attacker.PlayersParty, defender, navPlayerMenu, GameBoyColor, GameText, GameBackground);
+                                                            //MonsterShiftMenu(attacker, attacker.PlayersParty, defender, navPlayerMenu, GBText, GBBackground);
                                                             reloadBattleFIGHT = true;
                                                             reloadBattleBAG = false;
                                                             reloadBattlePOKeFRAUD = false;
@@ -168,16 +163,14 @@ namespace MainClasses
                         do
                         {
                             //Displays BattlePOKeFRAUD
-                            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                            //DISBattleSelectPokeParty(GameBoyColor, GameText, GameBackground);
-                            //MESQueUserAttack(attacker, GameText, GameBackground);
+                            ASCII.DISSelectParty(attacker.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
                                 case ConsoleKey.K:
                                 case ConsoleKey.Enter:
                                     //TODO Add MonsterShiftMenu() HERE!!!
-                                    //MonsterShiftMenu(attacker, attacker.PlayersParty, defender, navPlayerMenu, GameBoyColor, GameText, GameBackground);
+                                    //MonsterShiftMenu(attacker, attacker.PlayersParty, defender, navPlayerMenu, GBText, GBBackground);
                                     reloadBattleFIGHT = true;
                                     reloadBattleBAG = false;
                                     reloadBattlePOKeFRAUD = false;
@@ -188,15 +181,14 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays BattleRUN
-                                        //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                                        //DISBattleSelectRun(GameBoyColor, GameText, GameBackground);
-                                        //MESQueUserAttack(attacker, GameText, GameBackground);
+                                        ASCII.DISSelectRun(attacker.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                //MESUserEscape(attacker, GameBoyColor, GameText, GameBackground);
+                                                string message = $"{attacker.Name.ToUpper()} fled to safety!";
+                                                ASCII.ScrollMessage(message, 15, 2000, GBText, GBBackground);
                                                 reloadBattleFIGHT = false;
                                                 reloadBattleBAG = false;
                                                 reloadBattlePOKeFRAUD = false;
@@ -207,15 +199,13 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays BattleBAG
-                                                    //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-                                                    //DISBattleSelectBag(GameBoyColor, GameText, GameBackground);
-                                                    //MESQueUserAttack(attacker, GameText, GameBackground);
+                                                    ASCII.DISSelectBag(attacker.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
                                                         case ConsoleKey.K:
                                                         case ConsoleKey.Enter:
-                                                            //Player_Inventory.ItemSection(attacker, defender, navPlayerMenu, GameBoyColor, GameText, GameBackground);
+                                                            //Player_Inventory.ItemSection(attacker, defender, navPlayerMenu, GBText, GBBackground);
                                                             if (defender.IsCaught == true)
                                                             {
                                                                 reloadBattleFIGHT = false;
@@ -291,19 +281,14 @@ namespace MainClasses
 
         #endregion
 
-        #region Fight Menu Moves 
+        #region Fight Menu Select Moves 
 
-        public static void DISFightMoves(Monster monster, Monster_Moves move, ConsoleColor GameBoyColor)
-        {
-            Monster_Moves emptyMove = new Monster_Moves();//Use as default empty slots
-            //Move1 (11,22)
-            //Move2 (36,22)
-            //Move3 (11,23)
-            //Move4 (36,23)
-            //PP (75,22)
-            //TYPE (75,23)      
+        public static void DISFightMoves(Monster monster, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        {           
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
             Console.SetCursorPosition(11, 22);
-            if (monster.EquippedMoves.Move1 == emptyMove)
+            if (monster.EquippedMoves.Move1.Type == Monster_Race.NONE)
             {
                 Console.Write("");
             }
@@ -312,7 +297,7 @@ namespace MainClasses
                 Console.Write(monster.EquippedMoves.Move1.Name);
             }
             Console.SetCursorPosition(36, 22);
-            if (monster.EquippedMoves.Move2 == emptyMove)
+            if (monster.EquippedMoves.Move2.Type == Monster_Race.NONE)
             {
                 Console.Write("");
             }
@@ -321,7 +306,7 @@ namespace MainClasses
                 Console.Write(monster.EquippedMoves.Move2.Name);
             }
             Console.SetCursorPosition(11, 23);
-            if (monster.EquippedMoves.Move3 == emptyMove)
+            if (monster.EquippedMoves.Move3.Type == Monster_Race.NONE)
             {
                 Console.Write("");
             }
@@ -330,7 +315,7 @@ namespace MainClasses
                 Console.Write(monster.EquippedMoves.Move3.Name);
             }
             Console.SetCursorPosition(36, 23);
-            if (monster.EquippedMoves.Move4 == emptyMove)
+            if (monster.EquippedMoves.Move4.Type == Monster_Race.NONE)
             {
                 Console.Write("");
             }
@@ -339,113 +324,127 @@ namespace MainClasses
                 Console.Write(monster.EquippedMoves.Move4.Name);
             }
             Console.SetCursorPosition(75, 22);
-            Console.Write($@"{move.Uses}/{move.MaxUses}");
-            Console.SetCursorPosition(75, 23);
-            switch (move.Type)
+            if (move.Type == Monster_Race.NONE)
             {
-                case Monster_Race.Fire:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    break;
-                case Monster_Race.Water:
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    break;
-                case Monster_Race.Electric:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    break;
-                case Monster_Race.Ground:
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    break;
-                case Monster_Race.Psychic:
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    break;
+                Console.Write("");
             }
-            Console.Write(move.Type);
-            Console.ForegroundColor = ConsoleColor.White;
+            else
+            {
+                Console.Write($@"{move.Uses}/{move.MaxUses}");
+            }                     
+            Console.SetCursorPosition(75, 23);
+            if (move.Type == Monster_Race.NONE)
+            {
+                Console.Write("");
+            }
+            else
+            {
+                switch (move.Type)
+                {
+                    case Monster_Race.Fire:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case Monster_Race.Water:
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    case Monster_Race.Electric:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case Monster_Race.Ground:
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        break;
+                    case Monster_Race.Psychic:
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        break;
+                }
+                Console.Write(move.Type);
+            }                        
+            Console.ForegroundColor = GBText;
             Console.SetCursorPosition(0, 0);
             //TestCombat.GameConsole(GameBoyColor);
         }
 
-        public static void DISFightMove1(ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor Gamebackground)
-        {
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = Gamebackground;
-            Console.SetCursorPosition(4, 21);
+        public static void DISFightMove1(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {            
+            Console.SetCursorPosition(5, 21);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
             Console.WriteLine("▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄");
-            Console.SetCursorPosition(4, 22);
+            Console.SetCursorPosition(5, 22);
             Console.WriteLine("█  -->                                            █  PP                         █");
-            Console.SetCursorPosition(4, 23);
+            Console.SetCursorPosition(5, 23);
             Console.WriteLine("█                                                 █  TYPE:                      █");
-            Console.SetCursorPosition(4, 24);
+            Console.SetCursorPosition(5, 24);
             Console.WriteLine("█                                                 █                             █");
-            Console.SetCursorPosition(4, 25);
+            Console.SetCursorPosition(5, 25);
             Console.WriteLine(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ");
-
+            DISFightMoves(monster, monster.EquippedMoves.Move1, GBText, GBBackground);
             //Console.SetCursorPosition(0, 20);
             //Console.Write(_ASCII.Move1);
             //TestCombat.GameConsole(GameBoyColor);
         }
 
-        public static void DISFightMove2(ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor Gamebackground)
+        public static void DISFightMove2(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = Gamebackground;
-            Console.SetCursorPosition(4, 21);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(5, 21);
             Console.WriteLine("▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄");
-            Console.SetCursorPosition(4, 22);
+            Console.SetCursorPosition(5, 22);
             Console.WriteLine("█                          -->                    █  PP                         █");
-            Console.SetCursorPosition(4, 23);
+            Console.SetCursorPosition(5, 23);
             Console.WriteLine("█                                                 █  TYPE:                      █");
-            Console.SetCursorPosition(4, 24);
+            Console.SetCursorPosition(5, 24);
             Console.WriteLine("█                                                 █                             █");
-            Console.SetCursorPosition(4, 25);
+            Console.SetCursorPosition(5, 25);
             Console.WriteLine(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ");
-
+            DISFightMoves(monster, monster.EquippedMoves.Move2, GBText, GBBackground);
             //Console.SetCursorPosition(0, 20);
             //Console.Write(_ASCII.Move2);
             //TestCombat.GameConsole(GameBoyColor);
         }
 
-        public static void DISFightMove3(ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor Gamebackground)
+        public static void DISFightMove3(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = Gamebackground;
-            Console.SetCursorPosition(4, 21);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(5, 21);
             Console.WriteLine("▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄");
-            Console.SetCursorPosition(4, 22);
+            Console.SetCursorPosition(5, 22);
             Console.WriteLine("█                                                 █  PP                         █");
-            Console.SetCursorPosition(4, 23);
+            Console.SetCursorPosition(5, 23);
             Console.WriteLine("█  -->                                            █  TYPE:                      █");
-            Console.SetCursorPosition(4, 24);
+            Console.SetCursorPosition(5, 24);
             Console.WriteLine("█                                                 █                             █");
-            Console.SetCursorPosition(4, 25);
+            Console.SetCursorPosition(5, 25);
             Console.WriteLine(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ");
-
+            DISFightMoves(monster, monster.EquippedMoves.Move3, GBText, GBBackground);
             //Console.SetCursorPosition(0, 20);
             //Console.Write(_ASCII.Move3);
             //TestCombat.GameConsole(GameBoyColor);
         }
 
-        public static void DISFightMove4(ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor Gamebackground)
+        public static void DISFightMove4(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = Gamebackground;
-            Console.SetCursorPosition(4, 21);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            Console.SetCursorPosition(5, 21);
             Console.WriteLine("▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄");
-            Console.SetCursorPosition(4, 22);
+            Console.SetCursorPosition(5, 22);
             Console.WriteLine("█                                                 █  PP                         █");
-            Console.SetCursorPosition(4, 23);
+            Console.SetCursorPosition(5, 23);
             Console.WriteLine("█                          -->                    █  TYPE:                      █");
-            Console.SetCursorPosition(4, 24);
+            Console.SetCursorPosition(5, 24);
             Console.WriteLine("█                                                 █                             █");
-            Console.SetCursorPosition(4, 25);
+            Console.SetCursorPosition(5, 25);
             Console.WriteLine(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ");
-
+            DISFightMoves(monster, monster.EquippedMoves.Move4, GBText, GBBackground);
             //Console.SetCursorPosition(0, 20);
             //Console.Write(_ASCII.Move4);
             //TestCombat.GameConsole(GameBoyColor);
         }
 
-        public static void FightMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void FightMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             bool reloadFightMove1 = false;
             bool reloadFightMove2 = false;
@@ -455,14 +454,14 @@ namespace MainClasses
             do
             {
                 //Displays FightMove1
-                DISFightMove1(GameBoyColor, GameText, GameBackground);
-                DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move1, GameBoyColor);
+                ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                DISFightMove1(player.MonsterEquipped, GBText, GBBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
                     case ConsoleKey.K:
                     case ConsoleKey.Enter:
-                        Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move1, GameBoyColor, GameText, GameBackground);
+                        Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move1, GBText, GBBackground);
                         reloadFightMove1 = false;
                         reloadFightMove2 = false;
                         reloadFightMove3 = false;
@@ -473,14 +472,14 @@ namespace MainClasses
                         do
                         {
                             //Displays FightMove2
-                            DISFightMove2(GameBoyColor, GameText, GameBackground);
-                            DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move2, GameBoyColor);
+                            ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                            DISFightMove2(player.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
                                 case ConsoleKey.K:
                                 case ConsoleKey.Enter:
-                                    Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move2, GameBoyColor, GameText, GameBackground);
+                                    Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move2, GBText, GBBackground);
                                     reloadFightMove1 = false;
                                     reloadFightMove2 = false;
                                     reloadFightMove3 = false;
@@ -491,14 +490,14 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays FightMove4
-                                        DISFightMove4(GameBoyColor, GameText, GameBackground);
-                                        DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move4, GameBoyColor);
+                                        ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                                        DISFightMove4(player.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move4, GameBoyColor, GameText, GameBackground);
+                                                Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move4, GBText, GBBackground);
                                                 reloadFightMove1 = false;
                                                 reloadFightMove2 = false;
                                                 reloadFightMove3 = false;
@@ -509,14 +508,14 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays FightMove3
-                                                    DISFightMove3(GameBoyColor, GameText, GameBackground);
-                                                    DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move3, GameBoyColor);
+                                                    ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                                                    DISFightMove3(player.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
                                                         case ConsoleKey.K:
                                                         case ConsoleKey.Enter:
-                                                            Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move3, GameBoyColor, GameText, GameBackground);
+                                                            Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move3, GBText, GBBackground);
                                                             reloadFightMove1 = false;
                                                             reloadFightMove2 = false;
                                                             reloadFightMove3 = false;
@@ -595,14 +594,14 @@ namespace MainClasses
                         do
                         {
                             //Displays Move3
-                            DISFightMove3(GameBoyColor, GameText, GameBackground);
-                            DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move3, GameBoyColor);
+                            ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                            DISFightMove3(player.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
                                 case ConsoleKey.K:
                                 case ConsoleKey.Enter:
-                                    Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move3, GameBoyColor, GameText, GameBackground);
+                                    Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move3, GBText, GBBackground);
                                     reloadFightMove1 = false;
                                     reloadFightMove2 = false;
                                     reloadFightMove3 = false;
@@ -613,14 +612,14 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays Move4
-                                        DISFightMove4(GameBoyColor, GameText, GameBackground);
-                                        DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move4, GameBoyColor);
+                                        ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                                        DISFightMove4(player.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move4, GameBoyColor, GameText, GameBackground);
+                                                Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move4, GBText, GBBackground);
                                                 reloadFightMove1 = false;
                                                 reloadFightMove2 = false;
                                                 reloadFightMove3 = false;
@@ -631,14 +630,14 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays Move2
-                                                    DISFightMove2(GameBoyColor, GameText, GameBackground);
-                                                    DISFightMoves(player.MonsterEquipped, player.MonsterEquipped.EquippedMoves.Move2, GameBoyColor);
+                                                    ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                                                    DISFightMove2(player.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
                                                         case ConsoleKey.K:
                                                         case ConsoleKey.Enter:
-                                                            Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move2, GameBoyColor, GameText, GameBackground);
+                                                            Combat.DoBattle(player, monster, player.MonsterEquipped.EquippedMoves.Move2, GBText, GBBackground);
                                                             reloadFightMove1 = false;
                                                             reloadFightMove2 = false;
                                                             reloadFightMove3 = false;
@@ -730,12 +729,12 @@ namespace MainClasses
 
         #region Fight Menu Inventory 
 
-        public static void ItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void ItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
 
         }
 
-        public static void MedSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void MedSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
 
         }
@@ -744,7 +743,7 @@ namespace MainClasses
 
         #region Fight Menu Player Party 
 
-        public static void DISInfoPlayerParty(Player player, ConsoleColor GameBoyColor)
+        public static void DISInfoPlayerParty(Player player)
         {
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.White;
@@ -831,7 +830,7 @@ namespace MainClasses
             Console.SetCursorPosition(0, 0);
         }
 
-        public static void PlayerMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadPlayerMenu = false;
             bool reloadPlayerMonstersEquipped = false;
@@ -905,7 +904,7 @@ namespace MainClasses
                                         {
                                             case ConsoleKey.Enter:
                                                 //SFX.Select();
-                                                //PlayerItemSectionOutsideBattle(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                //PlayerItemSectionOutsideBattle(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                 break;
                                             case ConsoleKey.UpArrow:
                                             case ConsoleKey.W:
@@ -1049,7 +1048,7 @@ namespace MainClasses
 
         #region Player Menu Inventory
 
-        public static void PlayerItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadItemRepel = false;
             bool reloadItemBlazeStone = false;
@@ -1080,7 +1079,7 @@ namespace MainClasses
                         {
                             case ConsoleKey.Y:
                             case ConsoleKey.Enter:
-                                //TestCombat.FUNTryCatchANDSort(player, monster, GameBoyColor, GameScreenText, GameScreenBackground);
+                                //TestCombat.FUNTryCatchANDSort(player, monster, GameScreenText, GameScreenBackground);
                                 reloadItemAquaStone = false;
                                 reloadItemBlazeStone = false;
                                 reloadItemEarthStone = false;
@@ -1105,7 +1104,7 @@ namespace MainClasses
                         reloadItemEarthStone = false;
                         reloadItemMindStone = false;
                         reloadItemSection = false;
-                        PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         break;
 
                     /*Selects Repel*/
@@ -1131,7 +1130,7 @@ namespace MainClasses
                                     reloadItemEarthStone = false;
                                     reloadItemMindStone = false;
                                     reloadItemSection = false;
-                                    PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                    PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                     break;
 
                                 case ConsoleKey.UpArrow:
@@ -1167,7 +1166,7 @@ namespace MainClasses
                                                 reloadItemEarthStone = false;
                                                 reloadItemMindStone = false;
                                                 reloadItemSection = false;
-                                                PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                 break;
 
                                             case ConsoleKey.UpArrow:
@@ -1202,7 +1201,7 @@ namespace MainClasses
                                                             reloadItemEarthStone = false;
                                                             reloadItemMindStone = false;
                                                             reloadItemSection = false;
-                                                            PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                            PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                             break;
 
                                                         case ConsoleKey.UpArrow:
@@ -1236,7 +1235,7 @@ namespace MainClasses
                                                                         reloadItemEarthStone = false;
                                                                         reloadItemMindStone = false;
                                                                         reloadItemSection = false;
-                                                                        PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                                        PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                                         break;
 
                                                                     case ConsoleKey.UpArrow:
@@ -1269,7 +1268,7 @@ namespace MainClasses
                                                                                     reloadItemEarthStone = false;
                                                                                     reloadItemMindStone = false;
                                                                                     reloadItemSection = false;
-                                                                                    PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                                                    PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                                                     break;
 
                                                                                 case ConsoleKey.UpArrow:
@@ -1300,7 +1299,7 @@ namespace MainClasses
                                                                                                 reloadItemEarthStone = false;
                                                                                                 reloadItemMindStone = false;
                                                                                                 reloadItemSection = false;
-                                                                                                PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                                                                PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                                                                 break;
                                                                                             case ConsoleKey.UpArrow:
                                                                                                 reloadItemEarthStone = true;
@@ -1504,7 +1503,7 @@ namespace MainClasses
 
         }//end ItemSection()
 
-        public static void PlayerMedSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerMedSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadItemSection = true; //Replace with ItemSection()
             bool reloadMedSection = false;
@@ -1527,10 +1526,10 @@ namespace MainClasses
                         //TODO Add Use Functionality
                         break;
                     case ConsoleKey.RightArrow:
-                        PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         break;
                     case ConsoleKey.LeftArrow:
-                        PlayerItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         reloadMedSection = false;
                         reloadMedFullHeal = false;
                         reloadMedFullRevive = false;
@@ -1552,10 +1551,10 @@ namespace MainClasses
                                     //TODO Add Use Functionality
                                     break;
                                 case ConsoleKey.RightArrow:
-                                    PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                    PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                     break;
                                 case ConsoleKey.LeftArrow:
-                                    PlayerItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                    PlayerItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                     reloadMedSection = false;
                                     reloadMedFullHeal = false;
                                     reloadMedFullRevive = false;
@@ -1584,10 +1583,10 @@ namespace MainClasses
                                                 //TODO Add Use Functionality
                                                 break;
                                             case ConsoleKey.RightArrow:
-                                                PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                 break;
                                             case ConsoleKey.LeftArrow:
-                                                PlayerItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                PlayerItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                 reloadMedSection = false;
                                                 reloadMedFullHeal = false;
                                                 reloadMedFullRevive = false;
@@ -1615,10 +1614,10 @@ namespace MainClasses
                                                             //TODO Add Use Functionality
                                                             break;
                                                         case ConsoleKey.RightArrow:
-                                                            PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                            PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                             break;
                                                         case ConsoleKey.LeftArrow:
-                                                            PlayerItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                            PlayerItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                             reloadMedSection = false;
                                                             reloadMedFullHeal = false;
                                                             reloadMedFullRevive = false;
@@ -1645,10 +1644,10 @@ namespace MainClasses
                                                                         //TODO Add Use Functionality
                                                                         break;
                                                                     case ConsoleKey.RightArrow:
-                                                                        PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                                        PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                                         break;
                                                                     case ConsoleKey.LeftArrow:
-                                                                        PlayerItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                                                                        PlayerItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                                                                         reloadMedSection = false;
                                                                         reloadMedFullHeal = false;
                                                                         reloadMedFullRevive = false;
@@ -1801,7 +1800,7 @@ namespace MainClasses
 
         }//end MedSection()
 
-        public static void PlayerMovesSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerMovesSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadMedSection = false; //replace with MedSection()
             bool reloadBASection = true; //replace with BattleItemsSection()
@@ -1821,11 +1820,11 @@ namespace MainClasses
                         //TODO Paste Use Item Functionality
                         break;
                     case ConsoleKey.RightArrow:
-                        PlayerBattleItemSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerBattleItemSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         reloadMovesSection = false;
                         break;
                     case ConsoleKey.LeftArrow:
-                        PlayerMedSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerMedSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         reloadMovesSection = false;
                         break;
                     case ConsoleKey.DownArrow:
@@ -1861,7 +1860,7 @@ namespace MainClasses
 
         }//end MovesSection()
 
-        public static void PlayerBattleItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameBoyColor, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerBattleItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadMovesSection = false; //Replace with MovesSection()
             bool reloadBASection = false;
@@ -1880,7 +1879,7 @@ namespace MainClasses
                         //TODO Paste Use Item Functionality
                         break;
                     case ConsoleKey.LeftArrow:
-                        PlayerMovesSection(player, monster, navPlayerMenu, GameBoyColor, GameScreenText, GameScreenBackground);
+                        PlayerMovesSection(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
                         reloadBASection = false;
                         break;
                     case ConsoleKey.DownArrow:

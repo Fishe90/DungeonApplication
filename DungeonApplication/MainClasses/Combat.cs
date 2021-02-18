@@ -10,245 +10,127 @@ namespace MainClasses
     {
         #region CalcDamage PlayerVSMonster
 
-        public static void PlayerVSMonsterHitZero(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void PlayerVSMonsterHitZero(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
             string playerHitZero = $@"{move.Name} doesn't affect the wild {defender.Name}!";
 
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageMonster(defender, defender.Health, 0, GameText, GameBackground);
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitZero)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageMonster(defender, 0, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitZero, 50, 2000, GBText, GBBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitLow(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void PlayerVSMonsterHitLow(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
             string playerHitLow = $@"It's not very effective!";
             int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) / 2;
 
-            Console.SetCursorPosition(0, 20);
-            //Console.Write(ASCII.gameBoyMessageBox);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitLow)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitLow, 50, 2000, GBText, GBBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitStan(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void PlayerVSMonsterHitStan(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
             int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2);
-
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+                        
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitSuper(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void PlayerVSMonsterHitSuper(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
             string playerHitSuper = $@"It's super effective!";
             int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) * 2;
 
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageMonster(defender, defender.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(attacker.MonsterEquipped, defender, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitSuper)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitSuper, 50, 2000, GBText, GBBackground);
             move.Uses -= 1;
         }
         #endregion
 
         #region CalcDamage MonsterVSPlayer
-        public static void MonsterVSPlayerHitZero(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void MonsterVSPlayerHitZero(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             string playerHitZero = $@"{move.Name} doesn't affect {defender.MonsterEquipped.Name}!";
 
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, 0, GameText, GameBackground);
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitZero)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageAttacker(defender, 0, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitZero, 50, 1000, GBText, GBBackground);            
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitLow(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void MonsterVSPlayerHitLow(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             string playerHitLow = $@"It's not very effective!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2) / 2;
 
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitLow)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitLow, 50, 2000, GBText, GBBackground);
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitStan(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void MonsterVSPlayerHitStan(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2);
 
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitSuper(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void MonsterVSPlayerHitSuper(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             string playerHitSuper = $@"It's super effective!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2) * 2;
 
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
+            //Console.ForegroundColor = GBText;
+            //Console.BackgroundColor = GBBackground;
             System.Threading.Thread.Sleep(1000);
-            Console.SetCursorPosition(9, 22);
-            Console.ForegroundColor = GameText;
-            Console.BackgroundColor = GameBackground;
-            foreach (char c in playerHit)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(1000);
-            CalcDamageAttacker(defender.MonsterEquipped, defender.MonsterEquipped.Health, damageDealt, GameText, GameBackground);
-            //DISAttackerAndDefender(defender.MonsterEquipped, attacker, GameBoyColor, GameText, GameBackground);
-            //DISMessageBox(GameBoyColor, GameText, GameBackground);
-            Console.SetCursorPosition(9, 22);
-            foreach (char c in playerHitSuper)
-            {
-                Console.Write(c);
-                System.Threading.Thread.Sleep(75);
-            }
-            System.Threading.Thread.Sleep(2000);
+            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
+            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHitSuper, 50, 2000, GBText, GBBackground);
             move.Uses -= 1;
         }
 
@@ -256,37 +138,36 @@ namespace MainClasses
 
         #region CalcDamage Display Player VS Monster
 
-        public static void CalcDamageMonster(Monster monster, int currentHealth, int damage, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void CalcDamageMonster(Monster monster, int damage, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            currentHealth = monster.Health;
+            int currentHealth = monster.Health;
             System.Threading.Thread.Sleep(1000);
             currentHealth -= damage;
             while (currentHealth < monster.Health)
             {
                 monster.Health -= 1;
-                //DISMonsterHealthBar(monster, 17, 4, GameText, GameBackground);
+                ASCII.HealthBar(monster, 17, 4);
                 if (monster.Health <= 0 && currentHealth <= 0)
                 {
                     monster.Health = 0;
                     currentHealth = 0;
                 }
-
                 System.Threading.Thread.Sleep(200);
             }
         }
 
-        public static void CalcDamageAttacker(Monster attacker, int currentHealth, int damage, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void CalcDamageAttacker(Player attacker, int damage, ConsoleColor GBText, ConsoleColor GBBackground)
         {
-            currentHealth = attacker.Health;
+            int currentHealth = attacker.MonsterEquipped.Health;
             System.Threading.Thread.Sleep(1000);
             currentHealth -= damage;
-            while (currentHealth < attacker.Health)
+            while (currentHealth < attacker.MonsterEquipped.Health)
             {
-                attacker.Health -= 1;
-                //DISMonsterHealthBar(attacker, 43, 15, GameText, GameBackground);
-                if (attacker.Health <= 0 && currentHealth <= 0)
+                attacker.MonsterEquipped.Health -= 1;
+                ASCII.HealthBar(attacker.MonsterEquipped, 43, 15);
+                if (attacker.MonsterEquipped.Health <= 0 && currentHealth <= 0)
                 {
-                    attacker.Health = 0;
+                    attacker.MonsterEquipped.Health = 0;
                     currentHealth = 0;
                 }
                 System.Threading.Thread.Sleep(200);
@@ -297,7 +178,7 @@ namespace MainClasses
 
         #region Combat Functionality Player VS Monster 
 
-        public static void DoAttackPlayer(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void DoAttackPlayer(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Monster_Race currentType = attacker.MonsterEquipped.Type;
             switch (move.Type)
@@ -329,35 +210,35 @@ namespace MainClasses
 
                 if (defender.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Water-Type*********/
 
                 else if (defender.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Fire-Type*********/
 
                 if (defender.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Electric-Type*********/
 
                 else if (defender.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Psychic-Type*********/
 
                 else if (defender.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -369,35 +250,35 @@ namespace MainClasses
 
                 if (defender.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Electric-Type*********/
 
                 else if (defender.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Water-Type*********/
 
                 else if (defender.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Ground-Type*********/
 
                 else if (defender.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Psychic-Type*********/
 
                 else if (defender.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -409,35 +290,35 @@ namespace MainClasses
 
                 if (defender.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Ground-Type*********/
 
                 else if (defender.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitZero(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitZero(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Rock-Type*********/
 
                 else if (defender.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Fire-Type*********/
 
                 else if (defender.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Psychic-Type*********/
 
                 else if (defender.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -449,35 +330,35 @@ namespace MainClasses
 
                 if (defender.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Fire-Type*********/
 
                 else if (defender.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Ground-Type*********/
 
                 else if (defender.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Water-Type*********/
 
                 else if (defender.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Psychic-Type*********/
 
                 else if (defender.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -489,35 +370,35 @@ namespace MainClasses
 
                 if (defender.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Water-Type*********/
 
                 else if (defender.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Electric-Type*********/
 
                 else if (defender.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Air-Type*********/
 
                 else if (defender.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Psychic-Type*********/
 
                 else if (defender.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if             
 
@@ -526,7 +407,7 @@ namespace MainClasses
             attacker.MonsterEquipped.Type = currentType;
         }
 
-        public static void DoAttackMonster(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void DoAttackMonster(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Monster_Race currentType = attacker.Type;
             switch (move.Type)
@@ -558,35 +439,35 @@ namespace MainClasses
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Water-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Fire-Type*********/
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Electric-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Fire-Type VS Psychic-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -598,35 +479,35 @@ namespace MainClasses
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Electric-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Water-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Ground-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Water-Type VS Psychic-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -638,35 +519,35 @@ namespace MainClasses
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Ground-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitZero(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitZero(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Rock-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Fire-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Electric-Type VS Psychic-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -678,35 +559,35 @@ namespace MainClasses
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Fire-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Ground-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Water-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Ground-Type VS Psychic-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if
 
@@ -718,35 +599,35 @@ namespace MainClasses
 
                 if (defender.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Water-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Electric-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Air-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Psychic-Type*********/
 
                 else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GameBoyColor, GameText, GameBackground);
+                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
                 }//end else if                
             }//end if             
 
@@ -755,15 +636,15 @@ namespace MainClasses
             attacker.Type = currentType;
         }
 
-        public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor GameBoyColor, ConsoleColor GameText, ConsoleColor GameBackground)
+        public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             string monsterFaint = $@"The wild {monster.Name} fainted!";
             string playerFaint = $@"{player.MonsterEquipped.Name} fainted!";
 
-            DoAttackPlayer(player, monster, move, GameBoyColor, GameText, GameBackground);
+            DoAttackPlayer(player, monster, move, GBText, GBBackground);
             if (monster.Health > 0)
             {
-                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GameBoyColor, GameText, GameBackground);
+                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GBText, GBBackground);
                 if (player.MonsterEquipped.Health <= 0)
                 {
                     //Console.SetCursorPosition(9, 22);
@@ -780,7 +661,7 @@ namespace MainClasses
             else
             {
                 //Console.SetCursorPosition(0, 5);
-                //Animation.BattleFaint(monster, GameBoyColor, GameText, GameBackground);
+                //Animation.BattleFaint(monster, GBText, GBBackground);
                 //Console.SetCursorPosition(9, 22);
                 //Console.Write("                                                                ");
                 Console.SetCursorPosition(9, 22);
@@ -793,5 +674,6 @@ namespace MainClasses
             }
         }//end 
         #endregion
+
     }
 }

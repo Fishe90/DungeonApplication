@@ -60,6 +60,23 @@ namespace MainClasses
             ASCIIDefender = asciiDefender;
             ASCIIPokedex = asciiPokedex;
             EquippedMoves = equippedMoves;
-        }// end FQCTOR        
+        }// end FQCTOR  
+
+        /****Monster Library****/
+
+        public static Monster pyra = new Monster("Pyra", "Pyra", '0', false, 0, 0, 0, 0, 0, 0, "001", false, Monster_Race.Fire, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster dousey = new Monster("Dousey", "Dousey", '0', false, 0, 0, 0, 0, 0, 0, "004", false, Monster_Race.Water, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster electra = new Monster("Electra", "Electra", '0', false, 0, 0, 0, 0, 0, 0, "007", false, Monster_Race.Electric, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
+        public static Monster cobblet = new Monster("Cobblet", "Cobblet", '0', false, 0, 0, 0, 0, 0, 0, "010", false, Monster_Race.Ground, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
+        public static Monster neo = new Monster("Neo", "Neo", '0', false, 0, 0, 0, 0, 0, 0, "013", false, Monster_Race.Psychic, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
+
+        public static Monster[] starters = new Monster[]
+        {
+            pyra, pyra, pyra, pyra, pyra,
+            dousey, dousey, dousey, dousey ,dousey,
+            electra, electra, electra, electra, electra,
+            cobblet, cobblet, cobblet, cobblet, cobblet,
+            neo
+        };
     }
 }

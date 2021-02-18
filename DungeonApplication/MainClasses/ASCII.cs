@@ -279,7 +279,7 @@ namespace MainClasses
 
         #region BATTLE: Info Displays (NEEDS COORDINATES)
 
-        public static void HealthBar(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void HealthBar(Monster monster, int positionX, int positionY)
         {
             Console.SetCursorPosition(positionX, positionY);
             Console.BackgroundColor = ConsoleColor.Black;
@@ -518,6 +518,62 @@ namespace MainClasses
 
         #region BATTLE: PvP/PvM Displays
 
+        public static void DISSelectFight(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"What will {monster.Name.ToUpper()} do?";
+            InstantMessage(message, GBText, GBBackground);
+            Console.SetCursorPosition(55, 21);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Console.SetCursorPosition(55, 22);
+            Console.Write("█     [FIGHT]         BAG ");
+            Console.SetCursorPosition(55, 23);
+            Console.Write("█      POKePARTY      RUN ");
+            Console.SetCursorPosition(55, 24);
+            Console.Write("█                         ");                                                    
+        }
+
+        public static void DISSelectBag(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"What will {monster.Name.ToUpper()} do?";
+            InstantMessage(message, GBText, GBBackground);
+            Console.SetCursorPosition(55, 21);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Console.SetCursorPosition(55, 22);
+            Console.Write("█      FIGHT         [BAG]");
+            Console.SetCursorPosition(55, 23);
+            Console.Write("█      POKePARTY      RUN ");
+            Console.SetCursorPosition(55, 24);
+            Console.Write("█                         ");
+        }
+
+        public static void DISSelectParty(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"What will {monster.Name.ToUpper()} do?";
+            InstantMessage(message, GBText, GBBackground);
+            Console.SetCursorPosition(55, 21);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Console.SetCursorPosition(55, 22);
+            Console.Write("█      FIGHT          BAG ");
+            Console.SetCursorPosition(55, 23);
+            Console.Write("█     [POKePARTY]     RUN ");
+            Console.SetCursorPosition(55, 24);
+            Console.Write("█                         ");
+        }
+
+        public static void DISSelectRun(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            string message = $"What will {monster.Name.ToUpper()} do?";
+            InstantMessage(message, GBText, GBBackground);
+            Console.SetCursorPosition(55, 21);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Console.SetCursorPosition(55, 22);
+            Console.Write("█      FIGHT          BAG ");
+            Console.SetCursorPosition(55, 23);
+            Console.Write("█      POKePARTY     [RUN]");
+            Console.SetCursorPosition(55, 24);
+            Console.Write("█                         ");
+        }
+
         public static void DISDefenderInfoBar(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Console.SetCursorPosition(15, 2);
@@ -536,9 +592,10 @@ namespace MainClasses
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
             Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
+            System.Threading.Thread.Sleep(5);
             NameANDGender(monster, 17, 3, GBText, GBBackground);
             Level(monster, 38, 3, GBText, GBBackground);
-            HealthBar(monster, 17, 4, GBText, GBBackground);
+            HealthBar(monster, 17, 4);
             Console.SetCursorPosition(90, 46);
 
         }
@@ -561,9 +618,10 @@ namespace MainClasses
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
             Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
+            System.Threading.Thread.Sleep(5);
             NameANDGender(player.MonsterEquipped, 43, 14, GBText, GBBackground);
             Level(player.MonsterEquipped, 64, 14, GBText, GBBackground);
-            HealthBar(player.MonsterEquipped, 43, 15, GBText, GBBackground);
+            HealthBar(player.MonsterEquipped, 43, 15);
             Console.SetCursorPosition(90, 46);
         }
 
@@ -1274,6 +1332,12 @@ namespace MainClasses
             player.Money += money;
         }
 
+        public static void ANIQuePlayerFight(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        {
+            DISATTandDEF(player, monster, GBText, GBBackground);
+
+        }
+
         #endregion
 
         #region BATTLE: Situational Encounters
@@ -1293,6 +1357,33 @@ namespace MainClasses
             ANINPCSwitch(npc, GBText, GBBackground);
             System.Threading.Thread.Sleep(2000);
             ANIPlayerSwitch(player, GBText, GBBackground);
+        }
+
+        public static void FullBattleWild(Player player, Monster[] monsters, int lvLow, int lvHigh, ConsoleColor GBText, ConsoleColor GBBackground, ConsoleKey navPlayerMenu)
+        {
+            Random rand = new Random();
+            int diceRole = rand.Next(lvLow, lvHigh);
+            char[] genders = new char[] { '♂', '♀' };
+            int diceRollGender = rand.Next(1, 10);
+            char gender = new char();
+            if (diceRollGender == 1 || diceRollGender == 3 || diceRollGender == 5 || diceRollGender == 7 || diceRollGender == 9)
+            {
+                gender = genders[0];
+            }
+            else
+            {
+                gender = genders[1];
+            }
+
+            Monster defender = monsters[new Random().Next(monsters.Length)];
+            defender.Lv = diceRole;
+            defender.MaxHealth = diceRole * 5;
+            defender.Health = diceRole * 5;
+            defender.Gender = gender;
+
+            WildEncounter(player, defender, GBText, GBBackground);            
+
+            Player_Menus.BattleFightMenu(player, defender, navPlayerMenu, GBText, GBBackground);          
         }
 
         #endregion
@@ -2153,7 +2244,7 @@ namespace MainClasses
 
         #endregion
 
-        #region Battle Menu (NEW ASCII)
+        #region Fight Menu
 
         public static string BattleSelectFIGHT = @"
   █ ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄ █

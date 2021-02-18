@@ -22,5 +22,11 @@ namespace MainClasses
             Move3 = move3;
             Move4 = move4;
         }
+
+        public static Monster_MovesEquipped fireLow = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped waterLow = new Monster_MovesEquipped(Monster_Moves.waterWaterGun, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped electricLow = new Monster_MovesEquipped(Monster_Moves.electricThundershock, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped groundLow = new Monster_MovesEquipped(Monster_Moves.groundMudshot, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped psychicLow = new Monster_MovesEquipped(Monster_Moves.psychicConfusion, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
     }
 }
