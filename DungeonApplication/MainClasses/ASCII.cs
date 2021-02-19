@@ -277,6 +277,467 @@ namespace MainClasses
 
         #region METHODS: Battle
 
+        #region BATTLE: Object Displays (NEEDS COORDINATES)
+
+        public static void BallFaceLeft(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        {
+            string[] pokeBall = new string[]
+        {
+                      @"▄▄▄   ",
+                @"▄",@"██▄▀▀",@"▄  ",
+                @"▀",@"█▀",@"  ▄",@"▀  ",
+                      @"▀▀▀   ",
+                    @"  ▄▄▄  ",
+                    @"▄▀█▄██▄",
+                    @"▀▄  ▀█▀",
+                    @"  ▀▀▀  "
+
+        };
+            Console.SetCursorPosition(positionX + 2, positionY);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[1]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[2]);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[3]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(pokeBall[4]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[5]);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(pokeBall[6]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[7]);
+            Console.SetCursorPosition(positionX + 2, positionY + 3);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[8]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(delay);
+        }
+
+        public static void BallFaceRight(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        {
+            string[] pokeBall = new string[]
+        {
+                      @"▄▄▄   ",
+                @"▄",@"██▄▀▀",@"▄  ",
+                @"▀",@"█▀",@"  ▄",@"▀  ",
+                      @"▀▀▀   ",
+                        @"  ▄▄▄  ",
+                    @"  ▄",@"▀█▄██",@"▄  ",
+                    @"  ▀",@"▄  ",@"▀█",@"▀  ",
+                        @"  ▀▀▀ "
+
+        };
+            Console.SetCursorPosition(positionX + 2, positionY);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[9]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[10]);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[11]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[12]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(pokeBall[13]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[14]);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(pokeBall[15]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[16]);
+            Console.SetCursorPosition(positionX + 2, positionY + 3);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[17]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(delay);
+        }
+
+        public static void PokeBallANI(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        {
+            string[] pokeBall = new string[]
+        {
+                      @"  ▄▄▄ ",
+                @"  ▄",@"███▄█",@"▄ ",
+            @"  ▀",@"▄ ",@"▀",@" ▄",@"▀ ",
+                      @"  ▀▀▀   "
+        };
+            Console.SetCursorPosition(positionX + 2, positionY);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(pokeBall[1]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[2]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[3]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[4]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[5]);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write(pokeBall[6]);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[7]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[8]);
+            Console.SetCursorPosition(positionX + 2, positionY + 3);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[9]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(delay);
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write("         ");
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write("         ");
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write("         ");
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write("         ");
+            Console.SetCursorPosition(90, 46);
+
+        }
+
+        public static void PokeBallStatic(int positionX, int positionY, ConsoleColor GBBackground)
+        {
+            string[] pokeBall = new string[]
+        {
+                      @"▄▄▄",
+                @"▄",@"███▄█",@"▄",
+            @"▀",@"▄ ",@"▀",@" ▄",@"▀",
+                      @"▀▀▀"
+        };
+            Console.SetCursorPosition(positionX + 2, positionY);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(pokeBall[1]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[2]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[3]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[4]);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[5]);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write(pokeBall[6]);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Write(pokeBall[7]);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[8]);
+            Console.SetCursorPosition(positionX + 2, positionY + 3);
+            Console.BackgroundColor = GBBackground;
+            Console.Write(pokeBall[9]);
+            Console.SetCursorPosition(90, 46);
+        }
+
+        public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        {
+            string[] frameONE = new string[]
+            {
+                @"                   ",
+                @"         ▄         ",
+                @"      ▀▄ ▀ ▄▀      ",
+                @"     ▀▀     ▄▄     ",
+                @"      ▄▀ ▄ ▀▄      ",
+                @"         ▀         "
+            };
+            string[] frameTWO = new string[]
+            {
+                @"                   ",
+                @"    ▄    ▄    ▄    ",
+                @"     ▀   ▀   ▀     ",
+                @"   ▄▄         ▄▄   ",
+                @"                   ",
+                @"    ▄▀   █   ▀▄    "
+            };
+            string[] frameTHREE = new string[]
+            {
+                @"         ▄         ",
+                @"   ▀     ▄     ▀   ",
+                @"     ▀       ▀     ",
+                @" ▄ ▄           ▄ ▄ ",
+                @"                   ",
+                @"     ▄       ▄     "
+            };
+            string[] frameFOUR = new string[]
+{
+                @"         ▄         ",
+                @"     ▄   ▄   ▄     ",
+                @"    ▀         ▀    ",
+                @" ▄ ▄           ▄ ▄ ",
+                @"                   ",
+                @"    ▀▄       ▄▀    "
+};
+            string[] frameFIVE = new string[]
+{
+                @"                   ",
+                @"         ▄         ",
+                @"       ▄   ▄       ",
+                @"    ▄ ▀     ▀ ▄    ",
+                @"      ▀▄   ▄▀      ",
+                @"                   "
+};
+            string[] frameSIX = new string[]
+{
+                @"                   ",
+                @"                   ",
+                @"       ▄▀▀▀▄       ",
+                @"      █     █      ",
+                @"       ▀▄▄▄▀       ",
+                @"                   "
+};
+
+
+            Console.ForegroundColor = ConsoleColor.White;
+            #region Frame One
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameONE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameONE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameONE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameONE[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameONE[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameONE[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion            
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Two
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameTWO[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameTWO[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameTWO[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameTWO[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameTWO[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameTWO[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion            
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Three
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameTHREE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameTHREE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameTHREE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameTHREE[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameTHREE[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameTHREE[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Four
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameFOUR[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameFOUR[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameFOUR[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameFOUR[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameFOUR[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameFOUR[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Five
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameFIVE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameFIVE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameFIVE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameFIVE[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameFIVE[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameFIVE[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Six
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameSIX[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameSIX[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameSIX[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameSIX[3]);
+            Console.SetCursorPosition(positionX, positionY + 4);
+            Console.Write(frameSIX[4]);
+            Console.SetCursorPosition(positionX, positionY + 5);
+            Console.Write(frameSIX[5]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+        }
+
+        public static void BallBreak(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        {
+            string[] frameONE = new string[]
+            {
+                @"                   ",
+                @"         ▄         ",
+                @"      ▀▄ ▀ ▄▀      ",
+                @"     ▀▀     ▄▄     "
+            };
+            string[] frameTWO = new string[]
+            {
+                @"                   ",
+                @"    ▄    ▄    ▄    ",
+                @"     ▀   ▀   ▀     ",
+                @"   ▄▄         ▄▄   "
+            };
+            string[] frameTHREE = new string[]
+            {
+                @"         ▄         ",
+                @"   ▀     ▄     ▀   ",
+                @"     ▀       ▀     ",
+                @" ▄ ▄           ▄ ▄ "
+            };
+            string[] frameFOUR = new string[]
+{
+                @"                   ",
+                @"   ▀     ▀     ▀   ",
+                @"                   ",
+                @" ▄               ▄ "
+};
+            string[] frameFIVE = new string[]
+{
+                @"                   ",
+                @"                   ",
+                @"                   ",
+                @"                   "
+};
+
+            Console.ForegroundColor = ConsoleColor.White;
+            #region Frame One
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameONE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameONE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameONE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameONE[3]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion            
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Two
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameTWO[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameTWO[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameTWO[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameTWO[3]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion            
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Three
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameTHREE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameTHREE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameTHREE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameTHREE[3]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Four
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameFOUR[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameFOUR[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameFOUR[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameFOUR[3]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+            #region Frame Four
+
+            Console.SetCursorPosition(positionX, positionY);
+            Console.Write(frameFIVE[0]);
+            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.Write(frameFIVE[1]);
+            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.Write(frameFIVE[2]);
+            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.Write(frameFIVE[3]);
+            Console.SetCursorPosition(90, 46);
+
+            #endregion
+            System.Threading.Thread.Sleep(delay);
+        }
+
+        #endregion
+
         #region BATTLE: Info Displays (NEEDS COORDINATES)
 
         public static void HealthBar(Monster monster, int positionX, int positionY)
@@ -449,11 +910,12 @@ namespace MainClasses
             {
                 Console.Write("HP:[                    ]");
             }
+            Console.SetCursorPosition(90, 46);
         }
 
         /****TO BE USED NEXT TO Health BAR DURING COMBAT IF DESIRED****/
         public static void Health(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
-        {            
+        {
             Console.SetCursorPosition(positionX, positionY);
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
@@ -461,7 +923,7 @@ namespace MainClasses
         }
 
         public static void Name(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
-        {            
+        {
             Console.SetCursorPosition(positionX, positionY);
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
@@ -469,7 +931,7 @@ namespace MainClasses
         }
 
         public static void Gender(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
-        {            
+        {
             Console.SetCursorPosition(positionX, positionY);
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
@@ -529,7 +991,8 @@ namespace MainClasses
             Console.SetCursorPosition(55, 23);
             Console.Write("█      POKePARTY      RUN ");
             Console.SetCursorPosition(55, 24);
-            Console.Write("█                         ");                                                    
+            Console.Write("█                         ");
+            Console.SetCursorPosition(90, 46);
         }
 
         public static void DISSelectBag(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -544,6 +1007,7 @@ namespace MainClasses
             Console.Write("█      POKePARTY      RUN ");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
+            Console.SetCursorPosition(90, 46);
         }
 
         public static void DISSelectParty(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -558,6 +1022,7 @@ namespace MainClasses
             Console.Write("█     [POKePARTY]     RUN ");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
+            Console.SetCursorPosition(90, 46);
         }
 
         public static void DISSelectRun(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -572,6 +1037,7 @@ namespace MainClasses
             Console.Write("█      POKePARTY     [RUN]");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
+            Console.SetCursorPosition(90, 46);
         }
 
         public static void DISDefenderInfoBar(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -711,289 +1177,56 @@ namespace MainClasses
 
         #region BATTLE: Animations
 
-        public static void ANIAttackerSwitch()
+        public static void ThrowBall(ConsoleColor GBBackground)
         {
-            string[] pokeBall = new string[]
-        {
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-
-            @"▀▄                     ",
-            @"▀▀█                    ",
-            @"▄▀                     ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-
-            @"████▀▄                 ",
-            @"▀▀o▀▀▀█                ",
-            @"▄▄▄▄▄▀                 ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-
-            @"▄████▀▄                ",
-            @"▀▀▀o▀▀▀█               ",
-            @"▀▄▄▄▄▄▀                ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-
-            @"   ▄████▀▄             ",
-            @"  █▀▀▀o▀▀▀█            ",
-            @"   ▀▄▄▄▄▄▀             ",
-            @"                       ",
-            @"                       ",
-            @"                       ",
-
-            @"                       ",
-            @"      ▄████▀▄          ",
-            @"     █▀▀▀o▀▀▀█         ",
-            @"      ▀▄▄▄▄▄▀          ",
-            @"                       ",
-            @"                       ",
-
-            @"                       ",
-            @"                       ",
-            @"         ▄████▀▄       ",
-            @"        █▀▀▀o▀▀▀█      ",
-            @"         ▀▄▄▄▄▄▀       ",
-            @"                       ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"           ▄████▀▄     ",
-            @"          █▀▀▀o▀▀▀█    ",
-            @"           ▀▄▄▄▄▄▀     ",
-
-            @"                       ",
-            @"                       ",
-            @"                       ",
-            @"          ▄█ ▀▀▀ █▄    ",
-            @"         █ ▄▄▄o▄▄▄ █   ",
-            @"          ▀█ ▄▄▄ █▀    ",
-
-            @"                       ",
-            @"                       ",
-            @"             ▄▄▄       ",
-            @"          ▀       ▀    ",
-            @"        █     o     █  ",
-            @"          ▄  ▄▄▄  ▄    ",
-
-            @"                       ",
-            @"              ▄        ",
-            @"        ▀▄    ▀    ▄▀  ",
-            @"                       ",
-            @"     ▄▄       o      ▄▄",
-            @"          ▄  ▄▄▄  ▄    "
-        };
-            string length = "                    ";
-            int frame = 0;
-            foreach (char item in length)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.SetCursorPosition(4, 15);
-                Console.Write(pokeBall[frame]);
-                Console.SetCursorPosition(4, 16);
-                Console.Write(pokeBall[frame + 1]);
-                Console.SetCursorPosition(4, 17);
-                Console.Write(pokeBall[frame + 2]);
-                Console.SetCursorPosition(4, 18);
-                Console.Write(pokeBall[frame + 3]);
-                Console.SetCursorPosition(4, 19);
-                Console.Write(pokeBall[frame + 4]);
-                Console.SetCursorPosition(4, 20);
-                Console.Write(pokeBall[frame + 5]);
-                Console.SetCursorPosition(90, 46);
-                frame += 6;
-                System.Threading.Thread.Sleep(25);
-            }
+            PokeBallANI(4, 13, 50, GBBackground);
+            PokeBallANI(12, 11, 50, GBBackground);
+            PokeBallANI(20, 9, 50, GBBackground);
+            PokeBallANI(28, 8, 50, GBBackground);
+            PokeBallANI(36, 7, 50, GBBackground);
+            PokeBallANI(44, 6, 50, GBBackground);
+            PokeBallANI(52, 6, 50, GBBackground);
+            PokeBallANI(56, 6, 50, GBBackground);
+            PokeBallANI(60, 6, 1000, GBBackground);
+            BallOpenClose(56, 5, 50, GBBackground);
+            PokeBallANI(60, 6, 250, GBBackground);
+            PokeBallANI(60, 7, 50, GBBackground);
+            PokeBallANI(60, 8, 50, GBBackground);
+            PokeBallANI(60, 9, 50, GBBackground);
+            PokeBallANI(60, 8, 50, GBBackground);
+            PokeBallANI(60, 9, 1500, GBBackground);
         }
 
-        public static void ANIDefenderSwitch()
+        public static void BallShakeLeft(ConsoleColor GBBackground)
         {
-            string[] pokeBall = new string[]
+            BallFaceLeft(61, 9, 500, GBBackground);
+            PokeBallANI(61, 9, 1000, GBBackground);
+            Console.SetCursorPosition(90, 46);
+        }
+
+        public static void BallShakeRight(ConsoleColor GBBackground)
         {
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
+            BallFaceRight(62, 9, 500, GBBackground);
+            PokeBallANI(61, 9, 1000, GBBackground);
+            Console.SetCursorPosition(90, 46);
+        }
 
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
+        public static void ANIAttackerSwitch(ConsoleColor GBBackground)
+        {           
+            PokeBallANI(12, 17, 1500, GBBackground);
+            BallBreak(8, 16, 50, GBBackground);
+        }
 
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
+        public static void ANIDefenderSwitch(ConsoleColor GBBackground)
+        {
+            PokeBallANI(60, 6, 250, GBBackground);
+            PokeBallANI(60, 7, 50, GBBackground);
+            PokeBallANI(60, 8, 50, GBBackground);
+            PokeBallANI(60, 9, 50, GBBackground);
+            PokeBallANI(60, 8, 50, GBBackground);
+            PokeBallANI(60, 9, 1000, GBBackground);
+            BallBreak(56, 8, 50, GBBackground);
 
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"      ▄████▀▄     ",
-            @"     █▀▀▀o▀▀▀█    ",
-            @"      ▀▄▄▄▄▄▀     ",
-
-            @"                  ",
-            @"                  ",
-            @"                  ",
-            @"     ▄█ ▀▀▀ █▄    ",
-            @"    █ ▄▄▄o▄▄▄ █   ",
-            @"     ▀█ ▄▄▄ █▀    ",
-
-            @"                  ",
-            @"                  ",
-            @"        ▄▄▄       ",
-            @"     ▀       ▀    ",
-            @"   █     o     █  ",
-            @"     ▄  ▄▄▄  ▄    ",
-
-            @"                  ",
-            @"         ▄        ",
-            @"   ▀▄    ▀    ▄▀  ",
-            @"                  ",
-            @"▄▄       o      ▄▄",
-            @"     ▄  ▄▄▄  ▄    "
-        };
-            string length = "             ";
-            int frame = 0;
-            foreach (char item in length)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.SetCursorPosition(58, 5);
-                Console.Write(pokeBall[frame]);
-                Console.SetCursorPosition(58, 6);
-                Console.Write(pokeBall[frame + 1]);
-                Console.SetCursorPosition(58, 7);
-                Console.Write(pokeBall[frame + 2]);
-                Console.SetCursorPosition(58, 8);
-                Console.Write(pokeBall[frame + 3]);
-                Console.SetCursorPosition(58, 9);
-                Console.Write(pokeBall[frame + 4]);
-                Console.SetCursorPosition(58, 10);
-                Console.Write(pokeBall[frame + 5]);
-                Console.SetCursorPosition(90, 46);
-                frame += 6;
-                System.Threading.Thread.Sleep(50);
-            }
         }
 
         public static void ANIDefenderFaint(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -1297,15 +1530,15 @@ namespace MainClasses
         {
             string message = $"{npc.Name} sent out {npc.MonsterEquipped.Name}!";
             ScrollMessage(message, 50, 2000, GBText, GBBackground);
-            ANIDefenderSwitch();
+            ANIDefenderSwitch(GBBackground);
             DISDefender(npc.MonsterEquipped, GBText, GBBackground);
         }
 
         public static void ANIPlayerSwitch(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             string message = $"{player.Name} sent out {player.MonsterEquipped.Name}!";
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
-            ANIAttackerSwitch();
+            ScrollMessage(message, 50, 1500, GBText, GBBackground);
+            ANIAttackerSwitch(GBBackground);
             Console.ForegroundColor = GBText;
             DISAttacker(player, GBText, GBBackground);
             DISAttackerInfoBar(player, GBText, GBBackground);
@@ -1346,8 +1579,9 @@ namespace MainClasses
         {
             ResetScreen(GBText, GBBackground);
             ANIWildAppear(monster, GBText, GBBackground);
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1500);
             ANIPlayerSwitch(player, GBText, GBBackground);
+            System.Threading.Thread.Sleep(1500);
         }
 
         public static void NPCEncounter(Player player, Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
@@ -1357,6 +1591,7 @@ namespace MainClasses
             ANINPCSwitch(npc, GBText, GBBackground);
             System.Threading.Thread.Sleep(2000);
             ANIPlayerSwitch(player, GBText, GBBackground);
+            System.Threading.Thread.Sleep(2000);
         }
 
         public static void FullBattleWild(Player player, Monster[] monsters, int lvLow, int lvHigh, ConsoleColor GBText, ConsoleColor GBBackground, ConsoleKey navPlayerMenu)
@@ -1381,9 +1616,9 @@ namespace MainClasses
             defender.Health = diceRole * 5;
             defender.Gender = gender;
 
-            WildEncounter(player, defender, GBText, GBBackground);            
+            WildEncounter(player, defender, GBText, GBBackground);
 
-            Player_Menus.BattleFightMenu(player, defender, navPlayerMenu, GBText, GBBackground);          
+            Player_Menus.BattleFightMenu(player, defender, navPlayerMenu, GBText, GBBackground);
         }
 
         #endregion
@@ -1763,10 +1998,10 @@ namespace MainClasses
         public static string BallIdle = $@"
    █                                                                          
    █                                                                          
-   █                                                                          
-   █                                                            ▄█▀▀▀█▄       
-   █                                                           █▄▄▄o▄▄▄█      
-   █                                                            ▀█▄▄▄█▀       ";
+   █                                                             ▄▄▄        
+   █                                                           ▄███▄█▄      
+   █                                                           ▀▄ ▀ ▄▀      
+   █                                                             ▀▀▀        ";
 
         #endregion
 
@@ -1778,6 +2013,20 @@ namespace MainClasses
             @"█▄▄▄o▄▄▄█",
             @" ▀█▄▄▄█▀ "
         };
+
+        #endregion
+
+        #region PokeCatcher
+
+        public static string[] pokeCatcher = new string[] {
+        @"                                                                                                                                                                                  ",
+        @"                                                                                                                                                                                  ",
+        @"                                                                                                                                                                                  ",
+        @"                                                                                      ▄█▀▀▀█▄                                                                                     ",
+        @"                                                                                     █▄▄▄o▄▄▄█                                                                                    ",
+        @"                                                                                      ▀█▄▄▄█▀                                                                                     ",
+        @"                                                                                                                                                                                  ",
+        @"                                                                                                                                                                                  "};
 
         #endregion
 

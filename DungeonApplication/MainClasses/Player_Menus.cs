@@ -18,10 +18,10 @@ namespace MainClasses
             bool reloadBattleBAG = false;
             bool reloadBattlePOKeFRAUD = false;
             bool reloadBattleRUN = false;
-            
+
+            ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
             do
-            {
-                ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
+            {                
                 ASCII.DISSelectFight(attacker.MonsterEquipped, GBText, GBBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
@@ -31,6 +31,7 @@ namespace MainClasses
                         FightMenu(attacker, defender, navPlayerMenu, GBText, GBBackground);
                         if (defender.Health <= 0)
                         {
+                            System.Threading.Thread.Sleep(2000);
                             ASCII.ANIDefenderFaint(defender, GBText, GBBackground);
                             reloadBattleFIGHT = false;
                             reloadBattleBAG = false;
@@ -58,6 +59,7 @@ namespace MainClasses
                                 case ConsoleKey.Enter:
                                     //Insert Battle Menu BAG Functionality HERE
                                     //ItemSection(attacker, defender, navPlayerMenu, GBText, GBBackground);
+                                    Combat.FUNTryCatchANDSort(attacker, defender, GBText, GBBackground);
                                     if (defender.IsCaught == true)
                                     {
                                         reloadBattleFIGHT = false;
@@ -451,10 +453,10 @@ namespace MainClasses
             bool reloadFightMove3 = false;
             bool reloadFightMove4 = false;
 
+            ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
             do
             {
-                //Displays FightMove1
-                ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
+                //Displays FightMove1                
                 DISFightMove1(player.MonsterEquipped, GBText, GBBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
@@ -472,7 +474,6 @@ namespace MainClasses
                         do
                         {
                             //Displays FightMove2
-                            ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                             DISFightMove2(player.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
@@ -490,7 +491,6 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays FightMove4
-                                        ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                                         DISFightMove4(player.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
@@ -508,7 +508,6 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays FightMove3
-                                                    ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                                                     DISFightMove3(player.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
@@ -594,7 +593,6 @@ namespace MainClasses
                         do
                         {
                             //Displays Move3
-                            ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                             DISFightMove3(player.MonsterEquipped, GBText, GBBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
@@ -612,7 +610,6 @@ namespace MainClasses
                                     do
                                     {
                                         //Displays Move4
-                                        ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                                         DISFightMove4(player.MonsterEquipped, GBText, GBBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
@@ -630,7 +627,6 @@ namespace MainClasses
                                                 do
                                                 {
                                                     //Displays Move2
-                                                    ASCII.DISATTandDEF(player, monster, GBText, GBBackground);
                                                     DISFightMove2(player.MonsterEquipped, GBText, GBBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)

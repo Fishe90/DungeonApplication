@@ -49,11 +49,21 @@ namespace DungeonApplication
             NPC.ASCIIDefender = ASCII.npcDefender;
             NPC.ASCIIProfile = ASCII.npcProfile;
 
-            //ASCII.DISATTandDEF(player1, NPC.MonsterEquipped, GBText, GBBackground);
-            //ASCII.DISSelectFight(player1.MonsterEquipped,GBText, GBBackground);
+
             //Player_Menus.FightMenu(player1, NPC.MonsterEquipped, navPlayerMenu, GBText, GBBackground);
 
+            //ASCII.NPCEncounter(player1, NPC, GBText, GBBackground);
+            //ASCII.DISATTandDEF(player1, NPC.MonsterEquipped, GBText, GBBackground);
+            //Player_Menus.BattleFightMenu(player1, NPC.MonsterEquipped, navPlayerMenu, GBText, GBBackground);
+            //ASCII.DISSelectFight(player1.MonsterEquipped, GBText, GBBackground);
+
             ASCII.FullBattleWild(player1, Monster.starters, 3, 6, GBText, GBBackground, navPlayerMenu);
+            ASCII.DISATTandDEF(player1, NPC.MonsterEquipped, GBText, GBBackground);
+            ASCII.ANIDefenderSwitch(GBBackground);
+            ASCII.ThrowBall(GBBackground);
+            ASCII.BallShakeLeft(GBBackground);
+            ASCII.BallShakeRight(GBBackground);
+     
         }
     }
 }
