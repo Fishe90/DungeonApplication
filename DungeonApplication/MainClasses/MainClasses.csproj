@@ -53,9 +53,41 @@
     <Compile Include="Player_Menus.cs" />
     <Compile Include="Player_Party.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SFX.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="SFX\" />
+    <Content Include="SFX\BattleMusic_SFX\LeagueBattleIntro.wav" />
+    <Content Include="SFX\BattleMusic_SFX\LeagueBattleMusic.wav" />
+    <Content Include="SFX\BattleMusic_SFX\RivalBattleMusic.wav" />
+    <Content Include="SFX\BattleMusic_SFX\WildBattleMusic.wav" />
+    <Content Include="SFX\BattleMusic_SFX\WildBattleMusicIntro.wav" />
+    <Content Include="SFX\Battle_SFX\BallBounce.wav" />
+    <Content Include="SFX\Battle_SFX\BallShake.wav" />
+    <Content Include="SFX\Battle_SFX\CaptureSuccess.wav" />
+    <Content Include="SFX\Battle_SFX\ExpGain.wav" />
+    <Content Include="SFX\Battle_SFX\IsShiny.wav" />
+    <Content Include="SFX\Battle_SFX\LevelUP.wav" />
+    <Content Include="SFX\Battle_SFX\MonsterFled.wav" />
+    <Content Include="SFX\Battle_SFX\RunAway%28NEW%29.wav" />
+    <Content Include="SFX\Battle_SFX\ThrowBall.wav" />
+    <Content Include="SFX\GameMusic_SFX\GameOpeningTitle.wav" />
+    <Content Include="SFX\GameMusic_SFX\POKeMONTheme.wav" />
+    <Content Include="SFX\Menu_SFX\OpenMenu%28NEW%29.wav" />
+    <Content Include="SFX\Menu_SFX\OpenMenu_01.wav" />
+    <Content Include="SFX\Menu_SFX\Select%28NEW%29.wav" />
+    <Content Include="SFX\Move_SFX\Cut.wav" />
+    <Content Include="SFX\Move_SFX\RockSmash.wav" />
+    <Content Include="SFX\PokeCenter_SFX\Healing.wav" />
+    <Content Include="SFX\PokeCenter_SFX\OpenPC.wav" />
+    <Content Include="SFX\Transition_SFX\Boundary.wav" />
+    <Content Include="SFX\Transition_SFX\EnterBuilding.wav" />
+    <Content Include="SFX\Transition_SFX\EnterCave_01.wav" />
+    <Content Include="SFX\Transition_SFX\EnterStore.wav" />
+    <Content Include="SFX\Travel_SFX\Route1.wav" />
+    <Content Include="SFX\Trimmable_SFX\All_PokeCrys_MustBeCut.wav" />
+    <Content Include="SFX\Trimmable_SFX\_ALL_SFX_MustBeCut_1.wav" />
+    <Content Include="SFX\Trimmable_SFX\_ALL_SFX_MustBeCut_2.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

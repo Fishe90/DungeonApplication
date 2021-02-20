@@ -59,7 +59,7 @@ namespace MainClasses
                                 case ConsoleKey.Enter:
                                     //Insert Battle Menu BAG Functionality HERE
                                     //ItemSection(attacker, defender, navPlayerMenu, GBText, GBBackground);
-                                    Combat.FUNTryCatchANDSort(attacker, defender, GBText, GBBackground);
+                                    Combat.TryCatchANDSort(attacker, defender, GBText, GBBackground);
                                     if (defender.IsCaught == true)
                                     {
                                         reloadBattleFIGHT = false;

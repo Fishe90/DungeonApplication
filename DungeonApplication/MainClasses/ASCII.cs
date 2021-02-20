@@ -461,57 +461,69 @@ namespace MainClasses
             string[] frameONE = new string[]
             {
                 @"                   ",
+                @"                   ",
                 @"         ▄         ",
                 @"      ▀▄ ▀ ▄▀      ",
                 @"     ▀▀     ▄▄     ",
                 @"      ▄▀ ▄ ▀▄      ",
-                @"         ▀         "
+                @"         ▀         ",
+                @"                   "
             };
             string[] frameTWO = new string[]
             {
+                @"                   ",
                 @"                   ",
                 @"    ▄    ▄    ▄    ",
                 @"     ▀   ▀   ▀     ",
                 @"   ▄▄         ▄▄   ",
                 @"                   ",
-                @"    ▄▀   █   ▀▄    "
+                @"    ▄▀   █   ▀▄    ",
+                @"                   "
             };
             string[] frameTHREE = new string[]
             {
+                @"                   ",
                 @"         ▄         ",
                 @"   ▀     ▄     ▀   ",
                 @"     ▀       ▀     ",
                 @" ▄ ▄           ▄ ▄ ",
                 @"                   ",
-                @"     ▄       ▄     "
+                @"     ▀   ▄   ▀     ",
+                @"   ▀     ▄     ▀   "
             };
             string[] frameFOUR = new string[]
-{
+            {
+                @"                   ",
                 @"         ▄         ",
                 @"     ▄   ▄   ▄     ",
                 @"    ▀         ▀    ",
                 @" ▄ ▄           ▄ ▄ ",
                 @"                   ",
-                @"    ▀▄       ▄▀    "
-};
+                @"    ▀▄   ▄   ▄▀    ",
+                @"         ▄         "
+            };
             string[] frameFIVE = new string[]
-{
+            {
+                @"                   ",
                 @"                   ",
                 @"         ▄         ",
                 @"       ▄   ▄       ",
                 @"    ▄ ▀     ▀ ▄    ",
                 @"      ▀▄   ▄▀      ",
+                @"         ▄         ",
                 @"                   "
-};
+            };
             string[] frameSIX = new string[]
-{
+            {
+                @"                   ",
                 @"                   ",
                 @"                   ",
                 @"       ▄▀▀▀▄       ",
                 @"      █     █      ",
                 @"       ▀▄▄▄▀       ",
+                @"                   ",
                 @"                   "
-};
+            };
 
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -529,6 +541,10 @@ namespace MainClasses
             Console.Write(frameONE[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameONE[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameONE[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameONE[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion            
@@ -547,6 +563,10 @@ namespace MainClasses
             Console.Write(frameTWO[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameTWO[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameTWO[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameTWO[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion            
@@ -565,6 +585,10 @@ namespace MainClasses
             Console.Write(frameTHREE[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameTHREE[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameTHREE[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameTHREE[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion
@@ -583,6 +607,10 @@ namespace MainClasses
             Console.Write(frameFOUR[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameFOUR[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameFOUR[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameFOUR[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion
@@ -601,6 +629,10 @@ namespace MainClasses
             Console.Write(frameFIVE[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameFIVE[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameFIVE[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameFIVE[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion
@@ -619,6 +651,10 @@ namespace MainClasses
             Console.Write(frameSIX[4]);
             Console.SetCursorPosition(positionX, positionY + 5);
             Console.Write(frameSIX[5]);
+            Console.SetCursorPosition(positionX, positionY + 6);
+            Console.Write(frameSIX[6]);
+            Console.SetCursorPosition(positionX, positionY + 7);
+            Console.Write(frameSIX[7]);
             Console.SetCursorPosition(90, 46);
 
             #endregion
@@ -1095,18 +1131,22 @@ namespace MainClasses
         {
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
-            Console.SetCursorPosition(58, 5);
+            Console.SetCursorPosition(58, 3);
             Console.Write(monster.ASCIIPokedex[0]);
-            Console.SetCursorPosition(58, 6);
+            Console.SetCursorPosition(58, 4);
             Console.Write(monster.ASCIIPokedex[1]);
-            Console.SetCursorPosition(58, 7);
+            Console.SetCursorPosition(58, 5);
             Console.Write(monster.ASCIIPokedex[2]);
-            Console.SetCursorPosition(58, 8);
+            Console.SetCursorPosition(58, 6);
             Console.Write(monster.ASCIIPokedex[3]);
-            Console.SetCursorPosition(58, 9);
+            Console.SetCursorPosition(58, 7);
             Console.Write(monster.ASCIIPokedex[4]);
-            Console.SetCursorPosition(58, 10);
+            Console.SetCursorPosition(58, 8);
             Console.Write(monster.ASCIIPokedex[5]);
+            Console.SetCursorPosition(58, 9);
+            Console.Write(monster.ASCIIPokedex[6]);
+            Console.SetCursorPosition(58, 10);
+            Console.Write(monster.ASCIIPokedex[7]);
             Console.SetCursorPosition(90, 46);
             DISDefenderInfoBar(monster, GBText, GBBackground);
             StaticMessageBox(GBText, GBBackground);
@@ -1116,18 +1156,22 @@ namespace MainClasses
         {
             Console.ForegroundColor = GBText;
             Console.BackgroundColor = GBBackground;
-            Console.SetCursorPosition(4, 15);
+            Console.SetCursorPosition(4, 13);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
-            Console.SetCursorPosition(4, 16);
+            Console.SetCursorPosition(4, 14);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
-            Console.SetCursorPosition(4, 17);
+            Console.SetCursorPosition(4, 15);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
-            Console.SetCursorPosition(4, 18);
+            Console.SetCursorPosition(4, 16);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
-            Console.SetCursorPosition(4, 19);
+            Console.SetCursorPosition(4, 17);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
-            Console.SetCursorPosition(4, 20);
+            Console.SetCursorPosition(4, 18);
             Console.Write(player.MonsterEquipped.ASCIIAttacker[5]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[6]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.MonsterEquipped.ASCIIAttacker[7]);
             Console.SetCursorPosition(90, 46);
             DISAttackerInfoBar(player, GBText, GBBackground);
             StaticMessageBox(GBText, GBBackground);
@@ -1177,18 +1221,21 @@ namespace MainClasses
 
         #region BATTLE: Animations
 
-        public static void ThrowBall(ConsoleColor GBBackground)
+        public static void ThrowBall(Player player,ConsoleColor GBText, ConsoleColor GBBackground)
         {
             PokeBallANI(4, 13, 50, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
             PokeBallANI(12, 11, 50, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
             PokeBallANI(20, 9, 50, GBBackground);
+            DISAttacker(player, GBText, GBBackground);
             PokeBallANI(28, 8, 50, GBBackground);
             PokeBallANI(36, 7, 50, GBBackground);
             PokeBallANI(44, 6, 50, GBBackground);
             PokeBallANI(52, 6, 50, GBBackground);
             PokeBallANI(56, 6, 50, GBBackground);
-            PokeBallANI(60, 6, 1000, GBBackground);
-            BallOpenClose(56, 5, 50, GBBackground);
+            PokeBallANI(60, 6, 500, GBBackground);
+            BallOpenClose(56, 3, 50, GBBackground);
             PokeBallANI(60, 6, 250, GBBackground);
             PokeBallANI(60, 7, 50, GBBackground);
             PokeBallANI(60, 8, 50, GBBackground);
@@ -1212,14 +1259,15 @@ namespace MainClasses
         }
 
         public static void ANIAttackerSwitch(ConsoleColor GBBackground)
-        {           
+        {
             PokeBallANI(12, 17, 1500, GBBackground);
             BallBreak(8, 16, 50, GBBackground);
         }
 
         public static void ANIDefenderSwitch(ConsoleColor GBBackground)
         {
-            PokeBallANI(60, 6, 250, GBBackground);
+            PokeBallANI(60, 5, 50, GBBackground);
+            PokeBallANI(60, 6, 50, GBBackground);
             PokeBallANI(60, 7, 50, GBBackground);
             PokeBallANI(60, 8, 50, GBBackground);
             PokeBallANI(60, 9, 50, GBBackground);
@@ -1480,18 +1528,22 @@ namespace MainClasses
             int startPositionX = 95;
             foreach (char frame in distance)
             {
-                Console.SetCursorPosition(4, 5);
+                Console.SetCursorPosition(4, 3);
                 Console.Write(monster.ASCIIDefender[0].Substring(startPositionX, 83));
-                Console.SetCursorPosition(4, 6);
+                Console.SetCursorPosition(4, 4);
                 Console.Write(monster.ASCIIDefender[1].Substring(startPositionX, 83));
-                Console.SetCursorPosition(4, 7);
+                Console.SetCursorPosition(4, 5);
                 Console.Write(monster.ASCIIDefender[2].Substring(startPositionX, 83));
-                Console.SetCursorPosition(4, 8);
+                Console.SetCursorPosition(4, 6);
                 Console.Write(monster.ASCIIDefender[3].Substring(startPositionX, 83));
-                Console.SetCursorPosition(4, 9);
+                Console.SetCursorPosition(4, 7);
                 Console.Write(monster.ASCIIDefender[4].Substring(startPositionX, 83));
-                Console.SetCursorPosition(4, 10);
+                Console.SetCursorPosition(4, 8);
                 Console.Write(monster.ASCIIDefender[5].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 9);
+                Console.Write(monster.ASCIIDefender[6].Substring(startPositionX, 83));
+                Console.SetCursorPosition(4, 10);
+                Console.Write(monster.ASCIIDefender[7].Substring(startPositionX, 83));
                 Console.SetCursorPosition(90, 46);
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
@@ -1616,6 +1668,7 @@ namespace MainClasses
             defender.Health = diceRole * 5;
             defender.Gender = gender;
 
+            SFX.Battle();
             WildEncounter(player, defender, GBText, GBBackground);
 
             Player_Menus.BattleFightMenu(player, defender, navPlayerMenu, GBText, GBBackground);
@@ -1842,7 +1895,7 @@ namespace MainClasses
 
         #region GameBoy
 
-        public static string TEMGameBoy = @"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+        public static string TEMGameBoy = @"▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
 █  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  █
 █  █                                                                                   █  █
 █  █                                                                                   █  █
@@ -2562,20 +2615,20 @@ namespace MainClasses
         #region Player Profile Objects
 
         public static string[] npcDefender = new string[] {
-        @"                                                                                      ___                                                                                         ",
-        @"                                                                                    _|P__|                                                                                        ",
-        @"                                                                                    _|^-^)_                                                                                       ",
-        @"                                                                                   |_  Y  _|                                                                                      ",
-        @"                                                                                    || _ ||                                                                                       ",
-        @"                                                                                     |/ \|                                                                                        "};
+        @"                                                                                                                                                                                  ",
+        @"                                                                                                                                                                                  ",
+        @"                                                                                   ▄▄███▄                                                                                         ",
+        @"                                                                                    ▀▄█▄▀                                                                                         ",
+        @"                                                                                    ▀▄█▄▀                                                                                         ",
+        @"                                                                                     ▀ ▀                                                                                          "};
 
         public static string[] npcProfile = new string[] {
-        @"     ___         ",
-        @"   _|P__|        ",
-        @"   _|^-^)_       ",
-        @"  |_  Y  _|      ",
-        @"   || _ ||       ",
-        @"    |/ \|        "
+        @"                 ",
+        @"                 ",
+        @"  ▄▄███▄         ",
+        @"   ▀▄█▄▀         ",
+        @"   ▀▄█▄▀         ",
+        @"    ▀ ▀          "
         };
 
         public static string[] npcAttacker = new string[] {
@@ -2594,29 +2647,35 @@ namespace MainClasses
         #region Pyra
 
         public static string[] pyraDefender = new string[] {
-        @"                                                                                     |\_/\__                                                                                      ",
-        @"                                                                                    _/oYo \/_                                                                                     ",
-        @"                                                                                   (_y__-  \/_                                                                                    ",
-        @"                                                                                     |      \/                                                                                    ",
-        @"                                                                                    _|||_(   \_                                                                                   ",
-        @"                                                                                   (_(_|(____|/                                                                                   "};
+        @"                                                                                   ▄   ▄     ▄                                                                                    ",
+        @"                                                                                   █▀▄▄▀▄     █                                                                                   ",
+        @"                                                                                 ▄▄▀     ▀▀▄▀▀▄                                                                                   ",
+        @"                                                                                 ▀▄▄▄▄▀        █                                                                                  ",
+        @"                                                                                     █     ▄█ █                                                                                   ",
+        @"                                                                                     █ █ ▄▀  █ █                                                                                  ",
+        @"                                                                                   ▄▀ ▄▀ █  ▀ ▀                                                                                   ",
+        @"                                                                                  █▄ █▄ █                                                                                         "};
 
         public static string[] pyraPokedex = new string[] {
-        @"     |\_/\__      ",
-        @"    _/oYo \/_     ",
-        @"   (_y__-  \/_    ",
-        @"     |      \/    ",
-        @"    _|||_(   \_   ",
-        @"   (_(_|(____|/   "
+        @"   ▄   ▄     ▄    ",
+        @"   █▀▄▄▀▄     █   ",
+        @" ▄▄▀     ▀▀▄▀▀▄   ",
+        @" ▀▄▄▄▄▀        █  ",
+        @"     █     ▄█ █   ",
+        @"     █ █ ▄▀  █ █  ",
+        @"   ▄▀ ▄▀ █  ▀ ▀   ",
+        @"  █▄ █▄ █         "
         };
 
         public static string[] pyraAttacker = new string[] {
         @"                       ",
-        @"              /\_/|    ",
-        @"           __/     \_  ",
-        @"          _\/      __) ",
-        @"         _\/  O   |    ",
-        @"         \/  O  O |    "
+        @"               ▄   ▄   ",
+        @"             ▄▀█▄▄█▀   ",
+        @"           █▀      ▀▄  ",
+        @"         ██          ▀█",
+        @"        ██         ▄▄▄▀",
+        @"       ██  ▄      █    ",
+        @"      ██  ▄  ▄    █    "
         };
 
         #endregion
@@ -2624,29 +2683,35 @@ namespace MainClasses
         #region Dousey
 
         public static string[] douseyDefender = new string[] {
-        @"                                                                                      __                                                                                          ",
-        @"                                                                                   -=(o `\                                                                                        ",
-        @"                                                                                      '.-.\                                                                                       ",
-        @"                                                                                      /|  \\                                                                                      ",
-        @"                                                                                      '|  ||                                                                                      ",
-        @"                                                                                       _\_):,_                                                                                    "};
+        @"                                                                                                                                                                                  ",
+        @"                                                                                                                                                                                  ",
+        @"                                                                                    ▄▄▄▀▀▄                                                                                        ",
+        @"                                                                                      ▀█  █▄                                                                                      ",
+        @"                                                                                     ▄▀█   █▀▄                                                                                    ",
+        @"                                                                                    █ ▄█   █▄ █                                                                                   ",
+        @"                                                                                    █▀ █   █ ▀█                                                                                   ",
+        @"                                                                                      ▄▀▄▄▀▄▄_                                                                                    "};
 
         public static string[] douseyPokedex = new string[] {
-        @"      __          ",
-        @"   -=(o `\        ",
-        @"      '.-.\       ",
-        @"      /|  \\      ",
-        @"      '|  ||      ",
-        @"       _\_):,_    "
+        @"                  ",
+        @"                  ",
+        @"    ▄▄▄▀▀▄        ",
+        @"      ▀█  █▄      ",
+        @"     ▄▀█   █▀▄    ",
+        @"    █ ▄█   █▄ █   ",
+        @"    █▀ █   █ ▀█   ",
+        @"      ▄▀▄▄▀▄▄_    "
         };
 
         public static string[] douseyAttacker = new string[] {
         @"                       ",
-        @"              __       ",
-        @"            /    \>    ",
-        @"           /     |     ",
-        @"          /|    /|     ",
-        @"          |/    ||     "
+        @"             ▄▄▄▄_     ",
+        @"           ▄▀   ▀▄▀    ",
+        @"          █      █     ",
+        @"        ▄█     ▄▀█▄    ",
+        @"      ▄███     ▄▀███▄  ",
+        @"     ██▀█      ▄▀█ ▀██ ",
+        @"     ▀  █        █   ▀█"
         };
 
         #endregion
@@ -2654,29 +2719,35 @@ namespace MainClasses
         #region Electra
 
         public static string[] electraDefender = new string[] {
-        @"                                                                                     |\_/\__                                                                                      ",
-        @"                                                                                    _/oYo \/_                                                                                     ",
-        @"                                                                                   (_y__-  \/_                                                                                    ",
-        @"                                                                                     |      \/                                                                                    ",
-        @"                                                                                    _|||_(   \_                                                                                   ",
-        @"                                                                                   (_(_|(____|/                                                                                   "};
+        @"                                                                                                                                                                                  ",
+        @"                                                                                        ▄█                                                                                        ",
+        @"                                                                                      ▄▀ █                                                                                        ",
+        @"                                                                                     █0 0 █▄                                                                                      ",
+        @"                                                                                  ▄▄█ ▀██▀ █▄▄                                                                                    ",
+        @"                                                                                ▀▀█▄▄      ▄▄█▀▀                                                                                  ",
+        @"                                                                                ▄▀▀          ▀▀▄                                                                                  ",
+        @"                                                                                                                                                                                  "};
 
         public static string[] electraPokedex = new string[] {
-        @"    |\_/\__      ",
-        @"   _/oYo \/_     ",
-        @"  (_y__-  \/_    ",
-        @"    |      \/    ",
-        @"   _|||_(   \_   ",
-        @"  (_(_|(____|/   "
+        @"                 ",
+        @"        ▄█       ",
+        @"      ▄▀ █       ",
+        @"     █0 0 █▄     ",
+        @"  ▄▄█ ▀██▀ █▄▄   ",
+        @"▀▀█▄▄      ▄▄█▀▀ ",
+        @"▄▀▀          ▀▀▄ ",
+        @"                 "
         };
 
         public static string[] electraAttacker = new string[] {
-        @"    |\_/\__      ",
-        @"   _/oYo \/_     ",
-        @"  (_y__-  \/_    ",
-        @"    |      \/    ",
-        @"   _|||_(   \_   ",
-        @"  (_(_|(____|/   "
+        @"                       ",
+        @"                       ",
+        @"         █▀▄           ",
+        @"         █  ▀▄         ",
+        @"        █     █        ",
+        @"   ▄▄▄█▀ ▀▄▄▄▀ ▀█▄▄▄▄▄ ",
+        @"   ▄██▄   ▀▀      ▄█▄ ▀",
+        @"                     ▀▀"
         };
 
         #endregion
@@ -2685,28 +2756,34 @@ namespace MainClasses
 
         public static string[] cobbletDefender = new string[] {
         @"                                                                                                                                                                                  ",
-        @"                                                                                      _   _                                                                                       ",
-        @"                                                                                ___  / \_/ \  ___                                                                                 ",
-        @"                                                                                \ / |\_= =_/| \ /                                                                                 ",
-        @"                                                                                 \\//\_\_/_/\\//                                                                                  ",
-        @"                                                                                  \/         \/                                                                                   "};
+        @"                                                                                      ▄   ▄                                                                                       ",
+        @"                                                                                 ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄                                                                                  ",
+        @"                                                                                █  ██\▀▄ ▄▀/██  █                                                                                 ",
+        @"                                                                                █ █▀ ▄     ▄ ▀█ █                                                                                 ",
+        @"                                                                                ▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀                                                                                 ",
+        @"                                                                                  ▀           ▀                                                                                   ",
+        @"                                                                                  ▀███████████▀                                                                                   "};
 
         public static string[] cobbletPokedex = new string[] {
         @"                 ",
-        @"      _   _      ",
-        @"___  / \_/ \  ___",
-        @"\ / |\_= =_/| \ /",
-        @" \\//\_\_/_/\\// ",
-        @"  \/         \/  "
+        @"      ▄   ▄      ",
+        @" ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄ ",
+        @"█  ██\▀▄ ▄▀/██  █",
+        @"█ █▀ ▄     ▄ ▀█ █",
+        @"▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀",
+        @"  ▀           ▀  ",
+        @"  ▀███████████▀  "
         };
 
         public static string[] cobbletAttacker = new string[] {
         @"                       ",
-        @"          _   _        ",
-        @"         / \_/ \   ___ ",
-        @"        |\_/ \_/|  \ / ",
-        @"        \\_\_/_/\\_//  ",
-        @"         \/      \_/   "
+        @"           ▄   ▄       ",
+        @"     ▄▀█▄▀▀▀▀▀▀█    ▄▄ ",
+        @"     █  █\█  ▄▀/█  █  █",
+        @"      █  ▄     ▄ ▀▄█ █ ",
+        @"       █▀ ▀▀▀▀▀ ▀▄ ▄▀  ",
+        @"                  ▀    ",
+        @"                       "
         };
 
         #endregion
@@ -2714,29 +2791,35 @@ namespace MainClasses
         #region Neo
 
         public static string[] neoDefender = new string[] {
-        @"                                                                                     |\_/\__                                                                                      ",
-        @"                                                                                    _/oYo \/_                                                                                     ",
-        @"                                                                                   (_y__-  \/_                                                                                    ",
-        @"                                                                                     |      \/                                                                                    ",
-        @"                                                                                    _|||_(   \_                                                                                   ",
-        @"                                                                                   (_(_|(____|/                                                                                   "};
+        @"                                                                                   █▀▀▄█▀▀▀█▄▀▀█                                                                                  ",
+        @"                                                                                   █           █                                                                                  ",
+        @"                                                                                   ▄▀         ▀▄                                                                                  ",
+        @"                                                                                   █ ▀▀▄   ▄▀▀ █                                                                                  ",
+        @"                                                                                   ▄▀▀▄▄   ▄▄▀▀▄                                                                                  ",
+        @"                                                                                   ▀▄▄▀ ▀▀▀ ▀▄▄▀                                                                                  ",
+        @"                                                                                  █▀  █  █  █  ▀█                                                                                 ",
+        @"                                                                                   ▀▀▄▄▀▀▀▀▀▄▄▀▀                                                                                  "};
 
         public static string[] neoPokedex = new string[] {
-        @"    |\_/\__      ",
-        @"   _/oYo \/_     ",
-        @"  (_y__-  \/_    ",
-        @"    |      \/    ",
-        @"   _|||_(   \_   ",
-        @"  (_(_|(____|/   "
+        @"   █▀▀▄█▀▀▀█▄▀▀█ ",
+        @"   █           █ ",
+        @"   ▄▀         ▀▄ ",
+        @"   █ ▀▀▄   ▄▀▀ █ ",
+        @"   ▄▀▀▄▄   ▄▄▀▀▄ ",
+        @"   ▀▄▄▀ ▀▀▀ ▀▄▄▀ ",
+        @"  █▀  █  █  █  ▀█",
+        @"   ▀▀▄▄▀▀▀▀▀▄▄▀▀ "
         };
 
         public static string[] neoAttacker = new string[] {
-        @"    |\_/\__      ",
-        @"   _/oYo \/_     ",
-        @"  (_y__-  \/_    ",
-        @"    |      \/    ",
-        @"   _|||_(   \_   ",
-        @"  (_(_|(____|/   "
+        @"       ▄           ▄         ",
+        @"       █▀▄▄▀▀▀▀▄▄▀██         ",
+        @"      █            █         ",
+        @"     █              █        ",
+        @"     ▄▀▄  ▄▄▄▄▄  ▄▀▄▀ ▄ ▄    ",
+        @"     █  █▀     ▀█   █▄▀▀█▄   ",
+        @"    █ █▄█        █▄▄▀ ▄▀     ",
+        @"    ▀▄ █         █ ▀▄▀       "
         };
 
         #endregion

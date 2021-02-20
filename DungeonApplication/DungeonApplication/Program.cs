@@ -35,35 +35,29 @@ namespace DungeonApplication
 
             Monster firePyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Fire, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, pyraDefault);
             Monster waterDousey = new Monster("Dousey", "Dousey", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Water, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, douseyDefault);
-            Monster electricDousey = new Monster("Electra", "Electra", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Electric, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, electraDefault);
+            Monster electricElectra = new Monster("Electra", "Electra", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Electric, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, electraDefault);
             Monster groundCobblet = new Monster("Cobblet", "Cobblet", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Water, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, cobbletDefault);
             Monster psychicNeo = new Monster("Neo", "Neo", '♂', false, 25, 50, 25, 0, 5, 1, "004", false, Monster_Race.Water, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, neoDefault);
 
             Player player1 = new Player();
             player1.Name = "Dillon";
-            player1.MonsterEquipped = firePyra;
+            player1.MonsterEquipped = psychicNeo;
             player1.Money = 0;
             Player NPC = new Player();
             NPC.Name = "Bryan";
-            NPC.MonsterEquipped = waterDousey;
+            NPC.MonsterEquipped = firePyra;
             NPC.ASCIIDefender = ASCII.npcDefender;
             NPC.ASCIIProfile = ASCII.npcProfile;
 
 
             //Player_Menus.FightMenu(player1, NPC.MonsterEquipped, navPlayerMenu, GBText, GBBackground);
-
+            //SFX.RivalBattle();
             //ASCII.NPCEncounter(player1, NPC, GBText, GBBackground);
             //ASCII.DISATTandDEF(player1, NPC.MonsterEquipped, GBText, GBBackground);
             //Player_Menus.BattleFightMenu(player1, NPC.MonsterEquipped, navPlayerMenu, GBText, GBBackground);
             //ASCII.DISSelectFight(player1.MonsterEquipped, GBText, GBBackground);
 
             ASCII.FullBattleWild(player1, Monster.starters, 3, 6, GBText, GBBackground, navPlayerMenu);
-            ASCII.DISATTandDEF(player1, NPC.MonsterEquipped, GBText, GBBackground);
-            ASCII.ANIDefenderSwitch(GBBackground);
-            ASCII.ThrowBall(GBBackground);
-            ASCII.BallShakeLeft(GBBackground);
-            ASCII.BallShakeRight(GBBackground);
-     
         }
     }
 }

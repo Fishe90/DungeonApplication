@@ -178,7 +178,7 @@ namespace MainClasses
 
         #region Combat Functionality Player VS Monster 
 
-        public static void FUNCatchSort(Player player, Monster monsterCaught, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void CatchSort(Player player, Monster monsterCaught, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             int currentID = 1;
             bool reloadCatchSortPC = false;
@@ -327,7 +327,7 @@ namespace MainClasses
             }
         }
 
-        public static void FUNTryCatchANDSort(Player attacker, Monster defender, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void TryCatchANDSort(Player attacker, Monster defender, ConsoleColor GBText, ConsoleColor GBBackground)
         {
             Random rand = new Random();
             int catchChance1 = rand.Next(0, 100);
@@ -339,9 +339,7 @@ namespace MainClasses
 
             ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
             ASCII.ScrollMessage(messageTryCatch, 50, 1000, GBText, GBBackground);
-            ASCII.ThrowBall(GBBackground);
-            //ASCII.DISAttacker(attacker, GBText, GBBackground);
-            //ASCII.DISDefenderInfoBar(defender, GBText, GBBackground);
+            ASCII.ThrowBall(attacker, GBText, GBBackground);
             if (defender.Health < (.25 * defender.MaxHealth) && catchChance1 > 25 || catchChance1 > 50)
             {
                 ASCII.BallShakeLeft(GBBackground);
@@ -351,9 +349,9 @@ namespace MainClasses
                     if (defender.Health < (.25 * defender.MaxHealth) && catchChance2 > 25 || catchChance3 > 50)
                     {
                         ASCII.BallShakeLeft(GBBackground);
-                        //SFX.CaptureSuccess();
+                        SFX.CaptureSuccess();
                         ASCII.ScrollMessage(messageCaught, 50, 5000, GBText, GBBackground); 
-                        FUNCatchSort(attacker, defender, GBText, GBBackground);
+                        CatchSort(attacker, defender, GBText, GBBackground);
                         defender.IsCaught = true;
                     }
                     else
