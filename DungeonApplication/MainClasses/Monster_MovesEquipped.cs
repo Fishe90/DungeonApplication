@@ -23,6 +23,7 @@ namespace MainClasses
             Move4 = move4;
         }
 
+        public static Monster_MovesEquipped playerStarter = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.waterWaterGun, Monster_Moves.electricThundershock, Monster_Moves.psychicConfusion);
         public static Monster_MovesEquipped fireLow = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped waterLow = new Monster_MovesEquipped(Monster_Moves.waterWaterGun, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped electricLow = new Monster_MovesEquipped(Monster_Moves.electricThundershock, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);

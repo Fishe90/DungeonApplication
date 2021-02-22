@@ -10,127 +10,119 @@ namespace MainClasses
     {
         #region CalcDamage PlayerVSMonster
 
-        public static void PlayerVSMonsterHitZero(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void PlayerVSMonsterHitZero(Player attacker, Monster defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
-            string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
+            string playerHit = $@"{attacker.Party.MonsterEquipped.Name} used {move.Name}!";
             string playerHitZero = $@"{move.Name} doesn't affect the wild {defender.Name}!";
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageMonster(defender, 0, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitZero, 50, 2000, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageMonster(defender, 0, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitZero, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitLow(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void PlayerVSMonsterHitLow(Player attacker, Monster defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
-            string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
+            string playerHit = $@"{attacker.Party.MonsterEquipped.Name} used {move.Name}!";
             string playerHitLow = $@"It's not very effective!";
-            int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) / 2;
+            int damageDealt = ((((((2 * attacker.Party.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) / 2;
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitLow, 50, 2000, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitLow, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitStan(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void PlayerVSMonsterHitStan(Player attacker, Monster defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
-            string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
-            int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2);
-                        
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            string playerHit = $@"{attacker.Party.MonsterEquipped.Name} used {move.Name}!";
+            int damageDealt = ((((((2 * attacker.Party.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2);
+
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
             move.Uses -= 1;
         }
 
-        public static void PlayerVSMonsterHitSuper(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void PlayerVSMonsterHitSuper(Player attacker, Monster defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
-            string playerHit = $@"{attacker.MonsterEquipped.Name} used {move.Name}!";
+            string playerHit = $@"{attacker.Party.MonsterEquipped.Name} used {move.Name}!";
             string playerHitSuper = $@"It's super effective!";
-            int damageDealt = ((((((2 * attacker.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) * 2;
+            int damageDealt = ((((((2 * attacker.Party.MonsterEquipped.Lv) / 5) + 2) * move.Damage) / 50) + 2) * 2;
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageMonster(defender, damageDealt, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitSuper, 50, 2000, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitSuper, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
         }
         #endregion
 
         #region CalcDamage MonsterVSPlayer
-        public static void MonsterVSPlayerHitZero(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void MonsterVSPlayerHitZero(Monster attacker, Player defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
-            string playerHitZero = $@"{move.Name} doesn't affect {defender.MonsterEquipped.Name}!";
+            string playerHitZero = $@"{move.Name} doesn't affect {defender.Party.MonsterEquipped.Name}!";
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageAttacker(defender, 0, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitZero, 50, 1000, GBText, GBBackground);            
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageAttacker(defender, 0, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitZero, 50, 1000, gbText, gbBackground);            
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitLow(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void MonsterVSPlayerHitLow(Monster attacker, Player defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             string playerHitLow = $@"It's not very effective!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2) / 2;
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitLow, 50, 2000, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitLow, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitStan(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void MonsterVSPlayerHitStan(Monster attacker, Player defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2);
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
             move.Uses -= 1;
         }
 
-        public static void MonsterVSPlayerHitSuper(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void MonsterVSPlayerHitSuper(Monster attacker, Player defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
             string playerHit = $@"{attacker.Name} used {move.Name}!";
             string playerHitSuper = $@"It's super effective!";
             int damageDealt = ((((((2 * attacker.Lv) / 5) + 2) * move.Damage) / 50) + 2) * 2;
 
-            //Console.ForegroundColor = GBText;
-            //Console.BackgroundColor = GBBackground;
+            ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
-            ASCII.ScrollMessage(playerHit, 50, 1000, GBText, GBBackground);
-            CalcDamageAttacker(defender, damageDealt, GBText, GBBackground);
-            ASCII.ScrollMessage(playerHitSuper, 50, 2000, GBText, GBBackground);
+            ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
+            ASCII.ScrollMessage(playerHitSuper, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
         }
 
@@ -138,7 +130,7 @@ namespace MainClasses
 
         #region CalcDamage Display Player VS Monster
 
-        public static void CalcDamageMonster(Monster monster, int damage, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void CalcDamageMonster(Monster monster, int damage, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             int currentHealth = monster.Health;
             System.Threading.Thread.Sleep(1000);
@@ -156,18 +148,18 @@ namespace MainClasses
             }
         }
 
-        public static void CalcDamageAttacker(Player attacker, int damage, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void CalcDamageAttacker(Player attacker, int damage, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            int currentHealth = attacker.MonsterEquipped.Health;
+            int currentHealth = attacker.Party.MonsterEquipped.Health;
             System.Threading.Thread.Sleep(1000);
             currentHealth -= damage;
-            while (currentHealth < attacker.MonsterEquipped.Health)
+            while (currentHealth < attacker.Party.MonsterEquipped.Health)
             {
-                attacker.MonsterEquipped.Health -= 1;
-                ASCII.HealthBar(attacker.MonsterEquipped, 43, 15);
-                if (attacker.MonsterEquipped.Health <= 0 && currentHealth <= 0)
+                attacker.Party.MonsterEquipped.Health -= 1;
+                ASCII.HealthBar(attacker.Party.MonsterEquipped, 43, 15);
+                if (attacker.Party.MonsterEquipped.Health <= 0 && currentHealth <= 0)
                 {
-                    attacker.MonsterEquipped.Health = 0;
+                    attacker.Party.MonsterEquipped.Health = 0;
                     currentHealth = 0;
                 }
                 System.Threading.Thread.Sleep(200);
@@ -178,7 +170,7 @@ namespace MainClasses
 
         #region Combat Functionality Player VS Monster 
 
-        public static void CatchSort(Player player, Monster monsterCaught, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void CatchSort(Player player, Monster monsterCaught, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             int currentID = 1;
             bool reloadCatchSortPC = false;
@@ -315,7 +307,7 @@ namespace MainClasses
                         player.PC[currentID].Gender = monsterCaught.Gender;
 
                         string message = $"{monsterCaught.Name} was sent to Slot {currentID} in {player.Name}'s PC.";
-                        ASCII.ScrollMessage(message, 50, 2000, GBText, GBBackground);                       
+                        ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);                       
                         reloadCatchSortPC = false;
                     }
                     else
@@ -327,75 +319,77 @@ namespace MainClasses
             }
         }
 
-        public static void TryCatchANDSort(Player attacker, Monster defender, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void TryCatchANDSort(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Random rand = new Random();
             int catchChance1 = rand.Next(0, 100);
             int catchChance2 = rand.Next(0, 200);
             int catchChance3 = rand.Next(0, 1000);
-            string messageTryCatch = $"{attacker.Name.ToUpper()} used a PokeCatcher!";
-            string messageFreed = $"Oh no! {defender.Name.ToUpper()} broke free!";
-            string messageCaught = $"{attacker.Name.ToUpper()} caught the wild {defender.Name.ToUpper()}!";
+            string messageTryCatch = $"{player.Name.ToUpper()} used a PokeCatcher!";
+            string messageFreed = $"Oh no! {monster.Name.ToUpper()} broke free!";
+            string messageCaught = $"{player.Name.ToUpper()} caught the wild {monster.Name.ToUpper()}!";
 
-            ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
-            ASCII.ScrollMessage(messageTryCatch, 50, 1000, GBText, GBBackground);
-            ASCII.ThrowBall(attacker, GBText, GBBackground);
-            if (defender.Health < (.25 * defender.MaxHealth) && catchChance1 > 25 || catchChance1 > 50)
+            ASCII.ScrollMessage(messageTryCatch, 50, 1000, gbText, gbBackground);
+            ASCII.ThrowBall(player, gbText, gbBackground);
+            if (monster.Health < (.25 * monster.MaxHealth) && catchChance1 > 25 || catchChance1 > 50)
             {
-                ASCII.BallShakeLeft(GBBackground);
-                if (defender.Health < (.25 * defender.MaxHealth) && catchChance2 > 25 || catchChance2 > 50)
+                ASCII.BallShakeLeft(gbBackground);
+                if (monster.Health < (.25 * monster.MaxHealth) && catchChance2 > 25 || catchChance2 > 50)
                 {
-                    ASCII.BallShakeRight(GBBackground);
-                    if (defender.Health < (.25 * defender.MaxHealth) && catchChance2 > 25 || catchChance3 > 50)
+                    ASCII.BallShakeRight(gbBackground);
+                    if (monster.Health < (.25 * monster.MaxHealth) && catchChance2 > 25 || catchChance3 > 50)
                     {
-                        ASCII.BallShakeLeft(GBBackground);
+                        ASCII.BallShakeLeft(gbBackground);
                         SFX.CaptureSuccess();
-                        ASCII.ScrollMessage(messageCaught, 50, 5000, GBText, GBBackground); 
-                        CatchSort(attacker, defender, GBText, GBBackground);
-                        defender.IsCaught = true;
+                        ASCII.ScrollMessage(messageCaught, 50, 5000, gbText, gbBackground); 
+                        CatchSort(player, monster, gbText, gbBackground);
+                        monster.IsCaught = true;
                     }
                     else
                     {
-                        ASCII.BallBreak(56, 8, 50, GBBackground);
-                        ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
-                        ASCII.ScrollMessage(messageFreed, 50, 2000, GBText, GBBackground);
+                        ASCII.BallBreak(56, 8, 50, gbBackground);
+                        ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                        ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
+                        DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
                     }
                 }
                 else
                 {
-                    ASCII.BallBreak(56, 8, 50, GBBackground);
-                    ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
-                    ASCII.ScrollMessage(messageFreed, 50, 2000, GBText, GBBackground);
+                    ASCII.BallBreak(56, 8, 50, gbBackground);
+                    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                    ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
+                    DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
                 }
             }
             else
             {
-                ASCII.BallBreak(56, 8, 50, GBBackground);
-                ASCII.DISATTandDEF(attacker, defender, GBText, GBBackground);
-                ASCII.ScrollMessage(messageFreed, 50, 2000, GBText, GBBackground);
+                ASCII.BallBreak(56, 8, 50, gbBackground);
+                ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
+                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
             }
-            //attacker.Inventory.BagSlot1.PokeCatcher -= 1;
+            player.Inventory.ItemSection[0].Amount -= 1;
         }
 
-        public static void DoAttackPlayer(Player attacker, Monster defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DoAttackPlayer(Player player, Monster monster, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Monster_Race currentType = attacker.MonsterEquipped.Type;
+            Monster_Race currentType = player.Party.MonsterEquipped.Type;
             switch (move.Type)
             {
                 case Monster_Race.Fire:
-                    attacker.MonsterEquipped.Type = Monster_Race.Fire;
+                    player.Party.MonsterEquipped.Type = Monster_Race.Fire;
                     break;
                 case Monster_Race.Water:
-                    attacker.MonsterEquipped.Type = Monster_Race.Water;
+                    player.Party.MonsterEquipped.Type = Monster_Race.Water;
                     break;
                 case Monster_Race.Electric:
-                    attacker.MonsterEquipped.Type = Monster_Race.Electric;
+                    player.Party.MonsterEquipped.Type = Monster_Race.Electric;
                     break;
                 case Monster_Race.Ground:
-                    attacker.MonsterEquipped.Type = Monster_Race.Ground;
+                    player.Party.MonsterEquipped.Type = Monster_Race.Ground;
                     break;
                 case Monster_Race.Psychic:
-                    attacker.MonsterEquipped.Type = Monster_Race.Psychic;
+                    player.Party.MonsterEquipped.Type = Monster_Race.Psychic;
                     break;
             }
 
@@ -403,228 +397,228 @@ namespace MainClasses
 
             /*//////////Fire Monster//////////*/
 
-            if (attacker.MonsterEquipped.Type == Monster_Race.Fire)
+            if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
             {
                 /**********Fire-Type VS Ground-Type*********/
 
-                if (defender.Type == Monster_Race.Ground)
+                if (monster.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Water-Type*********/
 
-                else if (defender.Type == Monster_Race.Water)
+                else if (monster.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitLow(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Fire-Type*********/
 
-                if (defender.Type == Monster_Race.Fire)
+                if (monster.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Electric-Type*********/
 
-                else if (defender.Type == Monster_Race.Electric)
+                else if (monster.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Psychic-Type*********/
 
-                else if (defender.Type == Monster_Race.Psychic)
+                else if (monster.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Water Monster//////////*/
 
-            if (attacker.MonsterEquipped.Type == Monster_Race.Water)
+            if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
             {
                 /**********Water-Type VS Fire-Type*********/
 
-                if (defender.Type == Monster_Race.Fire)
+                if (monster.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Electric-Type*********/
 
-                else if (defender.Type == Monster_Race.Electric)
+                else if (monster.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitLow(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Water-Type*********/
 
-                else if (defender.Type == Monster_Race.Water)
+                else if (monster.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Ground-Type*********/
 
-                else if (defender.Type == Monster_Race.Ground)
+                else if (monster.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Psychic-Type*********/
 
-                else if (defender.Type == Monster_Race.Psychic)
+                else if (monster.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Electric Monster//////////*/
 
-            if (attacker.MonsterEquipped.Type == Monster_Race.Electric)
+            if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
             {
                 /**********Electric-Type VS Water-Type*********/
 
-                if (defender.Type == Monster_Race.Water)
+                if (monster.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Ground-Type*********/
 
-                else if (defender.Type == Monster_Race.Ground)
+                else if (monster.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitZero(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitZero(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Rock-Type*********/
 
-                else if (defender.Type == Monster_Race.Electric)
+                else if (monster.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Fire-Type*********/
 
-                else if (defender.Type == Monster_Race.Fire)
+                else if (monster.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Psychic-Type*********/
 
-                else if (defender.Type == Monster_Race.Psychic)
+                else if (monster.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Ground Monster//////////*/
 
-            if (attacker.MonsterEquipped.Type == Monster_Race.Ground)
+            if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
             {
                 /**********Ground-Type VS Rock-Type*********/
 
-                if (defender.Type == Monster_Race.Electric)
+                if (monster.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Fire-Type*********/
 
-                else if (defender.Type == Monster_Race.Fire)
+                else if (monster.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitLow(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Ground-Type*********/
 
-                else if (defender.Type == Monster_Race.Ground)
+                else if (monster.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Water-Type*********/
 
-                else if (defender.Type == Monster_Race.Water)
+                else if (monster.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Psychic-Type*********/
 
-                else if (defender.Type == Monster_Race.Psychic)
+                else if (monster.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Psychic Monster//////////*/
 
-            if (attacker.MonsterEquipped.Type == Monster_Race.Psychic)
+            if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
             {
                 /**********Psychic-Type VS Fire-Type*********/
 
-                if (defender.Type == Monster_Race.Fire)
+                if (monster.Type == Monster_Race.Fire)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Water-Type*********/
 
-                else if (defender.Type == Monster_Race.Water)
+                else if (monster.Type == Monster_Race.Water)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Electric-Type*********/
 
-                else if (defender.Type == Monster_Race.Electric)
+                else if (monster.Type == Monster_Race.Electric)
                 {
-                    PlayerVSMonsterHitSuper(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitSuper(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Air-Type*********/
 
-                else if (defender.Type == Monster_Race.Ground)
+                else if (monster.Type == Monster_Race.Ground)
                 {
-                    PlayerVSMonsterHitStan(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitStan(player, monster, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Psychic-Type*********/
 
-                else if (defender.Type == Monster_Race.Psychic)
+                else if (monster.Type == Monster_Race.Psychic)
                 {
-                    PlayerVSMonsterHitLow(attacker, defender, move, GBText, GBBackground);
+                    PlayerVSMonsterHitLow(player, monster, move, gbText, gbBackground);
                 }//end else if                
             }//end if             
 
             #endregion             
 
-            attacker.MonsterEquipped.Type = currentType;
+            player.Party.MonsterEquipped.Type = currentType;
         }
 
-        public static void DoAttackMonster(Monster attacker, Player defender, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DoAttackMonster(Monster monster, Player player, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Monster_Race currentType = attacker.Type;
+            Monster_Race currentType = monster.Type;
             switch (move.Type)
             {
                 case Monster_Race.Fire:
-                    attacker.Type = Monster_Race.Fire;
+                    monster.Type = Monster_Race.Fire;
                     break;
                 case Monster_Race.Water:
-                    attacker.Type = Monster_Race.Water;
+                    monster.Type = Monster_Race.Water;
                     break;
                 case Monster_Race.Electric:
-                    attacker.Type = Monster_Race.Electric;
+                    monster.Type = Monster_Race.Electric;
                     break;
                 case Monster_Race.Ground:
-                    attacker.Type = Monster_Race.Ground;
+                    monster.Type = Monster_Race.Ground;
                     break;
                 case Monster_Race.Psychic:
-                    attacker.Type = Monster_Race.Psychic;
+                    monster.Type = Monster_Race.Psychic;
                     break;
             }
 
@@ -632,217 +626,218 @@ namespace MainClasses
 
             /*//////////Fire Monster//////////*/
 
-            if (attacker.Type == Monster_Race.Fire)
+            if (monster.Type == Monster_Race.Fire)
             {
                 /**********Fire-Type VS Ground-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Ground)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Water-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Water)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitLow(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Fire-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Fire)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Electric-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Fire-Type VS Psychic-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Water Monster//////////*/
 
-            if (attacker.Type == Monster_Race.Water)
+            if (monster.Type == Monster_Race.Water)
             {
                 /**********Water-Type VS Fire-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Fire)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Electric-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitLow(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Water-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Water)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Ground-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Water-Type VS Psychic-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Electric Monster//////////*/
 
-            if (attacker.Type == Monster_Race.Electric)
+            if (monster.Type == Monster_Race.Electric)
             {
                 /**********Electric-Type VS Water-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Water)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Ground-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitZero(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitZero(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Rock-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Fire-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Fire)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Electric-Type VS Psychic-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Ground Monster//////////*/
 
-            if (attacker.Type == Monster_Race.Ground)
+            if (monster.Type == Monster_Race.Ground)
             {
                 /**********Ground-Type VS Rock-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Electric)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Fire-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Fire)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitLow(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Ground-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Water-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Water)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Ground-Type VS Psychic-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if                
             }//end if
 
             /*//////////Psychic Monster//////////*/
 
-            if (attacker.Type == Monster_Race.Psychic)
+            if (monster.Type == Monster_Race.Psychic)
             {
                 /**********Psychic-Type VS Fire-Type*********/
 
-                if (defender.MonsterEquipped.Type == Monster_Race.Fire)
+                if (player.Party.MonsterEquipped.Type == Monster_Race.Fire)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Water-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Water)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Water)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Electric-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Electric)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Electric)
                 {
-                    MonsterVSPlayerHitSuper(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitSuper(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Air-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Ground)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Ground)
                 {
-                    MonsterVSPlayerHitStan(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitStan(monster, player, move, gbText, gbBackground);
                 }//end else if
 
                 /**********Psychic-Type VS Psychic-Type*********/
 
-                else if (defender.MonsterEquipped.Type == Monster_Race.Psychic)
+                else if (player.Party.MonsterEquipped.Type == Monster_Race.Psychic)
                 {
-                    MonsterVSPlayerHitLow(attacker, defender, move, GBText, GBBackground);
+                    MonsterVSPlayerHitLow(monster, player, move, gbText, gbBackground);
                 }//end else if                
             }//end if             
 
             #endregion             
 
-            attacker.Type = currentType;
+            monster.Type = currentType;
         }
 
-        public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DoBattle(Player player, Monster monster, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            DoAttackPlayer(player, monster, move, GBText, GBBackground);
+            DoAttackPlayer(player, monster, move, gbText, gbBackground);
             if (monster.Health > 0)
             {
-                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, GBText, GBBackground);                
+                DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);                
             }//end if
         }//end 
+
         #endregion
     }
 }

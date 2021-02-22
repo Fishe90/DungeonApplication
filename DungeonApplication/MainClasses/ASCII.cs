@@ -8,7 +8,7 @@ namespace MainClasses
 {
     public class ASCII
     {
-        /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); TO THE END TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
+        /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
 
         #region METHODS: Screen Control
 
@@ -20,7 +20,7 @@ namespace MainClasses
         }
 
         /****ERASES THE CURRENT SCREEN DISPLAY****/
-        public static void ResetScreen(ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ResetScreen(ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string[] screen = new string[]
             {
@@ -49,8 +49,8 @@ namespace MainClasses
                 "                                                                                   ",
                 "                                                                                   "
             };
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(4, 2);
             Console.Write(screen[0].Substring(0, 83));
             Console.SetCursorPosition(4, 3);
@@ -102,11 +102,34 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        /****DISPLAYS A STATIC SCREEN (FE: PLAYER MENU, EMPTY MENU SECTION)****/
-        public static void StaticScreen(string[] ScreenDisplay, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ResetHalfScreen(int posY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            string[] screen = new string[]
+            {
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   ",
+                "                                                                                   "
+            };
+            foreach (string item in screen)
+            {
+                Console.SetCursorPosition(4, posY);
+                Console.Write(item);
+                Console.SetCursorPosition(90, 46);
+                posY += 1;
+            }
+        }
+
+        /****DISPLAYS A STATIC SCREEN (FE: PLAYER MENU, EMPTY MENU SECTION)****/
+        public static void StaticScreen(string[] ScreenDisplay, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(4, 2);
             Console.Write(ScreenDisplay[0].Substring(0, 83));
             Console.SetCursorPosition(4, 3);
@@ -159,10 +182,10 @@ namespace MainClasses
         }
 
         /****DISPLAYS BACKGROUND MOVEMENT****/
-        public static void MovementScreen(string[] ScreenDisplay, int currentPosX, int currentPosY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void MovementScreen(string[] ScreenDisplay, int currentPosX, int currentPosY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(4, 2);
             Console.Write(ScreenDisplay[currentPosY].Substring(currentPosX, currentPosX + 83));
             Console.SetCursorPosition(4, 3);
@@ -215,10 +238,10 @@ namespace MainClasses
         }
 
         /****DISPLAYS A STATIC SCREEN (FE: PLAYER MENU, EMPTY MENU SECTION)****/
-        public static void StaticPMScreen(string[] ScreenDisplay, Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void StaticPMScreen(string[] ScreenDisplay, Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(4, 2);
             Console.Write(ScreenDisplay[0].Substring(0, 83));
             Console.SetCursorPosition(4, 3);
@@ -279,7 +302,7 @@ namespace MainClasses
 
         #region BATTLE: Object Displays (NEEDS COORDINATES)
 
-        public static void BallFaceLeft(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        public static void BallFaceLeft(int positionX, int positionY, int delay, ConsoleColor gbBackground)
         {
             string[] pokeBall = new string[]
         {
@@ -295,15 +318,15 @@ namespace MainClasses
         };
             Console.SetCursorPosition(positionX + 2, positionY);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[0]);
             Console.SetCursorPosition(positionX, positionY + 1);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[1]);
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[2]);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[3]);
             Console.SetCursorPosition(positionX, positionY + 2);
             Console.ForegroundColor = ConsoleColor.Red;
@@ -312,17 +335,17 @@ namespace MainClasses
             Console.Write(pokeBall[5]);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(pokeBall[6]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[7]);
             Console.SetCursorPosition(positionX + 2, positionY + 3);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[8]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(delay);
         }
 
-        public static void BallFaceRight(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        public static void BallFaceRight(int positionX, int positionY, int delay, ConsoleColor gbBackground)
         {
             string[] pokeBall = new string[]
         {
@@ -338,16 +361,16 @@ namespace MainClasses
         };
             Console.SetCursorPosition(positionX + 2, positionY);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[9]);
             Console.SetCursorPosition(positionX, positionY + 1);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[10]);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[11]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[12]);
             Console.SetCursorPosition(positionX, positionY + 2);
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -356,18 +379,18 @@ namespace MainClasses
             Console.Write(pokeBall[14]);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(pokeBall[15]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[16]);
             Console.SetCursorPosition(positionX + 2, positionY + 3);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[17]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(delay);
         }
 
-        public static void PokeBallANI(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        public static void PokeBallANI(int positionX, int positionY, int delay, ConsoleColor gbBackground)
         {
             string[] pokeBall = new string[]
         {
@@ -378,17 +401,17 @@ namespace MainClasses
         };
             Console.SetCursorPosition(positionX + 2, positionY);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[0]);
             Console.SetCursorPosition(positionX, positionY + 1);
             Console.Write(pokeBall[1]);
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[2]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[3]);
             Console.SetCursorPosition(positionX, positionY + 2);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[4]);
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[5]);
@@ -397,10 +420,10 @@ namespace MainClasses
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[7]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[8]);
             Console.SetCursorPosition(positionX + 2, positionY + 3);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[9]);
             Console.SetCursorPosition(90, 46);
 
@@ -418,7 +441,7 @@ namespace MainClasses
 
         }
 
-        public static void PokeBallStatic(int positionX, int positionY, ConsoleColor GBBackground)
+        public static void PokeBallStatic(int positionX, int positionY, ConsoleColor gbBackground)
         {
             string[] pokeBall = new string[]
         {
@@ -429,17 +452,17 @@ namespace MainClasses
         };
             Console.SetCursorPosition(positionX + 2, positionY);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[0]);
             Console.SetCursorPosition(positionX, positionY + 1);
             Console.Write(pokeBall[1]);
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[2]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[3]);
             Console.SetCursorPosition(positionX, positionY + 2);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[4]);
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[5]);
@@ -448,15 +471,15 @@ namespace MainClasses
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.BackgroundColor = ConsoleColor.White;
             Console.Write(pokeBall[7]);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[8]);
             Console.SetCursorPosition(positionX + 2, positionY + 3);
-            Console.BackgroundColor = GBBackground;
+            Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[9]);
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor gbBackground)
         {
             string[] frameONE = new string[]
             {
@@ -661,15 +684,16 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
         }
 
-        public static void BallBreak(int positionX, int positionY, int delay, ConsoleColor GBBackground)
+        public static void BallBreak(int positionX, int positionY, int delay, ConsoleColor gbBackground)
         {
+            #region Frames
             string[] frameONE = new string[]
-            {
+           {
                 @"                   ",
                 @"         ▄         ",
                 @"      ▀▄ ▀ ▄▀      ",
                 @"     ▀▀     ▄▄     "
-            };
+           };
             string[] frameTWO = new string[]
             {
                 @"                   ",
@@ -698,6 +722,7 @@ namespace MainClasses
                 @"                   ",
                 @"                   "
 };
+            #endregion
 
             Console.ForegroundColor = ConsoleColor.White;
             #region Frame One
@@ -950,27 +975,27 @@ namespace MainClasses
         }
 
         /****TO BE USED NEXT TO Health BAR DURING COMBAT IF DESIRED****/
-        public static void Health(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void Health(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.SetCursorPosition(positionX, positionY);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write($"([{monster.Health}/{monster.MaxHealth}]");
         }
 
-        public static void Name(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void Name(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.SetCursorPosition(positionX, positionY);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write(monster.Name.ToUpper());
         }
 
-        public static void Gender(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void Gender(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.SetCursorPosition(positionX, positionY);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             if (monster.Gender == '♂')
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -981,15 +1006,15 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write(monster.Gender);
             }
-            Console.ForegroundColor = GBText;
+            Console.ForegroundColor = gbText;
         }
 
-        public static void NameANDGender(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void NameANDGender(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
 
             Console.SetCursorPosition(positionX, positionY);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write(monster.Name.ToUpper());
             if (monster.Gender == '♂')
             {
@@ -1001,25 +1026,112 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write(monster.Gender);
             }
-            Console.ForegroundColor = GBText;
+            Console.ForegroundColor = gbText;
         }
 
-        public static void Level(Monster monster, int positionX, int positionY, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void Level(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(positionX, positionY);
             Console.Write($"Lv.{monster.Lv}");
+        }
+
+        public static void Party(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            int posY = 2;
+
+            string[] party = new string[]
+            {
+                " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                        ",
+                "█   █                              █ 1 █     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+                "█   █                             █▄▄▄█     █ 2 █                           █   █",
+                "█   █                                █     █▄▄▄█                            █   █",
+                " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     █                                 █   █",
+                "                                         ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ",
+                " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                        ",
+                "█   █                              █ 3 █     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+                "█   █                             █▄▄▄█     █ 4 █                           █   █",
+                "█   █                                █     █▄▄▄█                            █   █",
+                " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     █                                 █   █",
+                "                                         ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ",
+                " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                        ",
+                "█   █                              █ 5 █     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+                "█   █                             █▄▄▄█     █ 6 █                           █   █",
+                "█   █                                █     █▄▄▄█                            █   █",
+                " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     █                                 █   █",
+                "                                         ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ",
+                "                                                                                 ",
+                "▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄",
+                "█                                                                               █",
+                "█                                                                               █",
+                "█                                                                               █",
+                " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+            };
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            foreach (string item in party)
+            {
+                Console.SetCursorPosition(5, posY);
+                Console.Write(item);
+                posY += 1;
+            }
+
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+
+            //MonsterEquipped
+            ASCII.NameANDGender(player.Party.MonsterEquipped, 11, 3, gbText, gbBackground);
+            ASCII.Level(player.Party.MonsterEquipped, 30, 3, ConsoleColor.White, ConsoleColor.Black);
+            ASCII.HealthBar(player.Party.MonsterEquipped, 11, 4);
+            //Slot3
+            if (player.Party.Slot3.Type != Monster_Race.NONE)
+            {
+                ASCII.NameANDGender(player.Party.Slot3, 11, 9, gbText, gbBackground);
+                ASCII.Level(player.Party.Slot3, 30, 9, ConsoleColor.White, ConsoleColor.Black);
+                ASCII.HealthBar(player.Party.Slot3, 11, 10);
+            }
+            //Slot5
+            if (player.Party.Slot5.Type != Monster_Race.NONE)
+            {
+                ASCII.NameANDGender(player.Party.Slot5, 11, 15, gbText, gbBackground);
+                ASCII.Level(player.Party.Slot5, 30, 15, ConsoleColor.White, ConsoleColor.Black);
+                ASCII.HealthBar(player.Party.Slot5, 11, 16);
+            }
+
+            //Slot2
+            if (player.Party.Slot2.Type != Monster_Race.NONE)
+            {
+                ASCII.NameANDGender(player.Party.Slot2, 55, 4, gbText, gbBackground);
+                ASCII.Level(player.Party.Slot2, 74, 4, ConsoleColor.White, ConsoleColor.Black);
+                ASCII.HealthBar(player.Party.Slot2, 55, 5);
+            }
+            //Slot4
+            if (player.Party.Slot4.Type != Monster_Race.NONE)
+            {
+                ASCII.NameANDGender(player.Party.Slot4, 55, 10, gbText, gbBackground);
+                ASCII.Level(player.Party.Slot4, 74, 10, ConsoleColor.White, ConsoleColor.Black);
+                ASCII.HealthBar(player.Party.Slot4, 55, 11);
+            }
+            //Slot6
+            if (player.Party.Slot6.Type != Monster_Race.NONE)
+            {
+                ASCII.NameANDGender(player.Party.Slot6, 55, 16, gbText, gbBackground);
+                ASCII.Level(player.Party.Slot6, 74, 16, ConsoleColor.White, ConsoleColor.Black);
+                ASCII.HealthBar(player.Party.Slot6, 55, 17);
+            }
         }
 
         #endregion        
 
         #region BATTLE: PvP/PvM Displays
 
-        public static void DISSelectFight(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISSelectFight(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"What will {monster.Name.ToUpper()} do?";
-            InstantMessage(message, GBText, GBBackground);
+            InstantMessage(message, gbText, gbBackground);
             Console.SetCursorPosition(55, 21);
             Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
             Console.SetCursorPosition(55, 22);
@@ -1031,10 +1143,10 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void DISSelectBag(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISSelectBag(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"What will {monster.Name.ToUpper()} do?";
-            InstantMessage(message, GBText, GBBackground);
+            InstantMessage(message, gbText, gbBackground);
             Console.SetCursorPosition(55, 21);
             Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
             Console.SetCursorPosition(55, 22);
@@ -1046,10 +1158,10 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void DISSelectParty(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISSelectParty(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"What will {monster.Name.ToUpper()} do?";
-            InstantMessage(message, GBText, GBBackground);
+            InstantMessage(message, gbText, gbBackground);
             Console.SetCursorPosition(55, 21);
             Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
             Console.SetCursorPosition(55, 22);
@@ -1061,10 +1173,10 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void DISSelectRun(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISSelectRun(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"What will {monster.Name.ToUpper()} do?";
-            InstantMessage(message, GBText, GBBackground);
+            InstantMessage(message, gbText, gbBackground);
             Console.SetCursorPosition(55, 21);
             Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
             Console.SetCursorPosition(55, 22);
@@ -1076,61 +1188,61 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void DISDefenderInfoBar(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISDefenderInfoBar(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.SetCursorPosition(15, 2);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write(" ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             Console.SetCursorPosition(15, 3);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("█                               ▀▄");
             Console.SetCursorPosition(15, 4);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("█                                 ▀▄");
             Console.SetCursorPosition(15, 5);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
             System.Threading.Thread.Sleep(5);
-            NameANDGender(monster, 17, 3, GBText, GBBackground);
-            Level(monster, 38, 3, GBText, GBBackground);
+            NameANDGender(monster, 17, 3, gbText, gbBackground);
+            Level(monster, 38, 3, gbText, gbBackground);
             HealthBar(monster, 17, 4);
             Console.SetCursorPosition(90, 46);
 
         }
 
-        public static void DISAttackerInfoBar(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISAttackerInfoBar(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.SetCursorPosition(37, 13);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             Console.SetCursorPosition(37, 14);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("   ▄▀                               █");
             Console.SetCursorPosition(37, 15);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write(" ▄▀                                 █");
             Console.SetCursorPosition(37, 16);
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.Write("▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀");
             System.Threading.Thread.Sleep(5);
-            NameANDGender(player.MonsterEquipped, 43, 14, GBText, GBBackground);
-            Level(player.MonsterEquipped, 64, 14, GBText, GBBackground);
-            HealthBar(player.MonsterEquipped, 43, 15);
+            NameANDGender(player.Party.MonsterEquipped, 43, 14, gbText, gbBackground);
+            Level(player.Party.MonsterEquipped, 64, 14, gbText, gbBackground);
+            HealthBar(player.Party.MonsterEquipped, 43, 15);
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void DISDefender(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISDefender(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(58, 3);
             Console.Write(monster.ASCIIPokedex[0]);
             Console.SetCursorPosition(58, 4);
@@ -1148,39 +1260,39 @@ namespace MainClasses
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[7]);
             Console.SetCursorPosition(90, 46);
-            DISDefenderInfoBar(monster, GBText, GBBackground);
-            StaticMessageBox(GBText, GBBackground);
+            DISDefenderInfoBar(monster, gbText, gbBackground);
+            StaticMessageBox(gbText, gbBackground);
         }
 
-        public static void DISAttacker(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISAttacker(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(4, 13);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(4, 14);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
             Console.SetCursorPosition(4, 15);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
             Console.SetCursorPosition(4, 16);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
             Console.SetCursorPosition(4, 17);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
             Console.SetCursorPosition(4, 18);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[5]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[5]);
             Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[6]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[6]);
             Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[7]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[7]);
             Console.SetCursorPosition(90, 46);
-            DISAttackerInfoBar(player, GBText, GBBackground);
-            StaticMessageBox(GBText, GBBackground);
+            DISAttackerInfoBar(player, gbText, gbBackground);
+            StaticMessageBox(gbText, gbBackground);
         }
 
-        public static void DISNPC(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISNPC(Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(58, 5);
             Console.Write(npc.ASCIIProfile[0]);
             Console.SetCursorPosition(58, 6);
@@ -1194,96 +1306,102 @@ namespace MainClasses
             Console.SetCursorPosition(58, 10);
             Console.Write(npc.ASCIIProfile[5]);
             Console.SetCursorPosition(90, 46);
-            StaticMessageBox(GBText, GBBackground);
+            StaticMessageBox(gbText, gbBackground);
         }
 
-        public static void DISJustDefender(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISJustDefender(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            ResetScreen(GBText, GBBackground);
-            DISDefender(monster, GBText, GBBackground);
+            ResetHalfScreen(12, gbText, gbBackground);
+            DISDefender(monster, gbText, gbBackground);
         }
 
-        public static void DISJustAttacker(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISJustAttacker(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            ResetScreen(GBText, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
+            ResetHalfScreen(2, gbText, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
         }
 
-        public static void DISATTandDEF(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void DISATTandDEF(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            ResetScreen(GBText, GBBackground);
-            DISDefender(monster, GBText, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
-            StaticMessageBox(GBText, GBBackground);
+            ResetScreen(gbText, gbBackground);
+            DISDefender(monster, gbText, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
+            StaticMessageBox(gbText, gbBackground);
         }
 
         #endregion
 
         #region BATTLE: Animations
 
-        public static void ThrowBall(Player player,ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ThrowBall(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            PokeBallANI(4, 13, 50, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
-            PokeBallANI(12, 11, 50, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
-            PokeBallANI(20, 9, 50, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
-            PokeBallANI(28, 8, 50, GBBackground);
-            PokeBallANI(36, 7, 50, GBBackground);
-            PokeBallANI(44, 6, 50, GBBackground);
-            PokeBallANI(52, 6, 50, GBBackground);
-            PokeBallANI(56, 6, 50, GBBackground);
-            PokeBallANI(60, 6, 500, GBBackground);
-            BallOpenClose(56, 3, 50, GBBackground);
-            PokeBallANI(60, 6, 250, GBBackground);
-            PokeBallANI(60, 7, 50, GBBackground);
-            PokeBallANI(60, 8, 50, GBBackground);
-            PokeBallANI(60, 9, 50, GBBackground);
-            PokeBallANI(60, 8, 50, GBBackground);
-            PokeBallANI(60, 9, 1500, GBBackground);
+            PokeBallANI(4, 13, 50, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
+            PokeBallANI(12, 11, 50, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
+            PokeBallANI(20, 9, 50, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
+            PokeBallANI(28, 8, 50, gbBackground);
+            PokeBallANI(36, 7, 50, gbBackground);
+            PokeBallANI(44, 6, 50, gbBackground);
+            PokeBallANI(52, 6, 50, gbBackground);
+            PokeBallANI(56, 6, 50, gbBackground);
+            PokeBallANI(60, 6, 500, gbBackground);
+            BallOpenClose(56, 3, 50, gbBackground);
+            PokeBallANI(60, 6, 250, gbBackground);
+            PokeBallANI(60, 7, 50, gbBackground);
+            PokeBallANI(60, 8, 50, gbBackground);
+            PokeBallANI(60, 9, 50, gbBackground);
+            PokeBallANI(60, 8, 50, gbBackground);
+            PokeBallANI(60, 9, 1500, gbBackground);
         }
 
-        public static void BallShakeLeft(ConsoleColor GBBackground)
+        public static void BallShakeLeft(ConsoleColor gbBackground)
         {
-            BallFaceLeft(61, 9, 500, GBBackground);
-            PokeBallANI(61, 9, 1000, GBBackground);
+            BallFaceLeft(61, 9, 500, gbBackground);
+            PokeBallANI(61, 9, 1000, gbBackground);
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void BallShakeRight(ConsoleColor GBBackground)
+        public static void BallShakeRight(ConsoleColor gbBackground)
         {
-            BallFaceRight(62, 9, 500, GBBackground);
-            PokeBallANI(61, 9, 1000, GBBackground);
+            BallFaceRight(62, 9, 500, gbBackground);
+            PokeBallANI(61, 9, 1000, gbBackground);
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void ANIAttackerSwitch(ConsoleColor GBBackground)
+        public static void ANIAttackerSwitch(ConsoleColor gbBackground)
         {
-            PokeBallANI(12, 17, 1500, GBBackground);
-            BallBreak(8, 16, 50, GBBackground);
+            PokeBallANI(12, 13, 50, gbBackground);
+            PokeBallANI(12, 14, 50, gbBackground);
+            PokeBallANI(12, 15, 50, gbBackground);
+            PokeBallANI(12, 16, 50, gbBackground);
+            PokeBallANI(12, 17, 50, gbBackground);
+            PokeBallANI(12, 16, 50, gbBackground);
+            PokeBallANI(12, 17, 1000, gbBackground);
+            BallBreak(8, 16, 50, gbBackground);
         }
 
-        public static void ANIDefenderSwitch(ConsoleColor GBBackground)
+        public static void ANIDefenderSwitch(ConsoleColor gbBackground)
         {
-            PokeBallANI(60, 5, 50, GBBackground);
-            PokeBallANI(60, 6, 50, GBBackground);
-            PokeBallANI(60, 7, 50, GBBackground);
-            PokeBallANI(60, 8, 50, GBBackground);
-            PokeBallANI(60, 9, 50, GBBackground);
-            PokeBallANI(60, 8, 50, GBBackground);
-            PokeBallANI(60, 9, 1000, GBBackground);
-            BallBreak(56, 8, 50, GBBackground);
+            PokeBallANI(60, 5, 50, gbBackground);
+            PokeBallANI(60, 6, 50, gbBackground);
+            PokeBallANI(60, 7, 50, gbBackground);
+            PokeBallANI(60, 8, 50, gbBackground);
+            PokeBallANI(60, 9, 50, gbBackground);
+            PokeBallANI(60, 8, 50, gbBackground);
+            PokeBallANI(60, 9, 1000, gbBackground);
+            BallBreak(56, 8, 50, gbBackground);
 
         }
 
-        public static void ANIDefenderFaint(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIDefenderFaint(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"{monster.Name.ToUpper()} fainted!";
 
             #region Frames
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(58, 5);
             Console.Write(monster.ASCIIPokedex[0]);
             Console.SetCursorPosition(58, 6);
@@ -1396,112 +1514,160 @@ namespace MainClasses
             #endregion
 
             System.Threading.Thread.Sleep(1000);
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message, 50, 2000, gbText, gbBackground);
         }
 
-        public static void ANIAttackerFaint(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIAttackerFaint(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            string message = $"{player.MonsterEquipped.Name.ToUpper()} fainted!";
+            string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} fainted!";
 
             #region Frames
-            Console.ForegroundColor = GBText;
-            Console.BackgroundColor = GBBackground;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(4, 15);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
             Console.SetCursorPosition(4, 16);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
             Console.SetCursorPosition(4, 17);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
             Console.SetCursorPosition(4, 18);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
             Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[5]);
             Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[5]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[6]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(25);
 
-            Console.SetCursorPosition(4, 15);
+            Console.SetCursorPosition(4, 13);
             Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 15);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(4, 16);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
             Console.SetCursorPosition(4, 17);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
             Console.SetCursorPosition(4, 18);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
             Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
             Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[4]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[5]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(25);
 
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
             Console.SetCursorPosition(4, 15);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 16);
-            Console.Write("                       ");
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(4, 17);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
             Console.SetCursorPosition(4, 18);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
             Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
             Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[3]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(25);
 
-            Console.SetCursorPosition(4, 15);
+            Console.SetCursorPosition(4, 13);
             Console.Write("                       ");
-            Console.SetCursorPosition(4, 16);
+            Console.SetCursorPosition(4, 14);
             Console.Write("                       ");
-            Console.SetCursorPosition(4, 17);
-            Console.Write("                       ");
-            Console.SetCursorPosition(4, 18);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
-            Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
-            Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[2]);
-            Console.SetCursorPosition(90, 46);
-
-            System.Threading.Thread.Sleep(25);
-
-            Console.SetCursorPosition(4, 15);
-            Console.Write("                       ");
-            Console.SetCursorPosition(4, 16);
-            Console.Write("                       ");
-            Console.SetCursorPosition(4, 17);
-            Console.Write("                       ");
-            Console.SetCursorPosition(4, 18);
-            Console.Write("                       ");
-            Console.SetCursorPosition(4, 19);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
-            Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[1]);
-            Console.SetCursorPosition(90, 46);
-
-            System.Threading.Thread.Sleep(25);
-
             Console.SetCursorPosition(4, 15);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 16);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 17);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 18);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 19);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
+            Console.SetCursorPosition(4, 20);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
+            Console.SetCursorPosition(90, 46);
+
+            System.Threading.Thread.Sleep(25);
+
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 15);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 16);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 17);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 18);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 19);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 20);
-            Console.Write(player.MonsterEquipped.ASCIIAttacker[0]);
+            Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(90, 46);
 
             System.Threading.Thread.Sleep(25);
 
+            Console.SetCursorPosition(4, 13);
+            Console.Write("                       ");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("                       ");
             Console.SetCursorPosition(4, 15);
             Console.Write("                       ");
             Console.SetCursorPosition(4, 16);
@@ -1518,10 +1684,10 @@ namespace MainClasses
             #endregion
 
             System.Threading.Thread.Sleep(1000);
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message, 50, 2000, gbText, gbBackground);
         }
 
-        public static void ANIWildAppear(Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIWildAppear(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"A wild {monster.Name} appeared!";
             string distance = "                                                                      ";
@@ -1548,11 +1714,11 @@ namespace MainClasses
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
             }
-            DISDefenderInfoBar(monster, GBText, GBBackground);
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+            DISDefenderInfoBar(monster, gbText, gbBackground);
+            ScrollMessage(message, 50, 2000, gbText, gbBackground);
         }
 
-        public static void ANINPCAppear(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANINPCAppear(Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"{npc.Name} challenged you to a battle!";
             string distance = "                                                                      ";
@@ -1575,78 +1741,224 @@ namespace MainClasses
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
             }
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message, 50, 2000, gbText, gbBackground);
         }
 
-        public static void ANINPCSwitch(Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANINPCSwitch(Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            string message = $"{npc.Name} sent out {npc.MonsterEquipped.Name}!";
-            ScrollMessage(message, 50, 2000, GBText, GBBackground);
-            ANIDefenderSwitch(GBBackground);
-            DISDefender(npc.MonsterEquipped, GBText, GBBackground);
+            string message = $"{npc.Name} sent out {npc.Party.MonsterEquipped.Name}!";
+            ScrollMessage(message, 50, 2000, gbText, gbBackground);
+            ANIDefenderSwitch(gbBackground);
+            DISDefender(npc.Party.MonsterEquipped, gbText, gbBackground);
         }
 
-        public static void ANIPlayerSwitch(Player player, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIPlayerSend(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            string message = $"{player.Name} sent out {player.MonsterEquipped.Name}!";
-            ScrollMessage(message, 50, 1500, GBText, GBBackground);
-            ANIAttackerSwitch(GBBackground);
-            Console.ForegroundColor = GBText;
-            DISAttacker(player, GBText, GBBackground);
-            DISAttackerInfoBar(player, GBText, GBBackground);
+            string message = $"{player.Name} sent out {player.Party.MonsterEquipped.Name}!";
+            ScrollMessage(message, 50, 1500, gbText, gbBackground);
+            ANIAttackerSwitch(gbBackground);
+            Console.ForegroundColor = gbText;
+            DISAttacker(player, gbText, gbBackground);
+            DISAttackerInfoBar(player, gbText, gbBackground);
         }
 
-        public static void ANINPCNext(Player player, Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIReturn(int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            string message1 = $"{npc.Name.ToUpper()} is about to send {npc.MonsterEquipped.Name.ToUpper()}.";
+            int startPos = positionY;
+            #region Frames
+            string[] frameFIVE = new string[]
+            {
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       "
+            };
+            string[] frameFOUR = new string[]
+            {
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "           ▄           ",
+                "        ▀▄ ▀ ▄▀        ",
+                "       ▀▀     ▄▄       "
+            };
+            string[] frameTHREE = new string[]
+            {
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "      ▄    ▄    ▄      ",
+                "       ▀   ▀   ▀       ",
+                "     ▄▄         ▄▄     "
+            };
+            string[] frameTWO = new string[]
+            {
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "           ▄           ",
+                "     ▀     ▄     ▀     ",
+                "       ▀       ▀       ",
+                "   ▄ ▄           ▄ ▄   "
+            };
+            string[] frameONE = new string[]
+            {
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "                       ",
+                "     ▀     ▀     ▀     ",
+                "                       ",
+                "   ▄               ▄   "
+            };
+            #endregion
+
+            Console.ForegroundColor = ConsoleColor.White;
+            #region Frame One
+
+            foreach (string frame in frameONE)
+            {
+                Console.SetCursorPosition(positionX, positionY);
+                Console.Write(frame);
+                Console.SetCursorPosition(90, 46);
+                positionY += 1;
+            }
+
+            #endregion            
+            System.Threading.Thread.Sleep(50);
+            #region Frame Two
+
+            positionY = startPos;
+            foreach (string frame in frameTWO)
+            {
+                Console.SetCursorPosition(positionX, positionY);
+                Console.Write(frame);
+                Console.SetCursorPosition(90, 46);
+                positionY += 1;
+            }
+
+            #endregion            
+            System.Threading.Thread.Sleep(50);
+            #region Frame Three
+
+            positionY = startPos;
+            foreach (string frame in frameTHREE)
+            {
+                Console.SetCursorPosition(positionX, positionY);
+                Console.Write(frame);
+                Console.SetCursorPosition(90, 46);
+                positionY += 1;
+            }
+
+            #endregion
+            System.Threading.Thread.Sleep(50);
+            #region Frame Four
+
+            positionY = startPos;
+            foreach (string frame in frameFOUR)
+            {
+                Console.SetCursorPosition(positionX, positionY);
+                Console.Write(frame);
+                Console.SetCursorPosition(90, 46);
+                positionY += 1;
+            }
+
+            #endregion
+            System.Threading.Thread.Sleep(50);
+            #region Frame Five
+
+            positionY = startPos;
+            foreach (string frame in frameFIVE)
+            {
+                Console.SetCursorPosition(positionX, positionY);
+                Console.Write(frame);
+                Console.SetCursorPosition(90, 46);
+                positionY += 1;
+            }
+
+            #endregion
+            System.Threading.Thread.Sleep(500);
+        }
+
+        /****WHY DOESN'T THIS METHOD WORK???****/
+        public static void ANIPlayerSwitchSend(Player player, Monster newMonster, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+            if (player.Party.MonsterEquipped.Health >= 0)
+            {
+                DISATTandDEF(player, monster, gbText, gbBackground);
+                ScrollMessage(message, 50, 1000, gbText, gbBackground);
+                ANIReturn(6, 13, gbText, gbBackground);
+            }
+            ResetHalfScreen(12, gbText, gbBackground);
+            System.Threading.Thread.Sleep(1000);
+            player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+            player.Party.MonsterEquipped = newMonster;
+            newMonster = player.Party.MonsterSwitch;
+            ANIPlayerSend(player, gbText, gbBackground);
+        }
+
+
+        public static void ANINPCNext(Player player, Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            string message1 = $"{npc.Name.ToUpper()} is about to send {npc.Party.MonsterEquipped.Name.ToUpper()}.";
             string message2 = $"Will you send out another Pokefraud?";
-            DISJustAttacker(player, GBText, GBBackground);
+            DISJustAttacker(player, gbText, gbBackground);
             System.Threading.Thread.Sleep(2000);
-            ScrollMessage(message1, 50, 2000, GBText, GBBackground);
-            ScrollMessage(message2, 50, 2000, GBText, GBBackground);
+            ScrollMessage(message1, 50, 2000, gbText, gbBackground);
+            ScrollMessage(message2, 50, 2000, gbText, gbBackground);
         }
 
-        public static void ANINPCDefeat(Player player, Player npc, int money, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANINPCDefeat(Player player, Player npc, int money, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message1 = $"{player.Name.ToUpper()} defeated {npc.Name.ToUpper()}!";
             string message2 = $"{npc.Name.ToUpper()} rewarded {player.Name.ToUpper()} ${money}.";
-            DISNPC(npc, GBText, GBBackground);
-            DISAttacker(player, GBText, GBBackground);
-            ScrollMessage(message1, 50, 2000, GBText, GBBackground);
-            ScrollMessage(message2, 50, 2000, GBText, GBBackground);
+            DISNPC(npc, gbText, gbBackground);
+            DISAttacker(player, gbText, gbBackground);
+            ScrollMessage(message1, 50, 2000, gbText, gbBackground);
+            ScrollMessage(message2, 50, 2000, gbText, gbBackground);
             player.Money += money;
         }
 
-        public static void ANIQuePlayerFight(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void ANIQuePlayerFight(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            DISATTandDEF(player, monster, GBText, GBBackground);
-
+            DISATTandDEF(player, monster, gbText, gbBackground);
         }
 
         #endregion
 
         #region BATTLE: Situational Encounters
 
-        public static void WildEncounter(Player player, Monster monster, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void WildEncounter(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            ResetScreen(GBText, GBBackground);
-            ANIWildAppear(monster, GBText, GBBackground);
+            ResetScreen(gbText, gbBackground);
+            ANIWildAppear(monster, gbText, gbBackground);
             System.Threading.Thread.Sleep(1500);
-            ANIPlayerSwitch(player, GBText, GBBackground);
+            ANIPlayerSend(player, gbText, gbBackground);
             System.Threading.Thread.Sleep(1500);
         }
 
-        public static void NPCEncounter(Player player, Player npc, ConsoleColor GBText, ConsoleColor GBBackground)
+        public static void NPCEncounter(Player player, Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            ResetScreen(GBText, GBBackground);
-            ANINPCAppear(npc, GBText, GBBackground);
-            ANINPCSwitch(npc, GBText, GBBackground);
+            ResetScreen(gbText, gbBackground);
+            ANINPCAppear(npc, gbText, gbBackground);
+            ANINPCSwitch(npc, gbText, gbBackground);
             System.Threading.Thread.Sleep(2000);
-            ANIPlayerSwitch(player, GBText, GBBackground);
+            ANIPlayerSend(player, gbText, gbBackground);
             System.Threading.Thread.Sleep(2000);
         }
 
-        public static void FullBattleWild(Player player, Monster[] monsters, int lvLow, int lvHigh, ConsoleColor GBText, ConsoleColor GBBackground, ConsoleKey navPlayerMenu)
+        public static void FullBattleWild(Player player, Monster[] monsters, int lvLow, int lvHigh, ConsoleColor gbText, ConsoleColor gbBackground, ConsoleKey navPlayerMenu)
         {
             Random rand = new Random();
             int diceRole = rand.Next(lvLow, lvHigh);
@@ -1669,9 +1981,9 @@ namespace MainClasses
             defender.Gender = gender;
 
             SFX.Battle();
-            WildEncounter(player, defender, GBText, GBBackground);
+            WildEncounter(player, defender, gbText, gbBackground);
 
-            Player_Menus.BattleFightMenu(player, defender, navPlayerMenu, GBText, GBBackground);
+            Player_Menus.WildFightMenu(player, defender, navPlayerMenu, gbText, gbBackground);
         }
 
         #endregion
@@ -1895,7 +2207,7 @@ namespace MainClasses
 
         #region GameBoy
 
-        public static string TEMGameBoy = @"▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+        public static string TEMGameBoy = @"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
 █  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  █
 █  █                                                                                   █  █
 █  █                                                                                   █  █
@@ -2389,23 +2701,23 @@ namespace MainClasses
  _______________________________________________________________________________________
 |  ___________________________________________________________________________________  |
 | |                                             ____________________________________  | |
-| |                                            |  __________________________________| | |
-| |                                            | |     Poke Catcher     x             | |
-| |                                            | |                                    | |
-| |                   _____                    | |     Repel            x             | |
-| |                  //   \\                   | |                                    | |
-| |              ___||_____||___               | |     Blaze Stone      x             | |
-| |             / ___       ___ \              | |                                    | |
-| |            | /___\     /___\ |             | |     Aqua Stone       x             | |
-| |            | |___|     |___| |             | |                                    | |
-| |             \_______________/              | |     Power Stone      x             | |
-| |                                            | |                                    | |
-| |                                            | |     Earth Stone      x             | |
-| |  _______                                   | |                                    | |
-| | | ITEMS |_________________________________ | |     Mind Stone       x             | |
-| | |       | MEDICINE | MOVES | BATTLE ITEMS || |__________________________________  | |
-| | |                                         ||                                    | | |
-| | |_________________________________________||____________________________________| | |
+| |                                             ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ | |
+| |                                             █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| |                                             █ █                                   | |
+| | ▄▄▄▄▄▄▄▄▄                                   █ █                                   | |
+| | █ ITEMS █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █ █                                   | |
+| | █       | MEDICINE | MOVES | BATTLE ITEMS █ █ █                                   | |
+| | █                                         █ █ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ | |
+| | ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ | |
 | |  _______________________________________________________________________________  | |
 | | |                                                                               | | |
 | | |                                                                               | | |

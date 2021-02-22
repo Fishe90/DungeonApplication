@@ -8,11 +8,16 @@ namespace MainClasses
 {
     public enum Monster_Race
     {
+        NONE,
         Fire,
         Water,
         Electric,
         Ground,
         Psychic,
-        NONE
+
+        BATTLE,
+        WILD,
+        PLAYER,
+        NPC        
     }
 }

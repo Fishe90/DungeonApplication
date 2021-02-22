@@ -8,73 +8,84 @@ namespace MainClasses
 {
     public class Player_Inventory
     {
-        public ItemSection BagSlot1 { get; set; }
-        public MedSection BagSlot2 { get; set; }
-        public MoveSection BagSlot3 { get; set; }
-        public BattleItemSection BagSlot4 { get; set; }
+        public Item[] ItemSection { get; set; }
+        public Item[] MedSection { get; set; }
+        public Item[] MoveSection { get; set; }
+        public Item[] BattleSection { get; set; }
 
-        public Player_Inventory(ItemSection bagSlot1, MedSection bagSlot2, MoveSection bagSlot3, BattleItemSection bagSlot4)
+        //public Player_Inventory() { }
+
+        public Player_Inventory(/*Item[] itemSection, Item[] medSection, Item[] moveSection, Item[] battleSection*/)
         {
-            BagSlot1 = bagSlot1;
-            BagSlot2 = bagSlot2;
-            BagSlot3 = bagSlot3;
-            BagSlot4 = bagSlot4;
+            ItemSection = new Item[]
+            {
+                Item.pokeCatcher,
+                Item.repel,
+                Item.blazeStone,
+                Item.aquaStone,
+                Item.powerStone,
+                Item.earthStone,
+                Item.mindStone
+            };
+            MedSection = new Item[]
+            {
+                Item.healthPotion,
+                Item.revive,
+                Item.fullHeal,
+                Item.fullRevive,
+                Item.hpUp,
+                Item.attackUp
+            };
+            MoveSection = new Item[] { };
+            BattleSection = new Item[] { };
+        }
+    }
+
+    public enum Type
+    {
+        Item,
+        Med,
+        Move,
+        Battle
+    }
+
+    public class Item
+    {
+        public string Name { get; set; }
+        public Type Section { get; set; }
+        public Monster_Race Race { get; set; }
+        public bool UseNow { get; set; }
+        public int Amount { get; set; }
+        public int PriceBuy { get; set; }
+        public int PriceSell { get; set; }
+
+        public Item() { }
+
+        public Item(string name, Type section, Monster_Race race, bool useNow, int amount, int priceBuy, int priceSell)
+        {
+            Name = name;
+            Section = section;
+            Race = race;
+            UseNow = useNow;
+            Amount = amount;
+            PriceBuy = priceBuy;
+            PriceSell = priceSell;
         }
 
-        public Player_Inventory() { }
+        public static Item pokeCatcher = new Item("Catcher", Type.Item, Monster_Race.BATTLE, false, 5, 200, 100);
+        public static Item repel = new Item("Repel", Type.Item, Monster_Race.NONE, false, 5, 350, 175);
+        public static Item blazeStone = new Item("Blaze Stone", Type.Item, Monster_Race.Fire, false, 5, 1000, 500);
+        public static Item aquaStone = new Item("Aqua Stone", Type.Item, Monster_Race.Water, false, 5, 1000, 500);
+        public static Item powerStone = new Item("Power Stone", Type.Item, Monster_Race.Electric, false, 5, 1000, 500);
+        public static Item earthStone = new Item("Earth Stone", Type.Item, Monster_Race.Ground, false, 5, 1000, 500);
+        public static Item mindStone = new Item("Mind Stone", Type.Item, Monster_Race.Psychic, false, 5, 1000, 500);
+
+        public static Item healthPotion = new Item("Health Potion", Type.Med, Monster_Race.PLAYER, false, 5, 300, 150);
+        public static Item revive = new Item("Revive", Type.Med, Monster_Race.PLAYER, false, 5, 1500, 750);
+        public static Item fullHeal = new Item("Full Heal", Type.Med, Monster_Race.PLAYER, false, 5, 3000, 1500);
+        public static Item fullRevive = new Item("Full Revive", Type.Med, Monster_Race.PLAYER, false, 5, 3000, 1500);
+        public static Item attackUp = new Item("Attack-UP", Type.Med, Monster_Race.PLAYER, false, 5, 5000, 2500);
+        public static Item hpUp = new Item("HP-UP", Type.Med, Monster_Race.PLAYER, false, 5, 5000, 2500);
     }
 
-    public class ItemSection
-    {
-        public int PokeCatcher { get; set; }
-        public int Repel { get; set; }
-        public int BlazeStone { get; set; }
-        public int AquaStone { get; set; }
-        public int PowerStone { get; set; }
-        public int EarthStone { get; set; }
-        public int MindStone { get; set; }
-
-        public ItemSection(int pokeCatcher, int repel, int blazeStone, int aquaStone, int powerStone, int earthStone, int mindStone)
-        {
-            PokeCatcher = pokeCatcher;
-            Repel = repel;
-            BlazeStone = blazeStone;
-            AquaStone = aquaStone;
-            PowerStone = powerStone;
-            EarthStone = earthStone;
-            MindStone = mindStone;
-        }
-
-        public ItemSection() { }
-    }
-
-    public class MedSection
-    {
-        public int HealthPotion { get; set; }
-        public int FullHeal { get; set; }
-        public int FullRevive { get; set; }
-        public int HPUp { get; set; }
-        public int AttackUp { get; set; }
-
-        public MedSection(int healthPotion, int fullHeal, int fullRevive, int hpUp, int attackUp)
-        {
-            HealthPotion = healthPotion;
-            FullHeal = fullHeal;
-            FullRevive = fullRevive;
-            HPUp = hpUp;
-            AttackUp = attackUp;
-        }
-
-        public MedSection() { }
-    }
-
-    public class MoveSection
-    {
-        public MoveSection() { }
-    }
-
-    public class BattleItemSection
-    {
-        public BattleItemSection() { }
-    }
 }

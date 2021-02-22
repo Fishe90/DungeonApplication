@@ -18,6 +18,7 @@ namespace MainClasses
         public string PokeIndex { get; set; }
         public bool IsCaught { get; set; }
         public Monster_Race Type { get; set; }
+        public bool IsOwned { get; set; }
         public string Description { get; set; }
         public string[] ASCIIAttacker { get; set; }
         public string[] ASCIIDefender { get; set; }
@@ -44,7 +45,7 @@ namespace MainClasses
 
         public Monster() { }
 
-        public Monster(string defaultName, string name, char gender, bool isBoosted, int maxHealth, int maxExp, int health, int exp, int lv, int slotNum, string pokeIndex, bool isCaught, Monster_Race type, string description, string[] asciiAttacker, string[] asciiDefender, string[] asciiPokedex, Monster_MovesEquipped equippedMoves) : base(defaultName, name, gender, isBoosted)
+        public Monster(string defaultName, string name, char gender, bool isBoosted, int maxHealth, int maxExp, int health, int exp, int lv, int slotNum, string pokeIndex, bool isCaught, Monster_Race type, bool isOwned, string description, string[] asciiAttacker, string[] asciiDefender, string[] asciiPokedex, Monster_MovesEquipped equippedMoves) : base(defaultName, name, gender, isBoosted)
         {
             MaxHealth = maxHealth;
             MaxExp = maxExp;
@@ -55,6 +56,7 @@ namespace MainClasses
             PokeIndex = pokeIndex;
             IsCaught = isCaught;
             Type = type;
+            IsOwned = isOwned;
             Description = description;
             ASCIIAttacker = asciiAttacker;
             ASCIIDefender = asciiDefender;
@@ -62,13 +64,22 @@ namespace MainClasses
             EquippedMoves = equippedMoves;
         }// end FQCTOR  
 
-        /****Monster Library****/
+        /****NPC Monster Library****/
 
-        public static Monster pyra = new Monster("Pyra", "Pyra", '0', false, 0, 0, 0, 0, 0, 0, "001", false, Monster_Race.Fire, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
-        public static Monster dousey = new Monster("Dousey", "Dousey", '0', false, 0, 0, 0, 0, 0, 0, "004", false, Monster_Race.Water, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
-        public static Monster electra = new Monster("Electra", "Electra", '0', false, 0, 0, 0, 0, 0, 0, "007", false, Monster_Race.Electric, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
-        public static Monster cobblet = new Monster("Cobblet", "Cobblet", '0', false, 0, 0, 0, 0, 0, 0, "010", false, Monster_Race.Ground, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
-        public static Monster neo = new Monster("Neo", "Neo", '0', false, 0, 0, 0, 0, 0, 0, "013", false, Monster_Race.Psychic, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
+        public static Monster rivalPyra = new Monster("Pyra", "Pyra", '0', false, 0, 0, 0, 0, 0, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster rivalDousey = new Monster("Dousey", "Dousey", '0', false, 0, 0, 0, 0, 0, 0, "004", false, Monster_Race.Water, true, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
+        public static Monster rivalElectra = new Monster("Electra", "Electra", '0', false, 0, 0, 0, 0, 0, 0, "007", false, Monster_Race.Electric, true, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
+        public static Monster rivalCobblet = new Monster("Cobblet", "Cobblet", '0', false, 0, 0, 0, 0, 0, 0, "010", false, Monster_Race.Ground, true, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
+        public static Monster rivalNeo = new Monster("Neo", "Neo", '0', false, 0, 0, 0, 0, 0, 0, "013", false, Monster_Race.Psychic, true, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
+
+
+        /****Player Monster Library****/
+
+        public static Monster pyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster dousey = new Monster("Dousey", "Dousey", '♂', false, 25, 50, 25, 0, 5, 0, "004", false, Monster_Race.Water, true, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
+        public static Monster electra = new Monster("Electra", "Electra", '♂', false, 25, 50, 25, 0, 5, 0, "007", false, Monster_Race.Electric, true, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
+        public static Monster cobblet = new Monster("Cobblet", "Cobblet", '♂', false, 25, 50, 25, 0, 5, 0, "010", false, Monster_Race.Ground, true, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
+        public static Monster neo = new Monster("Neo", "Neo", '♂', false, 25, 50, 25, 0, 5, 0, "013", false, Monster_Race.Psychic, true, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
 
         public static Monster[] starters = new Monster[]
         {
