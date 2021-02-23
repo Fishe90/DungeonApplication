@@ -44,6 +44,7 @@
     <Compile Include="ASCII.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Combat.cs" />
+    <Compile Include="Maps.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Monster_Moves.cs" />
     <Compile Include="Monster_MovesEquipped.cs" />

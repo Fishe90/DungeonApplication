@@ -66,28 +66,33 @@ namespace MainClasses
 
         /****NPC Monster Library****/
 
-        public static Monster rivalPyra = new Monster("Pyra", "Pyra", '0', false, 0, 0, 0, 0, 0, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
-        public static Monster rivalDousey = new Monster("Dousey", "Dousey", '0', false, 0, 0, 0, 0, 0, 0, "004", false, Monster_Race.Water, true, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
-        public static Monster rivalElectra = new Monster("Electra", "Electra", '0', false, 0, 0, 0, 0, 0, 0, "007", false, Monster_Race.Electric, true, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
-        public static Monster rivalCobblet = new Monster("Cobblet", "Cobblet", '0', false, 0, 0, 0, 0, 0, 0, "010", false, Monster_Race.Ground, true, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
-        public static Monster rivalNeo = new Monster("Neo", "Neo", '0', false, 0, 0, 0, 0, 0, 0, "013", false, Monster_Race.Psychic, true, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
+        public static Monster rivalPyra = new Monster("Pyra", "Pyra", '♂', false, 25, 0, 25, 0, 5, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster rivalDousey = new Monster("Dousey", "Dousey", '♂', false, 25, 0, 25, 0, 5, 0, "004", false, Monster_Race.Water, true, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
+        public static Monster rivalElectra = new Monster("Electra", "Electra", '♂', false, 25, 0, 25, 0, 5, 0, "007", false, Monster_Race.Electric, true, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
+        public static Monster rivalCobblet = new Monster("Cobblet", "Cobblet", '♂', false, 25, 0, 25, 0, 5, 0, "010", false, Monster_Race.Ground, true, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
+        public static Monster rivalNeo = new Monster("Neo", "Neo", '♂', false, 25, 0, 25, 0, 5, 0, "013", false, Monster_Race.Psychic, true, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
 
 
-        /****Player Monster Library****/
+        /****Player Starter Library****/
 
-        public static Monster pyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster pyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 0, "001", false, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.playerStarter);
         public static Monster dousey = new Monster("Dousey", "Dousey", '♂', false, 25, 50, 25, 0, 5, 0, "004", false, Monster_Race.Water, true, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
         public static Monster electra = new Monster("Electra", "Electra", '♂', false, 25, 50, 25, 0, 5, 0, "007", false, Monster_Race.Electric, true, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
         public static Monster cobblet = new Monster("Cobblet", "Cobblet", '♂', false, 25, 50, 25, 0, 5, 0, "010", false, Monster_Race.Ground, true, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
         public static Monster neo = new Monster("Neo", "Neo", '♂', false, 25, 50, 25, 0, 5, 0, "013", false, Monster_Race.Psychic, true, "", ASCII.neoAttacker, ASCII.neoDefender, ASCII.neoPokedex, Monster_MovesEquipped.psychicLow);
 
+        public static Monster default2 = new Monster();        
+        public static Monster default3 = new Monster();
+        public static Monster default4 = new Monster();
+        public static Monster default5 = new Monster();
+        public static Monster default6 = new Monster();
+        public static Monster monsterSwitch = new Monster();
+
         public static Monster[] starters = new Monster[]
         {
             pyra, pyra, pyra, pyra, pyra,
             dousey, dousey, dousey, dousey ,dousey,
-            electra, electra, electra, electra, electra,
-            cobblet, cobblet, cobblet, cobblet, cobblet,
-            neo
+            electra, electra, electra, electra, electra
         };
     }
 }

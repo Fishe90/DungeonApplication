@@ -10,6 +10,72 @@ namespace MainClasses
     {
         /****GENERAL MENUS****/
 
+        //WHY DOESN'T THIS WORK???
+        public static void YesOrNo(string message, int chooseNum, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            chooseNum = 0;
+            bool reloadBattleFAINT = false;
+            int posY = 22;
+
+            ASCII.InstantMessage(message, gbText, gbBackground);
+            Console.SetCursorPosition(65, 22);
+            Console.Write("YES");
+            Console.SetCursorPosition(65, 23);
+            Console.Write("NO");
+            do
+            {
+                Console.SetCursorPosition(61, posY);
+                Console.Write("-->");
+                Console.SetCursorPosition(90, 46);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(61, posY);
+                        Console.Write("   ");
+                        posY -= 1;
+                        if (posY < 22)
+                        {
+                            posY += 1;
+                        }
+                        reloadBattleFAINT = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(61, posY);
+                        Console.Write("   ");
+                        posY += 1;
+                        if (posY > 23)
+                        {
+                            posY -= 1;
+                        }
+                        reloadBattleFAINT = true;
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        if (posY == 22)
+                        {
+                            chooseNum += 1;
+                            reloadBattleFAINT = false;
+                        }
+                        else if (posY == 23)
+                        {
+                            chooseNum += 2;
+                            reloadBattleFAINT = false;
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadBattleFAINT = false;
+                        break;
+                    default:
+                        reloadBattleFAINT = true;
+                        break;
+                }
+            } while (reloadBattleFAINT);
+        }
+
         public static void PlayerSwitchMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadBattleFAINT = false;
@@ -104,8 +170,9 @@ namespace MainClasses
                         FightMovesMenu(player, monster, navPlayerMenu, gbText, gbBackground);
                         if (monster.Health <= 0)
                         {
-                            System.Threading.Thread.Sleep(2000);
                             ASCII.ANIDefenderFaint(monster, gbText, gbBackground);
+                            //TODO ADD CalcEXP() HERE!!!
+                            Combat.CalcExp(player, monster, gbText, gbBackground);
                             reloadBattleFIGHT = false;
                             reloadBattleBAG = false;
                             reloadBattlePOKeFRAUD = false;
@@ -366,6 +433,667 @@ namespace MainClasses
                                                             else
                                                             {
                                                                 ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                                                reloadBattleFIGHT = true;
+                                                                reloadBattleBAG = false;
+                                                                reloadBattlePOKeFRAUD = false;
+                                                                reloadBattleRUN = false;
+                                                            }
+                                                            break;
+                                                        case ConsoleKey.S:
+                                                        case ConsoleKey.DownArrow:
+                                                            //Reloads BattleRUN
+                                                            reloadBattleRUN = true;
+                                                            reloadBattleBAG = false;
+                                                            break;
+                                                        case ConsoleKey.A:
+                                                        case ConsoleKey.LeftArrow:
+                                                            //Reloads BattleFIGHT
+                                                            reloadBattleBAG = false;
+                                                            reloadBattlePOKeFRAUD = false;
+                                                            reloadBattleRUN = false;
+                                                            reloadBattleFIGHT = true;
+                                                            break;
+                                                        default:
+                                                            //Reloads BattleBAG
+                                                            reloadBattleBAG = true;
+                                                            break;
+                                                    }//end switch navPlayerMenu
+                                                } while (reloadBattleBAG);//end dowhile reloadBattleBAG
+                                                break;
+                                            case ConsoleKey.A:
+                                            case ConsoleKey.LeftArrow:
+                                                //Reloads BattlePOKeFRAUD
+                                                reloadBattlePOKeFRAUD = true;
+                                                reloadBattleBAG = false;
+                                                reloadBattleRUN = false;
+                                                break;
+                                            default:
+                                                //Reloads POKeFRAUD
+                                                reloadBattleRUN = true;
+                                                break;
+                                        }//end switch navPlayerMenu
+                                    } while (reloadBattleRUN);//end dowhile reloadBattleRUN
+                                    break;
+                                case ConsoleKey.W:
+                                case ConsoleKey.UpArrow:
+                                    //Reloads BattleFIGHT
+                                    reloadBattleFIGHT = true;
+                                    reloadBattleBAG = false;
+                                    reloadBattlePOKeFRAUD = false;
+                                    reloadBattleRUN = false;
+                                    break;
+                                default:
+                                    //Reloads POKeFRAUD
+                                    reloadBattlePOKeFRAUD = true;
+                                    break;
+                            }//end switch navPlayerMenu
+                        } while (reloadBattlePOKeFRAUD);//end dowhile reloadBattlePOKeFRAUD
+                        break;
+                    default:
+                        //Reloads BattleFIGHT
+                        reloadBattleFIGHT = true;
+                        break;
+                }//end switch navPlayerMenu
+            } while (reloadBattleFIGHT);//end dowhile reloadBattleFIGHT
+        }//end BattleMenu()
+
+        public static void NPCFightMenu(Player player, Player npc, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadBattleFIGHT = false;
+            bool reloadBattleBAG = false;
+            bool reloadBattlePOKeFRAUD = false;
+            bool reloadBattleRUN = false;
+            bool reloadBattleFAINT = false;
+            string message1 = $"Will you send out another PokeFraud?";
+
+            do
+            {
+                //Displays Select Fight
+                ASCII.DISSelectFight(player.Party.MonsterEquipped, gbText, gbBackground);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.K:
+                    case ConsoleKey.Enter:
+                        FightMovesMenu(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                        if (npc.Party.MonsterEquipped.Health <= 0)
+                        {
+                            int posY = 22;
+                            ASCII.ANIDefenderFaint(npc.Party.MonsterEquipped, gbText, gbBackground);
+                            //TODO ADD CalcEXP() HERE!!!
+                            //Combat.CalcExp(player, npc.Party.MonsterEquipped, gbText, gbBackground);
+                            if (npc.Party.Slot2.Health <= 0 && npc.Party.Slot3.Health <= 0 && npc.Party.Slot4.Health <= 0 && npc.Party.Slot5.Health <= 0 && npc.Party.Slot6.Health <= 0)
+                            {
+                                ASCII.ANINPCDefeat(player, npc, 500, gbText, gbBackground);
+                                reloadBattleFIGHT = false;
+                                reloadBattleBAG = false;
+                                reloadBattlePOKeFRAUD = false;
+                                reloadBattleRUN = false;
+                            }
+                            else if (npc.Party.Slot2.Health > 0)
+                            {
+                                ASCII.ANINPCNext(player, npc, 2, gbText, gbBackground);                                
+                                bool reloadNext2 = false;                                
+
+                                Console.SetCursorPosition(65, 22);
+                                Console.Write("YES");
+                                Console.SetCursorPosition(65, 23);
+                                Console.Write("NO");
+                                do
+                                {
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("-->");
+                                    Console.SetCursorPosition(90, 46);
+                                    navPlayerMenu = Console.ReadKey().Key;
+                                    switch (navPlayerMenu)
+                                    {
+                                        case ConsoleKey.UpArrow:
+                                        case ConsoleKey.W:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY -= 1;
+                                            if (posY < 22)
+                                            {
+                                                posY += 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.DownArrow:
+                                        case ConsoleKey.S:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY += 1;
+                                            if (posY > 23)
+                                            {
+                                                posY -= 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.Enter:
+                                        case ConsoleKey.K:
+                                            if (posY == 22)
+                                            {
+                                                BattlePartySwitchNPCNEW(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                reloadNext2 = false;
+                                            }
+                                            else if (posY == 23)
+                                            {
+                                                reloadNext2 = false;
+                                            }
+                                            break;
+                                        case ConsoleKey.Backspace:
+                                        case ConsoleKey.O:
+                                            reloadNext2 = false;
+                                            break;
+                                        default:
+                                            reloadNext2 = true;
+                                            break;
+                                    }
+                                } while (reloadNext2);
+                                ASCII.ANINPCSend(npc, gbText, gbBackground);
+                            }
+                            else if (npc.Party.Slot3.Health > 0)
+                            {
+                                ASCII.ANINPCNext(player, npc, 3, gbText, gbBackground);
+                                bool reloadNext2 = false;
+
+                                Console.SetCursorPosition(65, 22);
+                                Console.Write("YES");
+                                Console.SetCursorPosition(65, 23);
+                                Console.Write("NO");
+                                do
+                                {
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("-->");
+                                    Console.SetCursorPosition(90, 46);
+                                    navPlayerMenu = Console.ReadKey().Key;
+                                    switch (navPlayerMenu)
+                                    {
+                                        case ConsoleKey.UpArrow:
+                                        case ConsoleKey.W:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY -= 1;
+                                            if (posY < 22)
+                                            {
+                                                posY += 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.DownArrow:
+                                        case ConsoleKey.S:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY += 1;
+                                            if (posY > 23)
+                                            {
+                                                posY -= 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.Enter:
+                                        case ConsoleKey.K:
+                                            if (posY == 22)
+                                            {
+                                                BattlePartySwitchNPCNEW(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                reloadNext2 = false;
+                                            }
+                                            else if (posY == 23)
+                                            {
+                                                reloadNext2 = false;
+                                            }
+                                            break;
+                                        case ConsoleKey.Backspace:
+                                        case ConsoleKey.O:
+                                            reloadNext2 = false;
+                                            break;
+                                        default:
+                                            reloadNext2 = true;
+                                            break;
+                                    }
+                                } while (reloadNext2);
+                                ASCII.ANINPCSend(npc, gbText, gbBackground);
+                            }
+                            else if (npc.Party.Slot4.Health > 0)
+                            {
+                                ASCII.ANINPCNext(player, npc, 4, gbText, gbBackground);
+                                bool reloadNext2 = false;
+
+                                Console.SetCursorPosition(65, 22);
+                                Console.Write("YES");
+                                Console.SetCursorPosition(65, 23);
+                                Console.Write("NO");
+                                do
+                                {
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("-->");
+                                    Console.SetCursorPosition(90, 46);
+                                    navPlayerMenu = Console.ReadKey().Key;
+                                    switch (navPlayerMenu)
+                                    {
+                                        case ConsoleKey.UpArrow:
+                                        case ConsoleKey.W:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY -= 1;
+                                            if (posY < 22)
+                                            {
+                                                posY += 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.DownArrow:
+                                        case ConsoleKey.S:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY += 1;
+                                            if (posY > 23)
+                                            {
+                                                posY -= 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.Enter:
+                                        case ConsoleKey.K:
+                                            if (posY == 22)
+                                            {
+                                                BattlePartySwitchNPCNEW(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                reloadNext2 = false;
+                                            }
+                                            else if (posY == 23)
+                                            {
+                                                reloadNext2 = false;
+                                            }
+                                            break;
+                                        case ConsoleKey.Backspace:
+                                        case ConsoleKey.O:
+                                            reloadNext2 = false;
+                                            break;
+                                        default:
+                                            reloadNext2 = true;
+                                            break;
+                                    }
+                                } while (reloadNext2);
+                                ASCII.ANINPCSend(npc, gbText, gbBackground);
+                            }
+                            else if (npc.Party.Slot5.Health > 0)
+                            {
+                                ASCII.ANINPCNext(player, npc, 5, gbText, gbBackground);
+                                bool reloadNext2 = false;
+
+                                Console.SetCursorPosition(65, 22);
+                                Console.Write("YES");
+                                Console.SetCursorPosition(65, 23);
+                                Console.Write("NO");
+                                do
+                                {
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("-->");
+                                    Console.SetCursorPosition(90, 46);
+                                    navPlayerMenu = Console.ReadKey().Key;
+                                    switch (navPlayerMenu)
+                                    {
+                                        case ConsoleKey.UpArrow:
+                                        case ConsoleKey.W:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY -= 1;
+                                            if (posY < 22)
+                                            {
+                                                posY += 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.DownArrow:
+                                        case ConsoleKey.S:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY += 1;
+                                            if (posY > 23)
+                                            {
+                                                posY -= 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.Enter:
+                                        case ConsoleKey.K:
+                                            if (posY == 22)
+                                            {
+                                                BattlePartySwitchNPCNEW(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                reloadNext2 = false;
+                                            }
+                                            else if (posY == 23)
+                                            {
+                                                reloadNext2 = false;
+                                            }
+                                            break;
+                                        case ConsoleKey.Backspace:
+                                        case ConsoleKey.O:
+                                            reloadNext2 = false;
+                                            break;
+                                        default:
+                                            reloadNext2 = true;
+                                            break;
+                                    }
+                                } while (reloadNext2);
+                                ASCII.ANINPCSend(npc, gbText, gbBackground);
+                            }
+                            else if (npc.Party.Slot6.Health > 0)
+                            {
+                                ASCII.ANINPCNext(player, npc, 6, gbText, gbBackground);
+                                bool reloadNext2 = false;
+
+                                Console.SetCursorPosition(65, 22);
+                                Console.Write("YES");
+                                Console.SetCursorPosition(65, 23);
+                                Console.Write("NO");
+                                do
+                                {
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("-->");
+                                    Console.SetCursorPosition(90, 46);
+                                    navPlayerMenu = Console.ReadKey().Key;
+                                    switch (navPlayerMenu)
+                                    {
+                                        case ConsoleKey.UpArrow:
+                                        case ConsoleKey.W:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY -= 1;
+                                            if (posY < 22)
+                                            {
+                                                posY += 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.DownArrow:
+                                        case ConsoleKey.S:
+                                            Console.SetCursorPosition(61, posY);
+                                            Console.Write("   ");
+                                            posY += 1;
+                                            if (posY > 23)
+                                            {
+                                                posY -= 1;
+                                            }
+                                            reloadNext2 = true;
+                                            break;
+                                        case ConsoleKey.Enter:
+                                        case ConsoleKey.K:
+                                            if (posY == 22)
+                                            {
+                                                BattlePartySwitchNPCNEW(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                reloadNext2 = false;
+                                            }
+                                            else if (posY == 23)
+                                            {
+                                                reloadNext2 = false;
+                                            }
+                                            break;
+                                        case ConsoleKey.Backspace:
+                                        case ConsoleKey.O:
+                                            reloadNext2 = false;
+                                            break;
+                                        default:
+                                            reloadNext2 = true;
+                                            break;
+                                    }
+                                } while (reloadNext2);
+                                ASCII.ANINPCSend(npc, gbText, gbBackground);
+                            }
+                        }
+                        else if (player.Party.MonsterEquipped.Health <= 0)
+                        {
+                            ASCII.ANIAttackerFaint(player, gbText, gbBackground);
+                            ASCII.ScrollMessage(message1, 50, 25, gbText, gbBackground);
+                            int posY = 22;
+
+                            Console.SetCursorPosition(65, 22);
+                            Console.Write("YES");
+                            Console.SetCursorPosition(65, 23);
+                            Console.Write("NO");
+                            do
+                            {
+                                Console.SetCursorPosition(61, posY);
+                                Console.Write("-->");
+                                Console.SetCursorPosition(90, 46);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+                                        Console.SetCursorPosition(61, posY);
+                                        Console.Write("   ");
+                                        posY -= 1;
+                                        if (posY < 22)
+                                        {
+                                            posY += 1;
+                                        }
+                                        reloadBattleFAINT = true;
+                                        break;
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+                                        Console.SetCursorPosition(61, posY);
+                                        Console.Write("   ");
+                                        posY += 1;
+                                        if (posY > 23)
+                                        {
+                                            posY -= 1;
+                                        }
+                                        reloadBattleFAINT = true;
+                                        break;
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+                                        if (posY == 22)
+                                        {
+                                            BattlePartySwitch(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                            reloadBattleFAINT = false;
+                                        }
+                                        if (posY == 23)
+                                        {
+                                            SFX.RunAway();
+                                            string message2 = $"{player.Name.ToUpper()} fled to safety!";
+                                            ASCII.ScrollMessage(message2, 15, 2000, gbText, gbBackground);
+                                            reloadBattleFAINT = false;
+                                        }
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        SFX.RunAway();
+                                        string message = $"{player.Name.ToUpper()} fled to safety!";
+                                        ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
+                                        reloadBattleFAINT = false;
+                                        break;
+                                    default:
+                                        reloadBattleFAINT = true;
+                                        break;
+                                }
+                            } while (reloadBattleFAINT);
+                            reloadBattleFIGHT = true;
+                            reloadBattleBAG = false;
+                            reloadBattlePOKeFRAUD = false;
+                            reloadBattleRUN = false;
+                        }
+                        else
+                        {
+                            ASCII.DISATTandDEF(player, npc.Party.MonsterEquipped, gbText, gbBackground);
+                            reloadBattleFIGHT = true;
+                            reloadBattleBAG = false;
+                            reloadBattlePOKeFRAUD = false;
+                            reloadBattleRUN = false;
+                        }
+                        break;
+                    case ConsoleKey.D:
+                    case ConsoleKey.RightArrow:
+                        do
+                        {
+                            //Displays Select Bag                            
+                            ASCII.DISSelectBag(player.Party.MonsterEquipped, gbText, gbBackground);
+                            navPlayerMenu = Console.ReadKey().Key;
+                            switch (navPlayerMenu)
+                            {
+                                case ConsoleKey.K:
+                                case ConsoleKey.Enter:
+                                    ASCII.StaticMessageBox(gbText, gbBackground);
+                                    BattleItemSection(player.Inventory.ItemSection, player.Inventory.MedSection, player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                    if (npc.Party.MonsterEquipped.IsCaught == true)
+                                    {
+                                        reloadBattleFIGHT = false;
+                                        reloadBattleBAG = false;
+                                        reloadBattlePOKeFRAUD = false;
+                                        reloadBattleRUN = false;
+                                    }
+                                    else
+                                    {
+                                        ASCII.DISATTandDEF(player, npc.Party.MonsterEquipped, gbText, gbBackground);
+                                        reloadBattleFIGHT = true;
+                                        reloadBattleBAG = false;
+                                        reloadBattlePOKeFRAUD = false;
+                                        reloadBattleRUN = false;
+                                    }
+                                    break;
+                                case ConsoleKey.S:
+                                case ConsoleKey.DownArrow:
+                                    do
+                                    {
+                                        //Displays Select Run
+                                        ASCII.DISSelectRun(player.Party.MonsterEquipped, gbText, gbBackground);
+                                        navPlayerMenu = Console.ReadKey().Key;
+                                        switch (navPlayerMenu)
+                                        {
+                                            case ConsoleKey.K:
+                                            case ConsoleKey.Enter:
+                                                string message = $"You cannot escape a player battle!";
+                                                ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
+                                                reloadBattleFIGHT = true;
+                                                reloadBattleBAG = false;
+                                                reloadBattlePOKeFRAUD = false;
+                                                reloadBattleRUN = false;
+                                                break;
+                                            case ConsoleKey.A:
+                                            case ConsoleKey.LeftArrow:
+                                                do
+                                                {
+                                                    //Displays Select Party
+                                                    ASCII.DISSelectParty(player.Party.MonsterEquipped, gbText, gbBackground);
+                                                    navPlayerMenu = Console.ReadKey().Key;
+                                                    switch (navPlayerMenu)
+                                                    {
+                                                        case ConsoleKey.K:
+                                                        case ConsoleKey.Enter:
+                                                            BattlePartySwitch(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                            reloadBattleFIGHT = true;
+                                                            reloadBattleBAG = false;
+                                                            reloadBattlePOKeFRAUD = false;
+                                                            reloadBattleRUN = false;
+                                                            break;
+                                                        case ConsoleKey.W:
+                                                        case ConsoleKey.UpArrow:
+                                                            //Reloads BattleFIGHT
+                                                            reloadBattleBAG = false;
+                                                            reloadBattlePOKeFRAUD = false;
+                                                            reloadBattleRUN = false;
+                                                            reloadBattleFIGHT = true;
+                                                            break;
+                                                        case ConsoleKey.D:
+                                                        case ConsoleKey.RightArrow:
+                                                            //Reloads BattleRUN
+                                                            reloadBattleRUN = true;
+                                                            reloadBattlePOKeFRAUD = false;
+                                                            break;
+                                                        default:
+                                                            //Reloads BattlePOKeFRAUD
+                                                            reloadBattlePOKeFRAUD = true;
+                                                            break;
+                                                    }//end switch navPlayerMenu
+                                                } while (reloadBattlePOKeFRAUD);//end dowhile reloadBattlePOKeFRAUD 
+                                                break;
+                                            case ConsoleKey.W:
+                                            case ConsoleKey.UpArrow:
+                                                //Reloads BattleBAG
+                                                reloadBattleBAG = true;
+                                                reloadBattlePOKeFRAUD = false;
+                                                reloadBattleRUN = false;
+                                                break;
+                                            default:
+                                                //Reloads BattleRUN
+                                                reloadBattleRUN = true;
+                                                break;
+                                        }//end switch navPlayerMenu
+                                    } while (reloadBattleRUN);//end dowhile reloadBattleRUN                                    
+                                    break;
+                                case ConsoleKey.A:
+                                case ConsoleKey.LeftArrow:
+                                    //Reloads BattleFIGHT
+                                    reloadBattleFIGHT = true;
+                                    reloadBattlePOKeFRAUD = false;
+                                    reloadBattleBAG = false;
+                                    reloadBattleRUN = false;
+                                    break;
+                                default:
+                                    //Reloads BattleBAG
+                                    reloadBattleBAG = true;
+                                    break;
+                            }
+                        } while (reloadBattleBAG);//end dowhile reloadBattleBag
+                        break;
+                    case ConsoleKey.S:
+                    case ConsoleKey.DownArrow:
+                        do
+                        {
+                            //Displays Select Party
+                            ASCII.DISSelectParty(player.Party.MonsterEquipped, gbText, gbBackground);
+                            navPlayerMenu = Console.ReadKey().Key;
+                            switch (navPlayerMenu)
+                            {
+                                case ConsoleKey.K:
+                                case ConsoleKey.Enter:
+                                    BattlePartySwitch(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                    reloadBattleFIGHT = true;
+                                    reloadBattleBAG = false;
+                                    reloadBattlePOKeFRAUD = false;
+                                    reloadBattleRUN = false;
+                                    break;
+                                case ConsoleKey.D:
+                                case ConsoleKey.RightArrow:
+                                    do
+                                    {
+                                        //Displays Select Run
+                                        ASCII.DISSelectRun(player.Party.MonsterEquipped, gbText, gbBackground);
+                                        navPlayerMenu = Console.ReadKey().Key;
+                                        switch (navPlayerMenu)
+                                        {
+                                            case ConsoleKey.K:
+                                            case ConsoleKey.Enter:
+                                                string message = $"You cannot escape a player battle!";
+                                                ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
+                                                reloadBattleFIGHT = true;
+                                                reloadBattleBAG = false;
+                                                reloadBattlePOKeFRAUD = false;
+                                                reloadBattleRUN = false;
+                                                break;
+                                            case ConsoleKey.W:
+                                            case ConsoleKey.UpArrow:
+                                                do
+                                                {
+                                                    //Displays Select Bag
+                                                    ASCII.DISSelectBag(player.Party.MonsterEquipped, gbText, gbBackground);
+                                                    navPlayerMenu = Console.ReadKey().Key;
+                                                    switch (navPlayerMenu)
+                                                    {
+                                                        case ConsoleKey.K:
+                                                        case ConsoleKey.Enter:
+                                                            ASCII.StaticMessageBox(gbText, gbBackground);
+                                                            BattleItemSection(player.Inventory.ItemSection, player.Inventory.MedSection, player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+                                                            if (npc.Party.MonsterEquipped.IsCaught == true)
+                                                            {
+                                                                reloadBattleFIGHT = false;
+                                                                reloadBattleBAG = false;
+                                                                reloadBattlePOKeFRAUD = false;
+                                                                reloadBattleRUN = false;
+                                                            }
+                                                            else
+                                                            {
+                                                                ASCII.DISATTandDEF(player, npc.Party.MonsterEquipped, gbText, gbBackground);
                                                                 reloadBattleFIGHT = true;
                                                                 reloadBattleBAG = false;
                                                                 reloadBattlePOKeFRAUD = false;
@@ -1508,6 +2236,7 @@ namespace MainClasses
                         posX += 76;
                         posY += 1;
                         if (posX > 82 ||
+                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
                             posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
                             posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
                         {
@@ -1569,20 +2298,21 @@ namespace MainClasses
                                 switch (navPlayerMenu)
                                 {
                                     case ConsoleKey.Enter:
-                                        if (player.Party.MonsterEquipped.Health >= 0)
-                                        {
-                                            ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                                            ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
-                                            ASCII.ANIReturn(6, 13, gbText, gbBackground);
-                                        }
-                                        ASCII.ResetHalfScreen(12, gbText, gbBackground);
-                                        System.Threading.Thread.Sleep(1000);
-                                        player.Party.MonsterSwitch = player.Party.MonsterEquipped;
-                                        player.Party.MonsterEquipped = player.Party.Slot3;
-                                        player.Party.Slot3 = player.Party.MonsterSwitch;
-                                        ASCII.ANIPlayerSend(player, gbText, gbBackground);
+                                        //if (player.Party.MonsterEquipped.Health >= 0)
+                                        //{
+                                        //    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                        //    ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
+                                        //    ASCII.ANIReturn(6, 13, gbText, gbBackground);
+                                        //}
+                                        //ASCII.ResetHalfScreen(12, gbText, gbBackground);
+                                        //System.Threading.Thread.Sleep(1000);
+                                        //player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                        //player.Party.MonsterEquipped = player.Party.Slot3;
+                                        //player.Party.Slot3 = player.Party.MonsterSwitch;
+                                        //ASCII.ANIPlayerSend(player, gbText, gbBackground);
                                         //This Method utilizes the same code as the above but DOESN'T WORK
-                                        //ASCII.ANIPlayerSwitchSend(player, player.Party.Slot3, monster, gbText, gbBackground);
+                                        
+                                        ASCII.ANIPlayerSwitchSend(player, 3, monster, gbText, gbBackground);
                                         reloadParty = false;
                                         break;
                                     case ConsoleKey.Backspace:
@@ -1612,20 +2342,19 @@ namespace MainClasses
                                 switch (navPlayerMenu)
                                 {
                                     case ConsoleKey.Enter:
-                                        if (player.Party.MonsterEquipped.Health >= 0)
-                                        {
-                                            ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                                            ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
-                                            ASCII.ANIReturn(6, 13, gbText, gbBackground);
-                                        }
-                                        ASCII.ResetHalfScreen(12, gbText, gbBackground);
-                                        System.Threading.Thread.Sleep(1000);
-                                        player.Party.MonsterSwitch = player.Party.MonsterEquipped;
-                                        player.Party.MonsterEquipped = player.Party.Slot5;
-                                        player.Party.Slot5 = player.Party.MonsterSwitch;
-                                        ASCII.ANIPlayerSend(player, gbText, gbBackground);
-                                        //This Method utilizes the same code as the above but DOESN'T WORK
-                                        //ASCII.ANIPlayerSwitchSend(player, player.Party.Slot5, monster, gbText, gbBackground);
+                                        //if (player.Party.MonsterEquipped.Health >= 0)
+                                        //{
+                                        //    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                        //    ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
+                                        //    ASCII.ANIReturn(6, 13, gbText, gbBackground);
+                                        //}
+                                        //ASCII.ResetHalfScreen(12, gbText, gbBackground);
+                                        //System.Threading.Thread.Sleep(1000);
+                                        //player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                        //player.Party.MonsterEquipped = player.Party.Slot5;
+                                        //player.Party.Slot5 = player.Party.MonsterSwitch;
+                                        //ASCII.ANIPlayerSend(player, gbText, gbBackground);
+                                        ASCII.ANIPlayerSwitchSend(player, 5, monster, gbText, gbBackground);
                                         reloadParty = false;
                                         break;
                                     case ConsoleKey.Backspace:
@@ -1655,20 +2384,19 @@ namespace MainClasses
                                 switch (navPlayerMenu)
                                 {
                                     case ConsoleKey.Enter:
-                                        if (player.Party.MonsterEquipped.Health >= 0)
-                                        {
-                                            ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                                            ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
-                                            ASCII.ANIReturn(6, 13, gbText, gbBackground);
-                                        }
-                                        ASCII.ResetHalfScreen(12, gbText, gbBackground);
-                                        System.Threading.Thread.Sleep(1000);
-                                        player.Party.MonsterSwitch = player.Party.MonsterEquipped;
-                                        player.Party.MonsterEquipped = player.Party.Slot2;
-                                        player.Party.Slot2 = player.Party.MonsterSwitch;
-                                        ASCII.ANIPlayerSend(player, gbText, gbBackground);
-                                        //This Method utilizes the same code as the above but DOESN'T WORK
-                                        //ASCII.ANIPlayerSwitchSend(player, player.Party.Slot2, monster, gbText, gbBackground);
+                                        //if (player.Party.MonsterEquipped.Health >= 0)
+                                        //{
+                                        //    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                        //    ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
+                                        //    ASCII.ANIReturn(6, 13, gbText, gbBackground);
+                                        //}
+                                        //ASCII.ResetHalfScreen(12, gbText, gbBackground);
+                                        //System.Threading.Thread.Sleep(1000);
+                                        //player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                        //player.Party.MonsterEquipped = player.Party.Slot2;
+                                        //player.Party.Slot2 = player.Party.MonsterSwitch;
+                                        //ASCII.ANIPlayerSend(player, gbText, gbBackground);
+                                        ASCII.ANIPlayerSwitchSend(player, 2, monster, gbText, gbBackground);
                                         reloadParty = false;
                                         break;
                                     case ConsoleKey.Backspace:
@@ -1698,20 +2426,19 @@ namespace MainClasses
                                 switch (navPlayerMenu)
                                 {
                                     case ConsoleKey.Enter:
-                                        if (player.Party.MonsterEquipped.Health >= 0)
-                                        {
-                                            ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                                            ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
-                                            ASCII.ANIReturn(6, 13, gbText, gbBackground);
-                                        }
-                                        ASCII.ResetHalfScreen(12, gbText, gbBackground);
-                                        System.Threading.Thread.Sleep(1000);
-                                        player.Party.MonsterSwitch = player.Party.MonsterEquipped;
-                                        player.Party.MonsterEquipped = player.Party.Slot4;
-                                        player.Party.Slot4 = player.Party.MonsterSwitch;
-                                        ASCII.ANIPlayerSend(player, gbText, gbBackground);
-                                        //This Method utilizes the same code as the above but DOESN'T WORK
-                                        //ASCII.ANIPlayerSwitchSend(player, player.Party.Slot4, monster, gbText, gbBackground);
+                                        //if (player.Party.MonsterEquipped.Health >= 0)
+                                        //{
+                                        //    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                        //    ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
+                                        //    ASCII.ANIReturn(6, 13, gbText, gbBackground);
+                                        //}
+                                        //ASCII.ResetHalfScreen(12, gbText, gbBackground);
+                                        //System.Threading.Thread.Sleep(1000);
+                                        //player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                        //player.Party.MonsterEquipped = player.Party.Slot4;
+                                        //player.Party.Slot4 = player.Party.MonsterSwitch;
+                                        //ASCII.ANIPlayerSend(player, gbText, gbBackground);
+                                        ASCII.ANIPlayerSwitchSend(player, 4, monster, gbText, gbBackground);
                                         reloadParty = false;
                                         break;
                                     case ConsoleKey.Backspace:
@@ -1741,20 +2468,19 @@ namespace MainClasses
                                 switch (navPlayerMenu)
                                 {
                                     case ConsoleKey.Enter:
-                                        if (player.Party.MonsterEquipped.Health >= 0)
-                                        {
-                                            ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                                            ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
-                                            ASCII.ANIReturn(6, 13, gbText, gbBackground);
-                                        }
-                                        ASCII.ResetHalfScreen(12, gbText, gbBackground);
-                                        System.Threading.Thread.Sleep(1000);
-                                        player.Party.MonsterSwitch = player.Party.MonsterEquipped;
-                                        player.Party.MonsterEquipped = player.Party.Slot6;
-                                        player.Party.Slot6 = player.Party.MonsterSwitch;
-                                        ASCII.ANIPlayerSend(player, gbText, gbBackground);
-                                        //This Method utilizes the same code as the above but DOESN'T WORK
-                                        //ASCII.ANIPlayerSwitchSend(player, player.Party.Slot6, monster, gbText, gbBackground);
+                                        //if (player.Party.MonsterEquipped.Health >= 0)
+                                        //{
+                                        //    ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
+                                        //    ASCII.ScrollMessage(messageReturn, 50, 1000, gbText, gbBackground);
+                                        //    ASCII.ANIReturn(6, 13, gbText, gbBackground);
+                                        //}
+                                        //ASCII.ResetHalfScreen(12, gbText, gbBackground);
+                                        //System.Threading.Thread.Sleep(1000);
+                                        //player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                        //player.Party.MonsterEquipped = player.Party.Slot6;
+                                        //player.Party.Slot6 = player.Party.MonsterSwitch;
+                                        //ASCII.ANIPlayerSend(player, gbText, gbBackground);
+                                        ASCII.ANIPlayerSwitchSend(player, 6, monster, gbText, gbBackground);
                                         reloadParty = false;
                                         break;
                                     case ConsoleKey.Backspace:
@@ -1788,6 +2514,287 @@ namespace MainClasses
             } while (reloadParty);
         }
 
+        public static void BattlePartySwitchNPCNEW(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadParty = false;
+            int posX = 6;
+            int posY = 3;
+
+            ASCII.Party(player, gbText, gbBackground);
+            do
+            {
+                ASCII.StaticMessageBox(gbText, gbBackground);
+                Console.SetCursorPosition(posX, posY);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 2);
+                Console.Write("███");
+                Console.SetCursorPosition(90, 46);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY += 6;
+                        if (posY > 16 ||
+                            posX == 6 && posY == 9 && player.Party.Slot3.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 6 && posY == 15 && player.Party.Slot5.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posY -= 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY -= 6;
+                        if (posY < 3)
+                        {
+                            posY += 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX += 76;
+                        posY += 1;
+                        if (posX > 82 ||
+                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posX -= 76;
+                            posY -= 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX -= 76;
+                        posY -= 1;
+                        if (posX < 6)
+                        {
+                            posX += 76;
+                            posY += 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.Enter:
+                        string messageReturn = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                        //Monster Equipped
+                        if (posX == 6 && posY == 3)
+                        {
+                            string message1 = $"{player.Party.MonsterEquipped.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} is already in battle!";
+                            if (player.Party.MonsterEquipped.Health <= 0)
+                            {
+                                ASCII.ScrollMessage(message1, 25, 2000, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                ASCII.ScrollMessage(message2, 25, 2000, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                        }
+                        //Slot 3
+                        else if (posX == 6 && posY == 9)
+                        {
+                            string message1 = $"{player.Party.Slot3.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                            if (player.Party.Slot3.Health <= 0)
+                            {
+                                ASCII.InstantMessage(message1, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                string message = $"Send out {player.Party.Slot3.Name.ToUpper()}?";
+                                ASCII.InstantMessage(message, gbText, gbBackground);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Enter:
+                                        ASCII.ANIPlayerSwitchSendNPCFaint(player, 3, monster, gbText, gbBackground);
+                                        reloadParty = false;
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                        reloadParty = true;
+                                        break;
+                                    default:
+                                        reloadParty = true;
+                                        break;
+                                }
+                            }
+                        }
+                        //Slot 5
+                        else if (posX == 6 && posY == 15)
+                        {
+                            string message1 = $"{player.Party.Slot5.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                            if (player.Party.Slot5.Health <= 0)
+                            {
+                                ASCII.InstantMessage(message1, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                string message = $"Send out {player.Party.Slot5.Name.ToUpper()}?";
+                                ASCII.InstantMessage(message, gbText, gbBackground);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Enter:
+                                        ASCII.ANIPlayerSwitchSendNPCFaint(player, 5, monster, gbText, gbBackground);
+                                        reloadParty = false;
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                        reloadParty = true;
+                                        break;
+                                    default:
+                                        reloadParty = true;
+                                        break;
+                                }
+                            }
+                        }
+                        //Slot 2
+                        else if (posX == 82 && posY == 4)
+                        {
+                            string message1 = $"{player.Party.Slot2.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                            if (player.Party.Slot2.Health <= 0)
+                            {
+                                ASCII.InstantMessage(message1, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                string message = $"Send out {player.Party.Slot2.Name.ToUpper()}?";
+                                ASCII.InstantMessage(message, gbText, gbBackground);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Enter:
+                                        ASCII.ANIPlayerSwitchSendNPCFaint(player, 2, monster, gbText, gbBackground);
+                                        reloadParty = false;
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                        reloadParty = true;
+                                        break;
+                                    default:
+                                        reloadParty = true;
+                                        break;
+                                }
+                            }
+                        }
+                        //Slot 4
+                        else if (posX == 82 && posY == 10)
+                        {
+                            string message1 = $"{player.Party.Slot4.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                            if (player.Party.Slot4.Health <= 0)
+                            {
+                                ASCII.InstantMessage(message1, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                string message = $"Send out {player.Party.Slot4.Name.ToUpper()}?";
+                                ASCII.InstantMessage(message, gbText, gbBackground);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Enter:
+                                        ASCII.ANIPlayerSwitchSendNPCFaint(player, 4, monster, gbText, gbBackground);
+                                        reloadParty = false;
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                        reloadParty = true;
+                                        break;
+                                    default:
+                                        reloadParty = true;
+                                        break;
+                                }
+                            }
+                        }
+                        //Slot 6
+                        else if (posX == 82 && posY == 16)
+                        {
+                            string message1 = $"{player.Party.Slot6.Name.ToUpper()} is unable to battle!";
+                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+                            if (player.Party.Slot6.Health <= 0)
+                            {
+                                ASCII.InstantMessage(message1, gbText, gbBackground);
+                                reloadParty = true;
+                            }
+                            else
+                            {
+                                string message = $"Send out {player.Party.Slot6.Name.ToUpper()}?";
+                                ASCII.InstantMessage(message, gbText, gbBackground);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Enter:
+                                        ASCII.ANIPlayerSwitchSendNPCFaint(player, 6, monster, gbText, gbBackground);
+                                        reloadParty = false;
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                        reloadParty = true;
+                                        break;
+                                    default:
+                                        reloadParty = true;
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        if (monster.IsOwned == true && player.Party.MonsterEquipped.Health <= 0)
+                        {
+                            string message = $"You cannot escape a PvP battle!";
+                            ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        else
+                        {
+                            ASCII.DISJustAttacker(player, gbText, gbBackground);
+                            reloadParty = false;
+                        }
+                        break;
+                    default:
+                        reloadParty = true;
+                        break;
+                }
+            } while (reloadParty);
+        }
+
         #endregion
 
         #endregion
@@ -1796,15 +2803,23 @@ namespace MainClasses
 
         #region Player Menu
 
-        public static void DISPlayerNameMenu(Player player)
+        public static void PlayerSelect(Player player, string[] MenuDisplay, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            string name = $"{player.Name}";
-            Console.SetCursorPosition(66, 13);
-            Console.Write(name);
-            Console.SetCursorPosition(0, 0);
+            int posY = 2;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            foreach (string line in MenuDisplay)
+            {
+                Console.SetCursorPosition(4, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            Console.SetCursorPosition(67, 12);
+            Console.Write(player.Name.ToUpper());
+            Console.SetCursorPosition(90, 46);
         }
 
-        public static void PlayerMenu(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
+        public static void PlayerMenu(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPlayerMenu = false;
             bool reloadPlayerMonstersEquipped = false;
@@ -1814,11 +2829,7 @@ namespace MainClasses
 
             do
             {
-                Console.SetCursorPosition(0, 0);
-                Console.Write(" ");
-                Console.Write(player.ToString());
-                //Console.Write(ASCII.gameButtons);
-                //DisplayPlayerNameMenu(player);
+                Player_Menus.PlayerSelect(player, ASCII.PMPokedexSelect, gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -1839,11 +2850,7 @@ namespace MainClasses
                         //SFX.Select();
                         do
                         {
-                            Console.SetCursorPosition(0, 0);
-                            Console.Write(" ");
-                            //Console.Write(player.PlayerMenuMonstersEquipped());
-                            //Console.Write(ASCII.gameButtons);
-                            //DisplayPlayerNameMenu(player);
+                            Player_Menus.PlayerSelect(player, ASCII.PMPartySelect, gbText, gbBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
@@ -1868,17 +2875,13 @@ namespace MainClasses
                                     //SFX.Select();
                                     do
                                     {
-                                        Console.SetCursorPosition(0, 0);
-                                        Console.Write(" ");
-                                        //Console.Write(player.PlayerMenuBag());
-                                        //Console.Write(ASCII.gameButtons);
-                                        //DisplayPlayerNameMenu(player);
+                                        Player_Menus.PlayerSelect(player, ASCII.PMBagSelect, gbText, gbBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.Enter:
                                                 //SFX.Select();
-                                                //PlayerItemSectionOutsideBattle(player, monster, navPlayerMenu, GameScreenText, GameScreenBackground);
+                                                //PlayerItemSectionOutsideBattle(player, monster, navPlayerMenu, gbText, gbBackground);
                                                 break;
                                             case ConsoleKey.UpArrow:
                                             case ConsoleKey.W:
@@ -1893,11 +2896,7 @@ namespace MainClasses
                                                 //SFX.Select();
                                                 do
                                                 {
-                                                    Console.SetCursorPosition(0, 0);
-                                                    Console.Write(" ");
-                                                    //Console.Write(player.PlayerMenuProfile());
-                                                    //Console.Write(ASCII.gameButtons);
-                                                    //DisplayPlayerNameMenu(player);
+                                                    Player_Menus.PlayerSelect(player, ASCII.PMProfileSelect, gbText, gbBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
@@ -1917,17 +2916,16 @@ namespace MainClasses
                                                             //SFX.Select();
                                                             do
                                                             {
-                                                                Console.SetCursorPosition(0, 0);
-                                                                Console.Write(" ");
-                                                                //Console.Write(player.PlayerMenuExit());
-                                                                //Console.Write(ASCII.gameButtons);
-                                                                //DisplayPlayerNameMenu(player);
+                                                                Player_Menus.PlayerSelect(player, ASCII.PMExitSelect, gbText, gbBackground);
                                                                 navPlayerMenu = Console.ReadKey().Key;
                                                                 switch (navPlayerMenu)
                                                                 {
                                                                     case ConsoleKey.Enter:
-                                                                        //SFX.Select();
-                                                                        //TODO Insert EXIT MENU CODE HERE!!!
+                                                                        reloadPlayerBag = false;
+                                                                        reloadPlayerEXIT = false;
+                                                                        reloadPlayerMenu = false;
+                                                                        reloadPlayerMonstersEquipped = false;
+                                                                        reloadPlayerProfile = false;
                                                                         break;
                                                                     case ConsoleKey.UpArrow:
                                                                     case ConsoleKey.W:
@@ -2009,8 +3007,7 @@ namespace MainClasses
         #endregion
 
         #region Player Menu Pokedex
-
-
+        
 
         #endregion
 

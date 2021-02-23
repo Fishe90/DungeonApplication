@@ -12,9 +12,9 @@ namespace DungeonApplication
         static void Main(string[] args)
         {
             Console.SetWindowSize(91, 47);
-            ConsoleColor gbText = ConsoleColor.White;
+            ConsoleColor gbText = ConsoleColor.Gray;
             ConsoleColor gbBackground = ConsoleColor.Black;
-            ConsoleColor GBColor = ConsoleColor.DarkRed;
+            ConsoleColor GBColor = ConsoleColor.DarkGreen;
             ConsoleKey navPlayerMenu = Console.ReadKey().Key;
 
             ASCII.GameBoy(GBColor);
@@ -43,37 +43,40 @@ namespace DungeonApplication
 
             Monster playerPyra = new Monster("Pyra", "Pyra", '♂', false, 25, 50, 25, 0, 5, 0, "004", true, Monster_Race.Fire, true, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.playerStarter);
 
-            Monster default2 = new Monster();
-            default2.Type = Monster_Race.NONE;
-            Monster default3 = new Monster();
-            default3.Type = Monster_Race.NONE;
-            Monster default4 = new Monster();
-            default4.Type = Monster_Race.NONE;
-            Monster default5 = new Monster();
-            default5.Type = Monster_Race.NONE;
-            Monster default6 = new Monster();
-            default6.Type = Monster_Race.NONE;
-            Monster monsterSwitch = new Monster();
-            monsterSwitch.Type = Monster_Race.NONE;
+            
 
-            Player player1 = new Player();
-            player1.Name = "Dillon";            
+            Player player1 = new Player();                    
             player1.Party = new Player_Party();
+            player1.Inventory = new Player_Inventory();
             player1.Party.MonsterEquipped = Monster.pyra;
             player1.Party.Slot2 = Monster.dousey;
             player1.Party.Slot3 = Monster.electra;
             player1.Party.Slot4 = Monster.cobblet;
             player1.Party.Slot5 = Monster.neo;
-            player1.Party.Slot6 = default6;
-            player1.Party.MonsterSwitch = monsterSwitch;
+            player1.Party.Slot6 = Monster.default6;
+            player1.Party.MonsterSwitch = Monster.monsterSwitch;
+            player1.Name = "Dillon";
 
             player1.Money = 0;
-            player1.Inventory = new Player_Inventory();
+            
 
             Player NPC = new Player();
             NPC.Name = "Bryan";
             NPC.Party = new Player_Party();
             NPC.Party.MonsterEquipped = Monster.rivalDousey;
+            NPC.Party.Slot2 = Monster.rivalCobblet;
+            NPC.Party.Slot3 = Monster.rivalElectra;
+            NPC.Party.Slot4 = new Monster();
+            NPC.Party.Slot4.Type = Monster_Race.NONE;
+            NPC.Party.Slot4.Health = 0;
+            NPC.Party.Slot5 = new Monster();
+            NPC.Party.Slot5.Type = Monster_Race.NONE;
+            NPC.Party.Slot5.Health = 0;
+            NPC.Party.Slot6 = new Monster();
+            NPC.Party.Slot6.Type = Monster_Race.NONE;
+            NPC.Party.Slot6.Health = 0;
+            NPC.Party.MonsterSwitch = new Monster();
+            NPC.Party.MonsterSwitch.Type = Monster_Race.NONE;
             NPC.ASCIIDefender = ASCII.npcDefender;
             NPC.ASCIIProfile = ASCII.npcProfile;
 
@@ -86,17 +89,18 @@ namespace DungeonApplication
                 psychicNeo
             };
 
-            bool reloadWild = false;
-            do
-            {
-                ASCII.FullBattleWild(player1, monsters, 5, 10, gbText, gbBackground, navPlayerMenu);
-                reloadWild = true;
-            } while (reloadWild);
-            ASCII.FullBattleWild(player1, monsters, 5, 10, gbText, gbBackground, navPlayerMenu);
+            //Player_Menus.PlayerMenu(player1, player1.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+            //navPlayerMenu = Console.ReadKey().Key;
 
-            navPlayerMenu = Console.ReadKey().Key;
+            //ASCII.FullBattleWild(player1, Monster.starters, 5, 10, gbText, gbBackground, navPlayerMenu);
 
-            ASCII.FullBattleWild(player1, Monster.starters, 3, 6, gbText, gbBackground, navPlayerMenu);
+            int currentPosX = 167;
+            int currentPosY = 56;
+
+            SFX.Route1();
+            Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
+            //ASCII.RegionNoEncounter(ASCII.DEMOMap, player1, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
+            //ASCII.RegionEncounter(ASCII.TestMap, player1, monsters, currentPosX, currentPosY, 6, 10, navPlayerMenu, gbText, gbBackground);
         }
     }
 }

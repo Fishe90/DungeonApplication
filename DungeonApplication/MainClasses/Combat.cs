@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,46 @@ namespace MainClasses
 {
     public class Combat
     {
+        #region CalcExpGain
+
+        public static void CalcExp(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            int currentExp = player.Party.MonsterEquipped.Exp;
+            int exp = monster.Lv * monster.Lv;
+            string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} gained {exp} exp!";
+
+            if (monster.IsOwned == true)
+            {
+                exp = exp * (3/2);
+                ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
+            }
+            else
+            {
+                ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
+            }            
+            System.Threading.Thread.Sleep(1000);
+            currentExp += exp;
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\Battle_SFX\ExpGain.wav";
+            select.Play();
+            while (currentExp > player.Party.MonsterEquipped.Exp)
+            {
+                player.Party.MonsterEquipped.Exp += 1;
+                ASCII.ExpBar(player.Party.MonsterEquipped, 43, 16);
+                if (player.Party.MonsterEquipped.Exp >= player.Party.MonsterEquipped.MaxExp)
+                {
+                    player.Party.MonsterEquipped.Exp = player.Party.MonsterEquipped.MaxExp;
+                    currentExp = player.Party.MonsterEquipped.MaxExp;
+                }
+                System.Threading.Thread.Sleep(100);
+            }
+            select.Stop();
+            //ASCII.ScrollMessage()
+        }
+
+        #endregion
+
         #region CalcDamage PlayerVSMonster
 
         public static void PlayerVSMonsterHitZero(Player attacker, Monster defender, Monster_Moves move, ConsoleColor gbText, ConsoleColor gbBackground)
