@@ -521,7 +521,7 @@ namespace MainClasses
                             int posY = 22;
                             ASCII.ANIDefenderFaint(npc.Party.MonsterEquipped, gbText, gbBackground);
                             //TODO ADD CalcEXP() HERE!!!
-                            //Combat.CalcExp(player, npc.Party.MonsterEquipped, gbText, gbBackground);
+                            Combat.CalcExp(player, npc.Party.MonsterEquipped, gbText, gbBackground);
                             if (npc.Party.Slot2.Health <= 0 && npc.Party.Slot3.Health <= 0 && npc.Party.Slot4.Health <= 0 && npc.Party.Slot5.Health <= 0 && npc.Party.Slot6.Health <= 0)
                             {
                                 ASCII.ANINPCDefeat(player, npc, 500, gbText, gbBackground);

@@ -56,6 +56,7 @@ namespace DungeonApplication
             player1.Party.Slot6 = Monster.default6;
             player1.Party.MonsterSwitch = Monster.monsterSwitch;
             player1.Name = "Dillon";
+            player1.Gender = '♂';
 
             player1.Money = 0;
             
@@ -96,7 +97,7 @@ namespace DungeonApplication
 
             int currentPosX = 167;
             int currentPosY = 56;
-
+     
             SFX.Route1();
             Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
             //ASCII.RegionNoEncounter(ASCII.DEMOMap, player1, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);

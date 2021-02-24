@@ -17,6 +17,7 @@ namespace MainClasses
             int exp = monster.Lv * monster.Lv;
             string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} gained {exp} exp!";
 
+            ASCII.DISJustAttacker(player, gbText, gbBackground);
             if (monster.IsOwned == true)
             {
                 exp = exp * (3/2);
@@ -28,10 +29,10 @@ namespace MainClasses
             }            
             System.Threading.Thread.Sleep(1000);
             currentExp += exp;
-            SoundPlayer select = new SoundPlayer();
-            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
-            select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\Battle_SFX\ExpGain.wav";
-            select.Play();
+            //SoundPlayer select = new SoundPlayer();
+            ////player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            //select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\Battle_SFX\ExpGain.wav";
+            //select.Play();
             while (currentExp > player.Party.MonsterEquipped.Exp)
             {
                 player.Party.MonsterEquipped.Exp += 1;
@@ -43,7 +44,9 @@ namespace MainClasses
                 }
                 System.Threading.Thread.Sleep(100);
             }
-            select.Stop();
+            System.Threading.Thread.Sleep(2000);
+            ASCII.DISJustAttacker(player, gbText, gbBackground);
+            //select.Stop();
             //ASCII.ScrollMessage()
         }
 

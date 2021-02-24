@@ -5,69 +5,69 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MainClasses
-{
+{ 
     public class ASCII
     {
         /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
 
         #region METHODS: Screen Control
 
-        public static void BattleIntroFLASH(Player player, int currentPosX, int currentPosY, string[] Map)
+        public static void BattleIntroFLASH(Player player, int direction, int currentPosX, int currentPosY, string[] Map)
         {
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.White, ConsoleColor.Black);
-            
-            
-            PlayerMovement(ConsoleColor.White, ConsoleColor.Black);
+
+
+            PlayerMovement(player, direction, ConsoleColor.White, ConsoleColor.Black);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.Black, ConsoleColor.White);
-            
-            
-            PlayerMovement(ConsoleColor.Black, ConsoleColor.White);
+
+
+            PlayerMovement(player, direction, ConsoleColor.Black, ConsoleColor.White);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.White, ConsoleColor.Black);
-            
-            
-            PlayerMovement(ConsoleColor.White, ConsoleColor.Black);
+
+
+            PlayerMovement(player, direction, ConsoleColor.White, ConsoleColor.Black);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.Black, ConsoleColor.White);
-            
-            
-            PlayerMovement(ConsoleColor.Black, ConsoleColor.White);
+
+
+            PlayerMovement(player, direction, ConsoleColor.Black, ConsoleColor.White);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.White, ConsoleColor.Black);
-            
-            
-            PlayerMovement(ConsoleColor.White, ConsoleColor.Black);
+
+
+            PlayerMovement(player, direction, ConsoleColor.White, ConsoleColor.Black);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.Black, ConsoleColor.White);
-            
-            
-            PlayerMovement(ConsoleColor.Black, ConsoleColor.White);
+
+
+            PlayerMovement(player, direction, ConsoleColor.Black, ConsoleColor.White);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.White, ConsoleColor.Black);
-            
-            
-            PlayerMovement(ConsoleColor.White, ConsoleColor.Black);
+
+
+            PlayerMovement(player, direction, ConsoleColor.White, ConsoleColor.Black);
             System.Threading.Thread.Sleep(200);
 
             Console.SetCursorPosition(0, 0);
             GameMap(Map, currentPosX, currentPosY, ConsoleColor.Black, ConsoleColor.White);
-            
-            
-            PlayerMovement(ConsoleColor.Black, ConsoleColor.White);
+
+
+            PlayerMovement(player, direction, ConsoleColor.Black, ConsoleColor.White);
             System.Threading.Thread.Sleep(200);
         }
 
@@ -92,7 +92,7 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void PlayerMovement(ConsoleColor gbText, ConsoleColor gbBackground)
+        public static void PlayerForward(ConsoleColor gbText, ConsoleColor gbBackground)
         {
             Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(42, 10);
@@ -133,6 +133,479 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
+        public static void PlayerMovement(Player player, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            //If the player gender == Male USE the Male movement animations, else use the female animations
+            //Create an updating int that knows which foot to step forward when going forwards or backwards
+            //OR Just for the UP and DOWN movements, display two frames
+
+            #region Male Movement
+            string[] MoveRight1 = new string[]
+            {
+                "▄▄███▄ ",                  //"▄▄███▄ ",
+                "▀██","▄","▀",              // "▀██▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] MoveRight2 = new string[]
+            {
+                 "▄▄███▄ ",                 //"▄▄███▄ ",
+                 "▀██","▄","▀",             // "▀██▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] MoveLeft1 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                 "▀","▄","██▀",             // "▀▄██▀", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] MoveLeft2 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                  "▀","▄","██▀",            // "▀▄██▀",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] MoveUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            #endregion
+
+            //TODO Create Female Version
+
+            //1 = Move Left
+            //2 = Move Right
+            //3 = Move Up RF
+            //4 = Move Up LF
+            //5 = Move Down RF
+            //6 = Move Down LF
+            if (direction == 1 && player.Gender == '♂')
+            {
+                #region MOVING LEFT
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft1[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveLeft1[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveLeft1[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft1[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.Write(MoveLeft1[4]);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(MoveLeft1[5]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveLeft1[6]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE LEFT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveLeft2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveLeft2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(MoveLeft2[4]);
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveLeft2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveLeft2[7]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+            if (direction == 2 && player.Gender == '♂')
+            {
+                #region MOVING RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight1[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight1[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveRight1[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight1[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(MoveRight1[4]);
+                Console.Write(MoveRight1[5]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight1[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveRight1[7]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveRight2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.Write(MoveRight2[4]);
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveRight2[7]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+            if (direction == 3 && player.Gender == '♂')
+            {
+                #region MOVING UP RF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpRF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpRF[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpRF[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpRF[3]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(50);
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[3]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+            if (direction == 4 && player.Gender == '♂')
+            {
+                #region MOVING UP LF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpLF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpLF[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpLF[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpLF[3]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(50);
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[3]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+            if (direction == 5 && player.Gender == '♂')
+            {
+                #region MOVING DOWN RF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownRF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownRF[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownRF[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownRF[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownRF[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownRF[5]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownIdle[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[5]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+            if (direction == 6 && player.Gender == '♂')
+            {
+                #region MOVING DOWN LF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownLF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownLF[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownLF[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownLF[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownLF[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownLF[5]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownIdle[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[5]);
+
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+        }
+
         public static void RegionNoEncounter(string[] Map, Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
@@ -141,7 +614,7 @@ namespace MainClasses
             {
                 Console.SetBufferSize(2000, 2000);
                 GameMap(Map, currentPosX, currentPosY, gbText, gbBackground);
-                PlayerMovement(gbText, gbBackground);
+                PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -193,7 +666,7 @@ namespace MainClasses
             } while (reloadTestMap);
         }
 
-        public static void RegionEncounter(string[] Map, Player player, Monster[] monsters, int currentPosX, int currentPosY, int lvLow, int lvHigh, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        public static void RegionEncounter(string[] Map, Player player, Monster[] monsters, int direction, int currentPosX, int currentPosY, int lvLow, int lvHigh, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
             Random rand = new Random();
@@ -203,7 +676,7 @@ namespace MainClasses
                 int encounterChance = rand.Next(0, 100);
                 Console.SetBufferSize(2000, 2000);
                 GameMap(Map, currentPosX, currentPosY, gbText, gbBackground);
-                PlayerMovement(gbText, gbBackground);
+                PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -222,7 +695,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -243,7 +716,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -264,7 +737,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -285,7 +758,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -1274,7 +1747,7 @@ namespace MainClasses
 
             if (monster.Exp == monster.MaxExp)
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("====================");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1282,7 +1755,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.95 * monster.MaxExp) && monster.Exp > (.9 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=================== ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1290,7 +1763,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.9 * monster.MaxExp) && monster.Exp > (.85 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("==================  ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1298,7 +1771,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.85 * monster.MaxExp) && monster.Exp > (.8 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=================   ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1306,7 +1779,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.8 * monster.MaxExp) && monster.Exp > (.75 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("================    ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1314,7 +1787,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.75 * monster.MaxExp) && monster.Exp > (.7 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("===============     ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1322,7 +1795,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.7 * monster.MaxExp) && monster.Exp > (.65 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("==============      ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1330,7 +1803,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.65 * monster.MaxExp) && monster.Exp > (.6 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=============       ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1338,7 +1811,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.6 * monster.MaxExp) && monster.Exp > (.55 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("============        ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1346,7 +1819,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.55 * monster.MaxExp) && monster.Exp > (.5 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("===========         ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1354,7 +1827,7 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.5 * monster.MaxExp) && monster.Exp > (.45 * monster.MaxExp))
             {
-                Console.Write("HP:[");
+                Console.Write("EXP[");
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("==========          ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1362,79 +1835,79 @@ namespace MainClasses
             }
             else if (monster.Exp <= (.45 * monster.MaxExp) && monster.Exp > (.4 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=========           ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.4 * monster.MaxExp) && monster.Exp > (.35 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("========            ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.35 * monster.MaxExp) && monster.Exp > (.3 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=======             ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.3 * monster.MaxExp) && monster.Exp > (.25 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("======              ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.25 * monster.MaxExp) && monster.Exp > (.2 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=====               ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.2 * monster.MaxExp) && monster.Exp > (.15 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("====                ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.15 * monster.MaxExp) && monster.Exp > (.1 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("===                 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.1 * monster.MaxExp) && monster.Exp > (.05 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("==                  ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= (.05 * monster.MaxExp) && monster.Exp > (0 * monster.MaxExp))
             {
-                Console.Write("HP:[");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("EXP[");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("=                   ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("]");
             }
             else if (monster.Exp <= 0)
             {
-                Console.Write("HP:[                    ]");
+                Console.Write("EXP[                    ]");
             }
             Console.SetCursorPosition(90, 46);
         }
@@ -2467,6 +2940,7 @@ namespace MainClasses
                     break;
             }          
             ANIPlayerSend(player, gbText, gbBackground);
+            Combat.DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
         }
 
         public static void ANIPlayerSwitchSendNPCFaint(Player player, int slot, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -2772,6 +3246,166 @@ namespace MainClasses
             #endregion
         }
 
+        public static void CharacterMerchant(int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            //(42, 10) **Top Left of Player at Center Screen
+            //(4,2) **Top Left of Screen
+            //(87,25) **Bottom Right of Screen
+
+            string[] defaultMale = new string[]
+            {
+                "█",
+                "▀▀▀", //TOP
+                "█",
+
+                "█",
+                "▄█▄", //MIDDLE
+                "█",
+
+                "▀",
+                "█▄█", //BOTTOM
+                "▀"
+            };
+
+            if (posX <= 80 && posX >= 4 && posY <= 21 && posY >= 2)
+            {
+                #region IF ON SCREEN                
+                Console.SetCursorPosition(posX + 1, posY);
+                Console.BackgroundColor = gbBackground;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(defaultMale[0]);
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(defaultMale[1]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[2]);
+
+                Console.SetCursorPosition(posX + 1, posY + 1);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(defaultMale[3]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(defaultMale[4]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(defaultMale[5]);
+
+                Console.SetCursorPosition(posX + 1, posY + 2);
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[6]);
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(defaultMale[7]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[8]);
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+
+            #region IF BORDER RIGHT
+            //Console.BackgroundColor = gbBackground;
+            //Console.SetCursorPosition(posX, posY);
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.Write(defaultMale[0]);
+
+            //Console.SetCursorPosition(posX + 1, posY + 1);
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.Write(defaultMale[1]);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.Write(defaultMale[2]);
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[3]);
+
+            //Console.SetCursorPosition(posX + 1, posY + 2);
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[4]);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.Write(defaultMale[5]);
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[6]);
+
+            //Console.SetCursorPosition(posX + 2, posY + 3);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.ForegroundColor = ConsoleColor.DarkBlue;
+            //Console.Write(defaultMale[7]);
+            //Console.SetCursorPosition(90, 46);
+            #endregion
+        }
+
+        public static void CharacterPokeCenter(int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            //(42, 10) **Top Left of Player at Center Screen
+            //(4,2) **Top Left of Screen
+            //(87,25) **Bottom Right of Screen
+
+            string[] defaultMale = new string[]
+            {
+                "▄███▄",
+                "▀",
+                "▄█▄",
+                "▀",
+                "▀",
+                "█▄█",
+                "▀"
+            };
+
+            if (posX <= 80 && posX >= 4 && posY <= 21 && posY >= 2)
+            {
+                #region IF ON SCREEN
+                Console.BackgroundColor = gbBackground;
+                Console.SetCursorPosition(posX + 1, posY);
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write(defaultMale[0]);
+
+                Console.SetCursorPosition(posX + 1, posY + 1);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(defaultMale[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(defaultMale[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[3]);
+
+                Console.SetCursorPosition(posX + 1, posY + 2);
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[4]);
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write(defaultMale[5]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(defaultMale[6]);
+                Console.SetCursorPosition(90, 46);
+                #endregion
+            }
+
+            #region IF BORDER RIGHT
+            //Console.BackgroundColor = gbBackground;
+            //Console.SetCursorPosition(posX, posY);
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.Write(defaultMale[0]);
+
+            //Console.SetCursorPosition(posX + 1, posY + 1);
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.Write(defaultMale[1]);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.Write(defaultMale[2]);
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[3]);
+
+            //Console.SetCursorPosition(posX + 1, posY + 2);
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[4]);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.Write(defaultMale[5]);
+            //Console.BackgroundColor = gbBackground;
+            //Console.Write(defaultMale[6]);
+
+            //Console.SetCursorPosition(posX + 2, posY + 3);
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.ForegroundColor = ConsoleColor.DarkBlue;
+            //Console.Write(defaultMale[7]);
+            //Console.SetCursorPosition(90, 46);
+            #endregion
+        }
         #endregion
 
         #region ASCII: String[] Templates
@@ -2974,7 +3608,7 @@ namespace MainClasses
 @"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                      █  ▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄  █                                   █       ▄▄▄▄▄▄▄▄▄       █                                      ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
 @"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                           █ █▀▄▄▄▄▄▄▄▀█   |SALE|  █                                   █      █▀▄▄▄▄▄▄▄▀█      █                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
 @"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                          █ █ █     █ █   ▀▀▀▀▀▀  █                                   █      █ █     █ █      █                                          ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
-@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                          ▀█ █   ▀ █ █▄▄▄▄▄▄▄▄▄▄▄▀                                    ▀▄▄▄▄▄█ █   ▀ █ █▄▄▄▄▄▄▀                                         ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
+@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                          ▀█ █   ▀ █ █▄▄▄▄▄▄▄▄▄▄▄▀                                    ▀▄▄▄▄▄█ █   ▀ █ █▄▄▄▄▄▀                                          ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
 @" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                          ▀█▄▄▄▄▄█▀                                                        ▀█▄▄▄▄▄█▀                                               ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
 @"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                 ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
 @"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                                                                                                                                                 ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",

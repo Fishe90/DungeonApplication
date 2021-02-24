@@ -18,7 +18,7 @@ namespace MainClasses
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(Map, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -70,7 +70,7 @@ namespace MainClasses
             } while (reloadTestMap);
         }
 
-        public static void RegionEncounter(string[] Map, Player player, Monster[] monsters, int currentPosX, int currentPosY, int lvLow, int lvHigh, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        public static void RegionEncounter(string[] Map, Player player, Monster[] monsters, int direction, int currentPosX, int currentPosY, int lvLow, int lvHigh, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
             Random rand = new Random();
@@ -80,7 +80,7 @@ namespace MainClasses
                 int encounterChance = rand.Next(0, 100);
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(Map, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -99,7 +99,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            ASCII.BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -120,7 +120,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            ASCII.BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -141,7 +141,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            ASCII.BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -162,7 +162,7 @@ namespace MainClasses
                         else
                         {
                             SFX.RivalBattle();
-                            ASCII.BattleIntroFLASH(player, currentPosX, currentPosY, Map);
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
                             SFX.Route1();
                             reloadTestMap = true;
@@ -189,20 +189,38 @@ namespace MainClasses
             bool reloadTestMap = false;
             int posX = 180;
             int posY = 34;
-            int chooseNum = 0;
-            //(167,56) **Player Position
+            int direction = 6;
+            //(167,56) **Player Position            
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
                 ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);                
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);                
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
                         posY -= 4;
                         //Rival House
@@ -211,6 +229,7 @@ namespace MainClasses
                             DEMORivalHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
                             currentPosY += 2;
                             posY += 4;
+                            direction = 6;
                         }
                         //PokeMart
                         if (currentPosX == 107 && currentPosY == 34)
@@ -218,6 +237,7 @@ namespace MainClasses
                             DEMOPokeMart(player, 15, 17, navPlayerMenu, gbText, gbBackground);
                             currentPosY += 2;
                             posY += 4;
+                            direction = 6;
                         }
                         //PokeCenter
                         if (currentPosX == 172 && currentPosY == 34)
@@ -225,6 +245,7 @@ namespace MainClasses
                             DEMOPokeCenter(player, 30, 17, navPlayerMenu, gbText, gbBackground);
                             currentPosY += 2;
                             posY += 4;
+                            direction = 6;
                         }
                         //Player's House
                         if (currentPosX == 167 && currentPosY == 54)
@@ -232,16 +253,27 @@ namespace MainClasses
                             DEMOPlayerHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
                             currentPosY += 2;
                             posY += 4;
+                            direction = 6;
                         }
                         //Border Top
                         if (currentPosY < 16)
                         {
                             currentPosY += 2;
+                            direction = 6;
                         }
                         reloadTestMap = true;
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
                         posY += 4;
                         //Border Bottom
@@ -253,6 +285,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
                         posX -= 10;
                         //Border Left
@@ -264,6 +297,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
                         posX += 10;
                         //Border Right
@@ -274,7 +308,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.M:
-                        Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);                        
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.Enter:
@@ -283,7 +317,6 @@ namespace MainClasses
                         if (currentPosX == 117 && currentPosY == 68)
                         {
                             //Player_Menus.YesOrNo(battle, chooseNum, navPlayerMenu, gbText, gbBackground);
-                            chooseNum = 0;
                             bool reloadBattleFAINT = false;
                             int menuPosY = 22;
 
@@ -304,10 +337,10 @@ namespace MainClasses
                                     case ConsoleKey.W:
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
-                                        posY -= 1;
-                                        if (posY < 22)
+                                        menuPosY -= 1;
+                                        if (menuPosY < 22)
                                         {
-                                            posY += 1;
+                                            menuPosY += 1;
                                         }
                                         reloadBattleFAINT = true;
                                         break;
@@ -315,10 +348,10 @@ namespace MainClasses
                                     case ConsoleKey.S:
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
-                                        posY += 1;
-                                        if (posY > 23)
+                                        menuPosY += 1;
+                                        if (menuPosY > 23)
                                         {
-                                            posY -= 1;
+                                            menuPosY -= 1;
                                         }
                                         reloadBattleFAINT = true;
                                         break;
@@ -326,8 +359,8 @@ namespace MainClasses
                                     case ConsoleKey.K:
                                         if (menuPosY == 22)
                                         {
-                                            SFX.RivalBattle();
-                                            ASCII.BattleIntroFLASH(player, currentPosX, currentPosY, ASCII.DEMOMap);
+                                            SFX.LeagueBattle();
+                                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
                                             SFX.Route1();
                                             //ASCII.FullBattleWild(player, Monster.starters, 5, 10, gbText, gbBackground, navPlayerMenu);
@@ -363,18 +396,37 @@ namespace MainClasses
         public static void DEMOPlayerHouse(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int direction = 4;
             //(30,17)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(ASCII.playerHouse, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;                        
                         if (currentPosY < 3)
                         {
@@ -384,6 +436,15 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
                         if (currentPosX == 30 && currentPosY > 17)
                         {
@@ -398,21 +459,24 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
                         if (currentPosX == 45 && currentPosY == 3)
                         {
                             DEMOPlayerRoom(player, 45, 3, navPlayerMenu, gbText, gbBackground);
                             currentPosX += 5;
+                            direction = 2;
                             reloadTestMap = true;
                         }
                         if (currentPosX < 5)
                         {
                             currentPosX += 5;
-                        }
-                        reloadTestMap = true;
+                            reloadTestMap = true;
+                        }                        
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
                         if (currentPosX > 55)
                         {
@@ -434,18 +498,37 @@ namespace MainClasses
         public static void DEMOPlayerRoom(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int direction = 1;
             //(45,3)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(ASCII.playerRoom, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
                         if (currentPosY < 3)
                         {
@@ -455,6 +538,15 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
                         if (currentPosY > 13)
                         {
@@ -464,6 +556,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
                         if (currentPosX < 5)
                         {
@@ -473,6 +566,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
                         if (currentPosX == 50 && currentPosY == 3)
                         {
@@ -500,18 +594,37 @@ namespace MainClasses
         public static void DEMORivalHouse(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int direction = 4;
             //(30,17)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(ASCII.rivalHouse, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
                         if (currentPosY < 3)
                         {
@@ -521,6 +634,15 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
                         if (currentPosX == 30 && currentPosY > 17)
                         {
@@ -535,6 +657,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
                         if (currentPosX < 5)
                         {
@@ -544,11 +667,13 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
                         if (currentPosX == 15 && currentPosY == 3)
                         {
                             DEMORivalRoom(player, 15, 3, navPlayerMenu, gbText, gbBackground);
                             currentPosX -= 5;
+                            direction = 1;
                             reloadTestMap = true;
                         }
                         if (currentPosX > 55)
@@ -571,18 +696,37 @@ namespace MainClasses
         public static void DEMORivalRoom(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int direction = 2;
             //(15,3)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 ASCII.GameMap(ASCII.rivalRoom, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
                         if (currentPosY < 3)
                         {
@@ -592,6 +736,15 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
                         if (currentPosY > 13)
                         {
@@ -601,6 +754,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
                         if (currentPosX == 10 && currentPosY == 3)
                         {
@@ -615,6 +769,7 @@ namespace MainClasses
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
                         if (currentPosX > 55)
                         {
@@ -637,55 +792,97 @@ namespace MainClasses
         public static void DEMOPokeCenter(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int posX = -12;
+            int posY = 21;
+            int direction = 5;
             //(30,17)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 //switch back to playerHouse
                 ASCII.GameMap(ASCII.pokeCenter, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.CharacterPokeCenter((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
+                        posY -= 4;
                         if (currentPosY < 3)
                         {
                             currentPosY += 2;
+                            posY += 4;
                         }
                         reloadTestMap = true;
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
+                        posY += 4;
                         if (currentPosX == 30 && currentPosY > 17)
                         {
                             currentPosY -= 2;
+                            posY -= 4;
                             reloadTestMap = false;
                         }
                         if (currentPosY > 17)
                         {
                             currentPosY -= 2;
+                            posY -= 4;
                             reloadTestMap = true;
                         }
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
+                        posX -= 10;
                         if (currentPosX < 5)
                         {
                             currentPosX += 5;
+                            posX += 10;
                         }
                         reloadTestMap = true;
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
+                        posX += 10;
                         if (currentPosX > 55)
                         {
                             currentPosX -= 5;
+                            posX -= 10;
                         }
                         reloadTestMap = true;
                         break;
@@ -703,55 +900,97 @@ namespace MainClasses
         public static void DEMOPokeMart(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
+            int posX = -27;
+            int posY = 21;
+            int direction = 5;
             //(15,17)
             do
             {
                 Console.SetBufferSize(2000, 2000);
                 //switch back to playerHouse
                 ASCII.GameMap(ASCII.pokeMart, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(gbText, gbBackground);
+                ASCII.CharacterMerchant((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+                //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
                     case ConsoleKey.UpArrow:
+                        direction += 1;
+                        if (direction < 3)
+                        {
+                            direction = 3;
+                        }
+                        if (direction == 5)
+                        {
+                            direction -= 2;
+                        }
+                        if (direction == 6)
+                        {
+                            direction -= 3;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 4;
+                        }
                         currentPosY -= 2;
+                        posY -= 4;
                         if (currentPosY < 3)
                         {
                             currentPosY += 2;
+                            posY += 4;
                         }
                         reloadTestMap = true;
                         break;
 
                     case ConsoleKey.DownArrow:
+                        direction += 1;
+                        if (direction < 5)
+                        {
+                            direction = 5;
+                        }
+                        if (direction == 7)
+                        {
+                            direction -= 2;
+                        }
                         currentPosY += 2;
+                        posY += 4;
                         if (currentPosX == 15 && currentPosY > 17)
                         {
                             currentPosY -= 2;
+                            posY -= 4;
                             reloadTestMap = false;
                         }
                         if (currentPosY > 17)
                         {
                             currentPosY -= 2;
+                            posY -= 4;
                             reloadTestMap = true;
                         }
                         break;
 
                     case ConsoleKey.LeftArrow:
+                        direction = 1;
                         currentPosX -= 5;
+                        posX -= 10;
                         if (currentPosX < 5)
                         {
                             currentPosX += 5;
+                            posX += 10;
                         }
                         reloadTestMap = true;
                         break;
 
                     case ConsoleKey.RightArrow:
+                        direction = 2;
                         currentPosX += 5;
+                        posX += 10;
                         if (currentPosX > 55)
                         {
                             currentPosX -= 5;
+                            posX -= 10;
                         }
                         reloadTestMap = true;
                         break;
@@ -765,7 +1004,6 @@ namespace MainClasses
                 }
             } while (reloadTestMap);
         }
-
 
         #endregion
     }
