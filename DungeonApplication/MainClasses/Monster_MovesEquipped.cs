@@ -23,11 +23,20 @@ namespace MainClasses
             Move4 = move4;
         }
 
-        public static Monster_MovesEquipped playerStarter = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.waterWaterGun, Monster_Moves.electricThundershock, Monster_Moves.psychicConfusion);
+        #region Starter Movesets
+        public static Monster_MovesEquipped fireStarter = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped waterStarter = new Monster_MovesEquipped(Monster_Moves.waterWaterGun, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped electricStarter = new Monster_MovesEquipped(Monster_Moves.electricThundershock, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        public static Monster_MovesEquipped psychicStarter = new Monster_MovesEquipped(Monster_Moves.psychicConfusion, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        #endregion
+
+        #region Wild Monster Movesets
         public static Monster_MovesEquipped fireLow = new Monster_MovesEquipped(Monster_Moves.fireEmber, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped waterLow = new Monster_MovesEquipped(Monster_Moves.waterWaterGun, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped electricLow = new Monster_MovesEquipped(Monster_Moves.electricThundershock, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped groundLow = new Monster_MovesEquipped(Monster_Moves.groundMudshot, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
         public static Monster_MovesEquipped psychicLow = new Monster_MovesEquipped(Monster_Moves.psychicConfusion, Monster_Moves.Empty, Monster_Moves.Empty, Monster_Moves.Empty);
+        #endregion
+
     }
 }

@@ -141,6 +141,14 @@ namespace MainClasses
 
         #region Game Music
 
+        public static void IntroTheme()
+        {
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\GameMusic_SFX\IntroTheme.wav";
+            select.PlayLooping();
+        }
+
         public static void OpeningTitle()
         {
             SoundPlayer select = new SoundPlayer();

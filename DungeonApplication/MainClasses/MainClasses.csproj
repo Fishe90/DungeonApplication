@@ -73,6 +73,7 @@
     <Content Include="SFX\Battle_SFX\RunAway%28NEW%29.wav" />
     <Content Include="SFX\Battle_SFX\ThrowBall.wav" />
     <Content Include="SFX\GameMusic_SFX\GameOpeningTitle.wav" />
+    <Content Include="SFX\GameMusic_SFX\IntroTheme.wav" />
     <Content Include="SFX\GameMusic_SFX\POKeMONTheme.wav" />
     <Content Include="SFX\Menu_SFX\OpenMenu%28NEW%29.wav" />
     <Content Include="SFX\Menu_SFX\OpenMenu_01.wav" />

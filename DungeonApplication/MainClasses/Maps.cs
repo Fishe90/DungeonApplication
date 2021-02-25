@@ -359,7 +359,7 @@ namespace MainClasses
                                     case ConsoleKey.K:
                                         if (menuPosY == 22)
                                         {
-                                            SFX.LeagueBattle();
+                                            SFX.Battle();
                                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
                                             SFX.Route1();

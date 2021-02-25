@@ -9,6 +9,7 @@ namespace MainClasses
     public enum Monster_Race
     {
         NONE,
+        Normal,
         Fire,
         Water,
         Electric,

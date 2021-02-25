@@ -10,6 +10,466 @@ namespace MainClasses
     {
         /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
 
+        //TODO Create Move Conversion Method() that rewrites the selected move into the desired slot just like how the CatchSort Functionality works
+        //TODO Be able to utilize the conversion method() when a monster is caught to prevent rewriting the original move structured code.
+       
+        #region METHODS: Game Versions
+
+        public static void DEMOVersion(ConsoleKey navPlayerMenu, int currentPosX, int currentPosY)
+        {            
+            bool reloadMainScreen = false;
+            bool reloadColorFormat = false;
+
+            ConsoleColor GBColor = new ConsoleColor();
+            ConsoleColor GBText = new ConsoleColor();
+            ConsoleColor GBBackground = new ConsoleColor();
+
+            #region Player Starting Stats
+
+            Player player = new Player();
+            player.Party = new Player_Party();
+            player.Inventory = new Player_Inventory();
+            player.Party.MonsterEquipped = new Monster();
+            player.Party.Slot2 = Monster.default2;
+            player.Party.Slot3 = Monster.default3;
+            player.Party.Slot4 = Monster.default4;
+            player.Party.Slot5 = Monster.default5;
+            player.Party.Slot6 = Monster.default6;
+            player.Party.MonsterSwitch = Monster.monsterSwitch;
+            player.Money = 0;
+
+            #endregion
+
+            #region Starting Rival Stats
+
+            Player rival = new Player();
+            rival.Party = new Player_Party();
+            rival.Party.MonsterEquipped = new Monster();
+            rival.Party.MonsterEquipped.Type = Monster_Race.NONE;
+            rival.Party.Slot2 = new Monster();
+            rival.Party.Slot2.Type = Monster_Race.NONE;
+            rival.Party.Slot2.Health = 0;
+            rival.Party.Slot3 = new Monster();
+            rival.Party.Slot3.Type = Monster_Race.NONE;
+            rival.Party.Slot3.Health = 0;
+            rival.Party.Slot4 = new Monster();
+            rival.Party.Slot4.Type = Monster_Race.NONE;
+            rival.Party.Slot4.Health = 0;
+            rival.Party.Slot5 = new Monster();
+            rival.Party.Slot5.Type = Monster_Race.NONE;
+            rival.Party.Slot5.Health = 0;
+            rival.Party.Slot6 = new Monster();
+            rival.Party.Slot6.Type = Monster_Race.NONE;
+            rival.Party.Slot6.Health = 0;
+            rival.Party.MonsterSwitch = new Monster();
+            rival.Party.MonsterSwitch.Type = Monster_Race.NONE;
+            rival.ASCIIDefender = npcDefender;
+            rival.ASCIIProfile = npcProfile;
+
+            #endregion                        
+
+            //****Choose Console Color
+            do
+            {
+                GameBoy(ConsoleColor.DarkGray);
+                ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                Console.SetCursorPosition(4, 3);
+                Console.WriteLine("                       - Choose Your Game Console Color -");
+                Console.SetCursorPosition(4, 5);
+                Console.WriteLine("     [R]ED     [B]LUE     [Y]ELLOW     [G]REEN     [L]IGHT-BLUE     [P]URPLE");
+                Console.SetCursorPosition(90, 46);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.R:
+                        GBColor = ConsoleColor.DarkRed;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.WriteLine("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.B:
+                        GBColor = ConsoleColor.DarkBlue;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.WriteLine("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.Y:
+                        GBColor = ConsoleColor.DarkYellow;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.WriteLine("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.G:
+                        GBColor = ConsoleColor.DarkGreen;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.Write("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.Write("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.L:
+                        GBColor = ConsoleColor.DarkCyan;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.Write("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.Write("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.P:
+                        GBColor = ConsoleColor.DarkMagenta;
+                        GameBoy(GBColor);
+                        ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                        Console.SetCursorPosition(32, 15);
+                        Console.Write("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.Write("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadMainScreen = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadMainScreen = true;
+                                break;
+                            default:
+                                reloadMainScreen = true;
+                                break;
+                        }
+                        break;
+                    default:
+                        reloadMainScreen = true;
+                        break;
+                }
+            } while (reloadMainScreen);
+
+            //****Choose Game Screen Format
+            do
+            {
+                GameBoy(GBColor);
+                ResetScreen(ConsoleColor.White, ConsoleColor.Black);
+                Console.SetCursorPosition(4, 3);
+                Console.WriteLine("                       - Choose Your Game Color Format -");
+                Console.SetCursorPosition(4, 5);
+                Console.WriteLine("                  [L]IGHT MODE                        [D]ARK MODE             ");
+                Console.SetCursorPosition(90, 46);
+                navPlayerMenu = Console.ReadKey().Key;
+
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.L:
+                        GBText = ConsoleColor.Black;
+                        GBBackground = ConsoleColor.White;
+                        GameMap(DEMOMap, currentPosX, currentPosY, GBText, GBBackground);
+                        Console.SetCursorPosition(32, 15);
+                        Console.WriteLine("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadColorFormat = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadColorFormat = true;
+                                break;
+                            default:
+                                reloadColorFormat = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.D:
+                        GBText = ConsoleColor.White;
+                        GBBackground = ConsoleColor.Black;
+                        GameMap(DEMOMap, currentPosX, currentPosY, GBText, GBBackground);
+                        Console.SetCursorPosition(32, 15);
+                        Console.WriteLine("     CONFIRM CHOICE?");
+                        Console.SetCursorPosition(32, 17);
+                        Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
+                        Console.SetCursorPosition(90, 46);
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.Enter:
+                                reloadColorFormat = false;
+                                break;
+                            case ConsoleKey.Backspace:
+                                reloadColorFormat = true;
+                                break;
+                            default:
+                                reloadColorFormat = true;
+                                break;
+                        }
+                        break;
+                    default:
+                        reloadColorFormat = true;
+                        break;
+                }
+            } while (reloadColorFormat);
+
+            SFX.IntroTheme();
+
+            #region ANIMATES TITLE INTRO
+            ResetScreen(GBText, GBBackground);
+            System.Threading.Thread.Sleep(4500);
+            int startLine = 2;
+            foreach (string line in Title)
+            {
+                Console.SetCursorPosition(6, startLine + 1);
+                Console.Write(line);
+                Console.SetCursorPosition(90, 46);
+                startLine += 1;
+            }
+            
+            System.Threading.Thread.Sleep(2000);
+            startLine = Title.Length;
+
+            foreach (string line in Title)
+            {
+                Console.SetCursorPosition(6, startLine + 2);
+                Console.Write("                                                                               ");
+                Console.SetCursorPosition(90, 46);
+                startLine -= 1;
+                System.Threading.Thread.Sleep(100);
+            }
+            #endregion
+
+            #region INPUT INFO
+
+            string message1 = "Welcome to the world of Pokefraud! My name is SALIX!";
+            string message2 = "But most people call me the Pokefraud Prof!";
+            string message3 = "This world is inhabited by magical creatures called Pokefraud!";
+            string message4 = "For some people, Pokefraud are pets. Others use them for fights.";
+            string message5 = "Myself...I study Pokefraud as a profession.";
+            string message6 = "First, what is your name? ";            
+            StaticMessageBox(GBText, GBBackground);
+            System.Threading.Thread.Sleep(1000);
+            int proY = 8;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            ScrollMessage(message1, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message2, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message3, 50, 1500, GBText, GBBackground);
+            PokeBallANI(31, 10, 25, GBBackground);
+            PokeBallANI(30, 11, 25, GBBackground);
+            PokeBallANI(29, 12, 25, GBBackground);
+            PokeBallANI(29, 13, 25, GBBackground);
+            PokeBallANI(29, 14, 25, GBBackground);
+            PokeBallANI(29, 13, 25, GBBackground);
+            PokeBallANI(29, 14, 2000, GBBackground);
+            BallBreak(21, 13, 50, GBBackground);
+            int pokY = 10;
+            foreach (string line in neoPokedex)
+            {
+                Console.SetCursorPosition(20, pokY);
+                Console.Write(line);
+                pokY += 1;
+            }
+            ScrollMessage(message4, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message5, 50, 1500, GBText, GBBackground);
+            ResetHalfScreen(8, GBText, GBBackground);
+            proY = 8;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            ScrollMessage(message6, 50, 1500, GBText, GBBackground);
+            string playerName = Console.ReadLine().ToUpper();
+            player.Name = playerName;
+            string message7 = $"SALIX: Right! So your name is {player.Name.ToUpper()}!";
+            ScrollMessage(message7, 50, 1500, GBText, GBBackground);
+            string message8 = "SALIX: And are you a boy or a girl?";
+            ScrollMessage(message8, 50, 1500, GBText, GBBackground);
+
+            bool reloadGender = false;
+            int posY = 22;
+            int chooseNum = 0;
+
+            Console.SetCursorPosition(65, 22);
+            Console.Write("BOY");
+            Console.SetCursorPosition(65, 23);
+            Console.Write("GIRL");
+            do
+            {
+                Console.SetCursorPosition(61, posY);
+                Console.Write("-->");
+                Console.SetCursorPosition(90, 46);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(61, posY);
+                        Console.Write("   ");
+                        posY -= 1;
+                        if (posY < 22)
+                        {
+                            posY += 1;
+                        }
+                        reloadGender = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(61, posY);
+                        Console.Write("   ");
+                        posY += 1;
+                        if (posY > 23)
+                        {
+                            posY -= 1;
+                        }
+                        reloadGender = true;
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        if (posY == 22)
+                        {
+                            player.Gender = '♂';
+                            string boy = "SALIX: Ah yes! So you're a boy!";
+                            ScrollMessage(boy, 50, 1500, GBText, GBBackground);
+                            chooseNum += 1;
+                            reloadGender = false;
+                        }
+                        else if (posY == 23)
+                        {
+                            player.Gender = '♀';
+                            string girl = "SALIX: Ah yes! So you're a girl!";
+                            ScrollMessage(girl, 50, 1500, GBText, GBBackground);
+                            chooseNum += 2;
+                            reloadGender = false;
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadGender = false;
+                        break;
+                    default:
+                        reloadGender = true;
+                        break;
+                }
+            } while (reloadGender);
+
+            string message9 = "SALIX: This is my grandson. He's been your rival since you were a baby.";
+            string message10 = "SALIX: ..Erm, what is his name again? ";
+            proY = 8;
+            foreach (string line in Rival)
+            {
+                Console.SetCursorPosition(25, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            ScrollMessage(message9, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message10, 50, 1500, GBText, GBBackground);
+            string rivalName = Console.ReadLine().ToUpper();
+            rival.Name = rivalName;
+            string message11 = $"SALIX: That's right! I remember now! His name is {rival.Name.ToUpper()}!";
+            ScrollMessage(message11, 50, 1500, GBText, GBBackground);
+            string message12 = "SALIX: Your very own Pokefraud legend is about to unfold!";
+            string message13 = "SALIX: A world of dreams and adventures with Pokefraud awaits! Let's go!";
+            ScrollMessage(message12, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message13, 50, 1500, GBText, GBBackground);
+
+            #endregion
+
+            InstantMessage("Press any key to continue..", GBText, GBBackground);
+                
+            navPlayerMenu = Console.ReadKey().Key;
+
+            SFX.Route1();
+            Maps.DEMOMap(player, rival, currentPosX, currentPosY, navPlayerMenu, GBText, GBBackground);
+        }
+
+        #endregion
+
         #region METHODS: Screen Control
 
         public static void BattleIntroFLASH(Player player, int direction, int currentPosX, int currentPosY, string[] Map)
@@ -778,6 +1238,7 @@ namespace MainClasses
 
         public static void GameBoy(ConsoleColor GBColor)
         {
+            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Black;
             Console.BackgroundColor = GBColor;
             Console.Write(TEMGameBoy);
@@ -871,6 +1332,7 @@ namespace MainClasses
         {
             string[] screen = new string[]
             {
+                "                                                                                   ",
                 "                                                                                   ",
                 "                                                                                   ",
                 "                                                                                   ",
@@ -3409,6 +3871,64 @@ namespace MainClasses
         #endregion
 
         #region ASCII: String[] Templates
+
+        #region Characters
+
+        public static string[] Professor = new string[]
+        {
+            "   ▄▄████▄▄   ",
+            "  ██████████  ",
+            " █▀ ▀▀█████▀█ ",
+            " ▀▄  ▄  ▄  ▄▀  ",
+            "  ▄▀▄▀  ▀▄▀▄  ",
+            "▄▀ ▄ ▀▀▀▀ ▄ ▀▄",
+            "▀▄▄▀▄▄▄▄▄▄▀▄▄▀",
+            "  █   ▄▄   █  ",
+            "  ▀▄▄▄▀▀▄▄▄▀  "
+        };
+
+        public static string[] Rival = new string[]
+{
+            "  ▀████████▄  ",
+            "▀████████████ ",
+            "▀█▀ =_  _= ▀█ ",
+            " ▀▄  ▄  ▄  ▄▀ ",
+            "  ▄▀▄▀  ▀▄▀▄  ",
+            "▄▀ ▄ ▀▀▀▀ ▄ ▀▄",
+            "▀▄▄▀▄▄▄▄▄▄▀▄▄▀",
+            "  █   ▄▄   █  ",
+            "  ▀▄▄▄▀▀▄▄▄▀  "
+};
+
+
+        #endregion
+
+        #region Display Art
+
+        public static string[] Title = new string[]
+            {
+                "                                  ▄▀▄                                          ",
+                "    ▄▄▀▀▀▀▄        ▄▄▄▄         ▄▀  ▄█       ▄▄▀▀▀▀▄                           ",
+                "_▄▄▀       ▀▄     █    █  █▀▄  ▀▄▄▀▀     ▄▄▀▀      █                      █▀▀▄▄",
+                "█      ▄▄    █    ▀▄▄  █ █   ▀▄  ▄▄▄    █        ▄▄█                      █   █",
+                " ██    █ █   █  ▄▄  █  ██    ▄▀▄▀▄  ▀▄  █   ▄▄▀▀▀            ▄▄           █   █",
+                "   █    █▀   █▄▀ ▄▀▄█      ▄▀ █ █ █ █   █  █▄▄▀█▀▀▀▄▄   ▄▄▄█▀▄ █ █▀▄▄ ▄▄▄ █   █",
+                "    █     ▄▀▀█  █ █ █    ▄▀  █  ▀█ █ ▄▀▄█   ▄▄▀█  ▄▄ ██▀ ▄▄  █ █ █  █▀   ▀    █",
+                "     █    █ █   ▀▄▀  █    ▀▄  █    ▀▀  ██  █   █  █ ▀█  █  █ █ ▀▄▀  █   ▄▀▀▄  █",
+                "      █    █ █      █       ▀▀▄▀▄▄▄▄▄▄▀ █  █   █▄▄█  █   ▀▀  ▀▄▄▄▄▄▀ █   ▀▀   █",
+                "       █    █ ▀▄▄▄▄▀█  █▀▄▄    ▀▀█      █▄▄█          ▀▄▄▄▄▀▄▀        ▀▀▄▄▄▀▄▄█",
+                "        █▄▄▀▀       █▄▄█   ▀▀▄▄▄ █                                             ",
+                "                                ▀▀                                             ",
+                "                                                                               ",
+                "                 ▄▀▀▀▄   █   █   ▄▀▀▄   █▀▀▄   ▀▀█▀▀   ▀█▀▀▀▀▀                 ",
+                "                 █  ▄█   █   █   █▀▀█   █▀▀▄     █       ▀▄                    ",
+                "                  ▀▀▀ ▀   ▀▀▀    ▀  ▀   ▀  ▀     ▀   ▀▀▀▀▀▀                    ",
+                "                 ▀▀▀▀▀█ █  █▀▀  █▀▄  ▄▀▀  ▀█▀  ▄▀▄  █▄ █▀▀▀▀▀                  ",
+                "                      █ █  █▀   █▀▄  ▀▀█   █   █ █  █ ▀█                       ",
+                "                       ▀   ▀▀▀  ▀ ▀  ▀▀   ▀▀▀   ▀   ▀  ▀                       "
+            };
+
+        #endregion
 
         #region Player Menu
 

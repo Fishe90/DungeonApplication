@@ -36,7 +36,7 @@ namespace MainClasses
             while (currentExp > player.Party.MonsterEquipped.Exp)
             {
                 player.Party.MonsterEquipped.Exp += 1;
-                ASCII.ExpBar(player.Party.MonsterEquipped, 43, 16);
+                ASCII.ExpBar(player.Party.MonsterEquipped, 43, 17);
                 if (player.Party.MonsterEquipped.Exp >= player.Party.MonsterEquipped.MaxExp)
                 {
                     player.Party.MonsterEquipped.Exp = player.Party.MonsterEquipped.MaxExp;
