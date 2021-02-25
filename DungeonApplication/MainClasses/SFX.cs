@@ -165,6 +165,22 @@ namespace MainClasses
             select.PlayLooping();
         }
 
+        public static void PokeCenter()
+        {
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\GameMusic_SFX\PokeCenter.wav";
+            select.PlayLooping();
+        }
+
+        public static void Route2()
+        {
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\GameMusic_SFX\Route2.wav";
+            select.PlayLooping();
+        }
+
         #endregion
 
         #region Menu SFX

@@ -391,7 +391,7 @@ namespace MainClasses
                     }
                     else
                     {
-                        ASCII.BallBreak(56, 8, 50, gbBackground);
+                        ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
                         ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                         ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                         DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
@@ -399,7 +399,7 @@ namespace MainClasses
                 }
                 else
                 {
-                    ASCII.BallBreak(56, 8, 50, gbBackground);
+                    ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
                     ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                     ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                     DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
@@ -407,7 +407,7 @@ namespace MainClasses
             }
             else
             {
-                ASCII.BallBreak(56, 8, 50, gbBackground);
+                ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
                 ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                 ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                 DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);

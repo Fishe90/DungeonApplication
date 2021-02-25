@@ -338,18 +338,22 @@ namespace MainClasses
             ScrollMessage(message1, 50, 1500, GBText, GBBackground);
             ScrollMessage(message2, 50, 1500, GBText, GBBackground);
             ScrollMessage(message3, 50, 1500, GBText, GBBackground);
-            PokeBallANI(31, 10, 25, GBBackground);
-            PokeBallANI(30, 11, 25, GBBackground);
-            PokeBallANI(29, 12, 25, GBBackground);
-            PokeBallANI(29, 13, 25, GBBackground);
-            PokeBallANI(29, 14, 25, GBBackground);
-            PokeBallANI(29, 13, 25, GBBackground);
-            PokeBallANI(29, 14, 2000, GBBackground);
-            BallBreak(21, 13, 50, GBBackground);
+            PokeBallANI(30, 10, 25, GBBackground);
+            PokeBallANI(29, 11, 25, GBBackground);
+            PokeBallANI(28, 12, 25, GBBackground);
+            PokeBallANI(27, 13, 25, GBBackground);
+            PokeBallANI(27, 14, 25, GBBackground);
+            PokeBallANI(27, 13, 25, GBBackground);
+            PokeBallANI(27, 14, 2000, GBBackground);
+            Console.ForegroundColor = GBText;
+            Console.BackgroundColor = GBBackground;
+            BallBreak(26, 13, 50, GBText, GBBackground);
             int pokY = 10;
             foreach (string line in neoPokedex)
             {
-                Console.SetCursorPosition(20, pokY);
+                Console.ForegroundColor = GBText;
+                Console.BackgroundColor = GBBackground;
+                Console.SetCursorPosition(18, pokY);
                 Console.Write(line);
                 pokY += 1;
             }
@@ -363,13 +367,13 @@ namespace MainClasses
                 Console.Write(line);
                 proY += 1;
             }
-            ScrollMessage(message6, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message6, 50, 1, GBText, GBBackground);
             string playerName = Console.ReadLine().ToUpper();
             player.Name = playerName;
             string message7 = $"SALIX: Right! So your name is {player.Name.ToUpper()}!";
             ScrollMessage(message7, 50, 1500, GBText, GBBackground);
             string message8 = "SALIX: And are you a boy or a girl?";
-            ScrollMessage(message8, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message8, 50, 1000, GBText, GBBackground);
 
             bool reloadGender = false;
             int posY = 22;
@@ -437,7 +441,6 @@ namespace MainClasses
                         break;
                 }
             } while (reloadGender);
-
             string message9 = "SALIX: This is my grandson. He's been your rival since you were a baby.";
             string message10 = "SALIX: ..Erm, what is his name again? ";
             proY = 8;
@@ -448,15 +451,965 @@ namespace MainClasses
                 proY += 1;
             }
             ScrollMessage(message9, 50, 1500, GBText, GBBackground);
-            ScrollMessage(message10, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message10, 50, 1, GBText, GBBackground);
             string rivalName = Console.ReadLine().ToUpper();
             rival.Name = rivalName;
             string message11 = $"SALIX: That's right! I remember now! His name is {rival.Name.ToUpper()}!";
             ScrollMessage(message11, 50, 1500, GBText, GBBackground);
-            string message12 = "SALIX: Your very own Pokefraud legend is about to unfold!";
-            string message13 = "SALIX: A world of dreams and adventures with Pokefraud awaits! Let's go!";
+            ResetHalfScreen(8, GBText, GBBackground);
+            proY = 8;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            string message12 = "SALIX: Now...You can't just venture off alone in this world.";
+            string message13 = "SALIX: You first need to choose a Pokefraud companion.";
+            string message14 = "SALIX: Here are 3 excellent starters that bond quickly with their trainers.";
             ScrollMessage(message12, 50, 1500, GBText, GBBackground);
-            ScrollMessage(message13, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message13, 50, 1500, GBText, GBBackground);    
+            
+            #region Animates Professor Movement
+
+            ResetHalfScreen(8, GBText, GBBackground);
+            proY = 7;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            System.Threading.Thread.Sleep(25);
+            ResetHalfScreen(7, GBText, GBBackground);
+            proY = 6;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            System.Threading.Thread.Sleep(25);
+            ResetHalfScreen(6, GBText, GBBackground);
+            proY = 5;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            System.Threading.Thread.Sleep(25);
+            ResetHalfScreen(5, GBText, GBBackground);
+            proY = 4;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            System.Threading.Thread.Sleep(25);
+            ResetHalfScreen(4, GBText, GBBackground);
+            proY = 3;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }                                   
+            System.Threading.Thread.Sleep(25);
+            ResetHalfScreen(3, GBText, GBBackground);
+            proY = 2;
+            foreach (string line in Professor)
+            {
+                Console.SetCursorPosition(40, proY);
+                Console.Write(line);
+                proY += 1;
+            }
+            System.Threading.Thread.Sleep(25);
+
+            #endregion
+
+            #region Animates Starters
+            PokeBallStatic(20, 15, ConsoleColor.Black);
+            PokeBallStatic(43, 15, ConsoleColor.Black);
+            PokeBallStatic(66, 15, ConsoleColor.Black);
+            BallBreak(20, 15, 50, ConsoleColor.White, ConsoleColor.Black);
+            posY = 11;
+            foreach (string line in pyraPokedex)
+            {
+                Console.SetCursorPosition(14, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            BallBreak(43, 15, 50, ConsoleColor.White, ConsoleColor.Black);
+            posY = 11;
+            foreach (string line in douseyPokedex)
+            {
+                Console.SetCursorPosition(37, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            BallBreak(66, 15, 50, ConsoleColor.White, ConsoleColor.Black);
+            posY = 11;
+            foreach (string line in electraPokedex)
+            {
+                Console.SetCursorPosition(60, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            #endregion
+
+            ScrollMessage(message14, 50, 1500, GBText, GBBackground);
+            bool reloadStarters = false;
+            int posX = 15;
+            do
+            {
+                if (posX == 15)
+                {
+                    Console.SetCursorPosition(posX, 19);
+                    Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+                    StaticMessageBox(GBText, GBBackground);
+                    Console.SetCursorPosition(8, 22);
+                    Console.Write("PYRA: The ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("FIRE");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Type Pokefraud.");
+                    Console.SetCursorPosition(8, 23);
+                    Console.Write("This creature can produce blazing flame attacks. (Weakness: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("WATER");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Types)");
+                }
+                if (posX == 38)
+                {
+                    Console.SetCursorPosition(posX, 19);
+                    Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+                    StaticMessageBox(GBText, GBBackground);
+                    Console.SetCursorPosition(8, 22);
+                    Console.Write("DOWSEY: The ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("WATER");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Type Pokefraud.");
+                    Console.SetCursorPosition(8, 23);
+                    Console.Write("Can generate water at will to attack its enemies. (Weakness: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("ELECTRIC");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Types)");
+                }
+                if (posX == 61)
+                {
+                    Console.SetCursorPosition(posX, 19);
+                    Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+                    StaticMessageBox(GBText, GBBackground);
+                    Console.SetCursorPosition(8, 22);
+                    Console.Write("ELECTRA: The ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("ELECTRIC");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Type Pokefraud.");
+                    Console.SetCursorPosition(8, 23);
+                    Console.Write("Produces high voltage attacks. (Weakness: ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("GROUND");
+                    Console.ForegroundColor = GBText;
+                    Console.Write(" Types)");
+                }                
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        Console.SetCursorPosition(posX, 19);
+                        Console.Write("                   ");
+                        posX += 23;
+                        if (posX > 61)
+                        {
+                            posX -= 23;
+                            reloadStarters = true;
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(posX, 19);
+                            Console.Write("                   ");
+                            reloadStarters = true;
+                        }                        
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        Console.SetCursorPosition(posX, 19);
+                        Console.Write("                   ");
+                        posX -= 23;
+                        if (posX < 15)
+                        {
+                            posX += 23;
+                            reloadStarters = true;
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(posX, 19);
+                            Console.Write("                   ");
+                            reloadStarters = true;
+                        }
+                        break;
+
+                    //EASTER EGG
+                    case ConsoleKey.P:
+                        navPlayerMenu = Console.ReadKey().Key;
+                        switch (navPlayerMenu)
+                        {
+                            case ConsoleKey.S:
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.Y:
+                                        navPlayerMenu = Console.ReadKey().Key;
+                                        switch (navPlayerMenu)
+                                        {
+                                            case ConsoleKey.C:
+                                                navPlayerMenu = Console.ReadKey().Key;
+                                                switch (navPlayerMenu)
+                                                {
+                                                    case ConsoleKey.H:
+                                                        navPlayerMenu = Console.ReadKey().Key;
+                                                        switch (navPlayerMenu)
+                                                        {
+                                                            case ConsoleKey.I:
+                                                                navPlayerMenu = Console.ReadKey().Key;
+                                                                switch (navPlayerMenu)
+                                                                {
+                                                                    case ConsoleKey.C:
+                                                                        //ResetHalfScreen(10, GBText, GBBackground);
+                                                                        player.Party.MonsterEquipped = Monster.starterNeo;
+                                                                        rival.Party.MonsterEquipped = Monster.rivalElectra;
+                                                                        rival.Party.Slot2 = Monster.rivalCobblet;
+                                                                        ResetHalfScreen(11, GBText, GBBackground);
+                                                                        string message = "SALIX: Oh no! It looks like all the available Pokefraud were chosen!";
+                                                                        string messageRare1 = "SALIX: But..";
+                                                                        string messageRare2 = "SALIX: We do have a fourth option for you..";
+                                                                        ScrollMessage(message, 50, 1500, GBText, GBBackground);
+                                                                        ScrollMessage(messageRare1, 50, 1500, GBText, GBBackground);
+                                                                        ScrollMessage(messageRare2, 50, 2500, GBText, GBBackground);
+                                                                        PokeBallStatic(43, 15, ConsoleColor.Black);
+                                                                        System.Threading.Thread.Sleep(1000);
+                                                                        BallBreak(43, 15, 50, ConsoleColor.White, ConsoleColor.Black);
+                                                                        posY = 12;
+                                                                        foreach (string line in neoPokedex)
+                                                                        {
+                                                                            Console.SetCursorPosition(37, posY);
+                                                                            Console.Write(line);
+                                                                            posY += 1;
+                                                                        }
+                                                                        string messageRare3 = "SALIX: This is NEO. The ";
+                                                                        StaticMessageBox(GBText, GBBackground);
+                                                                        posX = 8;                                                                        
+                                                                        foreach (char letter in messageRare3)
+                                                                        {
+                                                                            Console.SetCursorPosition(posX, 22);
+                                                                            Console.Write(letter);
+                                                                            posX += 1;
+                                                                            System.Threading.Thread.Sleep(50);
+
+                                                                        }
+                                                                        foreach (char letter in "PSYCHIC")
+                                                                        {
+                                                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                                            Console.SetCursorPosition(posX, 22);
+                                                                            Console.Write(letter);
+                                                                            posX += 1;
+                                                                            System.Threading.Thread.Sleep(50);
+                                                                        }
+                                                                        foreach (char letter in " Pokefraud!")
+                                                                        {
+                                                                            Console.ForegroundColor = GBText;
+                                                                            Console.SetCursorPosition(posX, 22);
+                                                                            Console.Write(letter);
+                                                                            posX += 1;
+                                                                            System.Threading.Thread.Sleep(50);
+                                                                        }
+                                                                        System.Threading.Thread.Sleep(1500);
+                                                                        string messageRare4 = "SALIX: NEO is a powerful Pokefraud with it having very few weaknesses!";
+                                                                        string messageRare5 = "SALIX: But..";
+                                                                        string messageRare6 = "SALIX: NEO tends not to listen to its trainer's commands at times..";
+                                                                        string messageRare7 = "SALIX: Good luck!";
+                                                                        ScrollMessage(messageRare4, 50, 1500, GBText, GBBackground);
+                                                                        ScrollMessage(messageRare5, 50, 1500, GBText, GBBackground);
+                                                                        ScrollMessage(messageRare6, 50, 1500, GBText, GBBackground);
+                                                                        ScrollMessage(messageRare7, 50, 1500, GBText, GBBackground);
+                                                                        reloadStarters = false;
+                                                                        break;
+                                                                    default:
+                                                                        reloadStarters = true;
+                                                                        break;
+                                                                }
+                                                                break;
+                                                            default:
+                                                                reloadStarters = true;
+                                                                break;
+                                                        }
+                                                        break;
+                                                    default:
+                                                        reloadStarters = true;
+                                                        break;
+                                                }
+                                                break;
+                                            default:
+                                                reloadStarters = true;
+                                                break;
+                                        }
+                                        break;
+                                    default:
+                                        reloadStarters = true;
+                                        break;
+                                }
+                                break;
+                            default:
+                                reloadStarters = true;
+                                break;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        StaticMessageBox(GBText, GBBackground);
+                        Console.SetCursorPosition(8, 22);
+                        Console.Write("I see...So you want ");
+                        if (posX == 15)
+                        {
+                            Console.Write("PYRA");
+                            player.Party.MonsterEquipped = Monster.Pyra;
+                            rival.Party.MonsterEquipped = Monster.rivalDousey;
+                        }
+                        if (posX == 38)
+                        {
+                            Console.Write("DOWSEY");
+                            player.Party.MonsterEquipped = Monster.Dousey;
+                            rival.Party.MonsterEquipped = Monster.rivalElectra;
+                        }
+                        if (posX == 61)
+                        {
+                            Console.Write("ELECTRA");
+                            player.Party.MonsterEquipped = Monster.Electra;
+                            rival.Party.MonsterEquipped = Monster.rivalPyra;
+                        }
+                        Console.Write("?");
+                        bool reloadChoose = false;
+                        posY = 22;
+                        chooseNum = 0;
+
+                        Console.SetCursorPosition(65, 22);
+                        Console.Write("YES");
+                        Console.SetCursorPosition(65, 23);
+                        Console.Write("NO");
+                        do
+                        {
+                            Console.SetCursorPosition(61, posY);
+                            Console.Write("-->");
+                            Console.SetCursorPosition(90, 46);
+                            navPlayerMenu = Console.ReadKey().Key;
+                            switch (navPlayerMenu)
+                            {
+                                case ConsoleKey.UpArrow:
+                                case ConsoleKey.W:
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("   ");
+                                    posY -= 1;
+                                    if (posY < 22)
+                                    {
+                                        posY += 1;
+                                    }
+                                    reloadChoose = true;
+                                    break;
+                                case ConsoleKey.DownArrow:
+                                case ConsoleKey.S:
+                                    Console.SetCursorPosition(61, posY);
+                                    Console.Write("   ");
+                                    posY += 1;
+                                    if (posY > 23)
+                                    {
+                                        posY -= 1;
+                                    }
+                                    reloadChoose = true;
+                                    break;
+                                case ConsoleKey.Enter:
+                                case ConsoleKey.K:
+                                    if (posY == 22)
+                                    {
+                                        reloadChoose = false;
+                                        reloadStarters = false;
+                                    }
+                                    else if (posY == 23)
+                                    {
+                                        ScrollMessage("SALIX: Well then..", 50, 1500, GBText, GBBackground);
+                                        ScrollMessage("SALIX: Please choose a Pokefraud.", 50, 2000, GBText, GBBackground);
+                                        reloadChoose = false;
+                                        reloadStarters = true;
+                                    }
+                                    break;
+                                case ConsoleKey.Backspace:
+                                case ConsoleKey.O:
+                                    ScrollMessage("SALIX: Well then..", 50, 1500, GBText, GBBackground);
+                                    ScrollMessage("SALIX: Please choose a Pokefraud.", 50, 2000, GBText, GBBackground);
+                                    reloadChoose = false;
+                                    reloadStarters = true;
+                                    break;
+                                default:
+                                    reloadChoose = true;
+                                    break;
+                            }
+                        } while (reloadChoose);
+                        break;
+                    default:
+                        reloadStarters = true;
+                        break;
+                }                
+            } while (reloadStarters);
+
+            ResetHalfScreen(12, GBText, GBBackground);
+            if (player.Party.MonsterEquipped != Monster.starterNeo)
+            {
+                if (player.Party.MonsterEquipped == Monster.starterPyra)
+                {
+                    //Deletes Dowsey
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(37, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Deletes Electra
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(60, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Redisplays Pyra
+                    posY = 11;
+                    foreach (string line in pyraPokedex)
+                    {
+                        Console.SetCursorPosition(14, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+
+                    #region Animates Professor Movement
+
+                    posY = 2;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 3;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 3;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 4;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 4;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 5;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 5;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 6;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 6;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 7;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 7;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 8;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 8;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 9;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    #endregion
+                }
+                if (player.Party.MonsterEquipped == Monster.starterDousey)
+                {
+                    //Deletes Pyra
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(14, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Deletes Electra
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(60, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Redisplays Dowsey                
+                    posX = 37;
+                    string moveOver = "                   ";
+                    foreach (char number in moveOver)
+                    {
+                        posY = 11;
+                        foreach (string line in douseyPokedex)
+                        {
+                            Console.SetCursorPosition(posX, posY);
+                            Console.Write(line);
+                            posY += 1;
+                        }
+                        System.Threading.Thread.Sleep(50);
+                        posX += 1;
+                    }
+
+                    #region Animates Professor Movement
+
+                    posY = 2;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 3;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 3;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 4;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 4;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 5;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 5;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 6;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 6;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 7;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 7;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 8;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 8;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 9;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    #endregion
+                }
+                if (player.Party.MonsterEquipped == Monster.starterElectra)
+                {
+                    //Deletes Pyra
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(14, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Deletes Dowsey
+                    posY = 11;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(60, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    //Redisplays Electra  
+                    posY = 11;
+                    foreach (string line in electraPokedex)
+                    {
+                        Console.SetCursorPosition(60, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+
+                    #region Animates Professor Movement
+
+                    posY = 2;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 3;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 3;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 4;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 4;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 5;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 5;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 6;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 6;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 7;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 7;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 8;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    posY = 8;
+                    foreach (string line in emptyPokedex)
+                    {
+                        Console.SetCursorPosition(40, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    proY = 9;
+                    foreach (string line in Professor)
+                    {
+                        Console.SetCursorPosition(40, proY);
+                        Console.Write(line);
+                        proY += 1;
+                    }
+                    System.Threading.Thread.Sleep(50);
+                    #endregion
+                }
+                //player.Party.MonsterEquipped.MaxHealth = 25;
+                //player.Party.MonsterEquipped.Health = 25;
+                //player.Party.MonsterEquipped.MaxExp = 50;
+                //player.Party.MonsterEquipped.Gender = '♂';
+                //player.Party.MonsterEquipped.IsCaught = true;
+                //player.Party.MonsterEquipped.Lv = 5;
+
+                string message15 = $"SALIX: A fine choice! {player.Party.MonsterEquipped.Name.ToUpper()} will surely serve you well!";
+                ScrollMessage(message15, 50, 1500, GBText, GBBackground);
+            }
+            else
+            {
+                #region Animates Professor Movement
+
+                posY = 2;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 3;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 3;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 4;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 4;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 5;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 5;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 6;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 6;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 7;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 7;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 8;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                posY = 8;
+                foreach (string line in emptyPokedex)
+                {
+                    Console.SetCursorPosition(40, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                proY = 9;
+                foreach (string line in Professor)
+                {
+                    Console.SetCursorPosition(40, proY);
+                    Console.Write(line);
+                    proY += 1;
+                }
+                System.Threading.Thread.Sleep(50);
+                #endregion
+            }
+            string message16 = "SALIX: Your very own Pokefraud legend is about to unfold!";
+            string message17 = "SALIX: A world of dreams and adventures with Pokefraud awaits! Let's go!";            
+            ScrollMessage(message16, 50, 1500, GBText, GBBackground);
+            ScrollMessage(message17, 50, 1500, GBText, GBBackground);            
 
             #endregion
 
@@ -1706,7 +2659,7 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor gbBackground)
+        public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor gbText)
         {
             string[] frameONE = new string[]
             {
@@ -1776,7 +2729,7 @@ namespace MainClasses
             };
 
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = gbText;
             #region Frame One
 
             Console.SetCursorPosition(positionX, positionY);
@@ -1911,7 +2864,7 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
         }
 
-        public static void BallBreak(int positionX, int positionY, int delay, ConsoleColor gbBackground)
+        public static void BallBreak(int positionX, int positionY, int delay, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             #region Frames
             string[] frameONE = new string[]
@@ -1951,16 +2904,16 @@ namespace MainClasses
 };
             #endregion
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = gbText;
             #region Frame One
 
-            Console.SetCursorPosition(positionX, positionY);
+            Console.SetCursorPosition(positionX - 6, positionY);
             Console.Write(frameONE[0]);
-            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.SetCursorPosition(positionX - 6, positionY + 1);
             Console.Write(frameONE[1]);
-            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.SetCursorPosition(positionX - 6, positionY + 2);
             Console.Write(frameONE[2]);
-            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameONE[3]);
             Console.SetCursorPosition(90, 46);
 
@@ -1968,13 +2921,13 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
             #region Frame Two
 
-            Console.SetCursorPosition(positionX, positionY);
+            Console.SetCursorPosition(positionX - 6, positionY);
             Console.Write(frameTWO[0]);
-            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.SetCursorPosition(positionX - 6, positionY + 1);
             Console.Write(frameTWO[1]);
-            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.SetCursorPosition(positionX - 6, positionY + 2);
             Console.Write(frameTWO[2]);
-            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameTWO[3]);
             Console.SetCursorPosition(90, 46);
 
@@ -1982,13 +2935,13 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
             #region Frame Three
 
-            Console.SetCursorPosition(positionX, positionY);
+            Console.SetCursorPosition(positionX - 6, positionY);
             Console.Write(frameTHREE[0]);
-            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.SetCursorPosition(positionX - 6, positionY + 1);
             Console.Write(frameTHREE[1]);
-            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.SetCursorPosition(positionX - 6, positionY + 2);
             Console.Write(frameTHREE[2]);
-            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameTHREE[3]);
             Console.SetCursorPosition(90, 46);
 
@@ -1996,13 +2949,13 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
             #region Frame Four
 
-            Console.SetCursorPosition(positionX, positionY);
+            Console.SetCursorPosition(positionX - 6, positionY);
             Console.Write(frameFOUR[0]);
-            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.SetCursorPosition(positionX - 6, positionY + 1);
             Console.Write(frameFOUR[1]);
-            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.SetCursorPosition(positionX - 6, positionY + 2);
             Console.Write(frameFOUR[2]);
-            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameFOUR[3]);
             Console.SetCursorPosition(90, 46);
 
@@ -2010,13 +2963,13 @@ namespace MainClasses
             System.Threading.Thread.Sleep(delay);
             #region Frame Four
 
-            Console.SetCursorPosition(positionX, positionY);
+            Console.SetCursorPosition(positionX - 6, positionY);
             Console.Write(frameFIVE[0]);
-            Console.SetCursorPosition(positionX, positionY + 1);
+            Console.SetCursorPosition(positionX - 6, positionY + 1);
             Console.Write(frameFIVE[1]);
-            Console.SetCursorPosition(positionX, positionY + 2);
+            Console.SetCursorPosition(positionX - 6, positionY + 2);
             Console.Write(frameFIVE[2]);
-            Console.SetCursorPosition(positionX, positionY + 3);
+            Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameFIVE[3]);
             Console.SetCursorPosition(90, 46);
 
@@ -2771,7 +3724,7 @@ namespace MainClasses
             Console.SetCursorPosition(90, 46);
         }
 
-        public static void ANIAttackerSwitch(ConsoleColor gbBackground)
+        public static void ANIAttackerSwitch(ConsoleColor gbText, ConsoleColor gbBackground)
         {
             PokeBallANI(12, 13, 50, gbBackground);
             PokeBallANI(12, 14, 50, gbBackground);
@@ -2780,10 +3733,10 @@ namespace MainClasses
             PokeBallANI(12, 17, 50, gbBackground);
             PokeBallANI(12, 16, 50, gbBackground);
             PokeBallANI(12, 17, 1000, gbBackground);
-            BallBreak(8, 16, 50, gbBackground);
+            BallBreak(12, 16, 50, gbText, gbBackground);
         }
 
-        public static void ANIDefenderSwitch(ConsoleColor gbBackground)
+        public static void ANIDefenderSwitch(ConsoleColor gbText, ConsoleColor gbBackground)
         {
             PokeBallANI(60, 5, 50, gbBackground);
             PokeBallANI(60, 6, 50, gbBackground);
@@ -2792,7 +3745,7 @@ namespace MainClasses
             PokeBallANI(60, 9, 50, gbBackground);
             PokeBallANI(60, 8, 50, gbBackground);
             PokeBallANI(60, 9, 1000, gbBackground);
-            BallBreak(56, 8, 50, gbBackground);
+            BallBreak(60, 8, 50, gbText, gbBackground);
 
         }
 
@@ -3218,7 +4171,7 @@ namespace MainClasses
             string message = $"{npc.Name} sent out {npc.Party.MonsterEquipped.Name}!";
             System.Threading.Thread.Sleep(1500);
             ScrollMessage(message, 50, 2000, gbText, gbBackground);
-            ANIDefenderSwitch(gbBackground);
+            ANIDefenderSwitch(gbText, gbBackground);
             DISDefender(npc.Party.MonsterEquipped, gbText, gbBackground);
         }
 
@@ -3226,7 +4179,7 @@ namespace MainClasses
         {
             string message = $"{player.Name} sent out {player.Party.MonsterEquipped.Name}!";
             ScrollMessage(message, 50, 1500, gbText, gbBackground);
-            ANIAttackerSwitch(gbBackground);
+            ANIAttackerSwitch(gbText, gbBackground);
             Console.ForegroundColor = gbText;
             DISAttacker(player, gbText, gbBackground);
             DISAttackerInfoBar(player, gbText, gbBackground);
@@ -3876,28 +4829,28 @@ namespace MainClasses
 
         public static string[] Professor = new string[]
         {
-            "   ▄▄████▄▄   ",
-            "  ██████████  ",
-            " █▀ ▀▀█████▀█ ",
-            " ▀▄  ▄  ▄  ▄▀  ",
-            "  ▄▀▄▀  ▀▄▀▄  ",
-            "▄▀ ▄ ▀▀▀▀ ▄ ▀▄",
-            "▀▄▄▀▄▄▄▄▄▄▀▄▄▀",
-            "  █   ▄▄   █  ",
-            "  ▀▄▄▄▀▀▄▄▄▀  "
+            " ███████▄▄  ",
+            "▀██████████ ",
+            "█▀ ▀▄  ▄▀ ▀█",
+            "▀▄  ▀  ▀  ▄▀ ",
+            " ▄▀▄▄▄▄▄▄▀▄ ",
+            "█ ▄      ▄ █",
+            "▀▄▀▄▄▄▄▄▄▀▄▀",
+            "  █  ▄▄  █  ",
+            "  ▀▄▄▀▀▄▄▀  "
         };
 
         public static string[] Rival = new string[]
 {
-            "  ▀████████▄  ",
+            " ▀████████▄  ",
             "▀████████████ ",
-            "▀█▀ =_  _= ▀█ ",
-            " ▀▄  ▄  ▄  ▄▀ ",
-            "  ▄▀▄▀  ▀▄▀▄  ",
-            "▄▀ ▄ ▀▀▀▀ ▄ ▀▄",
-            "▀▄▄▀▄▄▄▄▄▄▀▄▄▀",
-            "  █   ▄▄   █  ",
-            "  ▀▄▄▄▀▀▄▄▄▀  "
+            " █▀  ▄  ▄  ▀█ ",
+            " ▀▄  ▀  ▀  ▄▀ ",
+            "  ▄▀▄▄▄▄▄▄▀▄ ",
+            " █ ▄  ▀▀  ▄ █",
+            " ▀▄▀▄▄▄▄▄▄▀▄▀",
+            "   █  ▄▄  █  ",
+            "   ▀▄▄▀▀▄▄▀  "
 };
 
 
@@ -5397,27 +6350,42 @@ namespace MainClasses
 
         #region Display Monster Objects
 
+        #region Empty Space
+
+        public static string[] emptyPokedex = new string[] {
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   "
+        };
+
+        #endregion
+
         #region Pyra
 
         public static string[] pyraDefender = new string[] {
-        @"                                                                                   ▄   ▄     ▄                                                                                    ",
-        @"                                                                                   █▀▄▄▀▄     █                                                                                   ",
-        @"                                                                                 ▄▄▀     ▀▀▄▀▀▄                                                                                   ",
-        @"                                                                                 ▀▄▄▄▄▀        █                                                                                  ",
-        @"                                                                                     █     ▄█ █                                                                                   ",
-        @"                                                                                     █ █ ▄▀  █ █                                                                                  ",
-        @"                                                                                   ▄▀ ▄▀ █  ▀ ▀                                                                                   ",
-        @"                                                                                  █▄ █▄ █                                                                                         "};
+        @"                                                                                    ▄   ▄     ▄                                                                                   ",
+        @"                                                                                    █▀▄▄▀▄     █                                                                                  ",
+        @"                                                                                  ▄▄▀     ▀▀▄▀▀▄                                                                                  ",
+        @"                                                                                  ▀▄▄▄▄▀        █                                                                                 ",
+        @"                                                                                      █     ▄█ █                                                                                  ",
+        @"                                                                                      █ █ ▄▀  █ █                                                                                 ",
+        @"                                                                                    ▄▀ ▄▀ █  ▀ ▀                                                                                  ",
+        @"                                                                                   █▄ █▄ █                                                                                        "};
 
         public static string[] pyraPokedex = new string[] {
-        @"   ▄   ▄     ▄    ",
-        @"   █▀▄▄▀▄     █   ",
-        @" ▄▄▀     ▀▀▄▀▀▄   ",
-        @" ▀▄▄▄▄▀        █  ",
-        @"     █     ▄█ █   ",
-        @"     █ █ ▄▀  █ █  ",
-        @"   ▄▀ ▄▀ █  ▀ ▀   ",
-        @"  █▄ █▄ █         "
+        @"    ▄   ▄     ▄    ",
+        @"    █▀▄▄▀▄     █   ",
+        @"  ▄▄▀     ▀▀▄▀▀▄   ",
+        @"  ▀▄▄▄▄▀        █  ",
+        @"      █     ▄█ █   ",
+        @"      █ █ ▄▀  █ █  ",
+        @"    ▄▀ ▄▀ █  ▀ ▀   ",
+        @"   █▄ █▄ █         "
         };
 
         public static string[] pyraAttacker = new string[] {
@@ -5437,23 +6405,23 @@ namespace MainClasses
 
         public static string[] douseyDefender = new string[] {
         @"                                                                                                                                                                                  ",
-        @"                                                                                                                                                                                  ",
         @"                                                                                    ▄▄▄▀▀▄                                                                                        ",
         @"                                                                                      ▀█  █▄                                                                                      ",
         @"                                                                                     ▄▀█   █▀▄                                                                                    ",
         @"                                                                                    █ ▄█   █▄ █                                                                                   ",
         @"                                                                                    █▀ █   █ ▀█                                                                                   ",
+        @"                                                                                       █   █                                                                                      ",
         @"                                                                                      ▄▀▄▄▀▄▄_                                                                                    "};
 
         public static string[] douseyPokedex = new string[] {
-        @"                  ",
-        @"                  ",
-        @"    ▄▄▄▀▀▄        ",
-        @"      ▀█  █▄      ",
-        @"     ▄▀█   █▀▄    ",
-        @"    █ ▄█   █▄ █   ",
-        @"    █▀ █   █ ▀█   ",
-        @"      ▄▀▄▄▀▄▄_    "
+        @"                   ",
+        @"    ▄▄▄▀▀▄         ",
+        @"      ▀█  █▄       ",
+        @"     ▄▀█   █▀▄     ",
+        @"    █ ▄█   █▄ █    ",
+        @"    █▀ █   █ ▀█    ",
+        @"       █   █       ",
+        @"      ▄▀▄▄▀▄▄_     "
         };
 
         public static string[] douseyAttacker = new string[] {
@@ -5473,23 +6441,23 @@ namespace MainClasses
 
         public static string[] electraDefender = new string[] {
         @"                                                                                                                                                                                  ",
-        @"                                                                                        ▄█                                                                                        ",
-        @"                                                                                      ▄▀ █                                                                                        ",
-        @"                                                                                     █0 0 █▄                                                                                      ",
-        @"                                                                                  ▄▄█ ▀██▀ █▄▄                                                                                    ",
-        @"                                                                                ▀▀█▄▄      ▄▄█▀▀                                                                                  ",
-        @"                                                                                ▄▀▀          ▀▀▄                                                                                  ",
+        @"                                                                                         ▄█                                                                                       ",
+        @"                                                                                       ▄▀ █                                                                                       ",
+        @"                                                                                      █0 0 █▄                                                                                     ",
+        @"                                                                                   ▄▄█ ▀██▀ █▄▄                                                                                   ",
+        @"                                                                                 ▀▀█▄▄      ▄▄█▀▀                                                                                 ",
+        @"                                                                                 ▄▀▀          ▀▀▄                                                                                 ",
         @"                                                                                                                                                                                  "};
 
         public static string[] electraPokedex = new string[] {
-        @"                 ",
-        @"        ▄█       ",
-        @"      ▄▀ █       ",
-        @"     █0 0 █▄     ",
-        @"  ▄▄█ ▀██▀ █▄▄   ",
-        @"▀▀█▄▄      ▄▄█▀▀ ",
-        @"▄▀▀          ▀▀▄ ",
-        @"                 "
+        @"                   ",
+        @"         ▄█        ",
+        @"       ▄▀ █        ",
+        @"      █0 0 █▄      ",
+        @"   ▄▄█ ▀██▀ █▄▄    ",
+        @" ▀▀█▄▄      ▄▄█▀▀  ",
+        @" ▄▀▀          ▀▀▄  ",
+        @"                   "
         };
 
         public static string[] electraAttacker = new string[] {
@@ -5509,23 +6477,23 @@ namespace MainClasses
 
         public static string[] cobbletDefender = new string[] {
         @"                                                                                                                                                                                  ",
-        @"                                                                                      ▄   ▄                                                                                       ",
-        @"                                                                                 ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄                                                                                  ",
-        @"                                                                                █  ██\▀▄ ▄▀/██  █                                                                                 ",
-        @"                                                                                █ █▀ ▄     ▄ ▀█ █                                                                                 ",
-        @"                                                                                ▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀                                                                                 ",
-        @"                                                                                  ▀           ▀                                                                                   ",
-        @"                                                                                  ▀███████████▀                                                                                   "};
+        @"                                                                                       ▄   ▄                                                                                      ",
+        @"                                                                                  ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄                                                                                 ",
+        @"                                                                                 █  ██\▀▄ ▄▀/██  █                                                                                ",
+        @"                                                                                 █ █▀ ▄     ▄ ▀█ █                                                                                ",
+        @"                                                                                 ▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀                                                                                ",
+        @"                                                                                   ▀           ▀                                                                                  ",
+        @"                                                                                   ▀███████████▀                                                                                  "};
 
         public static string[] cobbletPokedex = new string[] {
-        @"                 ",
-        @"      ▄   ▄      ",
-        @" ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄ ",
-        @"█  ██\▀▄ ▄▀/██  █",
-        @"█ █▀ ▄     ▄ ▀█ █",
-        @"▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀",
-        @"  ▀           ▀  ",
-        @"  ▀███████████▀  "
+        @"                   ",
+        @"       ▄   ▄       ",
+        @"  ▄▄ ▄▀ ▀▀▀ ▀▄ ▄▄  ",
+        @" █  ██\▀▄ ▄▀/██  █ ",
+        @" █ █▀ ▄     ▄ ▀█ █ ",
+        @" ▀▄ ▄▀ ▀▀▀▀▀ ▀▄ ▄▀ ",
+        @"   ▀           ▀   ",
+        @"   ▀███████████▀   "
         };
 
         public static string[] cobbletAttacker = new string[] {
@@ -5554,14 +6522,14 @@ namespace MainClasses
         @"                                                                                   ▀▀▄▄▀▀▀▀▀▄▄▀▀                                                                                  "};
 
         public static string[] neoPokedex = new string[] {
-        @"   █▀▀▄█▀▀▀█▄▀▀█ ",
-        @"   █           █ ",
-        @"   ▄▀         ▀▄ ",
-        @"   █ ▀▀▄   ▄▀▀ █ ",
-        @"   ▄▀▀▄▄   ▄▄▀▀▄ ",
-        @"   ▀▄▄▀ ▀▀▀ ▀▄▄▀ ",
-        @"  █▀  █  █  █  ▀█",
-        @"   ▀▀▄▄▀▀▀▀▀▄▄▀▀ "
+        @"   █▀▀▄█▀▀▀█▄▀▀█   ",
+        @"   █           █   ",
+        @"   ▄▀         ▀▄   ",
+        @"   █ ▀▀▄   ▄▀▀ █   ",
+        @"   ▄▀▀▄▄   ▄▄▀▀▄   ",
+        @"   ▀▄▄▀ ▀▀▀ ▀▄▄▀   ",
+        @"  █▀  █  █  █  ▀█  ",
+        @"   ▀▀▄▄▀▀▀▀▀▄▄▀▀   "
         };
 
         public static string[] neoAttacker = new string[] {

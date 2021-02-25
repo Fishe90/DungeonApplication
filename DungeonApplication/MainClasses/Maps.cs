@@ -234,7 +234,10 @@ namespace MainClasses
                         //PokeMart
                         if (currentPosX == 107 && currentPosY == 34)
                         {
+                            SFX.EnterStore();
+                            System.Threading.Thread.Sleep(1000);
                             DEMOPokeMart(player, 15, 17, navPlayerMenu, gbText, gbBackground);
+                            SFX.Route1();
                             currentPosY += 2;
                             posY += 4;
                             direction = 6;
@@ -242,7 +245,11 @@ namespace MainClasses
                         //PokeCenter
                         if (currentPosX == 172 && currentPosY == 34)
                         {
+                            SFX.EnterStore();
+                            System.Threading.Thread.Sleep(1000);
+                            SFX.PokeCenter();
                             DEMOPokeCenter(player, 30, 17, navPlayerMenu, gbText, gbBackground);
+                            SFX.Route1();
                             currentPosY += 2;
                             posY += 4;
                             direction = 6;
@@ -259,6 +266,7 @@ namespace MainClasses
                         if (currentPosY < 16)
                         {
                             currentPosY += 2;
+                            posY += 4;
                             direction = 6;
                         }
                         reloadTestMap = true;
@@ -280,6 +288,7 @@ namespace MainClasses
                         if (currentPosY > 82)
                         {
                             currentPosY -= 2;
+                            posY -= 4;
                         }
                         reloadTestMap = true;
                         break;
@@ -292,6 +301,7 @@ namespace MainClasses
                         if (currentPosX < 60)
                         {
                             currentPosX += 5;
+                            posX += 10;
                         }
                         reloadTestMap = true;
                         break;
@@ -304,6 +314,7 @@ namespace MainClasses
                         if (currentPosX > 225)
                         {
                             currentPosX -= 5;
+                            posX -= 10;
                         }
                         reloadTestMap = true;
                         break;
@@ -794,7 +805,7 @@ namespace MainClasses
             bool reloadTestMap = false;
             int posX = -12;
             int posY = 21;
-            int direction = 5;
+            int direction = 4;
             //(30,17)
             do
             {
@@ -902,7 +913,7 @@ namespace MainClasses
             bool reloadTestMap = false;
             int posX = -27;
             int posY = 21;
-            int direction = 5;
+            int direction = 4;
             //(15,17)
             do
             {

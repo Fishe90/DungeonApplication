@@ -61,10 +61,42 @@ namespace DungeonApplication
             NPC.ASCIIProfile = ASCII.npcProfile;
 
             #endregion                        
-
+             
             int currentPosX = 167;
             int currentPosY = 56;
 
+            //string messageDowsey2 = "Can generate water at will to attack its enemies. (Weakness: ELECTRIC Types)";
+            //ASCII.InstantMessage(messageDowsey2, ConsoleColor.White, ConsoleColor.Black);
+            //int posY = 11;
+
+            //ASCII.PokeBallStatic(20, 15, ConsoleColor.Black);
+            //ASCII.PokeBallStatic(43, 15, ConsoleColor.Black);
+            //ASCII.PokeBallStatic(66, 15, ConsoleColor.Black);
+            //ASCII.BallBreak(20, 15, 100, ConsoleColor.White, ConsoleColor.Black);
+            //foreach (string line in ASCII.pyraPokedex)
+            //{
+            //    Console.SetCursorPosition(14, posY);
+            //    Console.Write(line);
+            //    posY += 1;
+            //}
+            //ASCII.BallBreak(43, 15, 100, ConsoleColor.White, ConsoleColor.Black);
+            //posY = 11;
+            //foreach (string line in ASCII.douseyPokedex)
+            //{
+            //    Console.SetCursorPosition(37, posY);
+            //    Console.Write(line);
+            //    posY += 1;
+            //}
+            //ASCII.BallBreak(66, 15, 100, ConsoleColor.White, ConsoleColor.Black);
+            //posY = 11;
+            //foreach (string line in ASCII.electraPokedex)
+            //{
+            //    Console.SetCursorPosition(60, posY);
+            //    Console.Write(line);
+            //    posY += 1;
+            //}
+
+            //navPlayerMenu = Console.ReadKey().Key;
             //TODO download pokecenter AND pokemart 8-bit theme music
             ASCII.DEMOVersion(navPlayerMenu, currentPosX, currentPosY);
             SFX.Route1();
