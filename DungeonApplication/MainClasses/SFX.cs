@@ -87,13 +87,13 @@ namespace MainClasses
         //TODO Trim ALL Battle Music files so they loop evenly
         #region Battle Music
 
-        //TODO Trim The Intro out of each battle .wav file, then create a looping version that plays after the intro
+        //TODO Trim The intro out of each battle .wav file, then create a looping version that plays after the intro
 
-        //public static void LeagueIntro()
+        //public static void Leagueintro()
         //{
         //    SoundPlayer select = new SoundPlayer();
         //    //player.Stream = new MemoryStream(conte.Resources.gameMusic);
-        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\LeagueBattleIntro.wav";
+        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\LeagueBattleintro.wav";
         //    select.Play();
         //}
 
@@ -105,11 +105,11 @@ namespace MainClasses
             select.PlayLooping();
         } //Trim in the 
 
-        //public static void RivalIntro()
+        //public static void Rivalintro()
         //{
         //    SoundPlayer select = new SoundPlayer();
         //    //player.Stream = new MemoryStream(conte.Resources.gameMusic);
-        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\RivalBattleIntro.wav";
+        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\RivalBattleintro.wav";
         //    select.Play();
         //}
 
@@ -121,11 +121,11 @@ namespace MainClasses
             select.PlayLooping();
         }
 
-        //public static void BattleIntro()
+        //public static void Battleintro()
         //{
         //    SoundPlayer select = new SoundPlayer();
         //    //player.Stream = new MemoryStream(conte.Resources.gameMusic);
-        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\WildBattleIntro.wav";
+        //    select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\WildBattleintro.wav";
         //    select.Play();
         //}
 
@@ -145,7 +145,7 @@ namespace MainClasses
         {
             SoundPlayer select = new SoundPlayer();
             //player.Stream = new MemoryStream(conte.Resources.gameMusic);
-            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\GameMusic_SFX\IntroTheme.wav";
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\GameMusic_SFX\introTheme.wav";
             select.PlayLooping();
         }
 

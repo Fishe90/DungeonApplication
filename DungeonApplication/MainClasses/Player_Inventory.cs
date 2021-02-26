@@ -72,7 +72,7 @@ namespace MainClasses
             PriceSell = priceSell;
         }
 
-        public static Item pokeCatcher = new Item("Catcher", Type.Item, Monster_Race.BATTLE, false, 5, 200, 100);
+        public static Item pokeCatcher = new Item("Catcher", Type.Item, Monster_Race.BATTLE, false, 50, 200, 100);
         public static Item repel = new Item("Repel", Type.Item, Monster_Race.NONE, false, 5, 350, 175);
         public static Item blazeStone = new Item("Blaze Stone", Type.Item, Monster_Race.Fire, false, 5, 1000, 500);
         public static Item aquaStone = new Item("Aqua Stone", Type.Item, Monster_Race.Water, false, 5, 1000, 500);

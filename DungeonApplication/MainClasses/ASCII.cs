@@ -8,14 +8,14 @@ namespace MainClasses
 { 
     public class ASCII
     {
-        /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 46); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
+        /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 42); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
 
         //TODO Create Move Conversion Method() that rewrites the selected move into the desired slot just like how the CatchSort Functionality works
         //TODO Be able to utilize the conversion method() when a monster is caught to prevent rewriting the original move structured code.
        
         #region METHODS: Game Versions
 
-        public static void DEMOVersion(ConsoleKey navPlayerMenu, int currentPosX, int currentPosY)
+        public static void DEMO(ConsoleKey navPlayerMenu, int currentPosX, int currentPosY)
         {            
             bool reloadMainScreen = false;
             bool reloadColorFormat = false;
@@ -77,7 +77,7 @@ namespace MainClasses
                 Console.WriteLine("                       - Choose Your Game Console Color -");
                 Console.SetCursorPosition(4, 5);
                 Console.WriteLine("     [R]ED     [B]LUE     [Y]ELLOW     [G]REEN     [L]IGHT-BLUE     [P]URPLE");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -89,7 +89,7 @@ namespace MainClasses
                         Console.WriteLine("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -112,7 +112,7 @@ namespace MainClasses
                         Console.WriteLine("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -135,7 +135,7 @@ namespace MainClasses
                         Console.WriteLine("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -158,7 +158,7 @@ namespace MainClasses
                         Console.Write("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.Write("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -181,7 +181,7 @@ namespace MainClasses
                         Console.Write("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.Write("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -204,7 +204,7 @@ namespace MainClasses
                         Console.Write("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.Write("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -234,7 +234,7 @@ namespace MainClasses
                 Console.WriteLine("                       - Choose Your Game Color Format -");
                 Console.SetCursorPosition(4, 5);
                 Console.WriteLine("                  [L]IGHT MODE                        [D]ARK MODE             ");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -247,7 +247,7 @@ namespace MainClasses
                         Console.WriteLine("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -270,7 +270,7 @@ namespace MainClasses
                         Console.WriteLine("     CONFIRM CHOICE?");
                         Console.SetCursorPosition(32, 17);
                         Console.WriteLine("[ENTER] YES [BACKSPACE] NO");
-                        Console.SetCursorPosition(90, 46);
+                        Console.SetCursorPosition(90, 42);
                         navPlayerMenu = Console.ReadKey().Key;
                         switch (navPlayerMenu)
                         {
@@ -301,7 +301,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(6, startLine + 1);
                 Console.Write(line);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 startLine += 1;
             }
             
@@ -312,7 +312,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(6, startLine + 2);
                 Console.Write("                                                                               ");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 startLine -= 1;
                 System.Threading.Thread.Sleep(100);
             }
@@ -349,7 +349,7 @@ namespace MainClasses
             Console.BackgroundColor = GBBackground;
             BallBreak(26, 13, 50, GBText, GBBackground);
             int pokY = 10;
-            foreach (string line in neoPokedex)
+            foreach (string line in cobbletPokedex)
             {
                 Console.ForegroundColor = GBText;
                 Console.BackgroundColor = GBBackground;
@@ -387,7 +387,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(61, posY);
                 Console.Write("-->");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -779,19 +779,19 @@ namespace MainClasses
                         if (posX == 15)
                         {
                             Console.Write("PYRA");
-                            player.Party.MonsterEquipped = Monster.Pyra;
+                            player.Party.MonsterEquipped = Monster.starterPyra;
                             rival.Party.MonsterEquipped = Monster.rivalDousey;
                         }
                         if (posX == 38)
                         {
                             Console.Write("DOWSEY");
-                            player.Party.MonsterEquipped = Monster.Dousey;
+                            player.Party.MonsterEquipped = Monster.starterDousey;
                             rival.Party.MonsterEquipped = Monster.rivalElectra;
                         }
                         if (posX == 61)
                         {
                             Console.Write("ELECTRA");
-                            player.Party.MonsterEquipped = Monster.Electra;
+                            player.Party.MonsterEquipped = Monster.starterElectra;
                             rival.Party.MonsterEquipped = Monster.rivalPyra;
                         }
                         Console.Write("?");
@@ -807,7 +807,7 @@ namespace MainClasses
                         {
                             Console.SetCursorPosition(61, posY);
                             Console.Write("-->");
-                            Console.SetCursorPosition(90, 46);
+                            Console.SetCursorPosition(90, 42);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
@@ -1285,12 +1285,6 @@ namespace MainClasses
                     System.Threading.Thread.Sleep(50);
                     #endregion
                 }
-                //player.Party.MonsterEquipped.MaxHealth = 25;
-                //player.Party.MonsterEquipped.Health = 25;
-                //player.Party.MonsterEquipped.MaxExp = 50;
-                //player.Party.MonsterEquipped.Gender = '♂';
-                //player.Party.MonsterEquipped.IsCaught = true;
-                //player.Party.MonsterEquipped.Lv = 5;
 
                 string message15 = $"SALIX: A fine choice! {player.Party.MonsterEquipped.Name.ToUpper()} will surely serve you well!";
                 ScrollMessage(message15, 50, 1500, GBText, GBBackground);
@@ -1502,7 +1496,7 @@ namespace MainClasses
                     posY2 -= 1;
                 }
             }
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void PlayerForward(ConsoleColor gbText, ConsoleColor gbBackground)
@@ -1522,7 +1516,7 @@ namespace MainClasses
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(@"▀   ▀");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(100);
 
@@ -1543,7 +1537,7 @@ namespace MainClasses
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.Write(@" ▀ ▀ ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void PlayerMovement(Player player, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -1664,7 +1658,7 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(MoveLeft1[6]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(100);
                 #region IDLE LEFT
@@ -1701,7 +1695,7 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(MoveLeft2[7]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
             if (direction == 2 && player.Gender == '♂')
@@ -1737,7 +1731,7 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(MoveRight1[7]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(100);
                 #region IDLE RIGHT
@@ -1774,7 +1768,7 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(MoveRight2[7]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
             if (direction == 3 && player.Gender == '♂')
@@ -1803,7 +1797,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveUpRF[3]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(50);
                 #region IDLE UP
@@ -1830,7 +1824,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveUpIdle[3]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
             if (direction == 4 && player.Gender == '♂')
@@ -1859,7 +1853,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveUpLF[3]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(50);
                 #region IDLE UP
@@ -1886,7 +1880,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveUpIdle[3]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
             if (direction == 5 && player.Gender == '♂')
@@ -1919,7 +1913,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveDownRF[5]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(100);
                 #region IDLE DOWN
@@ -1950,7 +1944,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveDownIdle[5]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
             if (direction == 6 && player.Gender == '♂')
@@ -1983,7 +1977,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveDownLF[5]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
                 System.Threading.Thread.Sleep(100);
                 #region IDLE DOWN
@@ -2014,7 +2008,7 @@ namespace MainClasses
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveDownIdle[5]);
 
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
         }
@@ -2195,7 +2189,7 @@ namespace MainClasses
             Console.ForegroundColor = ConsoleColor.Black;
             Console.BackgroundColor = GBColor;
             Console.Write(TEMGameBoy);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         /****ERASES THE CURRENT SCREEN DISPLAY****/
@@ -2278,7 +2272,7 @@ namespace MainClasses
             Console.Write(screen[22].Substring(0, 83));
             Console.SetCursorPosition(4, 25);
             Console.Write(screen[23].Substring(0, 83));
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void ResetHalfScreen(int posY, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -2300,7 +2294,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(4, posY);
                 Console.Write(item);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 posY += 1;
             }
         }
@@ -2358,7 +2352,7 @@ namespace MainClasses
             Console.Write(ScreenDisplay[22].Substring(0, 83));
             Console.SetCursorPosition(4, 25);
             Console.Write(ScreenDisplay[23].Substring(0, 83));
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         /****DISPLAYS BACKGROUND MOVEMENT****/
@@ -2414,7 +2408,7 @@ namespace MainClasses
             Console.Write(ScreenDisplay[currentPosY + 22].Substring(currentPosX, currentPosX + 83));
             Console.SetCursorPosition(4, 25);
             Console.Write(ScreenDisplay[currentPosY + 23].Substring(currentPosX, currentPosX + 83));
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         /****DISPLAYS A STATIC SCREEN (FE: PLAYER MENU, EMPTY MENU SECTION)****/
@@ -2473,7 +2467,7 @@ namespace MainClasses
             Console.SetCursorPosition(0, 0);
             Console.SetCursorPosition(67, 12);
             Console.Write(player.Name);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         #endregion
@@ -2520,7 +2514,7 @@ namespace MainClasses
             Console.SetCursorPosition(positionX + 2, positionY + 3);
             Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[8]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(delay);
         }
@@ -2565,7 +2559,7 @@ namespace MainClasses
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[17]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(delay);
         }
@@ -2605,7 +2599,7 @@ namespace MainClasses
             Console.SetCursorPosition(positionX + 2, positionY + 3);
             Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[9]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(delay);
 
@@ -2617,7 +2611,7 @@ namespace MainClasses
             Console.Write("         ");
             Console.SetCursorPosition(positionX, positionY + 3);
             Console.Write("         ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
         }
 
@@ -2656,7 +2650,7 @@ namespace MainClasses
             Console.SetCursorPosition(positionX + 2, positionY + 3);
             Console.BackgroundColor = gbBackground;
             Console.Write(pokeBall[9]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void BallOpenClose(int positionX, int positionY, int delay, ConsoleColor gbText)
@@ -2748,7 +2742,7 @@ namespace MainClasses
             Console.Write(frameONE[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameONE[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion            
             System.Threading.Thread.Sleep(delay);
@@ -2770,7 +2764,7 @@ namespace MainClasses
             Console.Write(frameTWO[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameTWO[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion            
             System.Threading.Thread.Sleep(delay);
@@ -2792,7 +2786,7 @@ namespace MainClasses
             Console.Write(frameTHREE[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameTHREE[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2814,7 +2808,7 @@ namespace MainClasses
             Console.Write(frameFOUR[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameFOUR[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2836,7 +2830,7 @@ namespace MainClasses
             Console.Write(frameFIVE[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameFIVE[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2858,7 +2852,7 @@ namespace MainClasses
             Console.Write(frameSIX[6]);
             Console.SetCursorPosition(positionX, positionY + 7);
             Console.Write(frameSIX[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2915,7 +2909,7 @@ namespace MainClasses
             Console.Write(frameONE[2]);
             Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameONE[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion            
             System.Threading.Thread.Sleep(delay);
@@ -2929,7 +2923,7 @@ namespace MainClasses
             Console.Write(frameTWO[2]);
             Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameTWO[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion            
             System.Threading.Thread.Sleep(delay);
@@ -2943,7 +2937,7 @@ namespace MainClasses
             Console.Write(frameTHREE[2]);
             Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameTHREE[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2957,7 +2951,7 @@ namespace MainClasses
             Console.Write(frameFOUR[2]);
             Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameFOUR[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -2971,7 +2965,7 @@ namespace MainClasses
             Console.Write(frameFIVE[2]);
             Console.SetCursorPosition(positionX - 6, positionY + 3);
             Console.Write(frameFIVE[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             #endregion
             System.Threading.Thread.Sleep(delay);
@@ -3151,7 +3145,7 @@ namespace MainClasses
             {
                 Console.Write("HP:[                    ]");
             }
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void ExpBar(Monster monster, int positionX, int positionY)
@@ -3324,7 +3318,7 @@ namespace MainClasses
             {
                 Console.Write("EXP[                    ]");
             }
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
 
@@ -3494,7 +3488,7 @@ namespace MainClasses
             Console.Write("█      POKePARTY      RUN ");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void DISSelectBag(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3509,7 +3503,7 @@ namespace MainClasses
             Console.Write("█      POKePARTY      RUN ");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void DISSelectParty(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3524,7 +3518,7 @@ namespace MainClasses
             Console.Write("█     [POKePARTY]     RUN ");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void DISSelectRun(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3539,7 +3533,7 @@ namespace MainClasses
             Console.Write("█      POKePARTY     [RUN]");
             Console.SetCursorPosition(55, 24);
             Console.Write("█                         ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void DISDefenderInfoBar(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3564,7 +3558,7 @@ namespace MainClasses
             NameANDGender(monster, 17, 3, gbText, gbBackground);
             Level(monster, 38, 3, gbText, gbBackground);
             HealthBar(monster, 17, 4);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
         }
 
@@ -3590,7 +3584,7 @@ namespace MainClasses
             NameANDGender(player.Party.MonsterEquipped, 43, 14, gbText, gbBackground);
             Level(player.Party.MonsterEquipped, 64, 14, gbText, gbBackground);
             HealthBar(player.Party.MonsterEquipped, 43, 15);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void DISDefender(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3613,7 +3607,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[6]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
             DISDefenderInfoBar(monster, gbText, gbBackground);
             StaticMessageBox(gbText, gbBackground);
         }
@@ -3638,7 +3632,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[6]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
             DISAttackerInfoBar(player, gbText, gbBackground);
             StaticMessageBox(gbText, gbBackground);
         }
@@ -3659,7 +3653,7 @@ namespace MainClasses
             Console.Write(npc.ASCIIProfile[4]);
             Console.SetCursorPosition(58, 10);
             Console.Write(npc.ASCIIProfile[5]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
             StaticMessageBox(gbText, gbBackground);
         }
 
@@ -3700,28 +3694,28 @@ namespace MainClasses
             PokeBallANI(44, 6, 50, gbBackground);
             PokeBallANI(52, 6, 50, gbBackground);
             PokeBallANI(56, 6, 50, gbBackground);
-            PokeBallANI(60, 6, 500, gbBackground);
-            BallOpenClose(56, 3, 50, gbBackground);
-            PokeBallANI(60, 6, 250, gbBackground);
-            PokeBallANI(60, 7, 50, gbBackground);
-            PokeBallANI(60, 8, 50, gbBackground);
-            PokeBallANI(60, 9, 50, gbBackground);
-            PokeBallANI(60, 8, 50, gbBackground);
-            PokeBallANI(60, 9, 1500, gbBackground);
+            PokeBallANI(61, 6, 500, gbBackground);
+            BallOpenClose(57, 3, 50, gbText);
+            PokeBallANI(61, 6, 250, gbBackground);
+            PokeBallANI(61, 7, 50, gbBackground);
+            PokeBallANI(61, 8, 50, gbBackground);
+            PokeBallANI(61, 9, 50, gbBackground);
+            PokeBallANI(61, 8, 50, gbBackground);
+            PokeBallANI(61, 9, 1500, gbBackground);
         }
 
         public static void BallShakeLeft(ConsoleColor gbBackground)
         {
             BallFaceLeft(61, 9, 500, gbBackground);
             PokeBallANI(61, 9, 1000, gbBackground);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void BallShakeRight(ConsoleColor gbBackground)
         {
             BallFaceRight(62, 9, 500, gbBackground);
             PokeBallANI(61, 9, 1000, gbBackground);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void ANIAttackerSwitch(ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3772,7 +3766,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[6]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[7]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3792,7 +3786,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[5]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[6]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3812,7 +3806,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[4]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[5]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3832,7 +3826,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[3]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[4]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3852,7 +3846,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[2]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3872,7 +3866,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[1]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[2]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3892,7 +3886,7 @@ namespace MainClasses
             Console.Write(monster.ASCIIPokedex[0]);
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[1]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3912,7 +3906,7 @@ namespace MainClasses
             Console.Write("                  ");
             Console.SetCursorPosition(58, 10);
             Console.Write(monster.ASCIIPokedex[0]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3932,7 +3926,7 @@ namespace MainClasses
             Console.Write("                  ");
             Console.SetCursorPosition(58, 10);
             Console.Write("                  ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
             #endregion
 
             System.Threading.Thread.Sleep(1000);
@@ -3962,7 +3956,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[5]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[6]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -3982,7 +3976,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[5]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4002,7 +3996,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[4]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4022,7 +4016,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[3]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4042,7 +4036,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[2]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4062,7 +4056,7 @@ namespace MainClasses
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[1]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4082,7 +4076,7 @@ namespace MainClasses
             Console.Write("                       ");
             Console.SetCursorPosition(4, 20);
             Console.Write(player.Party.MonsterEquipped.ASCIIAttacker[0]);
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
 
             System.Threading.Thread.Sleep(25);
 
@@ -4102,7 +4096,7 @@ namespace MainClasses
             Console.Write("                       ");
             Console.SetCursorPosition(4, 20);
             Console.Write("                       ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
             #endregion
 
             System.Threading.Thread.Sleep(1000);
@@ -4132,7 +4126,7 @@ namespace MainClasses
                 Console.Write(monster.ASCIIDefender[6].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 10);
                 Console.Write(monster.ASCIIDefender[7].Substring(startPositionX, 83));
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
             }
@@ -4159,7 +4153,7 @@ namespace MainClasses
                 Console.Write(npc.ASCIIDefender[4].Substring(startPositionX, 83));
                 Console.SetCursorPosition(4, 10);
                 Console.Write(npc.ASCIIDefender[5].Substring(startPositionX, 83));
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 startPositionX -= 1;
                 System.Threading.Thread.Sleep(1);
             }
@@ -4253,7 +4247,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(positionX, positionY);
                 Console.Write(frame);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 positionY += 1;
             }
 
@@ -4266,7 +4260,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(positionX, positionY);
                 Console.Write(frame);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 positionY += 1;
             }
 
@@ -4279,7 +4273,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(positionX, positionY);
                 Console.Write(frame);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 positionY += 1;
             }
 
@@ -4292,7 +4286,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(positionX, positionY);
                 Console.Write(frame);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 positionY += 1;
             }
 
@@ -4305,7 +4299,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(positionX, positionY);
                 Console.Write(frame);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 positionY += 1;
             }
 
@@ -4510,7 +4504,7 @@ namespace MainClasses
         {
             NPCEncounter(player, npc, gbText, gbBackground);
 
-            Player_Menus.NPCFightMenu(player, npc, navPlayerMenu, gbText, gbBackground);
+            Player_Menus.NPCFightMenu(player, npc, 500, navPlayerMenu, gbText, gbBackground);
         }
 
         #endregion
@@ -4518,6 +4512,78 @@ namespace MainClasses
         #endregion
 
         #region METHODS: Display Objects
+
+        public static void PCMain(Player player, ConsoleKey navPlayerMenu)
+        {
+            bool reloadPC = false;
+            int posX = 66;
+            int posY = 3;
+            foreach (string line in pcMain)
+            {
+                Console.SetCursorPosition(posX, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            Console.SetCursorPosition(69, 4);
+            Console.Write(player.Name.ToUpper() + "'S PC");
+            Console.SetCursorPosition(90, 42);
+            posY = 4;
+            do
+            {
+                Console.SetCursorPosition(67, posY);
+                Console.Write(">");
+                Console.SetCursorPosition(90, 42);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                        Console.SetCursorPosition(67, posY);
+                        Console.Write(" ");
+                        posY -= 1;
+                        if (posY == 3)
+                        {
+                            posY += 1;
+                        }
+                        reloadPC = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Console.SetCursorPosition(67, posY);
+                        Console.Write(" ");
+                        posY += 1;
+                        if (posY == 8)
+                        {
+                            posY -= 1;
+                        }
+                        reloadPC = true;
+                        break;
+                    case ConsoleKey.Enter:
+                        //Loads Player Monster PC
+                        if (posY == 4)
+                        {
+                            reloadPC = true;
+                        }
+                        //Loads Professor PC
+                        if (posY == 5)
+                        {
+                            reloadPC = true;
+                        }
+                        //Loads Hall of Fame PC
+                        if (posY == 6)
+                        {
+                            reloadPC = true;
+                        }
+                        //Swithes off PC
+                        if (posY == 7)
+                        {
+                            reloadPC = false;
+                        }
+                        break;
+                    default:
+                        reloadPC = false;
+                        break;
+                }
+            } while (reloadPC);           
+        }
 
         public static void StaticMessageBox(ConsoleColor GameText, ConsoleColor GameBackground)
         {
@@ -4533,7 +4599,7 @@ namespace MainClasses
             Console.WriteLine(" █                                                                               █ ");
             Console.SetCursorPosition(4, 25);
             Console.WriteLine("  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ");
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void InstantMessage(string Message, ConsoleColor GameText, ConsoleColor GameBackground)
@@ -4626,7 +4692,7 @@ namespace MainClasses
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.Write(defaultMale[7]);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
 
@@ -4657,7 +4723,7 @@ namespace MainClasses
             //Console.BackgroundColor = ConsoleColor.Black;
             //Console.ForegroundColor = ConsoleColor.DarkBlue;
             //Console.Write(defaultMale[7]);
-            //Console.SetCursorPosition(90, 46);
+            //Console.SetCursorPosition(90, 42);
             #endregion
         }
 
@@ -4711,7 +4777,7 @@ namespace MainClasses
                 Console.Write(defaultMale[7]);
                 Console.BackgroundColor = gbBackground;
                 Console.Write(defaultMale[8]);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
 
@@ -4742,7 +4808,7 @@ namespace MainClasses
             //Console.BackgroundColor = ConsoleColor.Black;
             //Console.ForegroundColor = ConsoleColor.DarkBlue;
             //Console.Write(defaultMale[7]);
-            //Console.SetCursorPosition(90, 46);
+            //Console.SetCursorPosition(90, 42);
             #endregion
         }
 
@@ -4787,7 +4853,7 @@ namespace MainClasses
                 Console.Write(defaultMale[5]);
                 Console.BackgroundColor = gbBackground;
                 Console.Write(defaultMale[6]);
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 #endregion
             }
 
@@ -4818,7 +4884,7 @@ namespace MainClasses
             //Console.BackgroundColor = ConsoleColor.Black;
             //Console.ForegroundColor = ConsoleColor.DarkBlue;
             //Console.Write(defaultMale[7]);
-            //Console.SetCursorPosition(90, 46);
+            //Console.SetCursorPosition(90, 42);
             #endregion
         }
         #endregion
@@ -5027,6 +5093,20 @@ namespace MainClasses
 
         #endregion
 
+        #region PC
+
+        public static string[] pcMain = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█                 █",
+            $"█  SALIX'S PC     █",
+            $"█  HALL OF FAME   █",
+            $"█  SWITCH OFF     █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
+        #endregion
+
         #region Maps
 
         #region DEMO Map
@@ -5129,31 +5209,31 @@ namespace MainClasses
 @"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                                                                                                                                                 ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
 @"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
 @"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                         ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
+@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                                                                                                                                                       ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
+@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
+@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                 ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
+@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                                                                                                                                                 ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
+@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
+@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                                ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
+@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                              █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                              ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
+@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                             ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                             ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
+@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                           █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                           ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
+@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                            ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                            ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
+@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                                ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
+@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                                ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
+@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                              █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                              ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
+@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                             ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                             ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
+@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                           █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                           ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
+@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                            ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄ █ ▄ ▄                                            ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
+@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                █▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█                                                ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
+@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                         ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
+@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                                                                                                                                                       ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
+@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
+@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                 ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
+@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                                                                                                                                                 ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
+@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
+@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                         ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
 @"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄       ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
-@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
-@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
-@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
-@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
-@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
-@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
-@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
-@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
-@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
-@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
-@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
-@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
-@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
-@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
-@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
-@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
-@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
-@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
-@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
-@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
-@"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
-@"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
-@"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
-@"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
 @" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
 @"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
 @"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
@@ -5629,25 +5709,21 @@ namespace MainClasses
 █  █                                                                                   █  █
 █  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  █
 █                                                                                         █
-█                                                                                         █
 █                 _▄▄▄▄▄_                                                                 █
 █                ▄▀▄ ▄ ▄▀▄                                                                █
-█                █ ▀▄▀▄▀ █                                                                █
-█                 ▀▄▄▄▄▄▀                                              _▄▄▄▄▄_            █
-█       _▄▄▄▄▄_             _▄▄▄▄▄_                                   ▄▀ ▄▀▄ ▀▄           █
-█      ▄▀ ▄▀▄ ▀▄           ▄▀ █▀▄ ▀▄                                  █  ▀▄▀  █           █
-█      █  █▀█  █           █  █▄▀  █                                   ▀▄▄▄▄▄▀            █
-█       ▀▄▄▄▄▄▀             ▀▄▄▄▄▄▀                            _▄▄▄▄▄_                    █
-█                 _▄▄▄▄▄_                                     ▄▀ ▄ ▄ ▀▄                   █
+█                █ ▀▄▀▄▀ █                                             _▄▄▄▄▄_            █
+█        _▄▄▄▄▄_  ▀▄▄▄▄▄▀  _▄▄▄▄▄_                                    ▄▀ ▄▀▄ ▀▄           █
+█       ▄▀ ▄▀▄ ▀▄         ▄▀ █▀▄ ▀▄                                   █  ▀▄▀  █           █
+█       █  █▀█  █         █  █▄▀  █                            _▄▄▄▄▄_ ▀▄▄▄▄▄▀            █
+█        ▀▄▄▄▄▄▀  _▄▄▄▄▄_  ▀▄▄▄▄▄▀                            ▄▀ ▄ ▄ ▀▄                   █
 █                ▄▀ ▄█▀ ▀▄                                    █  █▀▄  █                   █
-█                █  ▄█▀  █                                     ▀▄▄▄▄▄▀                    █
-█                 ▀▄▄▄▄▄▀        _▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄_                               █
-█                               ▄▀ ▄   ▄ ▄▄▄▄ ▄   ▄ ▄   ▄ ▀▄                              █
+█                █  ▄█▀  █       _▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄_    ▀▄▄▄▄▄▀                    █
+█                 ▀▄▄▄▄▄▀       ▄▀ ▄   ▄ ▄▄▄▄ ▄   ▄ ▄   ▄ ▀▄                              █
 █                               █  █▀▄▀█ █▄   █▀▄ █ █   █  █                              █
 █                               █  █   █ █▄▄▄ █  ▀█ ▀▄▄▄▀  █                              █
 █                                ▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀                               █
 █                                                                                         █
-█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█";
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀";
 
         #endregion
 

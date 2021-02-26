@@ -26,7 +26,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(61, posY);
                 Console.Write("-->");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -91,7 +91,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(61, posY);
                 Console.Write("-->");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -192,7 +192,7 @@ namespace MainClasses
                             {
                                 Console.SetCursorPosition(61, posY);
                                 Console.Write("-->");
-                                Console.SetCursorPosition(90, 46);
+                                Console.SetCursorPosition(90, 42);
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
@@ -497,13 +497,12 @@ namespace MainClasses
             } while (reloadBattleFIGHT);//end dowhile reloadBattleFIGHT
         }//end BattleMenu()
 
-        public static void NPCFightMenu(Player player, Player npc, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        public static void NPCFightMenu(Player player, Player npc, int loserPays, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadBattleFIGHT = false;
             bool reloadBattleBAG = false;
             bool reloadBattlePOKeFRAUD = false;
             bool reloadBattleRUN = false;
-            bool reloadBattleFAINT = false;
             string message1 = $"Will you send out another PokeFraud?";
 
             do
@@ -519,12 +518,13 @@ namespace MainClasses
                         if (npc.Party.MonsterEquipped.Health <= 0)
                         {
                             int posY = 22;
+                            System.Threading.Thread.Sleep(1000);
                             ASCII.ANIDefenderFaint(npc.Party.MonsterEquipped, gbText, gbBackground);
                             //TODO ADD CalcEXP() HERE!!!
                             Combat.CalcExp(player, npc.Party.MonsterEquipped, gbText, gbBackground);
                             if (npc.Party.Slot2.Health <= 0 && npc.Party.Slot3.Health <= 0 && npc.Party.Slot4.Health <= 0 && npc.Party.Slot5.Health <= 0 && npc.Party.Slot6.Health <= 0)
                             {
-                                ASCII.ANINPCDefeat(player, npc, 500, gbText, gbBackground);
+                                ASCII.ANINPCDefeat(player, npc, loserPays, gbText, gbBackground);
                                 reloadBattleFIGHT = false;
                                 reloadBattleBAG = false;
                                 reloadBattlePOKeFRAUD = false;
@@ -543,7 +543,7 @@ namespace MainClasses
                                 {
                                     Console.SetCursorPosition(61, posY);
                                     Console.Write("-->");
-                                    Console.SetCursorPosition(90, 46);
+                                    Console.SetCursorPosition(90, 42);
                                     navPlayerMenu = Console.ReadKey().Key;
                                     switch (navPlayerMenu)
                                     {
@@ -605,7 +605,7 @@ namespace MainClasses
                                 {
                                     Console.SetCursorPosition(61, posY);
                                     Console.Write("-->");
-                                    Console.SetCursorPosition(90, 46);
+                                    Console.SetCursorPosition(90, 42);
                                     navPlayerMenu = Console.ReadKey().Key;
                                     switch (navPlayerMenu)
                                     {
@@ -667,7 +667,7 @@ namespace MainClasses
                                 {
                                     Console.SetCursorPosition(61, posY);
                                     Console.Write("-->");
-                                    Console.SetCursorPosition(90, 46);
+                                    Console.SetCursorPosition(90, 42);
                                     navPlayerMenu = Console.ReadKey().Key;
                                     switch (navPlayerMenu)
                                     {
@@ -729,7 +729,7 @@ namespace MainClasses
                                 {
                                     Console.SetCursorPosition(61, posY);
                                     Console.Write("-->");
-                                    Console.SetCursorPosition(90, 46);
+                                    Console.SetCursorPosition(90, 42);
                                     navPlayerMenu = Console.ReadKey().Key;
                                     switch (navPlayerMenu)
                                     {
@@ -791,7 +791,7 @@ namespace MainClasses
                                 {
                                     Console.SetCursorPosition(61, posY);
                                     Console.Write("-->");
-                                    Console.SetCursorPosition(90, 46);
+                                    Console.SetCursorPosition(90, 42);
                                     navPlayerMenu = Console.ReadKey().Key;
                                     switch (navPlayerMenu)
                                     {
@@ -843,75 +843,29 @@ namespace MainClasses
                         }
                         else if (player.Party.MonsterEquipped.Health <= 0)
                         {
+                            System.Threading.Thread.Sleep(1000);
                             ASCII.ANIAttackerFaint(player, gbText, gbBackground);
-                            ASCII.ScrollMessage(message1, 50, 25, gbText, gbBackground);
-                            int posY = 22;
-
-                            Console.SetCursorPosition(65, 22);
-                            Console.Write("YES");
-                            Console.SetCursorPosition(65, 23);
-                            Console.Write("NO");
-                            do
+                            if (player.Party.Slot2.Health <= 0 && player.Party.Slot3.Health <= 0 && player.Party.Slot4.Health <= 0 && player.Party.Slot5.Health <= 0 && player.Party.Slot6.Health <= 0)
                             {
-                                Console.SetCursorPosition(61, posY);
-                                Console.Write("-->");
-                                Console.SetCursorPosition(90, 46);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.UpArrow:
-                                    case ConsoleKey.W:
-                                        Console.SetCursorPosition(61, posY);
-                                        Console.Write("   ");
-                                        posY -= 1;
-                                        if (posY < 22)
-                                        {
-                                            posY += 1;
-                                        }
-                                        reloadBattleFAINT = true;
-                                        break;
-                                    case ConsoleKey.DownArrow:
-                                    case ConsoleKey.S:
-                                        Console.SetCursorPosition(61, posY);
-                                        Console.Write("   ");
-                                        posY += 1;
-                                        if (posY > 23)
-                                        {
-                                            posY -= 1;
-                                        }
-                                        reloadBattleFAINT = true;
-                                        break;
-                                    case ConsoleKey.Enter:
-                                    case ConsoleKey.K:
-                                        if (posY == 22)
-                                        {
-                                            BattlePartySwitch(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
-                                            reloadBattleFAINT = false;
-                                        }
-                                        if (posY == 23)
-                                        {
-                                            SFX.RunAway();
-                                            string message2 = $"{player.Name.ToUpper()} fled to safety!";
-                                            ASCII.ScrollMessage(message2, 15, 2000, gbText, gbBackground);
-                                            reloadBattleFAINT = false;
-                                        }
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                    case ConsoleKey.O:
-                                        SFX.RunAway();
-                                        string message = $"{player.Name.ToUpper()} fled to safety!";
-                                        ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
-                                        reloadBattleFAINT = false;
-                                        break;
-                                    default:
-                                        reloadBattleFAINT = true;
-                                        break;
-                                }
-                            } while (reloadBattleFAINT);
-                            reloadBattleFIGHT = true;
-                            reloadBattleBAG = false;
-                            reloadBattlePOKeFRAUD = false;
-                            reloadBattleRUN = false;
+                                string message = "You are all out of usable Pokefraud!";
+                                string message2 = $"{player.Name.ToUpper()} paid {npc.Name.ToUpper()} ${loserPays}.";
+                                ASCII.ScrollMessage(message, 50, 1500, gbText, gbBackground);
+                                ASCII.ScrollMessage(message2, 50, 2500, gbText, gbBackground);
+                                player.Money -= loserPays;
+                                reloadBattleFIGHT = false;
+                                reloadBattleBAG = false;
+                                reloadBattlePOKeFRAUD = false;
+                                reloadBattleRUN = false;
+                            }
+                            else
+                            {
+                                BattlePartySwitch(player, npc.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
+
+                                reloadBattleFIGHT = true;
+                                reloadBattleBAG = false;
+                                reloadBattlePOKeFRAUD = false;
+                                reloadBattleRUN = false;
+                            }                            
                         }
                         else
                         {
@@ -1237,7 +1191,7 @@ namespace MainClasses
                 Console.Write(move.Type);
             }
             Console.ForegroundColor = gbText;
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void SelectFightMove1(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -1735,7 +1689,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(53, positionY);
                 Console.Write("-->");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -1884,7 +1838,7 @@ namespace MainClasses
             {
                 Console.SetCursorPosition(53, positionY);
                 Console.Write("-->");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -2055,7 +2009,7 @@ namespace MainClasses
                 Console.Write("███");
                 Console.SetCursorPosition(posX, posY + 2);
                 Console.Write("███");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -2187,7 +2141,7 @@ namespace MainClasses
                 Console.Write("███");
                 Console.SetCursorPosition(posX, posY + 2);
                 Console.Write("███");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -2530,7 +2484,7 @@ namespace MainClasses
                 Console.Write("███");
                 Console.SetCursorPosition(posX, posY + 2);
                 Console.Write("███");
-                Console.SetCursorPosition(90, 46);
+                Console.SetCursorPosition(90, 42);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -2816,7 +2770,7 @@ namespace MainClasses
             }
             Console.SetCursorPosition(67, 12);
             Console.Write(player.Name.ToUpper());
-            Console.SetCursorPosition(90, 46);
+            Console.SetCursorPosition(90, 42);
         }
 
         public static void PlayerMenu(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)

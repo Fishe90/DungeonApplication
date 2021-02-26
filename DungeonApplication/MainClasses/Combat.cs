@@ -14,35 +14,39 @@ namespace MainClasses
         public static void CalcExp(Player player, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             int currentExp = player.Party.MonsterEquipped.Exp;
-            int exp = monster.Lv * monster.Lv;
-            string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} gained {exp} exp!";
+            int exp = (monster.Lv * monster.Lv) / 2;            
 
             ASCII.DISJustAttacker(player, gbText, gbBackground);
             if (monster.IsOwned == true)
             {
-                exp = exp * (3/2);
-                ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
+                string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} gained {exp * 1.5} exp!";
+                ASCII.ScrollMessage(message, 50, 1000, gbText, gbBackground);
+                currentExp += Decimal.ToInt32(((monster.Lv * monster.Lv) / 2) * 1.5m);
             }
             else
             {
+                string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} gained {((monster.Lv * monster.Lv) / 2)} exp!";
                 ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
-            }            
+                currentExp += Decimal.ToInt32((monster.Lv * monster.Lv) / 2);
+            }
             System.Threading.Thread.Sleep(1000);
-            currentExp += exp;
-            //SoundPlayer select = new SoundPlayer();
-            ////player.Stream = new MemoryStream(conte.Resources.gameMusic);
-            //select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\Battle_SFX\ExpGain.wav";
-            //select.Play();
+            //currentExp += exp;
             while (currentExp > player.Party.MonsterEquipped.Exp)
             {
                 player.Party.MonsterEquipped.Exp += 1;
                 ASCII.ExpBar(player.Party.MonsterEquipped, 43, 17);
-                if (player.Party.MonsterEquipped.Exp >= player.Party.MonsterEquipped.MaxExp)
+                if (player.Party.MonsterEquipped.Exp == player.Party.MonsterEquipped.MaxExp)
                 {
-                    player.Party.MonsterEquipped.Exp = player.Party.MonsterEquipped.MaxExp;
-                    currentExp = player.Party.MonsterEquipped.MaxExp;
+                    currentExp -= player.Party.MonsterEquipped.MaxExp;
+                    System.Threading.Thread.Sleep(5);
+                    player.Party.MonsterEquipped.Lv += 1;
+                    player.Party.MonsterEquipped.MaxExp = player.Party.MonsterEquipped.Lv * player.Party.MonsterEquipped.Lv;
+                    player.Party.MonsterEquipped.Exp = 0;
+                    System.Threading.Thread.Sleep(500);
+                    ASCII.DISAttackerInfoBar(player, gbText, gbBackground);
+                    ASCII.ScrollMessage($"{player.Party.MonsterEquipped.Name.ToUpper()} grew to Lv.{player.Party.MonsterEquipped.Lv}!", 50, 1500, gbText, gbBackground);
                 }
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(50);
             }
             System.Threading.Thread.Sleep(2000);
             ASCII.DISJustAttacker(player, gbText, gbBackground);
@@ -391,7 +395,7 @@ namespace MainClasses
                     }
                     else
                     {
-                        ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
+                        ASCII.BallBreak(63, 8, 50, gbText, gbBackground);
                         ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                         ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                         DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
@@ -399,7 +403,7 @@ namespace MainClasses
                 }
                 else
                 {
-                    ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
+                    ASCII.BallBreak(63, 8, 50, gbText, gbBackground);
                     ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                     ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                     DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
@@ -407,7 +411,7 @@ namespace MainClasses
             }
             else
             {
-                ASCII.BallBreak(56, 8, 50, gbText, gbBackground);
+                ASCII.BallBreak(63, 8, 50, gbText, gbBackground);
                 ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
                 ASCII.ScrollMessage(messageFreed, 50, 2000, gbText, gbBackground);
                 DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);

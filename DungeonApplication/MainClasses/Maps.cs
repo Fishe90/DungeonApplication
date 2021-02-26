@@ -190,6 +190,8 @@ namespace MainClasses
             int posX = 180;
             int posY = 34;
             int direction = 6;
+            Random rand = new Random();
+            int encounterChance = rand.Next(0, 100);
             //(167,56) **Player Position            
             do
             {
@@ -223,6 +225,17 @@ namespace MainClasses
                         }
                         currentPosY -= 2;
                         posY -= 4;
+                        //Catching Field    
+                        encounterChance = rand.Next(0, 100);
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        {
+                            currentPosY += 2;
+                            posY += 4;
+                            SFX.Battle();
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                            SFX.Route1();
+                        }
                         //Rival House
                         if (currentPosX == 102 && currentPosY == 54)
                         {
@@ -274,6 +287,8 @@ namespace MainClasses
 
                     case ConsoleKey.DownArrow:
                         direction += 1;
+                        currentPosY += 2;
+                        posY += 4;
                         if (direction < 5)
                         {
                             direction = 5;
@@ -281,11 +296,20 @@ namespace MainClasses
                         if (direction == 7)
                         {
                             direction -= 2;
+                        }                        
+                        //Catching Field    
+                        encounterChance = rand.Next(0, 100);
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        {
+                            currentPosY -= 2;
+                            posY -= 4;
+                            SFX.Battle();
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                            SFX.Route1();
                         }
-                        currentPosY += 2;
-                        posY += 4;
                         //Border Bottom
-                        if (currentPosY > 82)
+                        if (currentPosY > 106)
                         {
                             currentPosY -= 2;
                             posY -= 4;
@@ -297,6 +321,17 @@ namespace MainClasses
                         direction = 1;
                         currentPosX -= 5;
                         posX -= 10;
+                        //Catching Field    
+                        encounterChance = rand.Next(0, 100);
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        {
+                            currentPosX += 5;
+                            posX += 10;
+                            SFX.Battle();
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                            SFX.Route1();
+                        }
                         //Border Left
                         if (currentPosX < 60)
                         {
@@ -310,6 +345,17 @@ namespace MainClasses
                         direction = 2;
                         currentPosX += 5;
                         posX += 10;
+                        //Catching Field    
+                        encounterChance = rand.Next(0, 100);
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        {
+                            currentPosX -= 5;
+                            posX -= 10;
+                            SFX.Battle();
+                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                            SFX.Route1();
+                        }
                         //Border Right
                         if (currentPosX > 225)
                         {
@@ -327,7 +373,6 @@ namespace MainClasses
                         string battle = "Do you want to battle?";
                         if (currentPosX == 117 && currentPosY == 68)
                         {
-                            //Player_Menus.YesOrNo(battle, chooseNum, navPlayerMenu, gbText, gbBackground);
                             bool reloadBattleFAINT = false;
                             int menuPosY = 22;
 
@@ -340,7 +385,7 @@ namespace MainClasses
                             {
                                 Console.SetCursorPosition(61, menuPosY);
                                 Console.Write("-->");
-                                Console.SetCursorPosition(90, 46);
+                                Console.SetCursorPosition(90, 42);
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
@@ -899,6 +944,166 @@ namespace MainClasses
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        reloadTestMap = true;
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        //Access PC
+                        if (currentPosX == 50 && currentPosY == 5)
+                        {
+                            ASCII.ScrollMessage($"{player.Name.ToUpper()} booted up the PC.", 25, 1500, gbText, gbBackground);
+                            ASCII.ScrollMessage("Which PC should be accessed?", 25, 1500, gbText, gbBackground);
+                            ASCII.PCMain(player, navPlayerMenu);
+                            navPlayerMenu = Console.ReadKey().Key;
+                            switch (navPlayerMenu)
+                            {
+                                default:
+                                    reloadTestMap = true;
+                                    break;
+                            }
+                        }
+                        //Heal PokeFraud
+                        if (currentPosX == 30 && currentPosY == 7)
+                        {
+                            string message1 = "Hello! Welcome to the PokeCenter!";
+                            string message2 = "Would you like to heal you Pokefraud?";
+                            string message3 = "Have a nice day!";
+                            string message4 = "Sure! Give me just a moment.";
+                            string message5 = "Your Pokefraud are all healed up!";
+                            ASCII.ScrollMessage(message1, 50, 1500, gbText, gbBackground);
+                            ASCII.ScrollMessage(message2, 50, 1500, gbText, gbBackground);
+                            int chooseNum = 0;
+                            int chooseY = 22;
+                            bool reloadBattleFAINT = false;
+                            
+                            Console.SetCursorPosition(65, 22);
+                            Console.Write("YES");
+                            Console.SetCursorPosition(65, 23);
+                            Console.Write("NO");
+                            do
+                            {
+                                Console.SetCursorPosition(61, chooseY);
+                                Console.Write("-->");
+                                Console.SetCursorPosition(90, 42);
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+                                        Console.SetCursorPosition(61, chooseY);
+                                        Console.Write("   ");
+                                        chooseY -= 1;
+                                        if (chooseY < 22)
+                                        {
+                                            chooseY += 1;
+                                        }
+                                        reloadBattleFAINT = true;
+                                        break;
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+                                        Console.SetCursorPosition(61, chooseY);
+                                        Console.Write("   ");
+                                        chooseY += 1;
+                                        if (chooseY > 23)
+                                        {
+                                            chooseY -= 1;
+                                        }
+                                        reloadBattleFAINT = true;
+                                        break;
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+                                        if (chooseY == 22)
+                                        {
+                                            ASCII.ScrollMessage(message4, 50, 1500, gbText, gbBackground);
+                                            //TODO Insert Pokeball animation
+                                            Console.SetCursorPosition(37, 6);
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.BackgroundColor = gbText;
+                                            Console.Write("▄");
+                                            SFX.HealingIndividual();
+                                            Console.SetCursorPosition(90, 42);
+                                            System.Threading.Thread.Sleep(500);
+                                            if (player.Party.Slot2.Type != Monster_Race.NONE)
+                                            {
+                                                Console.SetCursorPosition(39, 6);
+                                                Console.Write("▄");
+                                                SFX.HealingIndividual();
+                                                Console.SetCursorPosition(90, 42);
+                                                player.Party.Slot2.Health = player.Party.Slot2.MaxHealth;
+                                                System.Threading.Thread.Sleep(500);
+                                            }
+                                            
+                                            Console.BackgroundColor = gbBackground;
+                                            if (player.Party.Slot3.Type != Monster_Race.NONE)
+                                            {
+                                                
+                                                Console.SetCursorPosition(37, 7);
+                                                Console.Write("▀");
+                                                SFX.HealingIndividual();
+                                                Console.SetCursorPosition(90, 42);
+                                                player.Party.Slot3.Health = player.Party.Slot3.MaxHealth;
+                                                System.Threading.Thread.Sleep(500);
+                                            }
+                                            
+                                            if (player.Party.Slot4.Type != Monster_Race.NONE)
+                                            {
+                                                Console.SetCursorPosition(39, 7);
+                                                Console.Write("▀");
+                                                SFX.HealingIndividual();
+                                                Console.SetCursorPosition(90, 42);
+                                                player.Party.Slot4.Health = player.Party.Slot4.MaxHealth;
+                                                System.Threading.Thread.Sleep(500);
+                                            }
+                                            
+                                            if (player.Party.Slot5.Type != Monster_Race.NONE)
+                                            {
+                                                Console.SetCursorPosition(37, 7);
+                                                Console.Write("█");
+                                                SFX.HealingIndividual();
+                                                Console.SetCursorPosition(90, 42);
+                                                player.Party.Slot5.Health = player.Party.Slot5.MaxHealth;
+                                                System.Threading.Thread.Sleep(500);
+                                            }
+                                            
+                                            if (player.Party.Slot6.Type != Monster_Race.NONE)
+                                            {
+                                                Console.SetCursorPosition(39, 7);
+                                                Console.Write("█");
+                                                SFX.HealingIndividual();
+                                                Console.SetCursorPosition(90, 42);
+                                                player.Party.Slot6.Health = player.Party.Slot6.MaxHealth;
+                                            }
+                                            System.Threading.Thread.Sleep(250);
+                                            SFX.HealingComplete();
+                                            System.Threading.Thread.Sleep(4000);
+                                            SFX.PokeCenter();
+                                            Console.ForegroundColor = gbText;
+                                            Console.BackgroundColor = gbBackground;
+                                            ASCII.ScrollMessage(message5, 50, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);
+                                            player.Party.MonsterEquipped.Health = player.Party.MonsterEquipped.MaxHealth;
+                                            
+                                            chooseNum += 1;
+                                            reloadBattleFAINT = false;
+                                        }
+                                        else if (chooseY == 23)
+                                        {
+                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);
+                                            chooseNum += 2;
+                                            reloadBattleFAINT = false;
+                                        }
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        ASCII.ScrollMessage(message2, 50, 1500, gbText, gbBackground);
+                                        reloadBattleFAINT = false;
+                                        break;
+                                    default:
+                                        reloadBattleFAINT = true;
+                                        break;
+                                }
+                            } while (reloadBattleFAINT);
+                        }
                         reloadTestMap = true;
                         break;
                     default:
