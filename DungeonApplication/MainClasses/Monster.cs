@@ -86,10 +86,10 @@ namespace MainClasses
         #endregion
 
         #region Wild Monsters
-        public static Monster Pyra = new Monster("Pyra", "Pyra", '♂', false, 0, 0, 0, 0, 0, 0, "001", false, Monster_Race.Fire, false, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
+        public static Monster Pyra = new Monster("Pyra", "Pyra", '♂', false, 25, 0, 25, 0, 5, 0, "001", false, Monster_Race.Fire, false, "", ASCII.pyraAttacker, ASCII.pyraDefender, ASCII.pyraPokedex, Monster_MovesEquipped.fireLow);
         public static Monster Dousey = new Monster("Dousey", "Dousey", '♂', false, 0, 0, 0, 0, 0, 0, "004", false, Monster_Race.Water, false, "", ASCII.douseyAttacker, ASCII.douseyDefender, ASCII.douseyPokedex, Monster_MovesEquipped.waterLow);
         public static Monster Electra = new Monster("Electra", "Electra", '♂', false, 0, 0, 0, 0, 0, 0, "007", false, Monster_Race.Electric, false, "", ASCII.electraAttacker, ASCII.electraDefender, ASCII.electraPokedex, Monster_MovesEquipped.electricLow);
-        public static Monster Cobblet = new Monster("Cobblet", "Cobblet", '♂', false, 0, 0, 0, 0, 0, 0, "010", false, Monster_Race.Ground, false, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
+        public static Monster Cobblet = new Monster("Cobblet", "Cobblet", '♂', false, 25, 0, 25, 0, 5, 0, "010", false, Monster_Race.Ground, false, "", ASCII.cobbletAttacker, ASCII.cobbletDefender, ASCII.cobbletPokedex, Monster_MovesEquipped.groundLow);
         #endregion
 
         #region Player Starter Party

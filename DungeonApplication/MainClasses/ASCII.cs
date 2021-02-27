@@ -16,7 +16,7 @@ namespace MainClasses
         #region METHODS: Game Versions
 
         public static void DEMO(ConsoleKey navPlayerMenu, int currentPosX, int currentPosY)
-        {            
+        {
             bool reloadMainScreen = false;
             bool reloadColorFormat = false;
 
@@ -3328,7 +3328,7 @@ namespace MainClasses
             Console.SetCursorPosition(positionX, positionY);
             Console.ForegroundColor = gbText;
             Console.BackgroundColor = gbBackground;
-            Console.Write($"([{monster.Health}/{monster.MaxHealth}]");
+            Console.Write($"{monster.Health}/{monster.MaxHealth}");
         }
 
         public static void Name(Monster monster, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3383,6 +3383,34 @@ namespace MainClasses
             Console.BackgroundColor = gbBackground;
             Console.SetCursorPosition(positionX, positionY);
             Console.Write($"Lv.{monster.Lv}");
+        }
+
+        public static void Type(Monster_Race type, int positionX, int positionY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetCursorPosition(positionX, positionY);
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (type)
+            {
+                case Monster_Race.Fire:
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    break;
+                case Monster_Race.Water:
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    break;
+                case Monster_Race.Electric:
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    break;
+                case Monster_Race.Ground:
+                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                    break;
+                case Monster_Race.Psychic:
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                    break;
+            }
+            Console.Write(" " + type + " ");
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
         }
 
         public static void Party(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -3740,7 +3768,6 @@ namespace MainClasses
             PokeBallANI(60, 8, 50, gbBackground);
             PokeBallANI(60, 9, 1000, gbBackground);
             BallBreak(60, 8, 50, gbText, gbBackground);
-
         }
 
         public static void ANIDefenderFaint(Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -4131,7 +4158,7 @@ namespace MainClasses
                 System.Threading.Thread.Sleep(1);
             }
             DISDefenderInfoBar(monster, gbText, gbBackground);
-            ScrollMessage(message, 50, 2000, gbText, gbBackground);
+            ScrollMessage(message, 50, 1500, gbText, gbBackground);
         }
 
         public static void ANINPCAppear(Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -4163,8 +4190,7 @@ namespace MainClasses
         public static void ANINPCSend(Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"{npc.Name} sent out {npc.Party.MonsterEquipped.Name}!";
-            System.Threading.Thread.Sleep(1500);
-            ScrollMessage(message, 50, 2000, gbText, gbBackground);
+            ScrollMessage(message, 50, 1500, gbText, gbBackground);
             ANIDefenderSwitch(gbText, gbBackground);
             DISDefender(npc.Party.MonsterEquipped, gbText, gbBackground);
         }
@@ -4352,6 +4378,63 @@ namespace MainClasses
             Combat.DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
         }
 
+        public static void ANIPlayerSwitchSendTEST(Player player, int slot, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
+            if (player.Party.MonsterEquipped.Health >= 0)
+            {
+                if (monster.Health > 0)
+                {
+                    DISATTandDEF(player, monster, gbText, gbBackground);
+                    ScrollMessage(message, 50, 1000, gbText, gbBackground);
+                    ANIReturn(6, 13, gbText, gbBackground);
+                }
+                else
+                {
+                    DISJustAttacker(player, gbText, gbBackground);
+                    ScrollMessage(message, 50, 1000, gbText, gbBackground);
+                    ANIReturn(6, 13, gbText, gbBackground);
+                }
+            }
+            ResetHalfScreen(11, gbText, gbBackground);
+            System.Threading.Thread.Sleep(1000);
+            switch (slot)
+            {
+                case 2:
+                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                    player.Party.MonsterEquipped = player.Party.Slot2;
+                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                    break;
+                case 3:
+                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                    player.Party.MonsterEquipped = player.Party.Slot3;
+                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                    break;
+                case 4:
+                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                    player.Party.MonsterEquipped = player.Party.Slot4;
+                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                    break;
+                case 5:
+                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                    player.Party.MonsterEquipped = player.Party.Slot5;
+                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                    break;
+                case 6:
+                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                    player.Party.MonsterEquipped = player.Party.Slot6;
+                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                    break;
+                default:
+                    break;
+            }
+            ANIPlayerSend(player, gbText, gbBackground);
+            if (monster.Health > 0)
+            {
+                Combat.DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
+            }            
+        }
+
         public static void ANIPlayerSwitchSendNPCFaint(Player player, int slot, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             string message = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
@@ -4396,8 +4479,33 @@ namespace MainClasses
             ANIPlayerSend(player, gbText, gbBackground);
         }
 
-        public static void ANINPCNext(Player player, Player npc, int slot, ConsoleColor gbText, ConsoleColor gbBackground)
-        {            
+        public static void ANINPCNext(Player player, Player npc, int slot, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {                        
+            string message = "";
+            if (slot == 2)
+            {
+                message = $"{npc.Name.ToUpper()} is about to send {npc.Party.Slot2.Name.ToUpper()}.";
+            }
+            if (slot == 3)
+            {
+                message = $"{npc.Name.ToUpper()} is about to send {npc.Party.Slot3.Name.ToUpper()}.";
+            }
+            if (slot == 4)
+            {
+                message = $"{npc.Name.ToUpper()} is about to send {npc.Party.Slot4.Name.ToUpper()}.";
+            }
+            if (slot == 5)
+            {
+                message = $"{npc.Name.ToUpper()} is about to send {npc.Party.Slot5.Name.ToUpper()}.";
+            }
+            if (slot == 6)
+            {
+                message = $"{npc.Name.ToUpper()} is about to send {npc.Party.Slot6.Name.ToUpper()}.";
+            }
+            string message1 = $"Will you send out another Pokefraud?";
+            ScrollMessage(message, 50, 1500, gbText, gbBackground);
+            ScrollMessage(message1, 50, 500, gbText, gbBackground);
+            Player_Menus.QueSwitch(player, npc.Party.MonsterEquipped, 0, navPlayerMenu, gbText, gbBackground);
             switch (slot)
             {
                 case 2:
@@ -4428,10 +4536,7 @@ namespace MainClasses
                 default:
                     break;
             }
-            string message1 = $"{npc.Name.ToUpper()} is about to send {npc.Party.MonsterEquipped.Name.ToUpper()}.";
-            string message2 = $"Will you send out another Pokefraud?";
-            ScrollMessage(message1, 50, 2000, gbText, gbBackground);
-            ScrollMessage(message2, 50, 1000, gbText, gbBackground);
+            ANINPCSend(npc, gbText, gbBackground);
         }
 
         public static void ANINPCDefeat(Player player, Player npc, int money, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -4458,9 +4563,9 @@ namespace MainClasses
         {
             ResetScreen(gbText, gbBackground);
             ANIWildAppear(monster, gbText, gbBackground);
-            System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(500);
             ANIPlayerSend(player, gbText, gbBackground);
-            System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(500);
         }
 
         public static void NPCEncounter(Player player, Player npc, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -4468,8 +4573,9 @@ namespace MainClasses
             ResetScreen(gbText, gbBackground);
             ANINPCAppear(npc, gbText, gbBackground);
             ANINPCSend(npc, gbText, gbBackground);
+            System.Threading.Thread.Sleep(500);
             ANIPlayerSend(player, gbText, gbBackground);
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(500);
         }
 
         public static void FullBattleWild(Player player, Monster[] monsters, int lvLow, int lvHigh, ConsoleColor gbText, ConsoleColor gbBackground, ConsoleKey navPlayerMenu)
@@ -4496,8 +4602,7 @@ namespace MainClasses
 
             //SFX.Battle();
             WildEncounter(player, defender, gbText, gbBackground);
-
-            Player_Menus.WildFightMenu(player, defender, navPlayerMenu, gbText, gbBackground);
+            Player_Menus.FightMenu(player, defender, navPlayerMenu, gbText, gbBackground);
         }
 
         public static void FullBattleNPC(Player player, Player npc, ConsoleColor gbText, ConsoleColor gbBackground, ConsoleKey navPlayerMenu)
@@ -5103,6 +5208,196 @@ namespace MainClasses
             $"█  HALL OF FAME   █",
             $"█  SWITCH OFF     █",
             $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
+        #endregion
+
+        #region Player party
+
+        public static string[] partyNoBattle = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█  SUMMARY        █",
+            $"█  SWITCH         █",
+            $"█  ITEM           █",
+            $"█  CANCEL         █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
+        public static string[] partyBattle = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█  SWITCH         █",
+            $"█  CHECK STATS    █",
+            $"█  CANCEL         █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
+        #endregion
+
+        #region Pokedex Entry
+
+        public static string[] pokedexEntry = new string[]
+        {//(4,2)
+            " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █                   █████████████████             █               █             █ ",
+            " █                   █ POKEDEX ENTRY █    STATS    █     MOVES     █    EXIT     █ ",
+            " █                   █████████████████▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄█ ",
+            " █                   █                                                           █ ",
+            " █                   █            Pokedex No.                                    █ ",
+            " █                   █                                                           █ ",
+            " █                   █            Name                                           █ ",
+            " █                   █                                                           █ ",
+            " █                   █            Type                                           █ ",
+            " █                   █                                                           █ ",
+            " █                   █            OT                                             █ ",
+            " █                   █                                                           █ ",
+            " █                   █            Exp. Points                                    █ ",
+            " █                   █                                                           █ ",
+            " █                   █                                                           █ ",
+            " █                   █            To Next Lv.                                    █ ",
+            " █                   █                                                           █ ",
+            " █                   █                                                           █ ",
+            " █                   █                                                           █ ",
+            " █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█                                                           █ ",
+            " █ ITEM              █                                                           █ ",
+            " █                   █                                                           █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        public static string[] pokedexStats = new string[]
+        {
+            "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+            "█               ███████████████               █             █",
+            "█ POKEDEX ENTRY █    STATS    █     MOVES     █    EXIT     █",
+            "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███████████████▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+            "█                                                           █",
+            "█             HP                                            █",
+            "█                                                           █",
+            "█         Attack                                            █",
+            "█                                                           █",
+            "█        Defense                                            █",
+            "█                                                           █",
+            "█       Weakness                                            █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█             ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+            "█  ABILITY  ▄▀                                              █",
+            "█▀▀▀▀▀▀▀▀▀▀▀                                                █",
+            "█                                                           █",
+            "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
+        };
+
+        public static string[] pokedexMoves = new string[]
+        {
+            "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+            "█               █             █████████████████             █",
+            "█ POKEDEX ENTRY █    STATS    █     MOVES     █    EXIT     █",
+            "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄█████████████████▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+            "█                                                           █",
+            "█                                                           █",
+            "█              ▄▄▄▄▄▄     ▄                                 █",
+            "█              ▀          ▀                                 █",
+            "█                                                           █",
+            "█                                                           █",
+            "█              ▄     ▄▄▄▄▄▄                                 █",
+            "█              ▀          ▀                                 █",
+            "█                                                           █",
+            "█                                                           █",
+            "█              ▄          ▄                                 █",
+            "█              ▀▀▀▀▀▀     ▀                                 █",
+            "█                                                           █",
+            "█                                                           █",
+            "█              ▄          ▄                                 █",
+            "█              ▀     ▀▀▀▀▀▀                                 █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
+        };
+
+        public static string[] pokedexExit = new string[]
+        {
+            "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+            "█               █             █               ███████████████",
+            "█ POKEDEX ENTRY █    STATS    █     MOVES     █    EXIT     █",
+            "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███████████████",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█               ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄             █",
+            "█               █                             █             █",
+            "█               █                             █             █",
+            "█               █        Close window.        █             █",
+            "█               █                             █             █",
+            "█               █                             █             █",
+            "█               ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀             █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "█                                                           █",
+            "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
+        };
+
+        public static string[] pokedexRefreshRIGHT = new string[]
+        {
+            //(26, 6)
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           ",
+            "                                                           " 
+        };
+
+        public static string[] pokedexRefreshLEFT = new string[]
+        {
+            //(5, 3)
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "                   ",
+            "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+            " ITEM              ",
+            "                   "
         };
 
         #endregion

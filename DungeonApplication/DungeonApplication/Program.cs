@@ -13,7 +13,7 @@ namespace DungeonApplication
         {
             Console.Title = "POKeFRAUD: QUARTZ VERSION";
             Console.SetWindowSize(91, 43);
-            ConsoleColor gbText = ConsoleColor.Gray;
+            ConsoleColor gbText = ConsoleColor.White;
             ConsoleColor gbBackground = ConsoleColor.Black;
             ConsoleColor GBColor = ConsoleColor.DarkGreen;
             ConsoleKey navPlayerMenu = Console.ReadKey().Key;
@@ -30,8 +30,12 @@ namespace DungeonApplication
             player1.Party.Slot2 = Monster.starterDousey;
             player1.Party.Slot3 = Monster.starterElectra;
             player1.Party.Slot4 = Monster.Cobblet;
-            player1.Party.Slot5 = Monster.starterPyra;
-            player1.Party.Slot6 = Monster.rivalNeo;
+            player1.Party.Slot5 = Monster.default5;
+            player1.Party.Slot5.Health = 0;
+            player1.Party.Slot5.Name = "";
+            player1.Party.Slot6 = Monster.default6;
+            player1.Party.Slot6.Health = 0;
+            player1.Party.Slot6.Name = "";
             player1.Party.MonsterSwitch = Monster.monsterSwitch;
             player1.Name = "Dillon";
             player1.Gender = '♂';
@@ -66,10 +70,9 @@ namespace DungeonApplication
             int currentPosX = 167;
             int currentPosY = 56;
 
-            //Maps.DEMOPokeCenter(player1, 30, 17, navPlayerMenu, gbText, gbBackground);
-            //TODO download pokecenter AND pokemart 8-bit theme music
-            //ASCII.DEMO(navPlayerMenu, currentPosX, currentPosY);
-            //SFX.Route1();
+            
+
+            SFX.Route2();
             Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
         }
     }

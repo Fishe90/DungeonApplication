@@ -101,7 +101,7 @@ namespace MainClasses
                             SFX.RivalBattle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -122,7 +122,7 @@ namespace MainClasses
                             SFX.RivalBattle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -143,7 +143,7 @@ namespace MainClasses
                             SFX.RivalBattle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -164,7 +164,7 @@ namespace MainClasses
                             SFX.RivalBattle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             ASCII.FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -227,14 +227,14 @@ namespace MainClasses
                         posY -= 4;
                         //Catching Field    
                         encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
                         {
                             currentPosY += 2;
                             posY += 4;
                             SFX.Battle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                             ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                         }
                         //Rival House
                         if (currentPosX == 102 && currentPosY == 54)
@@ -250,7 +250,7 @@ namespace MainClasses
                             SFX.EnterStore();
                             System.Threading.Thread.Sleep(1000);
                             DEMOPokeMart(player, 15, 17, navPlayerMenu, gbText, gbBackground);
-                            SFX.Route1();
+                            SFX.Route2();
                             currentPosY += 2;
                             posY += 4;
                             direction = 6;
@@ -262,7 +262,7 @@ namespace MainClasses
                             System.Threading.Thread.Sleep(1000);
                             SFX.PokeCenter();
                             DEMOPokeCenter(player, 30, 17, navPlayerMenu, gbText, gbBackground);
-                            SFX.Route1();
+                            SFX.Route2();
                             currentPosY += 2;
                             posY += 4;
                             direction = 6;
@@ -299,14 +299,14 @@ namespace MainClasses
                         }                        
                         //Catching Field    
                         encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
                         {
                             currentPosY -= 2;
                             posY -= 4;
                             SFX.Battle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                             ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                         }
                         //Border Bottom
                         if (currentPosY > 106)
@@ -323,14 +323,14 @@ namespace MainClasses
                         posX -= 10;
                         //Catching Field    
                         encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
                         {
                             currentPosX += 5;
                             posX += 10;
                             SFX.Battle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                             ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                         }
                         //Border Left
                         if (currentPosX < 60)
@@ -354,7 +354,7 @@ namespace MainClasses
                             SFX.Battle();
                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                             ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            SFX.Route2();
                         }
                         //Border Right
                         if (currentPosX > 225)
@@ -415,11 +415,10 @@ namespace MainClasses
                                     case ConsoleKey.K:
                                         if (menuPosY == 22)
                                         {
-                                            SFX.Battle();
+                                            SFX.RivalBattle();
                                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
-                                            SFX.Route1();
-                                            //ASCII.FullBattleWild(player, Monster.starters, 5, 10, gbText, gbBackground, navPlayerMenu);
+                                            SFX.Route2();
                                             reloadBattleFAINT = false;
                                         }
                                         else if (menuPosY == 23)
@@ -971,7 +970,7 @@ namespace MainClasses
                             string message4 = "Sure! Give me just a moment.";
                             string message5 = "Your Pokefraud are all healed up!";
                             ASCII.ScrollMessage(message1, 50, 1500, gbText, gbBackground);
-                            ASCII.ScrollMessage(message2, 50, 1500, gbText, gbBackground);
+                            ASCII.ScrollMessage(message2, 50, 1, gbText, gbBackground);
                             int chooseNum = 0;
                             int chooseY = 22;
                             bool reloadBattleFAINT = false;
