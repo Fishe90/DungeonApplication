@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using MainClasses;
 
 namespace DungeonApplication
@@ -18,21 +19,26 @@ namespace DungeonApplication
             ConsoleColor GBColor = ConsoleColor.DarkGreen;
             ConsoleKey navPlayerMenu = Console.ReadKey().Key;
 
+            ASCII.TimePlayed.Start();
+
             ASCII.GameBoy(GBColor);
 
             #region Player Starting Stats
 
             Player player1 = new Player();
+            player1.PlayerID = ASCII.random.Next(20000, 40000);
             player1.Party = new Player_Party();
+            player1.Pokedex = Monster.Pokedex;
             player1.Inventory = new Player_Inventory();
+            player1.StartTime = DateTime.Now.ToString($"{0:MMM dd}, {0:yyyy}");
             player1.PC = Monster.PC;
             player1.Party.MonsterEquipped = Monster.starterNeo;
-            player1.Party.Slot2 = Monster.starterDousey;
-            player1.Party.Slot3 = Monster.starterElectra;
-            player1.Party.Slot4 = Monster.Cobblet;
-            player1.Party.Slot5 = Monster.default5;
-            player1.Party.Slot5.Health = 0;
-            player1.Party.Slot5.Name = "";
+            player1.Party.Slot2 = Monster.testPyra;
+            player1.Party.Slot3 = Monster.testDowsey;
+            player1.Party.Slot4 = Monster.testElectra;
+            player1.Party.Slot5 = Monster.testCobblet;
+            //player1.Party.Slot5.Health = 0;
+            //player1.Party.Slot5.Name = "";
             player1.Party.Slot6 = Monster.default6;
             player1.Party.Slot6.Health = 0;
             player1.Party.Slot6.Name = "";
@@ -48,7 +54,7 @@ namespace DungeonApplication
             Player NPC = new Player();
             NPC.Name = "Bryan";
             NPC.Party = new Player_Party();
-            NPC.Party.MonsterEquipped = Monster.rivalDousey;
+            NPC.Party.MonsterEquipped = Monster.rivalDowsey;
             NPC.Party.Slot2 = Monster.rivalElectra;
             NPC.Party.Slot3 = Monster.rivalCobblet;
             NPC.Party.Slot4 = new Monster();
@@ -65,13 +71,13 @@ namespace DungeonApplication
             NPC.ASCIIDefender = ASCII.npcDefender;
             NPC.ASCIIProfile = ASCII.npcProfile;
 
-            #endregion                        
-             
-            int currentPosX = 167;
-            int currentPosY = 56;
+            #endregion
 
             
 
+            int currentPosX = 167;
+            int currentPosY = 56;
+            //Player_Menus.PlayerPC(player1, new Monster(), navPlayerMenu, gbText, gbBackground);
             SFX.Route2();
             Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
         }

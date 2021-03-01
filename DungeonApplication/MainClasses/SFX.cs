@@ -103,7 +103,25 @@ namespace MainClasses
             //player.Stream = new MemoryStream(conte.Resources.gameMusic);
             select.SoundLocation = @"C:\Users\Student\OneDrive\Desktop\PokeFraud(TEST)\PokeClassLibrary\SFX\BattleMusic_SFX\LeagueBattleMusic.wav";
             select.PlayLooping();
-        } //Trim in the 
+        }
+
+        public static void LeagueBattleREMIX()
+        {
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\BattleMusic_SFX\CynthiaBattleTheme(REMIX_WAV) (mp3cut.net).wav";
+            select.PlayLooping();
+        }
+
+        public static void LeagueBattleRE()
+        {
+            SoundPlayer select = new SoundPlayer();
+            //player.Stream = new MemoryStream(conte.Resources.gameMusic);
+            select.SoundLocation = @"C:\Users\Student\OneDrive\Documents\Visual Studio 2017\Projects\03_CSF2\DungeonApplication\DungeonApplication\MainClasses\SFX\BattleMusic_SFX\CynthiaBattleTheme(REMIX_WAV).wav";
+            select.PlayLooping();
+        }
+
+        //Trim in the 
 
         //public static void Rivalintro()
         //{

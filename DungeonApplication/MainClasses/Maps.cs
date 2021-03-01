@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MainClasses
 {
@@ -416,6 +417,7 @@ namespace MainClasses
                                         if (menuPosY == 22)
                                         {
                                             SFX.RivalBattle();
+                                            //SFX.LeagueBattleRE();
                                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
                                             SFX.Route2();
@@ -952,14 +954,7 @@ namespace MainClasses
                         {
                             ASCII.ScrollMessage($"{player.Name.ToUpper()} booted up the PC.", 25, 1500, gbText, gbBackground);
                             ASCII.ScrollMessage("Which PC should be accessed?", 25, 1500, gbText, gbBackground);
-                            ASCII.PCMain(player, navPlayerMenu);
-                            navPlayerMenu = Console.ReadKey().Key;
-                            switch (navPlayerMenu)
-                            {
-                                default:
-                                    reloadTestMap = true;
-                                    break;
-                            }
+                            ASCII.PCMain(player, navPlayerMenu, gbText, gbBackground);
                         }
                         //Heal PokeFraud
                         if (currentPosX == 30 && currentPosY == 7)
@@ -1021,6 +1016,11 @@ namespace MainClasses
                                             Console.Write("▄");
                                             SFX.HealingIndividual();
                                             Console.SetCursorPosition(90, 42);
+                                            player.Party.MonsterEquipped.Health = player.Party.MonsterEquipped.MaxHealth;
+                                            player.Party.MonsterEquipped.EquippedMoves.Move1.Uses = player.Party.MonsterEquipped.EquippedMoves.Move1.MaxUses;
+                                            player.Party.MonsterEquipped.EquippedMoves.Move2.Uses = player.Party.MonsterEquipped.EquippedMoves.Move2.MaxUses;
+                                            player.Party.MonsterEquipped.EquippedMoves.Move3.Uses = player.Party.MonsterEquipped.EquippedMoves.Move3.MaxUses;
+                                            player.Party.MonsterEquipped.EquippedMoves.Move4.Uses = player.Party.MonsterEquipped.EquippedMoves.Move4.MaxUses;
                                             System.Threading.Thread.Sleep(500);
                                             if (player.Party.Slot2.Type != Monster_Race.NONE)
                                             {
@@ -1029,6 +1029,10 @@ namespace MainClasses
                                                 SFX.HealingIndividual();
                                                 Console.SetCursorPosition(90, 42);
                                                 player.Party.Slot2.Health = player.Party.Slot2.MaxHealth;
+                                                player.Party.Slot2.EquippedMoves.Move1.Uses = player.Party.Slot2.EquippedMoves.Move1.MaxUses;
+                                                player.Party.Slot2.EquippedMoves.Move2.Uses = player.Party.Slot2.EquippedMoves.Move2.MaxUses;
+                                                player.Party.Slot2.EquippedMoves.Move3.Uses = player.Party.Slot2.EquippedMoves.Move3.MaxUses;
+                                                player.Party.Slot2.EquippedMoves.Move4.Uses = player.Party.Slot2.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
                                             
@@ -1041,6 +1045,10 @@ namespace MainClasses
                                                 SFX.HealingIndividual();
                                                 Console.SetCursorPosition(90, 42);
                                                 player.Party.Slot3.Health = player.Party.Slot3.MaxHealth;
+                                                player.Party.Slot3.EquippedMoves.Move1.Uses = player.Party.Slot3.EquippedMoves.Move1.MaxUses;
+                                                player.Party.Slot3.EquippedMoves.Move2.Uses = player.Party.Slot3.EquippedMoves.Move2.MaxUses;
+                                                player.Party.Slot3.EquippedMoves.Move3.Uses = player.Party.Slot3.EquippedMoves.Move3.MaxUses;
+                                                player.Party.Slot3.EquippedMoves.Move4.Uses = player.Party.Slot3.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
                                             
@@ -1051,6 +1059,10 @@ namespace MainClasses
                                                 SFX.HealingIndividual();
                                                 Console.SetCursorPosition(90, 42);
                                                 player.Party.Slot4.Health = player.Party.Slot4.MaxHealth;
+                                                player.Party.Slot4.EquippedMoves.Move1.Uses = player.Party.Slot4.EquippedMoves.Move1.MaxUses;
+                                                player.Party.Slot4.EquippedMoves.Move2.Uses = player.Party.Slot4.EquippedMoves.Move2.MaxUses;
+                                                player.Party.Slot4.EquippedMoves.Move3.Uses = player.Party.Slot4.EquippedMoves.Move3.MaxUses;
+                                                player.Party.Slot4.EquippedMoves.Move4.Uses = player.Party.Slot4.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
                                             
@@ -1061,6 +1073,10 @@ namespace MainClasses
                                                 SFX.HealingIndividual();
                                                 Console.SetCursorPosition(90, 42);
                                                 player.Party.Slot5.Health = player.Party.Slot5.MaxHealth;
+                                                player.Party.Slot5.EquippedMoves.Move1.Uses = player.Party.Slot5.EquippedMoves.Move1.MaxUses;
+                                                player.Party.Slot5.EquippedMoves.Move2.Uses = player.Party.Slot5.EquippedMoves.Move2.MaxUses;
+                                                player.Party.Slot5.EquippedMoves.Move3.Uses = player.Party.Slot5.EquippedMoves.Move3.MaxUses;
+                                                player.Party.Slot5.EquippedMoves.Move4.Uses = player.Party.Slot5.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
                                             
@@ -1071,6 +1087,10 @@ namespace MainClasses
                                                 SFX.HealingIndividual();
                                                 Console.SetCursorPosition(90, 42);
                                                 player.Party.Slot6.Health = player.Party.Slot6.MaxHealth;
+                                                player.Party.Slot6.EquippedMoves.Move1.Uses = player.Party.Slot6.EquippedMoves.Move1.MaxUses;
+                                                player.Party.Slot6.EquippedMoves.Move2.Uses = player.Party.Slot6.EquippedMoves.Move2.MaxUses;
+                                                player.Party.Slot6.EquippedMoves.Move3.Uses = player.Party.Slot6.EquippedMoves.Move3.MaxUses;
+                                                player.Party.Slot6.EquippedMoves.Move4.Uses = player.Party.Slot6.EquippedMoves.Move4.MaxUses;
                                             }
                                             System.Threading.Thread.Sleep(250);
                                             SFX.HealingComplete();
@@ -1079,8 +1099,7 @@ namespace MainClasses
                                             Console.ForegroundColor = gbText;
                                             Console.BackgroundColor = gbBackground;
                                             ASCII.ScrollMessage(message5, 50, 1500, gbText, gbBackground);
-                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);
-                                            player.Party.MonsterEquipped.Health = player.Party.MonsterEquipped.MaxHealth;
+                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);                                            
                                             
                                             chooseNum += 1;
                                             reloadBattleFAINT = false;

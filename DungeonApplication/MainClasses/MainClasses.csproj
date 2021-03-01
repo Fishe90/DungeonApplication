@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SFX\BattleMusic_SFX\CynthiaBattleTheme%28REMIX_WAV%29 %28mp3cut.net%29.wav" />
+    <Content Include="SFX\BattleMusic_SFX\CynthiaBattleTheme%28REMIX_WAV%29.wav" />
     <Content Include="SFX\BattleMusic_SFX\LeagueBattleIntro.wav" />
     <Content Include="SFX\BattleMusic_SFX\LeagueBattleMusic.wav" />
     <Content Include="SFX\BattleMusic_SFX\RivalBattleMusic.wav" />

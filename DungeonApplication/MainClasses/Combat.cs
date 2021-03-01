@@ -220,7 +220,7 @@ namespace MainClasses
 
         public static void CatchSort(Player player, Monster monsterCaught, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            int currentID = 1;
+            int currentID = 0;
             bool reloadCatchSortPC = false;
 
             monsterCaught.IsCaught = true;
@@ -354,7 +354,7 @@ namespace MainClasses
                         player.PC[currentID].IsBoosted = false;
                         player.PC[currentID].Gender = monsterCaught.Gender;
 
-                        string message = $"{monsterCaught.Name} was sent to Slot {currentID} in {player.Name}'s PC.";
+                        string message = $"{monsterCaught.Name} was sent to Slot {currentID + 1} in {player.Name}'s PC.";
                         ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);                       
                         reloadCatchSortPC = false;
                     }

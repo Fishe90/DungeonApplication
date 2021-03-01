@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MainClasses
 {
@@ -10,9 +11,7 @@ namespace MainClasses
     {
         /****GENERAL MENUS****/
 
-        //WHY DOESN'T THIS WORK???
-        //QueSwitch after my monster faints
-        //QueSwitch after NPC Monster faints
+        #region General Menu
 
         public static void QueSwitch(Player player, Monster monster, int slot, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
@@ -59,13 +58,14 @@ namespace MainClasses
                         {
                             if (slot == 0)
                             {
-                                PlayerPartyMenu(player, navPlayerMenu, gbText, gbBackground);
+                                PlayerPartyMenuBattle(player, monster, navPlayerMenu, gbText, gbBackground);
+                                reloadBattleFAINT = false;
                             }
                             else
                             {
-                                ASCII.ANIPlayerSwitchSendTEST(player, slot, monster, gbText, gbBackground);                                
+                                ASCII.ANIPlayerSwitchSendTEST(player, slot, monster, gbText, gbBackground);
+                                reloadBattleFAINT = false;
                             }
-                            reloadBattleFAINT = false;
                         }
                         else if (posY == 23)
                         {
@@ -151,6 +151,8 @@ namespace MainClasses
                 }
             } while (reloadBattleFAINT);
         }
+
+        #endregion
 
         /****FIGHT MENU****/
 
@@ -514,7 +516,6 @@ namespace MainClasses
             bool reloadBattleBAG = false;
             bool reloadBattlePOKeFRAUD = false;
             bool reloadBattleRUN = false;
-            string message1 = $"Will you send out another PokeFraud?";
 
             do
             {
@@ -542,22 +543,18 @@ namespace MainClasses
                             else if (npc.Party.Slot2.Health > 0)
                             {
                                 ASCII.ANINPCNext(player, npc, 2, navPlayerMenu, gbText, gbBackground);
-                                ASCII.ANINPCSend(npc, gbText, gbBackground);
                             }
                             else if (npc.Party.Slot3.Health > 0)
                             {
                                 ASCII.ANINPCNext(player, npc, 3, navPlayerMenu, gbText, gbBackground);
-                                ASCII.ANINPCSend(npc, gbText, gbBackground);
                             }
                             else if (npc.Party.Slot4.Health > 0)
                             {
                                 ASCII.ANINPCNext(player, npc, 4, navPlayerMenu, gbText, gbBackground);
-                                ASCII.ANINPCSend(npc, gbText, gbBackground);
                             }
                             else if (npc.Party.Slot5.Health > 0)
                             {
                                 ASCII.ANINPCNext(player, npc, 5, navPlayerMenu, gbText, gbBackground);
-                                ASCII.ANINPCSend(npc, gbText, gbBackground);
                             }
                             else if (npc.Party.Slot6.Health > 0)
                             {
@@ -1701,16 +1698,9 @@ namespace MainClasses
             }
             else if (item.Name == "Revive" && monster.Health <= 0)
             {
+                ASCII.ScrollMessage(message2, 50, 2000, gbText, gbBackground);
                 monster.Health += monster.MaxHealth / 2;
             }
-            //else if (item.Name == "Health Potion" && monster.Health > 0 && monster.Health <= monster.MaxHealth)
-            //{
-            //    monster.Health += 20;
-            //}
-            //else if (item.Name == "Health Potion" && monster.Health > 0 && monster.Health <= monster.MaxHealth)
-            //{
-            //    monster.Health += 20;
-            //}
             else
             {
                 ASCII.InstantMessage(message, gbText, gbBackground);
@@ -2472,6 +2462,7 @@ namespace MainClasses
 
         #region Player Menu
 
+        //FOR FULLSCREEN SELECT
         public static void PlayerSelect(Player player, string[] MenuDisplay, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             int posY = 2;
@@ -2480,6 +2471,23 @@ namespace MainClasses
             foreach (string line in MenuDisplay)
             {
                 Console.SetCursorPosition(4, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+            Console.SetCursorPosition(67, 12);
+            Console.Write(player.Name.ToUpper());
+            Console.SetCursorPosition(90, 42);
+        }
+
+        //FOR TAB SELECT ONLY
+        public static void PlayerSelectTAB(Player player, string[] MenuDisplay, ConsoleColor gbText, ConsoleColor gbBackground)
+        {//(60,2)
+            int posY = 2;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            foreach (string line in MenuDisplay)
+            {
+                Console.SetCursorPosition(60, posY);
                 Console.Write(line);
                 posY += 1;
             }
@@ -2500,6 +2508,7 @@ namespace MainClasses
             {
                 //Selects Pokedex
                 PlayerSelect(player, ASCII.PMPokedexSelect, gbText, gbBackground);
+                //PlayerSelectTAB(player, ASCII.PMPokedexSelectTAB, gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -2510,9 +2519,11 @@ namespace MainClasses
                         //SFX.Select();
                         do
                         {
+
+                            reloadPlayerMenu = true;
+
                         } while (reloadPlayerMenu);
                         break;
-
                     //Navigates Down to PlayerMonstersEquipped
 
                     case ConsoleKey.DownArrow:
@@ -2522,6 +2533,7 @@ namespace MainClasses
                         {
                             //Selects Party
                             PlayerSelect(player, ASCII.PMPartySelect, gbText, gbBackground);
+                            //PlayerSelectTAB(player, ASCII.PMPartySelectTAB, gbText, gbBackground);
                             navPlayerMenu = Console.ReadKey().Key;
                             switch (navPlayerMenu)
                             {
@@ -2530,6 +2542,7 @@ namespace MainClasses
 
                                 case ConsoleKey.Enter:
                                     PlayerPartyMenu(player, navPlayerMenu, gbText, gbBackground);
+                                    reloadPlayerMonstersEquipped = true;
                                     break;
                                 case ConsoleKey.UpArrow:
                                 case ConsoleKey.W:
@@ -2547,12 +2560,14 @@ namespace MainClasses
                                     {
                                         //Selects Bag
                                         PlayerSelect(player, ASCII.PMBagSelect, gbText, gbBackground);
+                                        //PlayerSelectTAB(player, ASCII.PMBagSelectTAB, gbText, gbBackground);
                                         navPlayerMenu = Console.ReadKey().Key;
                                         switch (navPlayerMenu)
                                         {
                                             case ConsoleKey.Enter:
                                                 //SFX.Select();
-                                                //PlayerItemSectionOutsideBattle(player, monster, navPlayerMenu, gbText, gbBackground);
+                                                //PlayerItemSection(player, )
+                                                reloadPlayerBag = true;
                                                 break;
                                             case ConsoleKey.UpArrow:
                                             case ConsoleKey.W:
@@ -2569,12 +2584,14 @@ namespace MainClasses
                                                 {
                                                     //Selects Player Profile
                                                     PlayerSelect(player, ASCII.PMProfileSelect, gbText, gbBackground);
+                                                    //PlayerSelectTAB(player, ASCII.PMProfileSelectTAB, gbText, gbBackground);
                                                     navPlayerMenu = Console.ReadKey().Key;
                                                     switch (navPlayerMenu)
                                                     {
                                                         case ConsoleKey.Enter:
-                                                            //SFX.Select();
-                                                            //TODO Insert PLAYER PROFILE CODE HERE!!!
+                                                            PlayerProfile(player, gbText, gbBackground);
+                                                            navPlayerMenu = Console.ReadKey().Key;
+                                                            reloadPlayerProfile = true;
                                                             break;
                                                         case ConsoleKey.UpArrow:
                                                         case ConsoleKey.W:
@@ -2590,6 +2607,7 @@ namespace MainClasses
                                                             {
                                                                 //Selects EXIT
                                                                 PlayerSelect(player, ASCII.PMExitSelect, gbText, gbBackground);
+                                                                //PlayerSelectTAB(player, ASCII.PMExitSelectTAB, gbText, gbBackground);
                                                                 navPlayerMenu = Console.ReadKey().Key;
                                                                 switch (navPlayerMenu)
                                                                 {
@@ -2677,314 +2695,17 @@ namespace MainClasses
             } while (reloadPlayerMenu);//end dowhile reloadPlayerMenu            
         }//end MenuPokedex()
 
-        #region Player Menu Party
-
-        public static void PartySwitch(Player player, Monster monsterChoose, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
-        {
-            bool reloadParty = false;
-            int posX = 6;
-            int posY = 3;
-
-            ASCII.Party(player, gbText, gbBackground);            
-            do
-            {
-                if (posX == 6 && posY == 3)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.MonsterEquipped.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                if (posX == 6 && posY == 9)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot3.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                if (posX == 6 && posY == 15)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot5.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                if (posX == 82 && posY == 4)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot2.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                if (posX == 82 && posY == 10)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot4.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                if (posX == 82 && posY == 16)
-                {
-                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot6.Name.ToUpper()}?", gbText, gbBackground);
-                }
-                Console.SetCursorPosition(posX, posY);
-                Console.Write("███");
-                Console.SetCursorPosition(posX, posY + 1);
-                Console.Write("███");
-                Console.SetCursorPosition(posX, posY + 2);
-                Console.Write("███");
-                Console.SetCursorPosition(90, 42);
-                navPlayerMenu = Console.ReadKey().Key;
-                switch (navPlayerMenu)
-                {
-                    case ConsoleKey.DownArrow:
-                    case ConsoleKey.S:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posY += 6;
-                        if (posY > 16 ||
-                            posX == 6 && posY == 9 && player.Party.Slot3.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
-                            posX == 6 && posY == 15 && player.Party.Slot5.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
-                        {
-                            posY -= 6;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.UpArrow:
-                    case ConsoleKey.W:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posY -= 6;
-                        if (posY < 3)
-                        {
-                            posY += 6;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.RightArrow:
-                    case ConsoleKey.D:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posX += 76;
-                        posY += 1;
-                        if (posX > 82 ||
-                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
-                        {
-                            posX -= 76;
-                            posY -= 1;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                    case ConsoleKey.A:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posX -= 76;
-                        posY -= 1;
-                        if (posX < 6)
-                        {
-                            posX += 76;
-                            posY += 1;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.Enter:
-                        //Monster Equipped
-                        if (posX == 6 && posY == 3)
-                        {
-                            
-                        }
-                        //Slot 3
-                        else if (posX == 6 && posY == 9)
-                        {
-                            string message1 = $"{player.Party.Slot3.Name.ToUpper()} is unable to battle!";
-                            if (player.Party.Slot3.Health <= 0)
-                            {
-                                ASCII.InstantMessage(message1, gbText, gbBackground);
-                                reloadParty = true;
-                            }
-                            else
-                            {
-                                string message = $"Send out {player.Party.Slot3.Name.ToUpper()}?";
-                                ASCII.InstantMessage(message, gbText, gbBackground);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.Enter:
-                                        //ASCII.ANIPlayerSwitchSendTEST(player, 3, monster, gbText, gbBackground);
-                                        reloadParty = false;
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        reloadParty = true;
-                                        break;
-                                    default:
-                                        reloadParty = true;
-                                        break;
-                                }
-                            }
-                        }
-                        //Slot 5
-                        else if (posX == 6 && posY == 15)
-                        {
-                            string message1 = $"{player.Party.Slot5.Name.ToUpper()} is unable to battle!";
-                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
-                            if (player.Party.Slot5.Health <= 0)
-                            {
-                                ASCII.InstantMessage(message1, gbText, gbBackground);
-                                reloadParty = true;
-                            }
-                            else
-                            {
-                                string message = $"Send out {player.Party.Slot5.Name.ToUpper()}?";
-                                ASCII.InstantMessage(message, gbText, gbBackground);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.Enter:
-                                        //ASCII.ANIPlayerSwitchSendTEST(player, 5, monster, gbText, gbBackground);
-                                        reloadParty = false;
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        reloadParty = true;
-                                        break;
-                                    default:
-                                        reloadParty = true;
-                                        break;
-                                }
-                            }
-                        }
-                        //Slot 2
-                        else if (posX == 82 && posY == 4)
-                        {
-                            string message1 = $"{player.Party.Slot2.Name.ToUpper()} is unable to battle!";
-                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
-                            if (player.Party.Slot2.Health <= 0)
-                            {
-                                ASCII.InstantMessage(message1, gbText, gbBackground);
-                                reloadParty = true;
-                            }
-                            else
-                            {
-                                string message = $"Send out {player.Party.Slot2.Name.ToUpper()}?";
-                                ASCII.InstantMessage(message, gbText, gbBackground);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.Enter:
-                                        //ASCII.ANIPlayerSwitchSendTEST(player, 2, monster, gbText, gbBackground);
-                                        reloadParty = false;
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        reloadParty = true;
-                                        break;
-                                    default:
-                                        reloadParty = true;
-                                        break;
-                                }
-                            }
-                        }
-                        //Slot 4
-                        else if (posX == 82 && posY == 10)
-                        {
-                            string message1 = $"{player.Party.Slot4.Name.ToUpper()} is unable to battle!";
-                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
-                            if (player.Party.Slot4.Health <= 0)
-                            {
-                                ASCII.InstantMessage(message1, gbText, gbBackground);
-                                reloadParty = true;
-                            }
-                            else
-                            {
-                                string message = $"Send out {player.Party.Slot4.Name.ToUpper()}?";
-                                ASCII.InstantMessage(message, gbText, gbBackground);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.Enter:
-                                        //ASCII.ANIPlayerSwitchSendTEST(player, 4, monster, gbText, gbBackground);
-                                        reloadParty = false;
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        reloadParty = true;
-                                        break;
-                                    default:
-                                        reloadParty = true;
-                                        break;
-                                }
-                            }
-                        }
-                        //Slot 6
-                        else if (posX == 82 && posY == 16)
-                        {
-                            string message1 = $"{player.Party.Slot6.Name.ToUpper()} is unable to battle!";
-                            string message2 = $"{player.Party.MonsterEquipped.Name.ToUpper()} return!";
-                            if (player.Party.Slot6.Health <= 0)
-                            {
-                                ASCII.InstantMessage(message1, gbText, gbBackground);
-                                reloadParty = true;
-                            }
-                            else
-                            {
-                                string message = $"Send out {player.Party.Slot6.Name.ToUpper()}?";
-                                ASCII.InstantMessage(message, gbText, gbBackground);
-                                navPlayerMenu = Console.ReadKey().Key;
-                                switch (navPlayerMenu)
-                                {
-                                    case ConsoleKey.Enter:
-
-                                        //ASCII.ANIPlayerSwitchSendTEST(player, 6, monster, gbText, gbBackground);
-                                        reloadParty = false;
-
-                                        break;
-                                    case ConsoleKey.Backspace:
-                                        reloadParty = true;
-                                        break;
-                                    default:
-                                        reloadParty = true;
-                                        break;
-                                }
-                            }
-                        }
-                        break;
-                    case ConsoleKey.Backspace:
-                    case ConsoleKey.O:
-                        //if (monster.IsOwned == true && player.Party.MonsterEquipped.Health <= 0)
-                        //{
-                        //    string message = $"You cannot escape a PvP battle!";
-                        //    ASCII.ScrollMessage(message, 50, 2000, gbText, gbBackground);
-                        //    reloadParty = true;
-                        //}
-                        //else
-                        //{
-                        //    //ASCII.DISATTandDEF(player, monster, gbText, gbBackground);
-                        //    reloadParty = false;
-                        //}
-                        break;
-                    default:
-                        reloadParty = true;
-                        break;
-                }
-            } while (reloadParty);
-        }
-
-        #endregion
-
-        #endregion
-
         #region Player Menu Pokedex
 
+        
 
         #endregion
 
-        #region Player Menu Party
+        #region Player Menu Party        
 
         /****FOR OUTSIDE BATTLE****/
-        public static void PartyPopUpNOBATTLE(Player player, Monster monster, int chooseNum, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+
+        public static void PartyPopUp(Player player, Monster monster, int chooseNum, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPopUp = false;
             bool reloadEntry = false;
@@ -2996,12 +2717,7 @@ namespace MainClasses
             string message4 = $"Do what with {player.Party.Slot4.Name.ToUpper()}?";
             string message5 = $"Do what with {player.Party.Slot5.Name.ToUpper()}?";
             string message6 = $"Do what with {player.Party.Slot6.Name.ToUpper()}?";
-            foreach (string line in ASCII.partyNoBattle)
-            {
-                Console.SetCursorPosition(66, posY);
-                Console.Write(line);
-                posY += 1;
-            }
+
             if (chooseNum == 1)
             {
                 monster = player.Party.MonsterEquipped;
@@ -3035,6 +2751,13 @@ namespace MainClasses
             posY = 15;
             do
             {
+                int popupY = 14;
+                foreach (string line in ASCII.partyNoBattle)
+                {
+                    Console.SetCursorPosition(66, popupY);
+                    Console.Write(line);
+                    popupY += 1;
+                }
                 Console.SetCursorPosition(67, posY);
                 Console.Write(">");
                 Console.SetCursorPosition(90, 42);
@@ -3077,7 +2800,7 @@ namespace MainClasses
                         {
                             posY = 2;
                             int navX = 1;
-                            int navY = chooseNum;                            
+                            int navY = chooseNum;
                             do
                             {
                                 posY = 2;
@@ -3335,6 +3058,8 @@ namespace MainClasses
                                         break;
                                     case ConsoleKey.Backspace:
                                     case ConsoleKey.O:
+                                        ASCII.Party(player, gbText, gbBackground);
+                                        reloadPopUp = true;
                                         reloadEntry = false;
                                         break;
                                     default:
@@ -3347,30 +3072,10 @@ namespace MainClasses
                         if (posY == 16)
                         {
                             //TODO ADD Switch functionality OUTSIDE OF BATTLE
-                            if (chooseNum == 1)
-                            {
-                                PartySwitch(player, player.Party.MonsterEquipped, navPlayerMenu, gbText, gbBackground);
-                            }
-                            if (chooseNum == 2)
-                            {
-                                PartySwitch(player, player.Party.Slot2, navPlayerMenu, gbText, gbBackground);
-                            }
-                            if (chooseNum == 3)
-                            {
-                                PartySwitch(player, player.Party.Slot3, navPlayerMenu, gbText, gbBackground);
-                            }
-                            if (chooseNum == 4)
-                            {
-                                PartySwitch(player, player.Party.Slot4, navPlayerMenu, gbText, gbBackground);
-                            }
-                            if (chooseNum == 5)
-                            {
-                                PartySwitch(player, player.Party.Slot5, navPlayerMenu, gbText, gbBackground);
-                            }
-                            if (chooseNum == 6)
-                            {
-                                PartySwitch(player, player.Party.Slot6, navPlayerMenu, gbText, gbBackground);
-                            }
+
+                            PartySwitch(player, new Monster(), chooseNum, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadPopUp = true;
                             posY = 16;
                         }
                         if (posY == 17)
@@ -3394,7 +3099,539 @@ namespace MainClasses
             } while (reloadPopUp);
         }
 
-        /****FOR BATTLE****/        
+        public static void PlayerPartyMenu(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadParty = false;
+            int posX = 6;
+            int posY = 3;
+
+            ASCII.Party(player, gbText, gbBackground);
+            do
+            {
+                ASCII.StaticMessageBox(gbText, gbBackground);
+                Console.SetCursorPosition(posX, posY);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 2);
+                Console.Write("███");
+                Console.SetCursorPosition(90, 42);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY += 6;
+                        if (posY > 16 ||
+                            posX == 6 && posY == 9 && player.Party.Slot3.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 6 && posY == 15 && player.Party.Slot5.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posY -= 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY -= 6;
+                        if (posY < 3)
+                        {
+                            posY += 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX += 76;
+                        posY += 1;
+                        if (posX > 82 ||
+                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posX -= 76;
+                            posY -= 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX -= 76;
+                        posY -= 1;
+                        if (posX < 6)
+                        {
+                            posX += 76;
+                            posY += 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.Enter:
+                        //Monster Equipped
+                        if (posX == 6 && posY == 3)
+                        {
+                            PartyPopUp(player, new Monster(), 1, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        //Slot 3
+                        else if (posX == 6 && posY == 9)
+                        {
+                            PartyPopUp(player, new Monster(), 3, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        //Slot 5
+                        else if (posX == 6 && posY == 15)
+                        {
+                            PartyPopUp(player, new Monster(), 5, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        //Slot 2
+                        else if (posX == 82 && posY == 4)
+                        {
+                            PartyPopUp(player, new Monster(), 2, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        //Slot 4
+                        else if (posX == 82 && posY == 10)
+                        {
+                            PartyPopUp(player, new Monster(), 4, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        //Slot 6
+                        else if (posX == 82 && posY == 16)
+                        {
+                            PartyPopUp(player, new Monster(), 6, navPlayerMenu, gbText, gbBackground);
+                            ASCII.Party(player, gbText, gbBackground);
+                            reloadParty = true;
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadParty = false;
+                        break;
+                    default:
+                        reloadParty = true;
+                        break;
+                }
+            } while (reloadParty);
+        }
+
+        public static void PartySwitch(Player player, Monster monsterChoose, int chooseNum, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadParty = false;
+            int posX = 6;
+            int posY = 3;
+
+            if (chooseNum == 1)
+            {
+                monsterChoose = player.Party.MonsterEquipped;
+            }
+            if (chooseNum == 2)
+            {
+                monsterChoose = player.Party.Slot2;
+            }
+            if (chooseNum == 3)
+            {
+                monsterChoose = player.Party.Slot3;
+            }
+            if (chooseNum == 4)
+            {
+                monsterChoose = player.Party.Slot4;
+            }
+            if (chooseNum == 5)
+            {
+                monsterChoose = player.Party.Slot5;
+            }
+            if (chooseNum == 6)
+            {
+                monsterChoose = player.Party.Slot6;
+            }
+
+
+            ASCII.Party(player, gbText, gbBackground);
+            do
+            {
+                if (posX == 6 && posY == 3)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.MonsterEquipped.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                if (posX == 6 && posY == 9)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot3.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                if (posX == 6 && posY == 15)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot5.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                if (posX == 82 && posY == 4)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot2.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                if (posX == 82 && posY == 10)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot4.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                if (posX == 82 && posY == 16)
+                {
+                    ASCII.InstantMessage($"Swap {monsterChoose.Name.ToUpper()} with {player.Party.Slot6.Name.ToUpper()}?", gbText, gbBackground);
+                }
+                Console.SetCursorPosition(posX, posY);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("███");
+                Console.SetCursorPosition(posX, posY + 2);
+                Console.Write("███");
+                Console.SetCursorPosition(90, 42);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY += 6;
+                        if (posY > 16 ||
+                            posX == 6 && posY == 9 && player.Party.Slot3.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 6 && posY == 15 && player.Party.Slot5.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posY -= 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posY -= 6;
+                        if (posY < 3)
+                        {
+                            posY += 6;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX += 76;
+                        posY += 1;
+                        if (posX > 82 ||
+                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
+                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
+                        {
+                            posX -= 76;
+                            posY -= 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        Console.SetCursorPosition(posX, posY);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 1);
+                        Console.Write("   ");
+                        Console.SetCursorPosition(posX, posY + 2);
+                        Console.Write("   ");
+                        posX -= 76;
+                        posY -= 1;
+                        if (posX < 6)
+                        {
+                            posX += 76;
+                            posY += 1;
+                        }
+                        reloadParty = true;
+                        break;
+                    case ConsoleKey.Enter:
+
+                        //Monster Equipped
+                        if (posX == 6 && posY == 3)
+                        {
+                            //player.Party.MonsterSwitch = monsterChoose;
+                            //monsterChoose = player.Party.MonsterEquipped;
+                            //player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                            //reloadParty = false;
+                            switch (chooseNum)
+                            {
+                                case 2:
+                                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                                    break;
+                                case 3:
+                                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                                    break;
+                                case 4:
+                                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                                    break;
+                                case 5:
+                                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                                    break;
+                                case 6:
+                                    player.Party.MonsterSwitch = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        //Slot 3
+                        else if (posX == 6 && posY == 9/* && monsterChoose != player.Party.Slot3*/)
+                        {
+                            //player.Party.MonsterSwitch = player.Party.Slot3;
+                            //player.Party.Slot3 = monsterChoose;
+                            //monsterChoose = player.Party.MonsterSwitch;
+                            //reloadParty = false;
+                            switch (chooseNum)
+                            {
+                                case 1:
+                                    player.Party.MonsterSwitch = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                                    break;
+                                case 2:
+                                    player.Party.MonsterSwitch = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                                    break;
+                                case 4:
+                                    player.Party.MonsterSwitch = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                                    break;
+                                case 5:
+                                    player.Party.MonsterSwitch = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                                    break;
+                                case 6:
+                                    player.Party.MonsterSwitch = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        //Slot 5
+                        else if (posX == 6 && posY == 15/* && monsterChoose != player.Party.Slot5*/)
+                        {
+                            //player.Party.MonsterSwitch = monsterChoose;
+                            //monsterChoose = player.Party.Slot5;
+                            //player.Party.Slot5 = player.Party.MonsterSwitch;
+                            //reloadParty = false;
+                            switch (chooseNum)
+                            {
+                                case 1:
+                                    player.Party.MonsterSwitch = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                                    break;
+                                case 2:
+                                    player.Party.MonsterSwitch = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                                    break;
+                                case 3:
+                                    player.Party.MonsterSwitch = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                                    break;
+                                case 4:
+                                    player.Party.MonsterSwitch = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                                    break;
+                                case 6:
+                                    player.Party.MonsterSwitch = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        //Slot 2
+                        else if (posX == 82 && posY == 4/* && monsterChoose != player.Party.Slot2*/)
+                        {
+                            switch (chooseNum)
+                            {
+                                case 1:
+                                    player.Party.MonsterSwitch = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                                    break;
+                                case 3:
+                                    player.Party.MonsterSwitch = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                                    break;
+                                case 4:
+                                    player.Party.MonsterSwitch = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                                    break;
+                                case 5:
+                                    player.Party.MonsterSwitch = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                                    break;
+                                case 6:
+                                    player.Party.MonsterSwitch = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        //Slot 4
+                        else if (posX == 82 && posY == 10/* && monsterChoose != player.Party.Slot4*/)
+                        {
+                            //player.Party.MonsterSwitch = monsterChoose;
+                            //monsterChoose = player.Party.Slot4;
+                            //player.Party.Slot4 = player.Party.MonsterSwitch;
+                            //reloadParty = false;
+                            switch (chooseNum)
+                            {
+                                case 1:
+                                    player.Party.MonsterSwitch = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                                    break;
+                                case 2:
+                                    player.Party.MonsterSwitch = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                                    break;
+                                case 3:
+                                    player.Party.MonsterSwitch = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                                    break;
+                                case 5:
+                                    player.Party.MonsterSwitch = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                                    break;
+                                case 6:
+                                    player.Party.MonsterSwitch = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        //Slot 6
+                        else if (posX == 82 && posY == 16/* && monsterChoose != player.Party.Slot6*/)
+                        {
+                            //player.Party.MonsterSwitch = monsterChoose;
+                            //monsterChoose = player.Party.Slot6;
+                            //player.Party.Slot6 = player.Party.MonsterSwitch;
+                            //reloadParty = false;
+                            switch (chooseNum)
+                            {
+                                case 1:
+                                    player.Party.MonsterSwitch = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.MonsterEquipped;
+                                    player.Party.MonsterEquipped = player.Party.MonsterSwitch;
+                                    break;
+                                case 2:
+                                    player.Party.MonsterSwitch = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.Slot2;
+                                    player.Party.Slot2 = player.Party.MonsterSwitch;
+                                    break;
+                                case 3:
+                                    player.Party.MonsterSwitch = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.Slot3;
+                                    player.Party.Slot3 = player.Party.MonsterSwitch;
+                                    break;
+                                case 4:
+                                    player.Party.MonsterSwitch = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.Slot4;
+                                    player.Party.Slot4 = player.Party.MonsterSwitch;
+                                    break;
+                                case 5:
+                                    player.Party.MonsterSwitch = player.Party.Slot6;
+                                    player.Party.Slot6 = player.Party.Slot5;
+                                    player.Party.Slot5 = player.Party.MonsterSwitch;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                        reloadParty = false;
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadParty = false;
+                        break;
+                    default:
+                        reloadParty = true;
+                        break;
+                }
+            } while (reloadParty);
+        }
+
+        /****FOR BATTLE****/
+
         public static void PartyPopUpBATTLE(Player player, Monster monster, Monster defender, int chooseNum, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPopUp = false;
@@ -3408,7 +3645,7 @@ namespace MainClasses
             string message4 = $"Do what with {player.Party.Slot4.Name.ToUpper()}?";
             string message5 = $"Do what with {player.Party.Slot5.Name.ToUpper()}?";
             string message6 = $"Do what with {player.Party.Slot6.Name.ToUpper()}?";
-            
+
             if (chooseNum == 1)
             {
                 monster = player.Party.MonsterEquipped;
@@ -3496,7 +3733,7 @@ namespace MainClasses
                                 reloadPopUp = false;
                             }
                             else
-                            {                                
+                            {
                                 ASCII.InstantMessage($"Send out {monster.Name.ToUpper()}?", gbText, gbBackground);
                                 QueSwitch(player, defender, chooseNum, navPlayerMenu, gbText, gbBackground);
                                 reloadPopUp = false;
@@ -3791,7 +4028,6 @@ namespace MainClasses
             } while (reloadPopUp);
         }
 
-        /****FOR BATTLE****/
         public static void PlayerPartyMenuBattle(Player player, Monster defender, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadParty = false;
@@ -3886,19 +4122,27 @@ namespace MainClasses
                     case ConsoleKey.Enter:
 
                         #region Que Switch BEFORE ATTACK
-                        
-                        int currentHealth1 = player.Party.MonsterEquipped.Health;
-                        int currentHealth2 = player.Party.Slot2.Health;
-                        int currentHealth3 = player.Party.Slot3.Health;
-                        int currentHealth4 = player.Party.Slot4.Health;
-                        int currentHealth5 = player.Party.Slot5.Health;
-                        int currentHealth6 = player.Party.Slot6.Health;
+
+                        Monster current1 = player.Party.MonsterEquipped;
+                        Monster current2 = player.Party.Slot2;
+                        Monster current3 = player.Party.Slot3;
+                        Monster current4 = player.Party.Slot4;
+                        Monster current5 = player.Party.Slot5;
+                        Monster current6 = player.Party.Slot6;
+
+
+                        //int currentHealth1 = player.Party.MonsterEquipped.Health;
+                        //int currentHealth2 = player.Party.Slot2.Health;
+                        //int currentHealth3 = player.Party.Slot3.Health;
+                        //int currentHealth4 = player.Party.Slot4.Health;
+                        //int currentHealth5 = player.Party.Slot5.Health;
+                        //int currentHealth6 = player.Party.Slot6.Health;
 
                         //Monster Equipped
                         if (posX == 6 && posY == 3)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 1, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth1)
+                            if (player.Party.MonsterEquipped != current1)
                             {
                                 reloadParty = false;
                             }
@@ -3912,7 +4156,7 @@ namespace MainClasses
                         else if (posX == 6 && posY == 9)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 3, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth3)
+                            if (player.Party.Slot3 != current3)
                             {
                                 reloadParty = false;
                             }
@@ -3926,7 +4170,7 @@ namespace MainClasses
                         else if (posX == 6 && posY == 15)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 5, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth5)
+                            if (player.Party.Slot5 != current5)
                             {
                                 reloadParty = false;
                             }
@@ -3940,7 +4184,7 @@ namespace MainClasses
                         else if (posX == 82 && posY == 4)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 2, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth2)
+                            if (player.Party.Slot2 != current2)
                             {
                                 reloadParty = false;
                             }
@@ -3954,7 +4198,7 @@ namespace MainClasses
                         else if (posX == 82 && posY == 10)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 4, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth4)
+                            if (player.Party.Slot4 != current4)
                             {
                                 reloadParty = false;
                             }
@@ -3968,7 +4212,7 @@ namespace MainClasses
                         else if (posX == 82 && posY == 16)
                         {
                             PartyPopUpBATTLE(player, new Monster(), defender, 6, navPlayerMenu, gbText, gbBackground);
-                            if (player.Party.MonsterEquipped.Health != currentHealth6)
+                            if (player.Party.Slot6 != current6)
                             {
                                 reloadParty = false;
                             }
@@ -3996,154 +4240,7 @@ namespace MainClasses
                         else
                         {
                             reloadParty = false;
-                        }                        
-                        break;
-                    default:
-                        reloadParty = true;
-                        break;
-                }
-            } while (reloadParty);
-        }
-
-        /****FOR OUTSIDE BATTLE****/
-        public static void PlayerPartyMenu(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
-        {
-            bool reloadParty = false;
-            int posX = 6;
-            int posY = 3;
-
-            ASCII.Party(player, gbText, gbBackground);
-            do
-            {
-                ASCII.StaticMessageBox(gbText, gbBackground);
-                Console.SetCursorPosition(posX, posY);
-                Console.Write("███");
-                Console.SetCursorPosition(posX, posY + 1);
-                Console.Write("███");
-                Console.SetCursorPosition(posX, posY + 2);
-                Console.Write("███");
-                Console.SetCursorPosition(90, 42);
-                navPlayerMenu = Console.ReadKey().Key;
-                switch (navPlayerMenu)
-                {
-                    case ConsoleKey.DownArrow:
-                    case ConsoleKey.S:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posY += 6;
-                        if (posY > 16 ||
-                            posX == 6 && posY == 9 && player.Party.Slot3.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
-                            posX == 6 && posY == 15 && player.Party.Slot5.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
-                        {
-                            posY -= 6;
                         }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.UpArrow:
-                    case ConsoleKey.W:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posY -= 6;
-                        if (posY < 3)
-                        {
-                            posY += 6;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.RightArrow:
-                    case ConsoleKey.D:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posX += 76;
-                        posY += 1;
-                        if (posX > 82 ||
-                            posX == 82 && posY == 4 && player.Party.Slot2.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 10 && player.Party.Slot4.Type == Monster_Race.NONE ||
-                            posX == 82 && posY == 16 && player.Party.Slot6.Type == Monster_Race.NONE)
-                        {
-                            posX -= 76;
-                            posY -= 1;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                    case ConsoleKey.A:
-                        Console.SetCursorPosition(posX, posY);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 1);
-                        Console.Write("   ");
-                        Console.SetCursorPosition(posX, posY + 2);
-                        Console.Write("   ");
-                        posX -= 76;
-                        posY -= 1;
-                        if (posX < 6)
-                        {
-                            posX += 76;
-                            posY += 1;
-                        }
-                        reloadParty = true;
-                        break;
-                    case ConsoleKey.Enter:
-                        //Monster Equipped
-                        if (posX == 6 && posY == 3)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 1, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        //Slot 3
-                        else if (posX == 6 && posY == 9)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 3, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        //Slot 5
-                        else if (posX == 6 && posY == 15)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 5, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        //Slot 2
-                        else if (posX == 82 && posY == 4)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 2, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        //Slot 4
-                        else if (posX == 82 && posY == 10)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 4, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        //Slot 6
-                        else if (posX == 82 && posY == 16)
-                        {
-                            PartyPopUpNOBATTLE(player, new Monster(), 6, navPlayerMenu, gbText, gbBackground);
-                            ASCII.Party(player, gbText, gbBackground);
-                            reloadParty = true;
-                        }
-                        break;
-                    case ConsoleKey.Backspace:
-                    case ConsoleKey.O:
-                        reloadParty = false;
                         break;
                     default:
                         reloadParty = true;
@@ -5027,7 +5124,290 @@ namespace MainClasses
 
         #region Player Menu Profile
 
+        public static void PlayerProfile(Player player, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            /* int totalDiscovered = 0;
+             * foreach (Monster monster in player.Pokedex)
+             * {
+             *      if(monster.isDiscovered == true)
+             *      {
+             *          totalDiscovered += 1;
+             *      }
+             *      Console.SetCursorPosition(0,0);
+             * }
+             * 
+             */
+            int posY = 2;
+            if (player.Gender == '♂')
+            {
+                foreach (string line in ASCII.playerProfileMale)
+                {
+                    Console.SetCursorPosition(4, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+            }
+            if (player.Gender == '♀')
+            {
+                foreach (string line in ASCII.playerProfileFemale)
+                {
+                    Console.SetCursorPosition(4, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+            }
+            Console.SetCursorPosition(35, 7);
+            Console.Write(player.PlayerID);
+            Console.SetCursorPosition(35, 9);
+            Console.Write(player.Name.ToUpper());
+            Console.SetCursorPosition(35, 11);
+            Console.Write($"${player.Money}");
+            Console.SetCursorPosition(35, 13);
+            Console.Write($"# OF DISCOVERED");
+            Console.SetCursorPosition(35, 15);
+            Console.Write(ASCII.elapsedTime);
+            Console.SetCursorPosition(35, 17);
+            Console.Write(player.StartTime);
+            Console.SetCursorPosition(90, 42);
+        }
 
+        #endregion
+
+        #endregion
+
+        #region PC Menu
+
+        public static void PlayerPC(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadPokedex = false;
+            int posY = 2;
+            int navX = 42;
+            int navY = 8;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            do
+            {
+                if (navX == 42)
+                {
+                    if (navY == 8)
+                    {
+                        monster = player.PC[0];
+                    }
+                    if (navY == 11)
+                    {
+                        monster = player.PC[5];
+                    }
+                    if (navY == 14)
+                    {
+                        monster = player.PC[10];
+                    }
+                    if (navY == 17)
+                    {
+                        monster = player.PC[15];
+                    }
+                    if (navY == 20)
+                    {
+                        monster = player.PC[20];
+                    }
+                }
+                if (navX == 50)
+                {
+                    if (navY == 8)
+                    {
+                        monster = player.PC[1];
+                    }
+                    if (navY == 11)
+                    {
+                        monster = player.PC[6];
+                    }
+                    if (navY == 14)
+                    {
+                        monster = player.PC[11];
+                    }
+                    if (navY == 17)
+                    {
+                        monster = player.PC[16];
+                    }
+                    if (navY == 20)
+                    {
+                        monster = player.PC[21];
+                    }
+                }
+                if (navX == 58)
+                {
+                    if (navY == 8)
+                    {
+                        monster = player.PC[2];
+                    }
+                    if (navY == 11)
+                    {
+                        monster = player.PC[7];
+                    }
+                    if (navY == 14)
+                    {
+                        monster = player.PC[12];
+                    }
+                    if (navY == 17)
+                    {
+                        monster = player.PC[17];
+                    }
+                    if (navY == 20)
+                    {
+                        monster = player.PC[22];
+                    }
+                }
+                if (navX == 66)
+                {
+                    if (navY == 8)
+                    {
+                        monster = player.PC[3];
+                    }
+                    if (navY == 11)
+                    {
+                        monster = player.PC[8];
+                    }
+                    if (navY == 14)
+                    {
+                        monster = player.PC[13];
+                    }
+                    if (navY == 17)
+                    {
+                        monster = player.PC[18];
+                    }
+                    if (navY == 20)
+                    {
+                        monster = player.PC[23];
+                    }
+                }
+                if (navX == 74)
+                {
+                    if (navY == 8)
+                    {
+                        monster = player.PC[4];
+                    }
+                    if (navY == 11)
+                    {
+                        monster = player.PC[9];
+                    }
+                    if (navY == 14)
+                    {
+                        monster = player.PC[14];
+                    }
+                    if (navY == 17)
+                    {
+                        monster = player.PC[19];
+                    }
+                    if (navY == 20)
+                    {
+                        monster = player.PC[24];
+                    }
+                }
+
+                posY = 2;
+                foreach (string line in ASCII.emptyPC)
+                {
+                    Console.SetCursorPosition(4, posY);
+                    Console.Write(line);
+                    posY += 1;
+                }
+                int entryX = 42;
+                int entryY = 8;
+                foreach (Monster entry in player.PC)
+                {
+                    Console.SetCursorPosition(entryX, entryY);
+                    if (entry.Type != Monster_Race.NONE)
+                    {
+                        Console.Write(" (o) ");
+                    }
+                    else
+                    {
+                        Console.Write("     ");
+                    }
+                    entryX += 8;
+                    if (entryX == 82)
+                    {
+                        entryX = 42;
+                        entryY += 3;
+                    }
+                }
+                if (monster.Type != Monster_Race.NONE)
+                {
+                    posY = 9;
+                    foreach (string line in monster.ASCIIPokedex)
+                    {
+                        Console.SetCursorPosition(12, posY);
+                        Console.Write(line);
+                        posY += 1;
+                    }
+                    Console.SetCursorPosition(9, 4);
+                    Console.Write(monster.Name.ToUpper());
+                    Console.SetCursorPosition(26, 5);
+                    Console.Write($"No.{monster.PokeIndex}");
+                    ASCII.NameANDGender(monster, 9, 19, gbText, gbBackground);
+                    ASCII.Level(monster, 9, 20, gbText, gbBackground);
+                    ASCII.Type(monster.Type, 15, 23, gbText, gbBackground);
+                    Console.SetCursorPosition(navX, navY);
+                    Console.Write("( o )");
+                }
+                else
+                {
+                    Console.SetCursorPosition(navX, navY);
+                    Console.Write("(   )");
+                }
+                Console.SetCursorPosition(90, 42);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navY -= 3;
+                        if (navY == 5)
+                        {
+                            navY += 3;
+                        }
+                        reloadPokedex = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navY += 3;
+                        if (navY == 23)
+                        {
+                            navY -= 3;
+                        }
+                        reloadPokedex = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navX -= 8;
+                        if (navX == 34)
+                        {
+                            navX += 8;
+                        }
+                        reloadPokedex = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navX += 8;
+                        if (navX == 82)
+                        {
+                            navX -= 8;
+                        }
+                        reloadPokedex = true;
+                        break;
+                    default:
+                        reloadPokedex = false;
+                        break;
+                }
+            } while (reloadPokedex);
+        }
 
         #endregion
     }

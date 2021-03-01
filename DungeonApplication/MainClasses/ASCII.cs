@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MainClasses
 { 
@@ -12,8 +13,20 @@ namespace MainClasses
 
         //TODO Create Move Conversion Method() that rewrites the selected move into the desired slot just like how the CatchSort Functionality works
         //TODO Be able to utilize the conversion method() when a monster is caught to prevent rewriting the original move structured code.
-       
+
+        #region TIME CONTROL
+
+        public static Stopwatch TimePlayed = new Stopwatch();
+
+        public static TimeSpan PlayTime = TimePlayed.Elapsed;
+
+        public static string elapsedTime = string.Format("{0:00}:{1:00}", PlayTime.Hours, PlayTime.Minutes);
+
+        #endregion
+
         #region METHODS: Game Versions
+
+        public static Random random = new Random();
 
         public static void DEMO(ConsoleKey navPlayerMenu, int currentPosX, int currentPosY)
         {
@@ -24,17 +37,32 @@ namespace MainClasses
             ConsoleColor GBText = new ConsoleColor();
             ConsoleColor GBBackground = new ConsoleColor();
 
+            TimePlayed.Start();
+
             #region Player Starting Stats
 
             Player player = new Player();
+            player.PlayerID = random.Next(20000, 40000);
             player.Party = new Player_Party();
             player.Inventory = new Player_Inventory();
+            player.PC = Monster.PC;
+            player.StartTime = DateTime.Now.ToString($"{0:MMM dd}, {0:yyyy}");
             player.Party.MonsterEquipped = new Monster();
             player.Party.Slot2 = Monster.default2;
+            player.Party.Slot2.Health = 0;
+            player.Party.Slot2.Name = "";
             player.Party.Slot3 = Monster.default3;
+            player.Party.Slot3.Health = 0;
+            player.Party.Slot3.Name = "";
             player.Party.Slot4 = Monster.default4;
+            player.Party.Slot4.Health = 0;
+            player.Party.Slot4.Name = "";
             player.Party.Slot5 = Monster.default5;
+            player.Party.Slot5.Health = 0;
+            player.Party.Slot5.Name = "";
             player.Party.Slot6 = Monster.default6;
+            player.Party.Slot6.Health = 0;
+            player.Party.Slot6.Name = "";
             player.Party.MonsterSwitch = Monster.monsterSwitch;
             player.Money = 0;
 
@@ -543,7 +571,7 @@ namespace MainClasses
             }
             BallBreak(43, 15, 50, ConsoleColor.White, ConsoleColor.Black);
             posY = 11;
-            foreach (string line in douseyPokedex)
+            foreach (string line in dowseyPokedex)
             {
                 Console.SetCursorPosition(37, posY);
                 Console.Write(line);
@@ -731,7 +759,7 @@ namespace MainClasses
                                                                             System.Threading.Thread.Sleep(50);
                                                                         }
                                                                         System.Threading.Thread.Sleep(1500);
-                                                                        string messageRare4 = "SALIX: NEO is a powerful Pokefraud with it having very few weaknesses!";
+                                                                        string messageRare4 = "SALIX: NEO is a powerful Pokefraud with its very few weaknesses!";
                                                                         string messageRare5 = "SALIX: But..";
                                                                         string messageRare6 = "SALIX: NEO tends not to listen to its trainer's commands at times..";
                                                                         string messageRare7 = "SALIX: Good luck!";
@@ -780,12 +808,12 @@ namespace MainClasses
                         {
                             Console.Write("PYRA");
                             player.Party.MonsterEquipped = Monster.starterPyra;
-                            rival.Party.MonsterEquipped = Monster.rivalDousey;
+                            rival.Party.MonsterEquipped = Monster.rivalDowsey;
                         }
                         if (posX == 38)
                         {
                             Console.Write("DOWSEY");
-                            player.Party.MonsterEquipped = Monster.starterDousey;
+                            player.Party.MonsterEquipped = Monster.starterDowsey;
                             rival.Party.MonsterEquipped = Monster.rivalElectra;
                         }
                         if (posX == 61)
@@ -1006,7 +1034,7 @@ namespace MainClasses
                     System.Threading.Thread.Sleep(50);
                     #endregion
                 }
-                if (player.Party.MonsterEquipped == Monster.starterDousey)
+                if (player.Party.MonsterEquipped == Monster.starterDowsey)
                 {
                     //Deletes Pyra
                     posY = 11;
@@ -1030,7 +1058,7 @@ namespace MainClasses
                     foreach (char number in moveOver)
                     {
                         posY = 11;
-                        foreach (string line in douseyPokedex)
+                        foreach (string line in dowseyPokedex)
                         {
                             Console.SetCursorPosition(posX, posY);
                             Console.Write(line);
@@ -1411,7 +1439,7 @@ namespace MainClasses
                 
             navPlayerMenu = Console.ReadKey().Key;
 
-            SFX.Route1();
+            SFX.Route2();
             Maps.DEMOMap(player, rival, currentPosX, currentPosY, navPlayerMenu, GBText, GBBackground);
         }
 
@@ -4536,6 +4564,7 @@ namespace MainClasses
                 default:
                     break;
             }
+            ASCII.DISJustAttacker(player, gbText, gbBackground);
             ANINPCSend(npc, gbText, gbBackground);
         }
 
@@ -4600,7 +4629,6 @@ namespace MainClasses
             defender.Health = diceRole * 5;
             defender.Gender = gender;
 
-            //SFX.Battle();
             WildEncounter(player, defender, gbText, gbBackground);
             Player_Menus.FightMenu(player, defender, navPlayerMenu, gbText, gbBackground);
         }
@@ -4608,7 +4636,6 @@ namespace MainClasses
         public static void FullBattleNPC(Player player, Player npc, ConsoleColor gbText, ConsoleColor gbBackground, ConsoleKey navPlayerMenu)
         {
             NPCEncounter(player, npc, gbText, gbBackground);
-
             Player_Menus.NPCFightMenu(player, npc, 500, navPlayerMenu, gbText, gbBackground);
         }
 
@@ -4618,23 +4645,24 @@ namespace MainClasses
 
         #region METHODS: Display Objects
 
-        public static void PCMain(Player player, ConsoleKey navPlayerMenu)
+        public static void PCMain(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPC = false;
             int posX = 66;
-            int posY = 3;
-            foreach (string line in pcMain)
-            {
-                Console.SetCursorPosition(posX, posY);
-                Console.Write(line);
-                posY += 1;
-            }
-            Console.SetCursorPosition(69, 4);
-            Console.Write(player.Name.ToUpper() + "'S PC");
-            Console.SetCursorPosition(90, 42);
+            int posY = 3;            
             posY = 4;
             do
             {
+                int navY = 3;
+                foreach (string line in pcMain)
+                {
+                    Console.SetCursorPosition(posX, navY);
+                    Console.Write(line);
+                    navY += 1;
+                }
+                Console.SetCursorPosition(69, 4);
+                Console.Write(player.Name.ToUpper() + "'S PC");
+                Console.SetCursorPosition(90, 42);
                 Console.SetCursorPosition(67, posY);
                 Console.Write(">");
                 Console.SetCursorPosition(90, 42);
@@ -4665,7 +4693,8 @@ namespace MainClasses
                         //Loads Player Monster PC
                         if (posY == 4)
                         {
-                            reloadPC = true;
+                            Player_Menus.PlayerPC(player, new Monster(), navPlayerMenu, gbText, gbBackground);
+                            reloadPC = false;
                         }
                         //Loads Professor PC
                         if (posY == 5)
@@ -4998,10 +5027,36 @@ namespace MainClasses
 
         #region Characters
 
+        public static string[] playerMale = new string[]
+        {
+            " ▄▄██▀▀██▄▄ ",
+            " ████ ▄████ ",
+            "█▀ ▀█▀▀█▀ ▀█",
+            "▀▄  ▀  ▀  ▄▀ ",
+            " ▄▀▄▄▄▄▄▄▀▄ ",
+            "█ ▄  ▀▀  ▄ █",
+            "▀▄▀▄▄▄▄▄▄▀▄▀",
+            "  █  ▄▄  █  ",
+            "  ▀▄▄▀▀▄▄▀  "
+        };
+
+        public static string[] playerFemale = new string[]
+        {
+            " ▄▄██▀▀██▄▄ ",
+            " ████ ▄████ ",
+            "█▀ ▀█▀▀█▀ ▀█",
+            "▀▄  ▀  ▀  ▄▀ ",
+            " ▄▀▄▄▄▄▄▄▀▄ ",
+            "█ ▄  ▀▀  ▄ █",
+            "▀▄▀▄▄▄▄▄▄▀▄▀",
+            "  █  ▄▄  █  ",
+            "  ▀▄▄▀▀▄▄▀  "
+        };
+
         public static string[] Professor = new string[]
         {
             " ███████▄▄  ",
-            "▀██████████ ",
+            " ██████████ ",
             "█▀ ▀▄  ▄▀ ▀█",
             "▀▄  ▀  ▀  ▄▀ ",
             " ▄▀▄▄▄▄▄▄▀▄ ",
@@ -5084,6 +5139,26 @@ namespace MainClasses
                @"                                                                                   "
             };
 
+        public static string[] PMPokedexSelectTAB = new string[]
+            {
+               @"▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+               @" █     PokeROLODEX      █",
+               @"  █                     █",
+               @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  PARTY            █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  BAG              █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █                   █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  EXIT             █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+            };
+
         public static string[] PMPartySelect = new string[]
             {
                @"                                                            ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
@@ -5110,6 +5185,26 @@ namespace MainClasses
                @"                                                                                   ",
                @"                                                                                   ",
                @"                                                                                   "
+            };
+
+        public static string[] PMPartySelectTAB = new string[]
+            {
+               @"    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+               @"    █  PokeROLODEX      █",
+               @"    █                   █",
+               @"▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @" █     PARTY            █",
+               @"  █                     █",
+               @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  BAG              █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █                   █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  EXIT             █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
             };
 
         public static string[] PMBagSelect = new string[]
@@ -5140,32 +5235,72 @@ namespace MainClasses
                @"                                                                                   "
             };
 
+        public static string[] PMBagSelectTAB = new string[]
+            {
+               @"    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+               @"    █  PokeROLODEX      █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  PARTY            █",
+               @"    █                   █",
+               @"▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @" █     BAG              █",
+               @"  █                     █",
+               @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █                   █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  EXIT             █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+            };
+
         public static string[] PMProfileSelect = new string[]
             {
                @"                                                            ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
                @"                                                            █  PokeROLODEX      █  ",
                @"                                                            █                   █  ",
                @"                                                            █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
-               @"                 ▄▀▀▀▀▀▀▄                                   █  PARTY            █  ",
-               @"                █ ██████ █                                  █                   █  ",
-               @"               ██▀▄▄▄▄▄▄▀██                                 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
-               @"              █ ▀  ▄  ▄  ▀ █                                █  BAG              █  ",
-               @"               ██▄ ▀  ▀ ▄██                                 █                   █  ",
-               @"              █  ████████  █    ▄▀▀▀▀▀▀▄                ▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
-               @"               ▀█▀▄▄▀▀▄▄▀█▀    █ ██████ █                █                      █  ",
-               @"                ▀▄▄▄▀▀▄▄▄▀    ██▀▄▄▄▄▄▄▀██                █                     █  ",
-               @"                             █ ▀  ▄  ▄  ▀ █                █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
-               @"                              ██▄ ▀  ▀ ▄██                  █  EXIT             █  ",
-               @"                             █  ████████  █                 █                   █  ",
-               @"                              ▀█▀▄▄▀▀▄▄▀█▀                  █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
-               @"                               ▀▄▄▄▀▀▄▄▄▀                                          ",
-               @"                                                                                   ",
-               @"                                                                                   ",
-               @"                                                                                   ",
+               @"              ▄▀▀▀▀▀▄                  ▄▄▄▄▄▄▄▄▄            █  PARTY            █  ",
+               @"             █▄▀▀▄   █              ▄▀▀       █             █                   █  ",
+               @"             █▀█▀▀█▀█ ▀▄            █████████  █            █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
+               @"         ▄   ▀▄▀  ▀▄▀▀▀▀           █ █ █  █ █ █             █  BAG              █  ",
+               @"      ▄██▀     ▀█▀█                █ ▀▄    ▄▀ █             █                   █  ",
+               @"       ▀▄▀▄▄▄▄██▀▄███▄            █    ▀█▀█   █         ▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
+               @"         ▀▄▄████ ██▀██▀▄         █   ▄▀█▄▄▄▀▄  █         █                      █  ",
+               @"             ██  ██  █ █       ▄▀▄▄▄▀▄▀█  █▀▄▀▄ █         █                     █  ",
+               @"            ██  ██ ▄█▄▀          ▄▀▄▀  █  █  █ █           █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
+               @"           █▄▀▀█▀█  ▀█          ▀██   █   ▀▄  █ █           █  EXIT             █  ",
+               @"          █   ▄ ▀▄█                  █▄▄▄▄▄▄█  ██▀          █                   █  ",
+               @"         █  ▄▀ ▀▄  █                █▄▄█▄▄█▄█               █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█  ",
+               @"         █  █    █  █              █ ▄▀   █ █                                      ",
+               @"         █  █     █  █            █▄▀      █ █                                     ",
+               @"         █▄██      ██▄█          █▄▀        ██                                     ",
+               @"        ▀▀▀▀        ▀▀▀         ▀▀          ▀▀                                     ",
                @"                                                                                   ",
                @"                                                                                   ",
                @"                                                                                   ",
                @"                                                                                   "
+            };
+
+        public static string[] PMProfileSelectTAB = new string[]
+            {
+               @"    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+               @"    █  PokeROLODEX      █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  PARTY            █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  BAG              █",
+               @"    █                   █",
+               @"▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @" █                      █",
+               @"  █                     █",
+               @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  EXIT             █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
             };
 
         public static string[] PMExitSelect = new string[]
@@ -5196,6 +5331,26 @@ namespace MainClasses
                @"                                                                                   "
             };
 
+        public static string[] PMExitSelectTAB = new string[]
+            {
+               @"    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
+               @"    █  PokeROLODEX      █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  PARTY            █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █  BAG              █",
+               @"    █                   █",
+               @"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @"    █                   █",
+               @"    █                   █",
+               @"▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+               @" █     EXIT             █",
+               @"  █                     █",
+               @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+            };
+
         #endregion
 
         #region PC
@@ -5209,6 +5364,34 @@ namespace MainClasses
             $"█  SWITCH OFF     █",
             $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
         };
+
+        public static string[] emptyPC = new string[]
+            {
+                " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+                " █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄           ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄           █ ",
+                " █ █                           █         ▄██ █         1-25        █ ██▄         █ ",
+                " █ █▄▄▄▄▄▄▄▄▄▄▄                █          ▀█ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ █▀          █ ",
+                " █ █           ▀▄              █                                                 █ ",
+                " █ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ █ ",
+                " █ █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █                                             █ █ ",
+                " █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █                                             █ █ ",
+                " █ █                           █ █                                             █ █ ",
+                " █ █ Lv.                       █ █                                             █ █ ",
+                " █ █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █ ",
+                " █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █ ",
+                " █ █ TYPE:                     █ █        PARTY       ▄▀ ▄▀        CLOSE       █ █ ",
+                " █ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ █ ",
+                " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+            };
 
         #endregion
 
@@ -5399,6 +5582,90 @@ namespace MainClasses
             " ITEM              ",
             "                   "
         };
+
+        #endregion
+
+        #region Player Profile
+
+        public static string[] playerProfileMale = new string[]
+        {//(4,2)
+            " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █           ▄▄▄                  ▄▄▄           ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █ ",
+            " █          ▀ ▄ ▀  TRAINER CARD  ▀ ▄ ▀          █                              █ █ ",
+            " █          ▀▄▄▄▀                ▀▄▄▄▀          █             ▄▀▀▀▀▀▄          █ █ ",
+            " █                                              █            █▄▀▀▄   █         █ █ ",
+            " █  IDNo.                                       █            █▀█▀▀█▀█ ▀▄       █ █ ",
+            " █                                              █        ▄   ▀▄▀  ▀▄▀▀▀▀       █ █ ",
+            " █  NAME                                        █     ▄██▀     ▀█▀█            █ █ ",
+            " █                                              █      ▀▄▀▄▄▄▄██▀▄███▄         █ █ ",
+            " █  MONEY                                       █        ▀▄▄████ ██▀██▀▄       █ █ ",
+            " █                                              █            ██  ██  █ █       █ █ ",
+            " █  POKeDEX                                     █           ██  ██ ▄█▄▀        █ █ ",
+            " █                                              █          █▄▀▀█▀█  ▀█         █ █ ",
+            " █  TIME                                        █         █   ▄ ▀▄█            █ █ ",
+            " █                                              █        █  ▄▀ ▀▄  █           █ █ ",
+            " █  ADVENTURE STARTED                           █        █  █    █  █          █ █ ",
+            " █                                              █        █  █     █  █         █ █ ",
+            " █                                              █        █▄██      ██▄█        █ █ ",
+            " █                                              █       ▀▀▀▀        ▀▀▀        █ █ ",
+            " █                                              █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █ ",
+            " █                                                                               █ ",
+            " █                                                                               █ ",
+            " █                                                                               █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        public static string[] playerProfileFemale = new string[]
+        {//(4,2)
+            " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █           ▄▄▄                  ▄▄▄           ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █ ",
+            " █          ▀ ▄ ▀  TRAINER CARD  ▀ ▄ ▀          █              ▄▄▄▄▄▄▄▄▄       █ █ ",
+            " █          ▀▄▄▄▀                ▀▄▄▄▀          █           ▄▀▀       █        █ █ ",
+            " █                                              █           █████████  █       █ █ ",
+            " █  IDNo.                                       █          █ █ █  █ █ █        █ █ ",
+            " █                                              █          █ ▀▄    ▄▀ █        █ █ ",
+            " █  NAME                                        █         █    ▀█▀█   █        █ █ ",
+            " █                                              █        █   ▄▀█▄▄▄▀▄  █       █ █ ",
+            " █  MONEY                                       █      ▄▀▄▄▄▀▄▀█  █▀▄▀▄ █      █ █ ",
+            " █                                              █        ▄▀▄▀  █  █  █ █       █ █ ",
+            " █  POKeDEX                                     █       ▀██   █   ▀▄  █ █      █ █ ",
+            " █                                              █            █▄▄▄▄▄▄█  ██▀     █ █ ",
+            " █  TIME                                        █           █▄▄█▄▄█▄█          █ █ ",
+            " █                                              █          █ ▄▀   █ █          █ █ ",
+            " █  ADVENTURE STARTED                           █         █▄▀      █ █         █ █ ",
+            " █                                              █        █▄▀        ██         █ █ ",
+            " █                                              █       ▀▀          ▀▀         █ █ ",
+            " █                                              █                              █ █ ",
+            " █                                              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ █ ",
+            " █                                                                               █ ",
+            " █                                                                               █ ",
+            " █                                                                               █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        string asdf = @"
+    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  
+   █               ▀█▄
+  █                █ █
+  █▀█▀█▀█▀█▀▀▀█▀▀▄▄█▀ 
+  █▀▀█▀▀▀▀▀▀▀▀▀▀▀▀ █  
+  █  ██   ██  █  █▀█  
+  █  █        █  █ █  
+  █   █▄▄   ▄▄█ ▄▀ █  
+ ▄█     ▀▀█▀▀█▀▀   █  
+▄█      ▄▀    ▀▄ ▄█▀  
+ ▀▀▄   ▄█    ▀▄ ▀█    
+   ▀▀█▀▄▀█   █ ▀▄ █   
+  ▄▄▀▄▀  █   █  █ █   
+ ███▀   █     ▀▄███   
+       █▄▄▄▄▄▄▄▄█     
+      █▄▄█▄▄▄▄█▄▄█    
+     █  ▄▀   █  █     
+    █ ▄▀      █ █     
+   █▄▀         ██     
+  ▀▀           ▀▀     
+
+";
 
         #endregion
 
@@ -6774,7 +7041,7 @@ namespace MainClasses
 
         #region Dousey
 
-        public static string[] douseyDefender = new string[] {
+        public static string[] dowseyDefender = new string[] {
         @"                                                                                                                                                                                  ",
         @"                                                                                    ▄▄▄▀▀▄                                                                                        ",
         @"                                                                                      ▀█  █▄                                                                                      ",
@@ -6784,7 +7051,7 @@ namespace MainClasses
         @"                                                                                       █   █                                                                                      ",
         @"                                                                                      ▄▀▄▄▀▄▄_                                                                                    "};
 
-        public static string[] douseyPokedex = new string[] {
+        public static string[] dowseyPokedex = new string[] {
         @"                   ",
         @"    ▄▄▄▀▀▄         ",
         @"      ▀█  █▄       ",
@@ -6795,7 +7062,7 @@ namespace MainClasses
         @"      ▄▀▄▄▀▄▄_     "
         };
 
-        public static string[] douseyAttacker = new string[] {
+        public static string[] dowseyAttacker = new string[] {
         @"                       ",
         @"             ▄▄▄▄_     ",
         @"           ▄▀   ▀▄▀    ",
