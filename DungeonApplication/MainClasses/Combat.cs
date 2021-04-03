@@ -67,6 +67,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIAttackerMoves(move, gbText, gbBackground);
             CalcDamageMonster(defender, 0, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitZero, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
@@ -82,6 +83,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIAttackerMoves(move, gbText, gbBackground);
             CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitLow, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
@@ -96,6 +98,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIAttackerMoves(move, gbText, gbBackground);
             CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
             move.Uses -= 1;
         }
@@ -110,6 +113,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIAttackerMoves(move, gbText, gbBackground);
             CalcDamageMonster(defender, damageDealt, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitSuper, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
@@ -126,6 +130,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIDefenderMoves(move, gbText, gbBackground);
             CalcDamageAttacker(defender, 0, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitZero, 50, 1000, gbText, gbBackground);            
             move.Uses -= 1;
@@ -141,6 +146,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIDefenderMoves(move, gbText, gbBackground);
             CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitLow, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;
@@ -155,6 +161,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIDefenderMoves(move, gbText, gbBackground);
             CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
             move.Uses -= 1;
         }
@@ -169,6 +176,7 @@ namespace MainClasses
             ASCII.StaticMessageBox(gbText, gbBackground);
             System.Threading.Thread.Sleep(1000);
             ASCII.ScrollMessage(playerHit, 50, 1000, gbText, gbBackground);
+            Monster_Moves.ANIDefenderMoves(move, gbText, gbBackground);
             CalcDamageAttacker(defender, damageDealt, gbText, gbBackground);
             ASCII.ScrollMessage(playerHitSuper, 50, 2000, gbText, gbBackground);
             move.Uses -= 1;

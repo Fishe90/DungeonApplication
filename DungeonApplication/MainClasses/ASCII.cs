@@ -1646,6 +1646,78 @@ namespace MainClasses
                   " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
             };
             #endregion
+            #region Female Movement
+            string[] FemaleHeadRight = new string[]
+            {
+                " ▄███▄ ",                  //" ▄███▄ ",
+                "██","█▄","▀",              // "███▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] FemaleHeadRight2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "██","█▄","▀",             // "███▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] FemaleHeadLeft = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "▀","▄█","██",             // "▀▄███", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] FemaleHeadLeft2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                  "▀","▄█","██",            // "▀▄███",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " █ ▀ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ ▀ "           // " ▀ ▀ "  
+            };
+            #endregion
 
             //TODO Create Female Version
 
@@ -1655,6 +1727,8 @@ namespace MainClasses
             //4 = Move Up LF
             //5 = Move Down RF
             //6 = Move Down LF
+
+            //Male Movement
             if (direction == 1 && player.Gender == '♂')
             {
                 #region MOVING LEFT
@@ -2035,6 +2109,406 @@ namespace MainClasses
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.BackgroundColor = gbBackground;
                 Console.Write(MoveDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+
+            //Female Movement
+            if (direction == 1 && player.Gender == '♀')
+            {
+                #region MOVING LEFT
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadLeft[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadLeft[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadLeft[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft[4]);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write(FemaleHeadLeft[5]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadLeft[6]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE LEFT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadLeft2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadLeft2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadLeft2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write(FemaleHeadLeft2[4]);
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadLeft2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadLeft2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 2 && player.Gender == '♀')
+            {
+                #region MOVING RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadRight[1]);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadRight[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadRight[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write(FemaleHeadRight[4]);
+                Console.Write(FemaleHeadRight[5]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadRight[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadRight[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadRight2[1]);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadRight2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.Write(FemaleHeadRight2[4]);
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadRight2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadRight2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 3 && player.Gender == '♀')
+            {
+                #region MOVING UP RF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpRF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpRF[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpRF[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpRF[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(50);
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 4 && player.Gender == '♀')
+            {
+                #region MOVING UP LF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpLF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpLF[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpLF[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpLF[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(50);
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 5 && player.Gender == '♀')
+            {
+                #region MOVING DOWN RF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownRF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownRF[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownRF[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownRF[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownRF[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownRF[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownIdle[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownIdle[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 6 && player.Gender == '♀')
+            {
+                #region MOVING DOWN LF
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownLF[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownLF[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownLF[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownLF[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownLF[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownLF[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+                System.Threading.Thread.Sleep(100);
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownIdle[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownIdle[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[5]);
 
                 Console.SetCursorPosition(90, 42);
                 #endregion
@@ -4645,7 +5119,7 @@ namespace MainClasses
 
         #region METHODS: Display Objects
 
-        public static void PCMain(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        public static void PCMain(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPC = false;
             int posX = 66;
@@ -4656,6 +5130,8 @@ namespace MainClasses
                 int navY = 3;
                 foreach (string line in pcMain)
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ConsoleColor.Black;
                     Console.SetCursorPosition(posX, navY);
                     Console.Write(line);
                     navY += 1;
@@ -4693,8 +5169,11 @@ namespace MainClasses
                         //Loads Player Monster PC
                         if (posY == 4)
                         {
-                            Player_Menus.PlayerPC(player, new Monster(), navPlayerMenu, gbText, gbBackground);
-                            reloadPC = false;
+                            Player_Menus.PC(player, new Monster(), new int(), false, navPlayerMenu, gbText, gbBackground);
+                            GameMap(pokeCenter, currentPosX, currentPosY, gbText, gbBackground);
+                            CharacterPokeCenter((22), (8), gbText, gbBackground);
+                            ASCII.PlayerMovement(player, 3, gbText, gbBackground);
+                            reloadPC = true;
                         }
                         //Loads Professor PC
                         if (posY == 5)
@@ -5365,6 +5844,26 @@ namespace MainClasses
             $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
         };
 
+        public static string[] pcInner = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█  MOVE           █",
+            $"█  SUMMARY        █",
+            $"█  ITEM           █",
+            $"█  WITHDRAW       █",
+            $"█  RELEASE        █",
+            $"█  CANCEL         █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
+        public static string[] pcSwitch = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█  YES            █",
+            $"█  NO             █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
+
         public static string[] emptyPC = new string[]
             {
                 " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
@@ -5809,7 +6308,7 @@ namespace MainClasses
 @"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
 @"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█"
         };
-       
+
         #endregion
 
         #region Home Town
@@ -7039,7 +7538,7 @@ namespace MainClasses
 
         #endregion
 
-        #region Dousey
+        #region Dowsey
 
         public static string[] dowseyDefender = new string[] {
         @"                                                                                                                                                                                  ",

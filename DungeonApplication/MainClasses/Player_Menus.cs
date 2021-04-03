@@ -132,7 +132,7 @@ namespace MainClasses
                         }
                         if (posY == 23)
                         {
-                            SFX.RunAway();
+                            //SFX.RunAway();
                             string message2 = $"{player.Name.ToUpper()} fled to safety!";
                             ASCII.ScrollMessage(message2, 15, 2000, gbText, gbBackground);
                             reloadBattleFAINT = false;
@@ -140,7 +140,7 @@ namespace MainClasses
                         break;
                     case ConsoleKey.Backspace:
                     case ConsoleKey.O:
-                        SFX.RunAway();
+                        //SFX.RunAway();
                         string message = $"{player.Name.ToUpper()} fled to safety!";
                         ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
                         reloadBattleFAINT = false;
@@ -236,7 +236,7 @@ namespace MainClasses
                                         }
                                         if (posY == 23)
                                         {
-                                            SFX.RunAway();
+                                            //SFX.RunAway();
                                             string message2 = $"{player.Name.ToUpper()} fled to safety!";
                                             ASCII.ScrollMessage(message2, 15, 2000, gbText, gbBackground);
                                             reloadBattleFAINT = false;
@@ -244,7 +244,7 @@ namespace MainClasses
                                         break;
                                     case ConsoleKey.Backspace:
                                     case ConsoleKey.O:
-                                        SFX.RunAway();
+                                        //SFX.RunAway();
                                         string message = $"{player.Name.ToUpper()} fled to safety!";
                                         ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
                                         reloadBattleFAINT = false;
@@ -308,7 +308,7 @@ namespace MainClasses
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                SFX.RunAway();
+                                                //SFX.RunAway();
                                                 string message = $"{player.Name.ToUpper()} fled to safety!";
                                                 ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
                                                 reloadBattleFIGHT = false;
@@ -415,7 +415,7 @@ namespace MainClasses
                                         {
                                             case ConsoleKey.K:
                                             case ConsoleKey.Enter:
-                                                SFX.RunAway();
+                                                //SFX.RunAway();
                                                 string message = $"{player.Name.ToUpper()} fled to safety!";
                                                 ASCII.ScrollMessage(message, 15, 2000, gbText, gbBackground);
                                                 reloadBattleFIGHT = false;
@@ -2517,12 +2517,12 @@ namespace MainClasses
 
                     case ConsoleKey.Enter: //TODO ADD POKEDEX SECTION
                         //SFX.Select();
-                        do
-                        {
+                        //do
+                        //{
 
-                            reloadPlayerMenu = true;
+                        //    reloadPlayerMenu = true;
 
-                        } while (reloadPlayerMenu);
+                        //} while (reloadPlayerMenu);
                         break;
                     //Navigates Down to PlayerMonstersEquipped
 
@@ -5177,12 +5177,310 @@ namespace MainClasses
 
         #region PC Menu
 
+        public static void PC(Player player, Monster monster, int monster1, bool isMove, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadPokedex = true;
+            int pcX = 4;
+            int pcY = 2;
+            int navX = 42;
+            int navY = 8;
+            int entryX = 42;
+            int entryY = 8;
+            int pcSelect = 0;
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            do
+            {
+                #region Hover Selection
+                if (navX == 42)
+                {
+                    if (navY == 8)
+                    {                        
+                        pcSelect = 0;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 11)
+                    {
+                        pcSelect = 5;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 14)
+                    {
+                        pcSelect = 10;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 17)
+                    {
+                        pcSelect = 15;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 20)
+                    {
+                        pcSelect = 20;
+                        monster = player.PC[pcSelect];
+                    }
+                }
+                if (navX == 50)
+                {
+                    if (navY == 8)
+                    {
+                        pcSelect = 1;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 11)
+                    {
+                        pcSelect = 6;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 14)
+                    {
+                        pcSelect = 11;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 17)
+                    {
+                        pcSelect = 16;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 20)
+                    {
+                        pcSelect = 21;
+                        monster = player.PC[pcSelect];
+                    }
+                }
+                if (navX == 58)
+                {
+                    if (navY == 8)
+                    {
+                        pcSelect = 2;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 11)
+                    {
+                        pcSelect = 7;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 14)
+                    {
+                        pcSelect = 12;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 17)
+                    {
+                        pcSelect = 17;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 20)
+                    {
+                        pcSelect = 22;
+                        monster = player.PC[pcSelect];
+                    }
+                }
+                if (navX == 66)
+                {
+                    if (navY == 8)
+                    {
+                        pcSelect = 3;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 11)
+                    {
+                        pcSelect = 8;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 14)
+                    {
+                        pcSelect = 13;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 17)
+                    {
+                        pcSelect = 18;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 20)
+                    {
+                        pcSelect = 23;
+                        monster = player.PC[pcSelect];
+                    }
+                }
+                if (navX == 74)
+                {
+                    if (navY == 8)
+                    {
+                        pcSelect = 4;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 11)
+                    {
+                        pcSelect = 9;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 14)
+                    {
+                        pcSelect = 14;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 17)
+                    {
+                        pcSelect = 19;
+                        monster = player.PC[pcSelect];
+                    }
+                    if (navY == 20)
+                    {
+                        pcSelect = 24;
+                        monster = player.PC[pcSelect];
+                    }
+                }
+                #endregion
+
+                #region Display Empty PC
+                pcY = 2;
+                foreach (string line in ASCII.emptyPC)
+                {
+                    Console.SetCursorPosition(pcX, pcY);
+                    Console.Write(line);
+                    pcY += 1;
+                }
+                #endregion
+
+                #region Display Monster Entries
+                entryX = 42;
+                entryY = 8;
+                foreach (Monster entry in player.PC)
+                {
+                    Console.SetCursorPosition(entryX, entryY);
+                    if (entry.Type != Monster_Race.NONE)
+                    {
+                        Console.Write(" (o) ");
+                    }
+                    else
+                    {
+                        Console.Write("     ");
+                    }
+                    entryX += 8;
+                    if (entryX == 82)
+                    {
+                        entryX = 42;
+                        entryY += 3;
+                    }
+                }
+                #endregion
+
+                #region Display Monster Info Hover
+                if (monster.Type != Monster_Race.NONE)
+                {
+                    pcY = 9;
+                    foreach (string line in monster.ASCIIPokedex)
+                    {
+                        Console.SetCursorPosition(12, pcY);
+                        Console.Write(line);
+                        pcY += 1;
+                    }
+                    Console.SetCursorPosition(9, 4);
+                    Console.Write(monster.Name.ToUpper());
+                    Console.SetCursorPosition(26, 5);
+                    Console.Write($"No.{monster.PokeIndex}");
+                    ASCII.NameANDGender(monster, 9, 19, gbText, gbBackground);
+                    ASCII.Level(monster, 9, 20, gbText, gbBackground);
+                    ASCII.Type(monster.Type, 15, 23, gbText, gbBackground);
+                    Console.SetCursorPosition(navX, navY);
+                    Console.Write("( o )");
+                }
+                else
+                {
+                    Console.SetCursorPosition(navX, navY);
+                    Console.Write("(   )");
+                }
+                #endregion
+
+                #region PC Navigation
+                Console.SetCursorPosition(90, 42);
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navY -= 3;
+                        if (navY == 5)
+                        {
+                            navY += 3;
+                        }
+                        //reloadPokedex = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navY += 3;
+                        if (navY == 23)
+                        {
+                            navY -= 3;
+                        }
+                        //reloadPokedex = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navX -= 8;
+                        if (navX == 34)
+                        {
+                            navX += 8;
+                        }
+                        //reloadPokedex = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        //Console.SetCursorPosition(navX, navY);
+                        //Console.Write(" (o) ");
+                        navX += 8;
+                        if (navX == 82)
+                        {
+                            navX -= 8;
+                        }
+                        //reloadPokedex = true;
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        if (player.PC[pcSelect].Type != Monster_Race.NONE && isMove == false)
+                        {
+                            PCInner(player, pcSelect, navPlayerMenu, gbText, gbBackground);
+                            reloadPokedex = false;
+                        }
+                        else if (player.PC[pcSelect].Type != Monster_Race.NONE && isMove == true)
+                        {
+                            PCSwitch(player, monster1, pcSelect, navPlayerMenu, gbText, gbBackground);
+                            reloadPokedex = false;
+                        }
+                        else
+                        {
+                            reloadPokedex = true;
+                        }
+                        //reloadPokedex = true;
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadPokedex = false;
+                        break;
+                    default:
+                        reloadPokedex = false;
+                        break;
+                }
+                #endregion
+
+            } while (reloadPokedex);
+        }
+
         public static void PlayerPC(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadPokedex = false;
             int posY = 2;
             int navX = 42;
             int navY = 8;
+            int pcSelect = 0;
             Console.ForegroundColor = gbText;
             Console.BackgroundColor = gbBackground;
             do
@@ -5192,22 +5490,27 @@ namespace MainClasses
                     if (navY == 8)
                     {
                         monster = player.PC[0];
+                        pcSelect = 0;
                     }
                     if (navY == 11)
                     {
                         monster = player.PC[5];
+                        pcSelect = 5;
                     }
                     if (navY == 14)
                     {
                         monster = player.PC[10];
+                        pcSelect = 10;
                     }
                     if (navY == 17)
                     {
                         monster = player.PC[15];
+                        pcSelect = 15;
                     }
                     if (navY == 20)
                     {
                         monster = player.PC[20];
+                        pcSelect = 20;
                     }
                 }
                 if (navX == 50)
@@ -5215,22 +5518,27 @@ namespace MainClasses
                     if (navY == 8)
                     {
                         monster = player.PC[1];
+                        pcSelect = 1;
                     }
                     if (navY == 11)
                     {
                         monster = player.PC[6];
+                        pcSelect = 6;
                     }
                     if (navY == 14)
                     {
                         monster = player.PC[11];
+                        pcSelect = 11;
                     }
                     if (navY == 17)
                     {
                         monster = player.PC[16];
+                        pcSelect = 16;
                     }
                     if (navY == 20)
                     {
                         monster = player.PC[21];
+                        pcSelect = 21;
                     }
                 }
                 if (navX == 58)
@@ -5238,22 +5546,27 @@ namespace MainClasses
                     if (navY == 8)
                     {
                         monster = player.PC[2];
+                        pcSelect = 2;
                     }
                     if (navY == 11)
                     {
                         monster = player.PC[7];
+                        pcSelect = 7;
                     }
                     if (navY == 14)
                     {
                         monster = player.PC[12];
+                        pcSelect = 12;
                     }
                     if (navY == 17)
                     {
                         monster = player.PC[17];
+                        pcSelect = 17;
                     }
                     if (navY == 20)
                     {
                         monster = player.PC[22];
+                        pcSelect = 22;
                     }
                 }
                 if (navX == 66)
@@ -5261,22 +5574,27 @@ namespace MainClasses
                     if (navY == 8)
                     {
                         monster = player.PC[3];
+                        pcSelect = 3;
                     }
                     if (navY == 11)
                     {
                         monster = player.PC[8];
+                        pcSelect = 8;
                     }
                     if (navY == 14)
                     {
                         monster = player.PC[13];
+                        pcSelect = 13;
                     }
                     if (navY == 17)
                     {
                         monster = player.PC[18];
+                        pcSelect = 18;
                     }
                     if (navY == 20)
                     {
                         monster = player.PC[23];
+                        pcSelect = 23;
                     }
                 }
                 if (navX == 74)
@@ -5284,22 +5602,27 @@ namespace MainClasses
                     if (navY == 8)
                     {
                         monster = player.PC[4];
+                        pcSelect = 4;
                     }
                     if (navY == 11)
                     {
                         monster = player.PC[9];
+                        pcSelect = 9;
                     }
                     if (navY == 14)
                     {
                         monster = player.PC[14];
+                        pcSelect = 14;
                     }
                     if (navY == 17)
                     {
                         monster = player.PC[19];
+                        pcSelect = 19;
                     }
                     if (navY == 20)
                     {
                         monster = player.PC[24];
+                        pcSelect = 24;
                     }
                 }
 
@@ -5402,11 +5725,203 @@ namespace MainClasses
                         }
                         reloadPokedex = true;
                         break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+
+                        reloadPokedex = true;
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadPokedex = false;
+                        break;
                     default:
                         reloadPokedex = false;
                         break;
                 }
             } while (reloadPokedex);
+        }
+
+        public static void PCInner(Player player, int monster1, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadPopUp = true;
+            int popUpX = 63;
+            int popUpY = 12;
+            int navX = 64;
+            int navY = 13;
+
+            do
+            {
+                /* MOVE
+                 * SUMMARY
+                 * ITEM
+                 * WITHDRAW
+                 * RELEASE
+                 * CANCEL
+                 */
+                #region PopUp Display
+                popUpY = 12;
+                foreach (string line in ASCII.pcInner)
+                {
+                    Console.SetCursorPosition(popUpX, popUpY);
+                    Console.Write(line);
+                    popUpY += 1;
+                }
+                Console.SetCursorPosition(navX, navY);
+                Console.Write(">");
+                #endregion
+
+                ASCII.InstantMessage($"{player.PC[monster1].Name.ToUpper()} is selected.", gbText, gbBackground);
+
+                #region Menu
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(navX, navY);
+                        Console.Write(" ");
+                        navY -= 1;
+                        if (navY == 12)
+                        {
+                            navY = 18;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(navX, navY);
+                        Console.Write(" ");
+                        navY += 1;
+                        if (navY == 19)
+                        {
+                            navY = 13;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        //Move
+                        if (navY == 13)
+                        {
+                            PC(player, new Monster(), monster1, true, navPlayerMenu, gbText, gbBackground);
+                            reloadPopUp = false;
+                        }
+                        //Summary
+                        if (navY == 14)
+                        {
+
+                        }
+                        //Item
+                        if (navY == 15)
+                        {
+
+                        }
+                        //Withdraw
+                        if (navY == 16)
+                        {
+
+                        }
+                        //Release
+                        if (navY == 17)
+                        {
+
+                        }
+                        //Cancel
+                        if (navY == 18)
+                        {
+                            reloadPopUp = false;
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadPopUp = false;
+                        break;
+                    default:
+                        reloadPopUp = false;
+                        break;
+                }
+                #endregion
+            } while (reloadPopUp);
+        }
+
+        public static void PCSwitch(Player player, int monster1, int monster2, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadPopUp = true;
+            int popUpX = 63;
+            int popUpY = 16;
+            int navX = 64;
+            int navY = 17;
+
+            do
+            {
+                /* Yes
+                 * No
+                 */
+                #region PopUp Display
+                popUpY = 16;
+                foreach (string line in ASCII.pcSwitch)
+                {
+                    Console.SetCursorPosition(popUpX, popUpY);
+                    Console.Write(line);
+                    popUpY += 1;
+                }
+                Console.SetCursorPosition(navX, navY);
+                Console.Write(">");
+                #endregion
+
+                ASCII.InstantMessage($"Swap {player.PC[monster1].Name.ToUpper()} with {player.PC[monster2].Name.ToUpper()}?", gbText, gbBackground);
+
+                #region Menu
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(navX, navY);
+                        Console.Write(" ");
+                        navY -= 1;
+                        if (navY == 16)
+                        {
+                            navY = 18;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(navX, navY);
+                        Console.Write(" ");
+                        navY += 1;
+                        if (navY == 19)
+                        {
+                            navY = 17;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        //Yes
+                        if (navY == 17)
+                        {
+                            Monster monsterSwitch = new Monster();
+                            monsterSwitch = player.PC[monster1];
+                            player.PC[monster1] = player.PC[monster2];
+                            player.PC[monster2] = monsterSwitch;
+                            PC(player, new Monster(), new int(), false, navPlayerMenu, gbText, gbBackground);
+                            reloadPopUp = false;
+                        }
+                        //No
+                        if (navY == 18)
+                        {
+                            PC(player, new Monster(), monster1, true, navPlayerMenu, gbText, gbBackground);
+                            reloadPopUp = false;
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadPopUp = false;
+                        break;
+                    default:
+                        reloadPopUp = false;
+                        break;
+                }
+                #endregion
+            } while (reloadPopUp);
         }
 
         #endregion

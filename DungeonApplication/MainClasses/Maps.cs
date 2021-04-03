@@ -9,6 +9,10 @@ namespace MainClasses
 {
     public class Maps
     {
+        //TODO Add to movement where if the player keys in a direction that they aren't already facing in, make it so they face that direction first, then the next time they key in the same direction it allows movement.
+
+        //TODO Add MINIGAMES in the PC menu that the player can play.
+
         #region Map TYPE Templates
 
         public static void RegionNoEncounter(string[] Map, Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -25,7 +29,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         currentPosY -= 2;
                         if (currentPosY < 16)
                         {
@@ -34,7 +38,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         currentPosY += 2;
                         if (currentPosY > 64)
                         {
@@ -43,7 +47,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         currentPosX -= 5;
                         if (currentPosX < 63)
                         {
@@ -52,7 +56,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         currentPosX += 5;
                         if (currentPosX > 220)
                         {
@@ -87,7 +91,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         currentPosY -= 2;
                         if (currentPosY < 1)
                         {
@@ -108,7 +112,7 @@ namespace MainClasses
                         //reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         currentPosY += 2;
                         if (currentPosY > 63)
                         {
@@ -129,7 +133,7 @@ namespace MainClasses
                         //reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         currentPosX -= 5;
                         if (currentPosX < 63)
                         {
@@ -150,7 +154,7 @@ namespace MainClasses
                         //reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         currentPosX += 5;
                         //if (currentPosX > TestMap.Length)
                         //{
@@ -206,7 +210,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -286,7 +290,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         currentPosY += 2;
                         posY += 4;
@@ -318,7 +322,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         posX -= 10;
@@ -342,7 +346,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         posX += 10;
@@ -369,8 +373,8 @@ namespace MainClasses
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);                        
                         reloadTestMap = true;
                         break;
-                    case ConsoleKey.Enter:
-                    case ConsoleKey.K:
+                    case ConsoleKey.Enter: case ConsoleKey.K:
+                    
                         string battle = "Do you want to battle?";
                         if (currentPosX == 117 && currentPosY == 68)
                         {
@@ -390,8 +394,7 @@ namespace MainClasses
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
-                                    case ConsoleKey.UpArrow:
-                                    case ConsoleKey.W:
+                                    case ConsoleKey.UpArrow: case ConsoleKey.W:                                   
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
                                         menuPosY -= 1;
@@ -401,8 +404,7 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.DownArrow:
-                                    case ConsoleKey.S:
+                                    case ConsoleKey.DownArrow: case ConsoleKey.S:                                    
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
                                         menuPosY += 1;
@@ -412,11 +414,10 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.Enter:
-                                    case ConsoleKey.K:
+                                    case ConsoleKey.Enter: case ConsoleKey.K:                                    
                                         if (menuPosY == 22)
                                         {
-                                            SFX.RivalBattle();
+                                            SFX.LeagueBattleRE();
                                             //SFX.LeagueBattleRE();
                                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
@@ -428,8 +429,7 @@ namespace MainClasses
                                             reloadBattleFAINT = false;
                                         }
                                         break;
-                                    case ConsoleKey.Backspace:
-                                    case ConsoleKey.O:
+                                    case ConsoleKey.Backspace: case ConsoleKey.O:                                    
                                         reloadBattleFAINT = false;
                                         break;
                                     default:
@@ -466,7 +466,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -492,7 +492,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -515,7 +515,7 @@ namespace MainClasses
                         }                  
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         if (currentPosX == 45 && currentPosY == 3)
@@ -532,7 +532,7 @@ namespace MainClasses
                         }                        
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         if (currentPosX > 55)
@@ -568,7 +568,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -594,7 +594,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -612,7 +612,7 @@ namespace MainClasses
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         if (currentPosX < 5)
@@ -622,7 +622,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         if (currentPosX == 50 && currentPosY == 3)
@@ -664,7 +664,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -690,7 +690,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -713,7 +713,7 @@ namespace MainClasses
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         if (currentPosX < 5)
@@ -723,7 +723,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         if (currentPosX == 15 && currentPosY == 3)
@@ -766,7 +766,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -792,7 +792,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -810,7 +810,7 @@ namespace MainClasses
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         if (currentPosX == 10 && currentPosY == 3)
@@ -825,7 +825,7 @@ namespace MainClasses
                         }                        
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         if (currentPosX > 55)
@@ -866,7 +866,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -894,7 +894,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -920,7 +920,7 @@ namespace MainClasses
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         posX -= 10;
@@ -932,7 +932,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         posX += 10;
@@ -947,14 +947,14 @@ namespace MainClasses
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
-                    case ConsoleKey.Enter:
-                    case ConsoleKey.K:
+                    case ConsoleKey.Enter: case ConsoleKey.K:
+                    
                         //Access PC
                         if (currentPosX == 50 && currentPosY == 5)
                         {
                             ASCII.ScrollMessage($"{player.Name.ToUpper()} booted up the PC.", 25, 1500, gbText, gbBackground);
                             ASCII.ScrollMessage("Which PC should be accessed?", 25, 1500, gbText, gbBackground);
-                            ASCII.PCMain(player, navPlayerMenu, gbText, gbBackground);
+                            ASCII.PCMain(player, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
                         }
                         //Heal PokeFraud
                         if (currentPosX == 30 && currentPosY == 7)
@@ -982,8 +982,8 @@ namespace MainClasses
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
-                                    case ConsoleKey.UpArrow:
-                                    case ConsoleKey.W:
+                                    case ConsoleKey.UpArrow: case ConsoleKey.W:
+                                    
                                         Console.SetCursorPosition(61, chooseY);
                                         Console.Write("   ");
                                         chooseY -= 1;
@@ -993,8 +993,8 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.DownArrow:
-                                    case ConsoleKey.S:
+                                    case ConsoleKey.DownArrow: case ConsoleKey.S:
+                                    
                                         Console.SetCursorPosition(61, chooseY);
                                         Console.Write("   ");
                                         chooseY += 1;
@@ -1004,8 +1004,8 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.Enter:
-                                    case ConsoleKey.K:
+                                    case ConsoleKey.Enter: case ConsoleKey.K:
+                                    
                                         if (chooseY == 22)
                                         {
                                             ASCII.ScrollMessage(message4, 50, 1500, gbText, gbBackground);
@@ -1111,8 +1111,8 @@ namespace MainClasses
                                             reloadBattleFAINT = false;
                                         }
                                         break;
-                                    case ConsoleKey.Backspace:
-                                    case ConsoleKey.O:
+                                    case ConsoleKey.Backspace: case ConsoleKey.O:
+                                    
                                         ASCII.ScrollMessage(message2, 50, 1500, gbText, gbBackground);
                                         reloadBattleFAINT = false;
                                         break;
@@ -1151,7 +1151,7 @@ namespace MainClasses
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow: case ConsoleKey.W:
                         direction += 1;
                         if (direction < 3)
                         {
@@ -1179,7 +1179,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow: case ConsoleKey.S:
                         direction += 1;
                         if (direction < 5)
                         {
@@ -1205,7 +1205,7 @@ namespace MainClasses
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
                         direction = 1;
                         currentPosX -= 5;
                         posX -= 10;
@@ -1217,7 +1217,7 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.RightArrow: case ConsoleKey.D:
                         direction = 2;
                         currentPosX += 5;
                         posX += 10;
