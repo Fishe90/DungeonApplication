@@ -189,6 +189,24 @@ namespace MainClasses
 
         #region Maps
 
+        #region DEMO Map
+
+        public static void DEMOMapActive(Player player, Player npc, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMOMapStatic(Player player, Player npc, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
+        }
+
         public static void DEMOMap(Player player, Player npc, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
@@ -197,184 +215,340 @@ namespace MainClasses
             int direction = 6;
             Random rand = new Random();
             int encounterChance = rand.Next(0, 100);
-            //(167,56) **Player Position            
+            //(167,56) **Player Position   
+            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);                
+                //DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                //Console.SetBufferSize(2000, 2000);
+                //ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
+                //ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+                //ASCII.PlayerMovement(player, direction, gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
-                        }
-                        if (direction == 5)
-                        {
-                            direction -= 2;
-                        }
-                        if (direction == 6)
-                        {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        posY -= 4;
-                        //Catching Field    
-                        encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
-                        {
-                            currentPosY += 2;
-                            posY += 4;
-                            SFX.Battle();
-                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
-                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route2();
-                        }
-                        //Rival House
-                        if (currentPosX == 102 && currentPosY == 54)
-                        {
-                            DEMORivalHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
-                            currentPosY += 2;
-                            posY += 4;
-                            direction = 6;
-                        }
-                        //PokeMart
-                        if (currentPosX == 107 && currentPosY == 34)
-                        {
-                            SFX.EnterStore();
-                            System.Threading.Thread.Sleep(1000);
-                            DEMOPokeMart(player, 15, 17, navPlayerMenu, gbText, gbBackground);
-                            SFX.Route2();
-                            currentPosY += 2;
-                            posY += 4;
-                            direction = 6;
-                        }
-                        //PokeCenter
-                        if (currentPosX == 172 && currentPosY == 34)
-                        {
-                            SFX.EnterStore();
-                            System.Threading.Thread.Sleep(1000);
-                            SFX.PokeCenter();
-                            DEMOPokeCenter(player, 30, 17, navPlayerMenu, gbText, gbBackground);
-                            SFX.Route2();
-                            currentPosY += 2;
-                            posY += 4;
-                            direction = 6;
-                        }
-                        //Player's House
-                        if (currentPosX == 167 && currentPosY == 54)
-                        {
-                            DEMOPlayerHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
-                            currentPosY += 2;
-                            posY += 4;
-                            direction = 6;
-                        }
-                        //Border Top
-                        if (currentPosY < 16)
-                        {
-                            currentPosY += 2;
-                            posY += 4;
-                            direction = 6;
-                        }
-                        reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        currentPosY += 2;
-                        posY += 4;
-                        if (direction < 5)
-                        {
-                            direction = 5;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 2;
-                        }                        
-                        //Catching Field    
-                        encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
-                        {
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
                             currentPosY -= 2;
                             posY -= 4;
-                            SFX.Battle();
-                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
-                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route2();
+                            //Boundaries
+                            #region Boundaries
+
+                            #region Player House & Rival House Bottom
+                            if (currentPosX >= 172 && currentPosX <= 187 && currentPosY == 54 || currentPosX == 162 && currentPosY == 54 ||
+                                currentPosX >= 107 && currentPosX <= 122 && currentPosY == 54 || currentPosX == 97 && currentPosY == 54)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 3;
+                            }
+                            #endregion
+
+                            #region PokeCenter & PokeMart Bottom
+                            if (currentPosX >= 162 && currentPosX <= 167 && currentPosY == 34 || currentPosX >= 177 && currentPosX <= 182 && currentPosY == 34 ||
+                                currentPosX >= 112 && currentPosX <= 122 && currentPosY == 34 || currentPosX == 102 && currentPosY == 34)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 3;
+                            }
+                            #endregion
+
+                            #endregion
+                            //Border Top
+                            if (currentPosY < 16)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 3;
+                            }
+                            DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            //Catching Field    
+                            encounterChance = rand.Next(0, 100);
+                            if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
+                            {
+                                //currentPosY += 2;
+                                //posY += 4;
+                                DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                                SFX.Battle();
+                                ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                                ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                                DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                                SFX.Route2();
+                            }
+                            //Rival House
+                            if (currentPosX == 102 && currentPosY == 54)
+                            {
+                                DEMORivalHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 6;
+                                DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            }
+                            //PokeMart
+                            if (currentPosX == 107 && currentPosY == 34)
+                            {
+                                SFX.EnterStore();
+                                System.Threading.Thread.Sleep(1000);
+                                DEMOPokeMart(player, 15, 17, navPlayerMenu, gbText, gbBackground);
+                                SFX.Route2();
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 6;
+                                DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            }
+                            //PokeCenter
+                            if (currentPosX == 172 && currentPosY == 34)
+                            {
+                                SFX.EnterStore();
+                                System.Threading.Thread.Sleep(1000);
+                                SFX.PokeCenter();
+                                DEMOPokeCenter(player, 30, 17, navPlayerMenu, gbText, gbBackground);
+                                SFX.Route2();
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 6;
+                                DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            }
+                            //Player's House
+                            if (currentPosX == 167 && currentPosY == 54)
+                            {
+                                DEMOPlayerHouse(player, 30, 17, navPlayerMenu, gbText, gbBackground);
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 6;
+                                DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            }                            
                         }
-                        //Border Bottom
-                        if (currentPosY > 106)
+                        else
                         {
-                            currentPosY -= 2;
-                            posY -= 4;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        posX -= 10;
-                        //Catching Field    
-                        encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            currentPosX += 5;
-                            posX += 10;
-                            SFX.Battle();
-                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
-                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route2();
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            currentPosY += 2;
+                            posY += 4;
+                            //Boundaries
+                            #region Boundaries
+
+                            #region Player House & Rival House Top
+                            if (currentPosX >= 162 && currentPosX <= 187 && currentPosY == 46 || currentPosX >= 167 && currentPosX <= 182 && currentPosY == 44 || currentPosX >= 172 && currentPosX <= 177 && currentPosY == 42 ||
+                                currentPosX >= 97 && currentPosX <= 122 && currentPosY == 46 || currentPosX >= 102 && currentPosX <= 117 && currentPosY == 44 || currentPosX >= 107 && currentPosX <= 112 && currentPosY == 42)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                            }
+                            #endregion
+
+                            #region PokeCenter & PokeMart Top
+                            if (currentPosX >= 162 && currentPosX <= 182 && currentPosY == 24 || currentPosX >= 102 && currentPosX <= 122 && currentPosY == 24)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                            }
+                            #endregion
+
+                            #endregion
+                            //Border Bottom
+                            if (currentPosY > 106)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                            }
+                            DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            //Catching Field    
+                            encounterChance = rand.Next(0, 100);
+                            if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
+                            {
+                                //currentPosY -= 2;
+                                //posY -= 4;
+                                SFX.Battle();
+                                ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                                ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                                DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                                SFX.Route2();
+                            }                            
                         }
-                        //Border Left
-                        if (currentPosX < 60)
+                        else
                         {
-                            currentPosX += 5;
-                            posX += 10;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        posX += 10;
-                        //Catching Field    
-                        encounterChance = rand.Next(0, 100);
-                        if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
                         {
                             currentPosX -= 5;
                             posX -= 10;
-                            SFX.Battle();
-                            ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
-                            ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route2();
+                            //Boundaries
+                            #region Boundaries
+                            //167,56
+                            //+3,-11-16
+                            //+4,-1-5
+                            //Player House & PokeCenter Right
+                            if (currentPosX == 187 && currentPosY >= 46 && currentPosY <= 54 || currentPosX == 182 && currentPosY == 44 || currentPosX == 177 && currentPosY == 42 || currentPosX == 182 && currentPosY >= 24 && currentPosY <= 34)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            //Rival House & PokeMart Right
+                            if (currentPosX == 122 && currentPosY >= 46 && currentPosY <= 54 || currentPosX == 117 && currentPosY == 44 || currentPosX == 112 && currentPosY == 42 || currentPosX == 122 && currentPosY >= 24 && currentPosY <= 34)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            #endregion
+                            //Border Left
+                            if (currentPosX < 60)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            //Catching Field    
+                            encounterChance = rand.Next(0, 100);
+                            if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 98)
+                            {
+                                //currentPosX += 5;
+                                //posX += 10;
+                                SFX.Battle();
+                                ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                                ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                                DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                                SFX.Route2();
+                            }
                         }
-                        //Border Right
-                        if (currentPosX > 225)
+                        else
                         {
-                            currentPosX -= 5;
-                            posX -= 10;
+                            direction = 1;
+                            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
+                        {
+                            currentPosX += 5;
+                            posX += 10;
+                            //Boundaries
+                            #region Boundaries
+                            //167,56
+                            //-1,-11-16
+                            //-14,-1-5
+                            //Player House & PokeCenter Left
+                            if (currentPosX == 162 && currentPosY >= 46 && currentPosY <= 54 || currentPosX == 167 && currentPosY == 44 || currentPosX == 172 && currentPosY == 42 || currentPosX == 162 && currentPosY >= 24 && currentPosY <= 34)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            //Rival House & PokeMart Left
+                            if (currentPosX == 97 && currentPosY >= 46 && currentPosY <= 54 || currentPosX == 102 && currentPosY == 44 || currentPosX == 107 && currentPosY == 42 || currentPosX == 102 && currentPosY >= 24 && currentPosY <= 34)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            #endregion
+                            //Border Right
+                            if (currentPosX > 225)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            //Catching Field    
+                            encounterChance = rand.Next(0, 100);
+                            if (currentPosX <= 177 && currentPosX >= 107 && currentPosY >= 88 && currentPosY <= 98 && encounterChance > 95)
+                            {
+                                //currentPosX -= 5;
+                                //posX -= 10;
+                                SFX.Battle();
+                                ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                                ASCII.FullBattleWild(player, Monster.monsters, 3, 5, gbText, gbBackground, navPlayerMenu);
+                                DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                                SFX.Route2();
+                            }                            
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        reloadTestMap = true;
+                        break;
+
                     case ConsoleKey.M:
-                        Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);                        
+                        Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
-                    case ConsoleKey.Enter: case ConsoleKey.K:
-                    
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+
                         string battle = "Do you want to battle?";
                         if (currentPosX == 117 && currentPosY == 68)
                         {
@@ -394,7 +568,8 @@ namespace MainClasses
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
-                                    case ConsoleKey.UpArrow: case ConsoleKey.W:                                   
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
                                         menuPosY -= 1;
@@ -404,7 +579,8 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.DownArrow: case ConsoleKey.S:                                    
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
                                         Console.SetCursorPosition(61, menuPosY);
                                         Console.Write("   ");
                                         menuPosY += 1;
@@ -414,22 +590,37 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.Enter: case ConsoleKey.K:                                    
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
                                         if (menuPosY == 22)
                                         {
+                                            //SFX.RivalBattle();
                                             SFX.LeagueBattleRE();
-                                            //SFX.LeagueBattleRE();
+                                            //SFX.LeagueBattle();
+                                            ASCII.ScrollMessage($"Mysterious Man: At last! We finally meet!", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"Mysterious Man: I am {npc.Name.ToUpper()}! The PokeFraud League Champion!", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: I've been hearing stories about you..", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: The rutheless trainer wreaking havoc across the region.", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: I was looking forward to the day I'd meet such a worthy opponent.", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: One that would reignite the dying flame of my spirit to battle.", 25, 1500, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: But now is not the time for small talk.", 25, 1000, gbText, gbBackground);
+                                            ASCII.ScrollMessage($"{npc.Name.ToUpper()}: Let us have a battle to be remembered!", 25, 1500, gbText, gbBackground);
                                             ASCII.BattleIntroFLASH(player, direction, currentPosX, currentPosY, ASCII.DEMOMap);
+                                            System.Threading.Thread.Sleep(3000);
                                             ASCII.FullBattleNPC(player, npc, gbText, gbBackground, navPlayerMenu);
+                                            SFX.sp.Stop();
                                             SFX.Route2();
                                             reloadBattleFAINT = false;
                                         }
                                         else if (menuPosY == 23)
                                         {
+                                            DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                                             reloadBattleFAINT = false;
                                         }
                                         break;
-                                    case ConsoleKey.Backspace: case ConsoleKey.O:                                    
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                                         reloadBattleFAINT = false;
                                         break;
                                     default:
@@ -441,13 +632,31 @@ namespace MainClasses
                         else
                         {
                             reloadTestMap = true;
-                        }                        
-                        break;  
+                        }
+                        break;
                     default:
                         reloadTestMap = true;
                         break;
                 }
             } while (reloadTestMap);
+        }
+
+        #endregion
+
+        #region DEMO Player House
+
+        public static void DEMOPlayerHouseActive(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.playerHouse, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMOPlayerHouseStatic(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.playerHouse, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOPlayerHouse(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -455,94 +664,160 @@ namespace MainClasses
             bool reloadTestMap = false;
             int direction = 4;
             //(30,17)
+            DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                ASCII.GameMap(ASCII.playerHouse, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);
+                
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                            }
+                            DEMOPlayerHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        if (direction == 6)
-                        {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;                        
-                        if (currentPosY < 3)
-                        {
-                            currentPosY += 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction = 5;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            currentPosY += 2;
+                            DEMOPlayerHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            if (currentPosX == 30 && currentPosY == 19)
+                            {
+                                currentPosY -= 2;
+                                reloadTestMap = false;
+                            }
+                            if (currentPosX != 30 && currentPosY == 19)
+                            {
+                                currentPosY -= 2;                                
+                                reloadTestMap = true;
+                            }
                         }
-                        if (direction == 7)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        currentPosY += 2;
-                        if (currentPosX == 30 && currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            reloadTestMap = false;
-                        }
-                        if (currentPosY > 17)
-                        {
-                            currentPosY -= 2;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                             reloadTestMap = true;
-                        }                  
+                        }
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        if (currentPosX == 45 && currentPosY == 3)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
                         {
-                            DEMOPlayerRoom(player, 45, 3, navPlayerMenu, gbText, gbBackground);
-                            currentPosX += 5;
-                            direction = 2;
-                            reloadTestMap = true;
-                        }
-                        if (currentPosX < 5)
-                        {
-                            currentPosX += 5;
-                            reloadTestMap = true;
-                        }                        
-                        break;
-
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        if (currentPosX > 55)
-                        {
+                            direction = 1;
                             currentPosX -= 5;
+                            if (currentPosX == 45 && currentPosY == 3)
+                            {
+                                DEMOPlayerHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                                DEMOPlayerRoom(player, 45, 3, navPlayerMenu, gbText, gbBackground);
+                                currentPosX += 5;
+                                direction = 2;                               
+                                reloadTestMap = true;
+                            }
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                                reloadTestMap = true;
+                            }
+                            DEMOPlayerHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 1;
+                            DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            reloadTestMap = true;
+                        }
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
+                        {
+                            currentPosX += 5;
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
+                            }
+                            DEMOPlayerHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            reloadTestMap = true;
                         }
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMOPlayerHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -550,6 +825,24 @@ namespace MainClasses
                         break;
                 }
             } while (reloadTestMap);
+        }
+
+        #endregion
+
+        #region DEMO Player Room
+
+        public static void DEMOPlayerRoomActive(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.playerRoom, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMOPlayerRoomStatic(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.playerRoom, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOPlayerRoom(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -557,88 +850,150 @@ namespace MainClasses
             bool reloadTestMap = false;
             int direction = 1;
             //(45,3)
+            DEMOPlayerRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
             do
-            {
-                Console.SetBufferSize(2000, 2000);
-                ASCII.GameMap(ASCII.playerRoom, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+            {                
                 //ASCII.PlayerForward(gbText, gbBackground);
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                            }
+                            DEMOPlayerRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        if (direction == 6)
-                        {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        if (currentPosY < 3)
-                        {
-                            currentPosY += 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMOPlayerRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction = 5;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            currentPosY += 2;
+                            if (currentPosY > 13)
+                            {
+                                currentPosY -= 2;
+                                //reloadTestMap = true;
+                            }
+                            DEMOPlayerRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 7)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        currentPosY += 2;
-                        if (currentPosY > 13)
-                        {
-                            currentPosY -= 2;
-                            reloadTestMap = true;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            DEMOPlayerRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        if (currentPosX < 5)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
+                        {
+                            currentPosX -= 5;
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                            }
+                            DEMOPlayerRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 1;
+                            DEMOPlayerRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
                         {
                             currentPosX += 5;
-                        }
-                        reloadTestMap = true;
-                        break;
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
 
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        if (currentPosX == 50 && currentPosY == 3)
-                        {
-                            currentPosX -= 5;
-                            reloadTestMap = false;
+                                reloadTestMap = true;
+                            }
+                            DEMOPlayerRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            if (currentPosX == 50 && currentPosY == 3)
+                            {
+                                currentPosX -= 5;
+                                reloadTestMap = false;
+                            }                                                        
                         }
-                        if (currentPosX > 55)
+                        else
                         {
-                            currentPosX -= 5;
-
+                            direction = 2;
                             reloadTestMap = true;
+                            DEMOPlayerRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMOPlayerRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -646,6 +1001,24 @@ namespace MainClasses
                         break;
                 }
             } while (reloadTestMap);
+        }
+
+        #endregion
+
+        #region DEMO Rival House
+
+        public static void DEMORivalHouseActive(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.rivalHouse, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMORivalHouseStatic(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.rivalHouse, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMORivalHouse(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -653,94 +1026,158 @@ namespace MainClasses
             bool reloadTestMap = false;
             int direction = 4;
             //(30,17)
+            DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                ASCII.GameMap(ASCII.rivalHouse, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);
+                
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                            }
+                            DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        if (direction == 6)
-                        {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        if (currentPosY < 3)
-                        {
-                            currentPosY += 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMORivalHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction = 5;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            currentPosY += 2;
+                            if (currentPosX != 30 && currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                reloadTestMap = true;
+                            }
+                            DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            if (currentPosX == 30 && currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                reloadTestMap = false;
+                            }                            
                         }
-                        if (direction == 7)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        currentPosY += 2;
-                        if (currentPosX == 30 && currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            reloadTestMap = false;
-                        }
-                        if (currentPosY > 17)
-                        {
-                            currentPosY -= 2;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
                             reloadTestMap = true;
+                            DEMORivalHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        if (currentPosX < 5)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
+                        {
+                            currentPosX -= 5;
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                            }
+                            DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 1;
+                            DEMORivalHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
                         {
                             currentPosX += 5;
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
+                                reloadTestMap = true;
+                            }
+                            DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            if (currentPosX == 15 && currentPosY == 3)
+                            {
+                                DEMORivalRoom(player, 15, 3, navPlayerMenu, gbText, gbBackground);
+                                currentPosX -= 5;
+                                direction = 1;
+                                reloadTestMap = true;
+                                DEMORivalHouseActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            }                            
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMORivalHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        if (currentPosX == 15 && currentPosY == 3)
-                        {
-                            DEMORivalRoom(player, 15, 3, navPlayerMenu, gbText, gbBackground);
-                            currentPosX -= 5;
-                            direction = 1;
-                            reloadTestMap = true;
-                        }
-                        if (currentPosX > 55)
-                        {
-                            currentPosX -= 5;
-                            reloadTestMap = true;
-                        }                        
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMORivalHouseStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -750,93 +1187,174 @@ namespace MainClasses
             } while (reloadTestMap);
         }
 
+        #endregion
+
+        #region DEMO Rival Room
+
+        public static void DEMORivalRoomActive(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.rivalRoom, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMORivalRoomStatic(Player player, int currentPosX, int currentPosY, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            ASCII.GameMap(ASCII.rivalRoom, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
+        }
+
         public static void DEMORivalRoom(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
             int direction = 2;
             //(15,3)
+            DEMORivalRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                ASCII.GameMap(ASCII.rivalRoom, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);
+
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                            }
+                            DEMORivalRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
-                        }
-                        if (direction == 6)
-                        {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        if (currentPosY < 3)
-                        {
-                            currentPosY += 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMORivalRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction = 5;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            currentPosY += 2;
+                            if (currentPosY > 13)
+                            {
+                                currentPosY -= 2;
+                                reloadTestMap = true;
+                            }
+                            DEMORivalRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        if (direction == 7)
+                        else
                         {
-                            direction -= 2;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
+                            DEMORivalRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
-                        currentPosY += 2;
-                        if (currentPosY > 13)
-                        {
-                            currentPosY -= 2;
-                            reloadTestMap = true;
-                        }
+                        reloadTestMap = true;
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        if (currentPosX == 10 && currentPosY == 3)
-                        {
-                            currentPosX += 5;
-                            reloadTestMap = false;
-                        }
-                        if (currentPosX < 5)
-                        {
-                            currentPosX += 5;
-                            reloadTestMap = true;
-                        }                        
-                        break;
-
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        if (currentPosX > 55)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
                         {
                             currentPosX -= 5;
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                                reloadTestMap = true;
+                            }
+                            DEMORivalRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                            if (currentPosX == 10 && currentPosY == 3)
+                            {
+                                currentPosX += 5;
+                                reloadTestMap = false;
+                            }                            
+                        }
+                        else
+                        {
+                            direction = 1;
                             reloadTestMap = true;
+                            DEMORivalRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
+                        {
+                            currentPosX += 5;
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
+                                reloadTestMap = true;
+                            }
+                            DEMORivalRoomActive(player, currentPosX, currentPosY, direction, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMORivalRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMORivalRoomStatic(player, currentPosX, currentPosY, direction, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -844,6 +1362,28 @@ namespace MainClasses
                         break;
                 }
             } while (reloadTestMap);
+        }
+
+        #endregion
+
+        #region DEMO PokeCenter
+
+        public static void DEMOPokeCenterActive(Player player, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            //switch back to playerHouse
+            ASCII.GameMap(ASCII.pokeCenter, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterPokeCenter((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMOPokeCenterStatic(Player player, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            //switch back to playerHouse
+            ASCII.GameMap(ASCII.pokeCenter, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterPokeCenter((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOPokeCenter(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -853,102 +1393,183 @@ namespace MainClasses
             int posY = 21;
             int direction = 4;
             //(30,17)
+            DEMOPokeCenterActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                //switch back to playerHouse
-                ASCII.GameMap(ASCII.pokeCenter, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.CharacterPokeCenter((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);
+                
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            posY -= 4;
+                            if (currentPosY == 5 && currentPosX >= 20 && currentPosX <= 40)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                            }
+                            if (currentPosY == 3 && currentPosX >= 45 && currentPosX <= 55)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                            }
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                            }
+                            DEMOPokeCenterActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
-                        if (direction == 6)
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        posY -= 4;
-                        if (currentPosY < 3)
-                        {
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
                             currentPosY += 2;
                             posY += 4;
+                            if (currentPosX != 30 && currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                                reloadTestMap = true;
+                            }
+                            DEMOPokeCenterActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                            if (currentPosX == 30 && currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                                reloadTestMap = false;
+                            }                            
                         }
-                        reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                        else
                         {
-                            direction = 5;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 2;
-                        }
-                        currentPosY += 2;
-                        posY += 4;
-                        if (currentPosX == 30 && currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            posY -= 4;
-                            reloadTestMap = false;
-                        }
-                        if (currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            posY -= 4;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
                             reloadTestMap = true;
+                            DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        posX -= 10;
-                        if (currentPosX < 5)
-                        {
-                            currentPosX += 5;
-                            posX += 10;
-                        }
-                        reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        posX += 10;
-                        if (currentPosX > 55)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
                         {
                             currentPosX -= 5;
                             posX -= 10;
+                            if (currentPosY == 5 && currentPosX == 40)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            DEMOPokeCenterActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 1;
+                            DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
+                        {
+                            currentPosX += 5;
+                            posX += 10;
+                            if (currentPosY >= 3 && currentPosY <= 5 && currentPosX == 20)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            DEMOPokeCenterActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
-                    case ConsoleKey.Enter: case ConsoleKey.K:
-                    
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+
                         //Access PC
                         if (currentPosX == 50 && currentPosY == 5)
                         {
@@ -969,7 +1590,7 @@ namespace MainClasses
                             int chooseNum = 0;
                             int chooseY = 22;
                             bool reloadBattleFAINT = false;
-                            
+
                             Console.SetCursorPosition(65, 22);
                             Console.Write("YES");
                             Console.SetCursorPosition(65, 23);
@@ -982,8 +1603,9 @@ namespace MainClasses
                                 navPlayerMenu = Console.ReadKey().Key;
                                 switch (navPlayerMenu)
                                 {
-                                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                                    
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+
                                         Console.SetCursorPosition(61, chooseY);
                                         Console.Write("   ");
                                         chooseY -= 1;
@@ -993,8 +1615,9 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                                    
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+
                                         Console.SetCursorPosition(61, chooseY);
                                         Console.Write("   ");
                                         chooseY += 1;
@@ -1004,8 +1627,9 @@ namespace MainClasses
                                         }
                                         reloadBattleFAINT = true;
                                         break;
-                                    case ConsoleKey.Enter: case ConsoleKey.K:
-                                    
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+
                                         if (chooseY == 22)
                                         {
                                             ASCII.ScrollMessage(message4, 50, 1500, gbText, gbBackground);
@@ -1035,11 +1659,11 @@ namespace MainClasses
                                                 player.Party.Slot2.EquippedMoves.Move4.Uses = player.Party.Slot2.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
-                                            
+
                                             Console.BackgroundColor = gbBackground;
                                             if (player.Party.Slot3.Type != Monster_Race.NONE)
                                             {
-                                                
+
                                                 Console.SetCursorPosition(37, 7);
                                                 Console.Write("▀");
                                                 SFX.HealingIndividual();
@@ -1051,7 +1675,7 @@ namespace MainClasses
                                                 player.Party.Slot3.EquippedMoves.Move4.Uses = player.Party.Slot3.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
-                                            
+
                                             if (player.Party.Slot4.Type != Monster_Race.NONE)
                                             {
                                                 Console.SetCursorPosition(39, 7);
@@ -1065,7 +1689,7 @@ namespace MainClasses
                                                 player.Party.Slot4.EquippedMoves.Move4.Uses = player.Party.Slot4.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
-                                            
+
                                             if (player.Party.Slot5.Type != Monster_Race.NONE)
                                             {
                                                 Console.SetCursorPosition(37, 7);
@@ -1079,7 +1703,7 @@ namespace MainClasses
                                                 player.Party.Slot5.EquippedMoves.Move4.Uses = player.Party.Slot5.EquippedMoves.Move4.MaxUses;
                                                 System.Threading.Thread.Sleep(500);
                                             }
-                                            
+
                                             if (player.Party.Slot6.Type != Monster_Race.NONE)
                                             {
                                                 Console.SetCursorPosition(39, 7);
@@ -1099,8 +1723,8 @@ namespace MainClasses
                                             Console.ForegroundColor = gbText;
                                             Console.BackgroundColor = gbBackground;
                                             ASCII.ScrollMessage(message5, 50, 1500, gbText, gbBackground);
-                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);                                            
-                                            
+                                            ASCII.ScrollMessage(message3, 50, 1500, gbText, gbBackground);
+
                                             chooseNum += 1;
                                             reloadBattleFAINT = false;
                                         }
@@ -1111,8 +1735,9 @@ namespace MainClasses
                                             reloadBattleFAINT = false;
                                         }
                                         break;
-                                    case ConsoleKey.Backspace: case ConsoleKey.O:
-                                    
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+
                                         ASCII.ScrollMessage(message2, 50, 1500, gbText, gbBackground);
                                         reloadBattleFAINT = false;
                                         break;
@@ -1122,6 +1747,7 @@ namespace MainClasses
                                 }
                             } while (reloadBattleFAINT);
                         }
+                        DEMOPokeCenterStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -1129,6 +1755,31 @@ namespace MainClasses
                         break;
                 }
             } while (reloadTestMap);
+        }
+
+        #endregion
+
+        //TODO Create A Session Based Shopping Cart For the PokeMart that allows the user to browse items and add them to their cart while keeping track of the like item total.
+        //Then once the user has finished browsing, they can walk up to the clerk and proceed to checkout.
+
+        #region DEMO PokeMart
+
+        public static void DEMOPokeMartActive(Player player, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            //switch back to playerHouse
+            ASCII.GameMap(ASCII.pokeMart, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterMerchant((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+        }
+
+        public static void DEMOPokeMartStatic(Player player, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.SetBufferSize(2000, 2000);
+            //switch back to playerHouse
+            ASCII.GameMap(ASCII.pokeMart, currentPosX, currentPosY, gbText, gbBackground);
+            ASCII.CharacterMerchant((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOPokeMart(Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -1137,99 +1788,215 @@ namespace MainClasses
             int posX = -27;
             int posY = 21;
             int direction = 4;
-            //(15,17)
+            //Start Coordinates: (15,17)
+            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
             do
             {
-                Console.SetBufferSize(2000, 2000);
-                //switch back to playerHouse
-                ASCII.GameMap(ASCII.pokeMart, currentPosX, currentPosY, gbText, gbBackground);
-                ASCII.CharacterMerchant((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
-                ASCII.PlayerMovement(player, direction, gbText, gbBackground);
-                //ASCII.PlayerForward(gbText, gbBackground);
+                
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
                 {
 
-                    case ConsoleKey.UpArrow: case ConsoleKey.W:
-                        direction += 1;
-                        if (direction < 3)
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        if (direction == 3 || direction == 4)
                         {
-                            direction = 3;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            currentPosY -= 2;
+                            posY -= 4;
+                            //Boundaries
+                            #region Boundaries
+                            if (currentPosY == 5)
+                            {
+                                if (currentPosX >= 5 && currentPosX <= 20 || currentPosX == 40 || currentPosX == 45 || currentPosX == 55)
+                                {
+                                    currentPosY += 2;
+                                    posY += 4;
+                                }
+                            }
+                            if (currentPosY == 13)
+                            {
+                                if (currentPosX == 40 || currentPosX == 45 || currentPosX == 55)
+                                {
+                                    currentPosY += 2;
+                                    posY += 4;
+                                }
+                            }
+                            #endregion
+                            //Border Top
+                            if (currentPosY < 3)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                            }
+                            DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
-                        if (direction == 5)
+                        else
                         {
-                            direction -= 2;
+                            direction += 1;
+                            if (direction < 3)
+                            {
+                                direction = 3;
+                            }
+                            if (direction == 5)
+                            {
+                                direction -= 2;
+                            }
+                            if (direction == 6)
+                            {
+                                direction -= 3;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 4;
+                            }
+                            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
-                        if (direction == 6)
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        if (direction == 5 || direction == 6)
                         {
-                            direction -= 3;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 4;
-                        }
-                        currentPosY -= 2;
-                        posY -= 4;
-                        if (currentPosY < 3)
-                        {
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
                             currentPosY += 2;
                             posY += 4;
+                            //Boundaries
+                            #region Boundaries
+                            if (currentPosY == 11)
+                            {
+                                if (currentPosX == 40 || currentPosX == 45 || currentPosX == 55)
+                                {
+                                    currentPosY -= 2;
+                                    posY -= 4;
+                                }
+                            }
+                            #endregion
+                            //Border Bottom
+                            if (currentPosX == 15 && currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                                reloadTestMap = false;
+                            }
+                            if (currentPosY > 17)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                                reloadTestMap = true;
+                            }
+                            DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
-                        reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.DownArrow: case ConsoleKey.S:
-                        direction += 1;
-                        if (direction < 5)
+                        else
                         {
-                            direction = 5;
-                        }
-                        if (direction == 7)
-                        {
-                            direction -= 2;
-                        }
-                        currentPosY += 2;
-                        posY += 4;
-                        if (currentPosX == 15 && currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            posY -= 4;
-                            reloadTestMap = false;
-                        }
-                        if (currentPosY > 17)
-                        {
-                            currentPosY -= 2;
-                            posY -= 4;
+                            direction += 1;
+                            if (direction < 5)
+                            {
+                                direction = 5;
+                            }
+                            if (direction == 7)
+                            {
+                                direction -= 2;
+                            }
                             reloadTestMap = true;
+                            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         break;
 
-                    case ConsoleKey.LeftArrow: case ConsoleKey.A:
-                        direction = 1;
-                        currentPosX -= 5;
-                        posX -= 10;
-                        if (currentPosX < 5)
-                        {
-                            currentPosX += 5;
-                            posX += 10;
-                        }
-                        reloadTestMap = true;
-                        break;
-
-                    case ConsoleKey.RightArrow: case ConsoleKey.D:
-                        direction = 2;
-                        currentPosX += 5;
-                        posX += 10;
-                        if (currentPosX > 55)
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        if (direction == 1)
                         {
                             currentPosX -= 5;
                             posX -= 10;
+                            //Boundaries
+                            #region Boundaries
+                            if (currentPosX == 20 || currentPosX == 45)
+                            {
+                                if (currentPosY >= 3 && currentPosY <= 5 || currentPosY >= 11 && currentPosY <= 13 && currentPosX != 20)
+                                {
+                                    currentPosX += 5;
+                                    posX += 10;
+                                }
+                            }
+                            #endregion
+                            //Border Left
+                            if (currentPosX < 5)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
+                            DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 1;
+                            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        reloadTestMap = true;
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        if (direction == 2)
+                        {
+                            currentPosX += 5;
+                            posX += 10;
+                            //Boundaries
+                            #region Boundaries
+                            if (currentPosX == 40 || currentPosX == 55)
+                            {
+                                if (currentPosY >= 3 && currentPosY <= 5 || currentPosY >= 11 && currentPosY <= 13)
+                                {
+                                    currentPosX -= 5;
+                                    posX -= 10;
+                                }
+                            }
+                            #endregion
+                            //Border Right
+                            if (currentPosX > 55)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
+                            DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }
+                        else
+                        {
+                            direction = 2;
+                            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         }
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
+                        DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:
@@ -1238,6 +2005,8 @@ namespace MainClasses
                 }
             } while (reloadTestMap);
         }
+
+        #endregion
 
         #endregion
     }

@@ -319,7 +319,7 @@ namespace MainClasses
                 }
             } while (reloadColorFormat);
 
-            SFX.IntroTheme();
+            //SFX.IntroTheme();
 
             #region ANIMATES TITLE INTRO
             ResetScreen(GBText, GBBackground);
@@ -1439,7 +1439,7 @@ namespace MainClasses
                 
             navPlayerMenu = Console.ReadKey().Key;
 
-            SFX.Route2();
+            //SFX.Route2();
             Maps.DEMOMap(player, rival, currentPosX, currentPosY, navPlayerMenu, GBText, GBBackground);
         }
 
@@ -2515,6 +2515,581 @@ namespace MainClasses
             }
         }
 
+        public static void PlayerMovementStatic(Player player, int direction, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            //If the player gender == Male USE the Male movement animations, else use the female animations
+            //Create an updating int that knows which foot to step forward when going forwards or backwards
+            //OR Just for the UP and DOWN movements, display two frames
+
+            #region Male Movement
+            string[] MoveRight1 = new string[]
+            {
+                "▄▄███▄ ",                  //"▄▄███▄ ",
+                "▀██","▄","▀",              // "▀██▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] MoveRight2 = new string[]
+            {
+                 "▄▄███▄ ",                 //"▄▄███▄ ",
+                 "▀██","▄","▀",             // "▀██▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] MoveLeft1 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                 "▀","▄","██▀",             // "▀▄██▀", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] MoveLeft2 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                  "▀","▄","██▀",            // "▀▄██▀",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] MoveUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            #endregion
+            #region Female Movement
+            string[] FemaleHeadRight = new string[]
+            {
+                " ▄███▄ ",                  //" ▄███▄ ",
+                "██","█▄","▀",              // "███▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] FemaleHeadRight2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "██","█▄","▀",             // "███▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] FemaleHeadLeft = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "▀","▄█","██",             // "▀▄███", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] FemaleHeadLeft2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                  "▀","▄█","██",            // "▀▄███",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " █ ▀ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ ▀ "           // " ▀ ▀ "  
+            };
+            #endregion
+
+            //TODO Create Female Version
+
+            //1 = Move Left
+            //2 = Move Right
+            //3 = Move Up RF
+            //4 = Move Up LF
+            //5 = Move Down RF
+            //6 = Move Down LF
+
+            //Male Movement
+            if (direction == 1 && player.Gender == '♂')
+            {                
+                #region IDLE LEFT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveLeft2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveLeft2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(MoveLeft2[4]);
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveLeft2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveLeft2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveLeft2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 2 && player.Gender == '♂')
+            {
+                #region IDLE RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveRight2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.Write(MoveRight2[4]);
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveRight2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveRight2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(MoveRight2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 3 && player.Gender == '♂')
+            {
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 4 && player.Gender == '♂')
+            {
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 5 && player.Gender == '♂')
+            {
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownIdle[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 6 && player.Gender == '♂')
+            {
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[1]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(MoveDownIdle[2]);
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(MoveDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(MoveDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+
+            //Female Movement
+            if (direction == 1 && player.Gender == '♀')
+            {
+                #region IDLE LEFT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadLeft2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft2[1]);
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadLeft2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadLeft2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write(FemaleHeadLeft2[4]);
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadLeft2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadLeft2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadLeft2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 2 && player.Gender == '♀')
+            {
+                #region IDLE RIGHT
+                //HAT
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[0]);
+
+                //HEAD
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadRight2[1]);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadRight2[2]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.Write(FemaleHeadRight2[4]);
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadRight2[5]);
+
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadRight2[6]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(FemaleHeadRight2[7]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 3 && player.Gender == '♀')
+            {
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 4 && player.Gender == '♀')
+            {
+                #region IDLE UP
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadUpIdle[1]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadUpIdle[2]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadUpIdle[3]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 5 && player.Gender == '♀')
+            {
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownIdle[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownIdle[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+            if (direction == 6 && player.Gender == '♀')
+            {
+                #region IDLE DOWN
+                //HAT *SAME COLOR SCEME
+                Console.SetCursorPosition(42, 10);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[0]);
+
+                //HEAD *SAME COLOR SCEME
+                Console.SetCursorPosition(43, 11);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(FemaleHeadDownIdle[1]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(FemaleHeadDownIdle[2]);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[3]);
+
+                //SHIRT
+                Console.SetCursorPosition(43, 12);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(FemaleHeadDownIdle[4]);
+
+                //PANTS
+                Console.SetCursorPosition(43, 13);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = gbBackground;
+                Console.Write(FemaleHeadDownIdle[5]);
+
+                Console.SetCursorPosition(90, 42);
+                #endregion
+            }
+        }        
+
         public static void RegionNoEncounter(string[] Map, Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
@@ -2603,10 +3178,10 @@ namespace MainClasses
                         }
                         else
                         {
-                            SFX.RivalBattle();
+                            //SFX.RivalBattle();
                             BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            //SFX.Route1();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -2624,10 +3199,10 @@ namespace MainClasses
                         }
                         else
                         {
-                            SFX.RivalBattle();
+                            //SFX.RivalBattle();
                             BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            //SFX.Route1();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -2645,10 +3220,10 @@ namespace MainClasses
                         }
                         else
                         {
-                            SFX.RivalBattle();
+                            //SFX.RivalBattle();
                             BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            //SFX.Route1();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -2666,10 +3241,10 @@ namespace MainClasses
                         }
                         else
                         {
-                            SFX.RivalBattle();
+                            //SFX.RivalBattle();
                             BattleIntroFLASH(player, direction, currentPosX, currentPosY, Map);
                             FullBattleWild(player, monsters, lvLow, lvHigh, gbText, gbBackground, navPlayerMenu);
-                            SFX.Route1();
+                            //SFX.Route1();
                             reloadTestMap = true;
                         }
                         //reloadTestMap = true;
@@ -5500,9 +6075,25 @@ namespace MainClasses
             //Console.SetCursorPosition(90, 42);
             #endregion
         }
+
+        public static void PokeBallSmall()
+        {
+
+        }
         #endregion
 
         #region ASCII: String[] Templates
+
+        #region Sizing
+
+        public static string[] sizing = new string[]
+        {
+            "▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄",
+            "▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀",
+            "▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀"
+        };
+
+        #endregion
 
         #region Characters
 
@@ -6211,8 +6802,8 @@ namespace MainClasses
 @"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                                                                                                                                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
 @"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                                                                                                                                                         ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
 @"▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄                                                                                                                                                                       ▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█",
-@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                          ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                          ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
-@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                       ▄▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▄                                     ▄▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▄                                       ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
+@" ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                         ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄                                       ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄                                         ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄",
+@"▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                      ▄▀▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄▀▄                                   ▄▀▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄▀▄                                      ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀",
 @"▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀                                      █ █                   █ █                                   █ █       █   █       █ █                                      ▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█▀▄▀█▀█▀█",
 @"▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄                                           █ █                   █ █                                   █ █       █▀▀▀█       █ █                                           ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄▀█▀▄   ▄",
 @"█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄                                          █ ▀▄▄▄▄▄▄  ▄▄▄  ▄▄▄▄▄▄▀ █                                   █ ▀▄▄▄▄▄▄  ▄▄▄  ▄▄▄▄▄▄▀ █                                          ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀█▀█▀▄ ▄▀",
@@ -6461,9 +7052,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
         };
 
         #endregion
@@ -6511,9 +7102,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
 };
 
 
@@ -6566,9 +7157,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
         };
 
         #endregion
@@ -6616,9 +7207,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
 };
 
         #endregion
@@ -6649,13 +7240,13 @@ namespace MainClasses
             @"                                           █                █                     █                █                                           ",
             @"                                           █                ███████████████████████                █                                           ",
             @"                                           █                                                       █                                           ",
-            @"                                           █                      ▄▄▄▀▀▀▀▀▀▄▄▄                     █                                           ",
-            @"                                           █                   ▄▀▀ ▄▄▄▀▀▀▀▄▄▄ ▀▀▄                  █                                           ",
-            @"                                           █                  █  ▄▀   ▄▄▄▄   ▀▄  █                 █                                           ",
-            @"                                           █                         ██████                        █                                           ",
-            @"                                           █                  ████▄   ▀▀▀▀   ▄████                 █                                           ",
-            @"                                           █                   ▀██████▄▄▄▄██████▀                  █                                           ",
-            @"                                           █                      ▀▀▀██████▀▀▀                     █                                           ",
+            @"                                           █                     ▄▄▄▀▀▀▀▀▀▀▄▄▄                     █                                           ",
+            @"                                           █                  ▄▀▀ ▄▄▄▀▀▀▀▀▄▄▄ ▀▀▄                  █                                           ",
+            @"                                           █                 █  ▄▀   ▄▄▄▄▄   ▀▄  █                 █                                           ",
+            @"                                           █                        ███████                        █                                           ",
+            @"                                           █                 ████▄   ▀▀▀▀▀   ▄████                 █                                           ",
+            @"                                           █                  ▀██████▄▄▄▄▄██████▀                  █                                           ",
+            @"                                           █                     ▀▀▀███████▀▀▀                     █                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
@@ -6670,9 +7261,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
 };
 
         #endregion
@@ -6696,19 +7287,19 @@ namespace MainClasses
             @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                 ███                                   █                                           ",
-            @"                                           █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄▄▄▄▄▄██                                           ",
-            @"                                           █                 ███                ▄█ ██ █▄       ▄█ ██                                           ",
-            @"                                           █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███               █ █▄██▄█ █     █ █▄██                                           ",
-            @"                                           █████████████████████               █▄▀ ██ ▀▄█     █▄▀ ██                                           ",
-            @"                                           █                  █                █   ██   █     █   ██                                           ",
+            @"                                           █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█                                           ",
+            @"                                           █                 ███                  ▄██▄           ▄██                                           ",
+            @"                                           █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄███                ▄█ ██ █▄       ▄█ ██                                           ",
+            @"                                           █████████████████████               █ █▄██▄█ █     █ █▄██                                           ",
+            @"                                           █                  █                █▄▀ ██ ▀▄█     █▄▀ ██                                           ",
             @"                                           ████████████████████                █▄▄▄██▄▄▄█     █▄▄▄██                                           ",
+            @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                                      ▄██▄           ▄██                                           ",
             @"                                           █                                    ▄█ ██ █▄       ▄█ ██                                           ",
             @"                                           █                                   █ █▄██▄█ █     █ █▄██                                           ",
             @"                                           █                                   █▄▀ ██ ▀▄█     █▄▀ ██                                           ",
-            @"                                           █                                   █   ██   █     █   ██                                           ",
             @"                                           █                                   █▄▄▄██▄▄▄█     █▄▄▄██                                           ",
             @"                                           █                                                       █                                           ",
             @"                                           █                                                       █                                           ",
@@ -6724,9 +7315,9 @@ namespace MainClasses
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
             @"                                                                                                                                               ",
-            @"                                            ▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄▄███▄                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            ",
-            @"                                            ▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀▀▄█▄▀                                            "
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               ",
+            @"                                                                                                                                               "
 };
 
 
@@ -6742,6 +7333,8 @@ namespace MainClasses
 
         #region GameBoy
 
+        //APPLE II: 87 X 51
+        //GAMEBOY:  92 X 43
         public static string TEMGameBoy = @"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
 █  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  █
 █  █                                                                                   █  █
@@ -7682,8 +8275,44 @@ namespace MainClasses
 
         #endregion
 
+        #region Scribble EX
+
+        public static string[] scribbleEXDefender = new string[] {
+        @"                                                                                   █▀▀▄█▀▀▀█▄▀▀█                                                                                  ",
+        @"                                                                                   █           █                                                                                  ",
+        @"                                                                                   ▄▀         ▀▄                                                                                  ",
+        @"                                                                                   █ ▀▀▄   ▄▀▀ █                                                                                  ",
+        @"                                                                                   ▄▀▀▄▄   ▄▄▀▀▄                                                                                  ",
+        @"                                                                                   ▀▄▄▀ ▀▀▀ ▀▄▄▀                                                                                  ",
+        @"                                                                                  █▀  █  █  █  ▀█                                                                                 ",
+        @"                                                                                   ▀▀▄▄▀▀▀▀▀▄▄▀▀                                                                                  "};
+
+        public static string[] scribbleEXPokedex = new string[] {
+        @"   █▀▀▄█▀▀▀█▄▀▀█   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"                   ",
+        @"       ██  ██      ",
+        @"      ▄▄█ ▄▄█      "
+        };
+
+        public static string[] scribbleEXAttacker = new string[] {
+        @"       ▄           ▄         ",
+        @"       █▀▄▄▀▀▀▀▄▄▀██         ",
+        @"      █            █         ",
+        @"     █              █        ",
+        @"     ▄▀▄  ▄▄▄▄▄  ▄▀▄▀ ▄ ▄    ",
+        @"     █  █▀     ▀█   █▄▀▀█▄   ",
+        @"    █ █▄█        █▄▄▀ ▄▀     ",
+        @"    ▀▄ █         █ ▀▄▀       "
+        };
+
         #endregion
 
-        #endregion   
+        #endregion
+
+        #endregion
     }
 }

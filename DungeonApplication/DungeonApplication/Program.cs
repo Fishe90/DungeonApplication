@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using MainClasses;
+//using System.Windows.Media;
 
 namespace DungeonApplication
 {
@@ -28,6 +29,33 @@ namespace DungeonApplication
              * Player_Party: 33
              * SFX: 318
              */
+
+           
+            //ConsoleKeyInfo x = new ConsoleKeyInfo();
+            //while (Console.ReadKey().Key != ConsoleKey.E)
+            //{
+            //    x = Console.ReadKey();
+            //}
+            //Console.WriteLine("\n\nYou have pressed 'y' ");
+            //Console.Read();
+
+            //ConsoleKey choice;
+            //do
+            //{
+            //    choice = Console.ReadKey(true).Key;
+            //    switch (choice)
+            //    {
+            //        // 1 ! key
+            //        case ConsoleKey.D1:
+            //            Console.WriteLine("1. Choice");
+            //            break;
+            //        //2 @ key
+            //        case ConsoleKey.D2:
+            //            Console.WriteLine("2. Choice");
+            //            break;
+            //    }
+            //} while (choice != ConsoleKey.D1 && choice != ConsoleKey.D2);
+
             Console.CursorVisible = false;
             Console.Title = "POKeFRAUD: QUARTZ VERSION";
             Console.SetWindowSize(91, 43);
@@ -91,30 +119,27 @@ namespace DungeonApplication
             NPC.ASCIIProfile = ASCII.npcProfile;
 
             #endregion
-
-            
-
+           
             int currentPosX = 167;
             int currentPosY = 56;
 
-            //x = 4; y = 2
-            int startY = 2;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
-            foreach (string line in ASCII.emptyPC)
-            {
-                Console.SetCursorPosition(4, startY);
-                Console.Write(line);
-                startY += 1;
-            }
-            //Player_Menus.PC(player1, new Monster(), new int(), false, navPlayerMenu, gbText, gbBackground);
-            //Player_Menus.PCSwitch(navPlayerMenu, gbText, gbBackground);
-            //Player_Menus.PCInner(player1, new Monster(), navPlayerMenu, gbText, gbBackground);
             //navPlayerMenu = Console.ReadKey().Key;
 
             //ASCII.DEMO(navPlayerMenu, currentPosX, currentPosY);
-            SFX.Route2();
+            //SFX.Route2();
+            //Maps.DEMOPokeMart(player1, 15, 17, navPlayerMenu, gbText, gbBackground);
+
             Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
+
+            //Function void Play(string audioPath)
+            //{
+            //    MediaPlayer myPlayer = new MediaPlayer();
+            //    myPlayer.Open(new System.Uri(audioPath));
+            //    myPlayer.Play();
+            //}
+
+            //Play(Application.StartupPath + "\\Track1.wav");
+            //Play(Application.StartupPath + "\\Track2.wav");
         }
     }
 }

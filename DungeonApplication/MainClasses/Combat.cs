@@ -387,7 +387,7 @@ namespace MainClasses
 
             ASCII.ScrollMessage(messageTryCatch, 50, 1000, gbText, gbBackground);
             ASCII.ThrowBall(player, gbText, gbBackground);
-            if (monster.Health < (.25 * monster.MaxHealth) && catchChance1 > 25 || catchChance1 > 50)
+            if (monster.Health < (.25 * monster.MaxHealth) && catchChance1 > 25 || catchChance1 > 30)
             {
                 ASCII.BallShakeLeft(gbBackground);
                 if (monster.Health < (.25 * monster.MaxHealth) && catchChance2 > 25 || catchChance2 > 50)
@@ -396,7 +396,7 @@ namespace MainClasses
                     if (monster.Health < (.25 * monster.MaxHealth) && catchChance2 > 25 || catchChance3 > 50)
                     {
                         ASCII.BallShakeLeft(gbBackground);
-                        SFX.CaptureSuccess();
+                        //SFX.CaptureSuccess();
                         ASCII.ScrollMessage(messageCaught, 50, 5000, gbText, gbBackground); 
                         CatchSort(player, monster, gbText, gbBackground);
                         monster.IsCaught = true;

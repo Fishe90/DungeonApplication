@@ -283,6 +283,7 @@ namespace MainClasses
                                     BattleItemSection(player.Inventory.ItemSection, player.Inventory.MedSection, player, monster, navPlayerMenu, gbText, gbBackground);
                                     if (monster.IsCaught == true)
                                     {
+                                        //monster.IsCaught = false;
                                         reloadBattleFIGHT = false;
                                         reloadBattleBAG = false;
                                         reloadBattlePOKeFRAUD = false;

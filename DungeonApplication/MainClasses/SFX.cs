@@ -9,6 +9,8 @@ namespace MainClasses
 {
     public class SFX
     {
+        public static SoundPlayer sp = new SoundPlayer();
+
         #region Battle SFX
 
         public static void BallBounce()
