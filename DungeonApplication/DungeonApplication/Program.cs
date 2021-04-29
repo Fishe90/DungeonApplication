@@ -89,8 +89,8 @@ namespace DungeonApplication
             player1.Party.Slot6.Name = "";
             player1.Party.MonsterSwitch = Monster.monsterSwitch;
             player1.Name = "Dillon";
-            player1.Gender = '♀';
-            player1.Money = 0;
+            player1.Gender = '♂';//♂♀
+            player1.Money = 1000;
             player1.PC[1] = Monster.testPyra;
             player1.PC[2] = Monster.testDowsey;
 
@@ -127,7 +127,7 @@ namespace DungeonApplication
 
             //ASCII.DEMO(navPlayerMenu, currentPosX, currentPosY);
             //SFX.Route2();
-            //Maps.DEMOPokeMart(player1, 15, 17, navPlayerMenu, gbText, gbBackground);
+            Maps.DEMOPokeMart(player1, 15, 17, navPlayerMenu, gbText, gbBackground);
 
             Maps.DEMOMap(player1, NPC, currentPosX, currentPosY, navPlayerMenu, gbText, gbBackground);
 

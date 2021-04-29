@@ -2698,7 +2698,7 @@ namespace MainClasses
 
         #region Player Menu Pokedex
 
-        
+
 
         #endregion
 
@@ -5196,7 +5196,7 @@ namespace MainClasses
                 if (navX == 42)
                 {
                     if (navY == 8)
-                    {                        
+                    {
                         pcSelect = 0;
                         monster = player.PC[pcSelect];
                     }
@@ -5923,6 +5923,828 @@ namespace MainClasses
                 }
                 #endregion
             } while (reloadPopUp);
+        }
+
+        #endregion
+
+        #region PokeMart Purchase Menu
+
+        public static void PokeMartVendor(Player player, int mapPosX, int mapPosY, int posX, int posY, int direction, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool buyORsell = false;
+            bool reloadMenu = true;
+            bool reloadInnerMenu = true;
+            bool reloadBuyMenu = true;
+            bool reloadConfirmBuy = true;
+            string[] menuOptions = new string[]
+            {
+                "Buy",
+                "Sell",
+                "See Ya!"
+            };
+            int menuPosY = 4;
+            ASCII.ScrollMessageMulti("Welcome!", "What do you need?", 25, 1000, gbText, gbBackground);
+            ASCII.SmallMenu(6, 3, menuOptions, gbText, gbBackground);
+            do
+            {
+                Console.SetCursorPosition(7, menuPosY);
+                Console.Write(">");
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(7, menuPosY);
+                        Console.Write(" ");
+                        menuPosY -= 1;
+                        if (menuPosY < 4)
+                        {
+                            menuPosY = 4;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(7, menuPosY);
+                        Console.Write(" ");
+                        menuPosY += 1;
+                        if (menuPosY > 3 + menuOptions.Length)
+                        {
+                            menuPosY = 3 + menuOptions.Length;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                        if (menuPosY == 4 || menuPosY == 5)
+                        {                            
+                            int innerMenuPosY = 4;
+                            int itemPosX = 32;
+                            int itemPosY = 4;
+                            string[] PlayerDisplay = new string[]
+                            {
+                                "Money",
+                                "        $ " + player.Money
+                            };
+                            string[] PokeMartItemDisplay = new string[]
+        {
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        };
+                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+
+                            if (menuPosY == 4)
+                            {
+                                foreach (Item item in Item.PokeMartItems)
+                                {
+                                    Console.SetCursorPosition(itemPosX, itemPosY);
+                                    Console.Write(item.Name);
+                                    Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                    Console.Write("$" + item.PriceBuy);
+                                    itemPosY += 1;
+                                }
+                            }
+
+                            if (menuPosY == 5)
+                            {
+                                #region Player Inventory
+                                foreach (Item item in player.Inventory.ItemSection)
+                                {
+                                    Console.SetCursorPosition(itemPosX, itemPosY);
+                                    Console.Write(item.Name);
+                                    Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                    Console.Write("x" + item.Amount);
+                                    itemPosY += 1;
+                                }
+                                foreach (Item item in player.Inventory.MedSection)
+                                {
+                                    Console.SetCursorPosition(itemPosX, itemPosY);
+                                    Console.Write(item.Name);
+                                    Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                    Console.Write("x" + item.Amount);
+                                    itemPosY += 1;
+                                }
+                                foreach (Item item in player.Inventory.MoveSection)
+                                {
+                                    Console.SetCursorPosition(itemPosX, itemPosY);
+                                    Console.Write(item.Name);
+                                    Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                    Console.Write("x" + item.Amount);
+                                    itemPosY += 1;
+                                }
+                                foreach (Item item in player.Inventory.BattleSection)
+                                {
+                                    Console.SetCursorPosition(itemPosX, itemPosY);
+                                    Console.Write(item.Name);
+                                    Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                    Console.Write("x" + item.Amount);
+                                    itemPosY += 1;
+                                }
+                                #endregion
+                            }
+                            reloadInnerMenu = true;
+                            do
+                            {
+                                Console.SetCursorPosition(30, innerMenuPosY);
+                                Console.Write(">");
+                                if (Item.PokeMartItems[innerMenuPosY - 4].Description.Length <= 70)
+                                {
+                                    ASCII.InstantMessage(Item.PokeMartItems[innerMenuPosY - 4].Description, gbText, gbBackground);
+                                }
+                                else
+                                {
+                                    ASCII.InstantMessageMulti(Item.PokeMartItems[innerMenuPosY - 4].Description.Substring(0, 70), Item.PokeMartItems[innerMenuPosY - 4].Description.Substring(70), gbText, gbBackground);
+                                }
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+                                        Console.SetCursorPosition(30, innerMenuPosY);
+                                        Console.Write(" ");
+                                        innerMenuPosY -= 1;
+                                        if (innerMenuPosY < 4)
+                                        {
+                                            innerMenuPosY = 4;
+                                        }
+                                        break;
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+                                        Console.SetCursorPosition(30, innerMenuPosY);
+                                        Console.Write(" ");
+                                        innerMenuPosY += 1;
+                                        if (innerMenuPosY > 3 + PokeMartItemDisplay.Length)
+                                        {
+                                            innerMenuPosY = 3 + PokeMartItemDisplay.Length;
+                                        }
+                                        break;
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+                                        if (menuPosY == 4)
+                                        {
+                                            if (Item.PokeMartItems[innerMenuPosY - 4].PriceBuy > player.Money)
+                                            {
+                                                ASCII.ScrollMessage("You don't have enough money to purchase this item!", 5, 1000, gbText, gbBackground);
+                                                reloadBuyMenu = false;
+                                            }
+                                            else
+                                            {
+                                                ASCII.InstantMessageMulti(Item.PokeMartItems[innerMenuPosY - 4].Name + "? Certainly.", "How many would you like?", gbText, gbBackground);
+                                                string[] PlayerItemCount = new string[]
+                                                {
+                                            "^",
+                                            "x",
+                                            "v"
+                                                };
+                                                ASCII.SmallMenu(60, 15, PlayerItemCount, gbText, gbBackground);
+                                                int itemCount = 1;
+                                                reloadBuyMenu = true;
+                                                do
+                                                {
+                                                    Console.SetCursorPosition(64, 17);
+                                                    Console.Write(itemCount);
+                                                    Console.SetCursorPosition(74, 17);
+                                                    Console.Write("$" + Item.PokeMartItems[innerMenuPosY - 4].PriceBuy * itemCount);
+                                                    navPlayerMenu = Console.ReadKey().Key;
+
+                                                    switch (navPlayerMenu)
+                                                    {
+                                                        case ConsoleKey.UpArrow:
+                                                        case ConsoleKey.W:
+                                                            Console.SetCursorPosition(64, 17);
+                                                            Console.Write("      ");
+                                                            Console.SetCursorPosition(74, 17);
+                                                            Console.Write("      ");
+                                                            itemCount += 1;
+                                                            if (itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy > player.Money)
+                                                            {
+                                                                itemCount -= 1;
+                                                            }
+                                                            break;
+                                                        case ConsoleKey.DownArrow:
+                                                        case ConsoleKey.S:
+                                                            Console.SetCursorPosition(64, 17);
+                                                            Console.Write("      ");
+                                                            Console.SetCursorPosition(74, 17);
+                                                            Console.Write("      ");
+                                                            itemCount -= 1;
+                                                            if (itemCount == 0)
+                                                            {
+                                                                itemCount = 1;
+                                                            }
+                                                            break;
+                                                        case ConsoleKey.Enter:
+                                                        case ConsoleKey.K:
+                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                            itemPosY = 4;
+                                                            foreach (Item item in Item.PokeMartItems)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("$" + item.PriceBuy);
+                                                                itemPosY += 1;
+                                                            }
+                                                            ASCII.ScrollMessageMulti($"{Item.PokeMartItems[innerMenuPosY - 4].Name}, and you want {itemCount}?", $"That will be ${Item.PokeMartItems[innerMenuPosY - 4].PriceBuy * itemCount}, OK?", 5, 0, gbText, gbBackground);
+                                                            ASCII.SmallMenu(60, 16, new string[] { "YES", "NO" }, gbText, gbBackground);
+                                                            int confirmY = 17;
+                                                            reloadConfirmBuy = true;
+                                                            do
+                                                            {
+                                                                Console.SetCursorPosition(61, confirmY);
+                                                                Console.Write(">");
+                                                                navPlayerMenu = Console.ReadKey().Key;
+                                                                switch (navPlayerMenu)
+                                                                {
+                                                                    case ConsoleKey.UpArrow:
+                                                                    case ConsoleKey.W:
+                                                                        Console.SetCursorPosition(61, confirmY);
+                                                                        Console.Write(" ");
+                                                                        confirmY -= 1;
+                                                                        if (confirmY == 16)
+                                                                        {
+                                                                            confirmY = 18;
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.DownArrow:
+                                                                    case ConsoleKey.S:
+                                                                        Console.SetCursorPosition(61, confirmY);
+                                                                        Console.Write(" ");
+                                                                        confirmY += 1;
+                                                                        if (confirmY == 19)
+                                                                        {
+                                                                            confirmY = 17;
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.Enter:
+                                                                    case ConsoleKey.K:
+                                                                        //YES
+                                                                        if (confirmY == 17)
+                                                                        {
+                                                                            int count = 0;
+                                                                            while (count < player.Inventory.ItemSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.ItemSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.ItemSection[count].Amount += itemCount;
+                                                                                    player.Money -= itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.MedSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MedSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.MedSection[count].Amount += itemCount;
+                                                                                    player.Money -= itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.MoveSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MoveSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.MoveSection[count].Amount += itemCount;
+                                                                                    player.Money -= itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.BattleSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.BattleSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.BattleSection[count].Amount += itemCount;
+                                                                                    player.Money -= itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            reloadConfirmBuy = false;
+                                                                            reloadBuyMenu = false;
+                                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                            PlayerDisplay = new string[]
+                                    {
+                                "Money",
+                                "        $ " + player.Money
+                                    };
+                                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                            itemPosY = 4;
+                                                                            foreach (Item item in Item.PokeMartItems)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("$" + item.PriceBuy);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            ASCII.ScrollMessage("Thank you for your purchase!", 25, 1000, gbText, gbBackground);
+                                                                        }
+                                                                        //NO
+                                                                        if (confirmY == 18)
+                                                                        {
+                                                                            reloadConfirmBuy = false;
+                                                                            reloadBuyMenu = false;
+                                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                            itemPosY = 4;
+                                                                            foreach (Item item in Item.PokeMartItems)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("$" + item.PriceBuy);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.Backspace:
+                                                                    case ConsoleKey.O:
+                                                                        reloadConfirmBuy = false;
+                                                                        reloadBuyMenu = false;
+                                                                        Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                        ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                        ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                        itemPosY = 4;
+                                                                        foreach (Item item in Item.PokeMartItems)
+                                                                        {
+                                                                            Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                            Console.Write("$" + item.PriceBuy);
+                                                                            itemPosY += 1;
+                                                                        }
+                                                                        break;
+                                                                    default:
+                                                                        break;
+                                                                }
+                                                            } while (reloadConfirmBuy);
+                                                            break;
+                                                        case ConsoleKey.Backspace:
+                                                        case ConsoleKey.O:
+                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                            itemPosY = 4;
+                                                            foreach (Item item in Item.PokeMartItems)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("$" + item.PriceBuy);
+                                                                itemPosY += 1;
+                                                            }
+                                                            reloadBuyMenu = false;
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                } while (reloadBuyMenu);
+                                            }
+                                        }
+                                        if (menuPosY == 5)
+                                        {
+                                            int count = 0;
+                                            while (count < player.Inventory.ItemSection.Length)
+                                            {
+                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.ItemSection[count].Name)
+                                                {
+                                                    Item.PokeMartItems[innerMenuPosY - 4].Amount = player.Inventory.ItemSection[count].Amount;
+                                                }
+                                                count += 1;
+                                            }
+                                            count = 0;
+                                            while (count < player.Inventory.MedSection.Length)
+                                            {
+                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MedSection[count].Name)
+                                                {
+                                                    Item.PokeMartItems[innerMenuPosY - 4].Amount = player.Inventory.MedSection[count].Amount;
+                                                }
+                                                count += 1;
+                                            }
+                                            count = 0;
+                                            while (count < player.Inventory.MoveSection.Length)
+                                            {
+                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MoveSection[count].Name)
+                                                {
+                                                    Item.PokeMartItems[innerMenuPosY - 4].Amount = player.Inventory.MoveSection[count].Amount;
+                                                }
+                                                count += 1;
+                                            }
+                                            count = 0;
+                                            while (count < player.Inventory.BattleSection.Length)
+                                            {
+                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.BattleSection[count].Name)
+                                                {
+                                                    Item.PokeMartItems[innerMenuPosY - 4].Amount = player.Inventory.BattleSection[count].Amount;
+                                                }
+                                                count += 1;
+                                            }
+                                            if (Item.PokeMartItems[innerMenuPosY - 4].Amount <= 0)
+                                            {
+                                                ASCII.ScrollMessage("You do not possess this item!", 5, 1000, gbText, gbBackground);
+                                                reloadBuyMenu = false;
+                                            }
+                                            else
+                                            {
+                                                ASCII.InstantMessageMulti(Item.PokeMartItems[innerMenuPosY - 4].Name + "?", "How many would you like to sell?", gbText, gbBackground);
+                                                string[] PlayerItemCount = new string[]
+                                                {
+                                            "^",
+                                            "x",
+                                            "v"
+                                                };
+                                                ASCII.SmallMenu(60, 15, PlayerItemCount, gbText, gbBackground);
+                                                int itemCount = 1;
+                                                reloadBuyMenu = true;
+                                                do
+                                                {
+                                                    Console.SetCursorPosition(64, 17);
+                                                    Console.Write(itemCount);
+                                                    Console.SetCursorPosition(74, 17);
+                                                    Console.Write("$" + Item.PokeMartItems[innerMenuPosY - 4].PriceSell * itemCount);
+                                                    navPlayerMenu = Console.ReadKey().Key;
+
+                                                    switch (navPlayerMenu)
+                                                    {
+                                                        case ConsoleKey.UpArrow:
+                                                        case ConsoleKey.W:
+                                                            Console.SetCursorPosition(64, 17);
+                                                            Console.Write("      ");
+                                                            Console.SetCursorPosition(74, 17);
+                                                            Console.Write("      ");
+                                                            itemCount += 1;
+                                                            if (itemCount > Item.PokeMartItems[innerMenuPosY - 4].Amount)
+                                                            {
+                                                                itemCount -= 1;
+                                                            }
+                                                            break;
+                                                        case ConsoleKey.DownArrow:
+                                                        case ConsoleKey.S:
+                                                            Console.SetCursorPosition(64, 17);
+                                                            Console.Write("      ");
+                                                            Console.SetCursorPosition(74, 17);
+                                                            Console.Write("      ");
+                                                            itemCount -= 1;
+                                                            if (itemCount == 0)
+                                                            {
+                                                                itemCount = 1;
+                                                            }
+                                                            break;
+                                                        case ConsoleKey.Enter:
+                                                        case ConsoleKey.K:
+                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                            itemPosY = 4;
+                                                            #region Player Inventory
+                                                            foreach (Item item in player.Inventory.ItemSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.MedSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.MoveSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.BattleSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            #endregion
+                                                            ASCII.ScrollMessageMulti($"I can pay ${Item.PokeMartItems[innerMenuPosY - 4].PriceSell*itemCount}.", $"Would that be OK?", 5, 0, gbText, gbBackground);
+                                                            ASCII.SmallMenu(60, 16, new string[] { "YES", "NO" }, gbText, gbBackground);
+                                                            int confirmY = 17;
+                                                            reloadConfirmBuy = true;
+                                                            do
+                                                            {
+                                                                Console.SetCursorPosition(61, confirmY);
+                                                                Console.Write(">");
+                                                                navPlayerMenu = Console.ReadKey().Key;
+                                                                switch (navPlayerMenu)
+                                                                {
+                                                                    case ConsoleKey.UpArrow:
+                                                                    case ConsoleKey.W:
+                                                                        Console.SetCursorPosition(61, confirmY);
+                                                                        Console.Write(" ");
+                                                                        confirmY -= 1;
+                                                                        if (confirmY == 16)
+                                                                        {
+                                                                            confirmY = 18;
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.DownArrow:
+                                                                    case ConsoleKey.S:
+                                                                        Console.SetCursorPosition(61, confirmY);
+                                                                        Console.Write(" ");
+                                                                        confirmY += 1;
+                                                                        if (confirmY == 19)
+                                                                        {
+                                                                            confirmY = 17;
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.Enter:
+                                                                    case ConsoleKey.K:
+                                                                        //YES
+                                                                        if (confirmY == 17)
+                                                                        {
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.ItemSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.ItemSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.ItemSection[count].Amount -= itemCount;
+                                                                                    player.Money += itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceSell;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.MedSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MedSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.MedSection[count].Amount -= itemCount;
+                                                                                    player.Money += itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceSell;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.MoveSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.MoveSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.MoveSection[count].Amount -= itemCount;
+                                                                                    player.Money += itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceSell;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            count = 0;
+                                                                            while (count < player.Inventory.BattleSection.Length)
+                                                                            {
+                                                                                if (Item.PokeMartItems[innerMenuPosY - 4].Name == player.Inventory.BattleSection[count].Name)
+                                                                                {
+                                                                                    player.Inventory.BattleSection[count].Amount -= itemCount;
+                                                                                    player.Money += itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceSell;
+                                                                                }
+                                                                                count += 1;
+                                                                            }
+                                                                            reloadConfirmBuy = false;
+                                                                            reloadBuyMenu = false;
+                                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                            PlayerDisplay = new string[]
+                                    {
+                                "Money",
+                                "        $ " + player.Money
+                                    };
+                                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                            itemPosY = 4;
+                                                                            #region Player Inventory
+                                                                            foreach (Item item in player.Inventory.ItemSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.MedSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.MoveSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.BattleSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            #endregion
+                                                                            ASCII.ScrollMessageMulti($"Turned over the {Item.PokeMartItems[innerMenuPosY - 4].Name}", $"and received ${itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceSell}.", 25, 1000, gbText, gbBackground);
+                                                                        }
+                                                                        //NO
+                                                                        if (confirmY == 18)
+                                                                        {
+                                                                            reloadConfirmBuy = false;
+                                                                            reloadBuyMenu = false;
+                                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                            itemPosY = 4;
+                                                                            #region Player Inventory
+                                                                            foreach (Item item in player.Inventory.ItemSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.MedSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.MoveSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            foreach (Item item in player.Inventory.BattleSection)
+                                                                            {
+                                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                                Console.Write(item.Name);
+                                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                                Console.Write("x" + item.Amount);
+                                                                                itemPosY += 1;
+                                                                            }
+                                                                            #endregion
+                                                                        }
+                                                                        break;
+                                                                    case ConsoleKey.Backspace:
+                                                                    case ConsoleKey.O:
+                                                                        reloadConfirmBuy = false;
+                                                                        reloadBuyMenu = false;
+                                                                        Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                                        ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                                        ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                                        itemPosY = 4;
+                                                                        #region Player Inventory
+                                                                        foreach (Item item in player.Inventory.ItemSection)
+                                                                        {
+                                                                            Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                            Console.Write("x" + item.Amount);
+                                                                            itemPosY += 1;
+                                                                        }
+                                                                        foreach (Item item in player.Inventory.MedSection)
+                                                                        {
+                                                                            Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                            Console.Write("x" + item.Amount);
+                                                                            itemPosY += 1;
+                                                                        }
+                                                                        foreach (Item item in player.Inventory.MoveSection)
+                                                                        {
+                                                                            Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                            Console.Write("x" + item.Amount);
+                                                                            itemPosY += 1;
+                                                                        }
+                                                                        foreach (Item item in player.Inventory.BattleSection)
+                                                                        {
+                                                                            Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                            Console.Write("x" + item.Amount);
+                                                                            itemPosY += 1;
+                                                                        }
+                                                                        #endregion
+                                                                        break;
+                                                                    default:
+                                                                        break;
+                                                                }
+                                                            } while (reloadConfirmBuy);
+                                                            break;
+                                                        case ConsoleKey.Backspace:
+                                                        case ConsoleKey.O:
+                                                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                                                            ASCII.SmallMenu(6, 3, PlayerDisplay, gbText, gbBackground);
+                                                            ASCII.MediumMenu(29, 3, PokeMartItemDisplay, gbText, gbBackground);
+                                                            itemPosY = 4;
+                                                            #region Player Inventory
+                                                            foreach (Item item in player.Inventory.ItemSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.MedSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.MoveSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            foreach (Item item in player.Inventory.BattleSection)
+                                                            {
+                                                                Console.SetCursorPosition(itemPosX, itemPosY);
+                                                                Console.Write(item.Name);
+                                                                Console.SetCursorPosition(itemPosX + 29, itemPosY);
+                                                                Console.Write("x" + item.Amount);
+                                                                itemPosY += 1;
+                                                            }
+                                                            #endregion
+                                                            reloadBuyMenu = false;
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                } while (reloadBuyMenu);
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        reloadInnerMenu = false;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } while (reloadInnerMenu);
+                        }
+                        if (menuPosY == 5)
+                        {
+
+                        }
+                        if (menuPosY == 6)
+                        {
+                            reloadMenu = false;
+                        }
+                        if (menuPosY != 6)
+                        {
+                            Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
+                            ASCII.SmallMenu(6, 3, menuOptions, gbText, gbBackground);
+                            ASCII.ScrollMessage("Is there anything else I may do for you?", 25, 0, gbText, gbBackground);
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadMenu = false;
+                        break;
+                    default:
+                        break;
+                }
+            } while (reloadMenu);
+
         }
 
         #endregion

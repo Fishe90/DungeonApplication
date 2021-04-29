@@ -59,4 +59,38 @@ namespace MainClasses
         };
         
     }
+
+    public class Player1
+    {
+        public string Name { get; set; }
+        public char Gender { get; set; }
+        public int PlayerID { get; set; }
+        public int Money { get; set; }
+        public string StartTime { get; set; }
+        public string[] ASCIIAttacker { get; set; }
+        public string[] ASCIIDefender { get; set; }
+        public string[] ASCIIProfile { get; set; }
+        public Player_Party Party { get; set; }
+        public Item[] Inventory { get; set; }
+        public Monster[] Pokedex { get; set; }
+        public Monster[] PC { get; set; }
+
+        public Player1(string name, char gender, int playerID, int money, string startTime, string[] asciiAttacker, string[] asciiDefender, string[] asciiProfile, Player_Party party, Item[] inventory, Monster[] pokedex, Monster[] pc)
+        {
+            Name = name;
+            Gender = gender;
+            PlayerID = playerID;
+            Money = money;
+            StartTime = startTime;
+            ASCIIAttacker = asciiAttacker;
+            ASCIIDefender = asciiDefender;
+            ASCIIProfile = asciiProfile;
+            Party = party;
+            Inventory = inventory;
+            Pokedex = pokedex;
+            PC = pc;
+        }
+
+        public Player1() { }
+    }
 }

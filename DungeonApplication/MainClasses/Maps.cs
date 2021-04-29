@@ -193,25 +193,35 @@ namespace MainClasses
 
         public static void DEMOMapActive(Player player, Player npc, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
+            int centerX = currentPosX - posX;
+            int centerY = currentPosY - posY;
             Console.SetBufferSize(2000, 2000);
             ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
-            ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.DisplayNPC("trainerFemale", 3, centerX - 30, centerY, gbText, gbBackground);
+            //ASCII.DisplayNPC("trainerMale", 3, centerX + 30, centerY, gbText, gbBackground);
             ASCII.PlayerMovement(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOMapStatic(Player player, Player npc, int currentPosX, int currentPosY, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
+            int centerX = currentPosX - posX;
+            int centerY = currentPosY - posY;
             Console.SetBufferSize(2000, 2000);
             ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
-            ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
+            ASCII.DisplayNPC("trainerFemale", 3, centerX - 30, centerY, gbText, gbBackground);
+            //ASCII.DisplayNPC("trainerMale", 3, centerX + 30, centerY, gbText, gbBackground);
             ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
         }
 
         public static void DEMOMap(Player player, Player npc, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             bool reloadTestMap = false;
-            int posX = 180;
-            int posY = 34;
+            //Coordinates Relative to the Center of the Player Field
+            //int posX = 142;
+            //int posY = 68;
+            //OG Coordinates:
+            int posX = 150;
+            int posY = 34;            
             int direction = 6;
             Random rand = new Random();
             int encounterChance = rand.Next(0, 100);
@@ -219,11 +229,7 @@ namespace MainClasses
             DEMOMapStatic(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
             do
             {
-                //DEMOMapActive(player, npc, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
-                //Console.SetBufferSize(2000, 2000);
-                //ASCII.GameMap(ASCII.DEMOMap, currentPosX, currentPosY, gbText, gbBackground);
-                //ASCII.CharacterMale((currentPosX - posX), (currentPosY - posY), gbText, gbBackground);
-                //ASCII.PlayerMovement(player, direction, gbText, gbBackground);
+
                 navPlayerMenu = Console.ReadKey().Key;
 
                 switch (navPlayerMenu)
@@ -276,6 +282,13 @@ namespace MainClasses
                             #endregion
 
                             #endregion
+                            //Rival Up
+                            if (currentPosX == 112 && currentPosY == 68)
+                            {
+                                currentPosY += 2;
+                                posY += 4;
+                                direction = 3;
+                            }
                             //Border Top
                             if (currentPosY < 16)
                             {
@@ -401,6 +414,12 @@ namespace MainClasses
                             #endregion
 
                             #endregion
+                            //Rival Bottom
+                            if (currentPosX == 112 && currentPosY == 66)
+                            {
+                                currentPosY -= 2;
+                                posY -= 4;
+                            }
                             //Border Bottom
                             if (currentPosY > 106)
                             {
@@ -460,6 +479,12 @@ namespace MainClasses
                                 currentPosX += 5;
                                 posX += 10;
                             }
+                            //Rival Left
+                            if (currentPosX == 112 && currentPosY >= 66 && currentPosY <= 68)
+                            {
+                                currentPosX += 5;
+                                posX += 10;
+                            }
                             #endregion
                             //Border Left
                             if (currentPosX < 60)
@@ -513,6 +538,12 @@ namespace MainClasses
                                 posX -= 10;
                             }
                             #endregion
+                            //Rival Right
+                            if (currentPosX == 112 && currentPosY >= 66 && currentPosY <= 68)
+                            {
+                                currentPosX -= 5;
+                                posX -= 10;
+                            }
                             //Border Right
                             if (currentPosX > 225)
                             {
@@ -550,10 +581,19 @@ namespace MainClasses
                     case ConsoleKey.K:
 
                         string battle = "Do you want to battle?";
-                        if (currentPosX == 117 && currentPosY == 68)
+                        if (currentPosX == 117 && currentPosY == 68 && direction == 1 || 
+                            currentPosX == 107 && currentPosY == 68 && direction == 2 ||
+                            currentPosX == 112 && currentPosY == 70 && direction == 3 ||
+                            currentPosX == 112 && currentPosY == 70 && direction == 4 ||
+                            currentPosX == 112 && currentPosY == 64 && direction == 5 ||
+                            currentPosX == 112 && currentPosY == 64 && direction == 6)
                         {
                             bool reloadBattleFAINT = false;
                             int menuPosY = 22;
+                            int centerX = currentPosX - posX;
+                            int centerY = currentPosY - posY;
+                            ASCII.DisplayNPC("trainerFemale", direction, centerX - 30, centerY, gbText, gbBackground);
+                            ASCII.PlayerMovementStatic(player, direction, gbText, gbBackground);
 
                             ASCII.InstantMessage(battle, gbText, gbBackground);
                             Console.SetCursorPosition(65, 22);
@@ -1996,7 +2036,12 @@ namespace MainClasses
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
-                        DEMOPokeMartActive(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        reloadTestMap = true;
+                        break;
+                    case ConsoleKey.Enter:
+                        Player_Menus.PokeMartVendor(player, currentPosX, currentPosY, posX, posY, direction, navPlayerMenu, gbText, gbBackground);
+                        DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
                         reloadTestMap = true;
                         break;
                     default:

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 namespace MainClasses
-{ 
+{
     public class ASCII
     {
         /****FOR EACH NEW METHOD() ADD Console.SetCursorPosition(90, 42); AT THE END OF THE LAST WRITE/WRITELINE TO REMOVE THE (PRESS ANY KEY TO CONTINUE)****/
@@ -332,7 +332,7 @@ namespace MainClasses
                 Console.SetCursorPosition(90, 42);
                 startLine += 1;
             }
-            
+
             System.Threading.Thread.Sleep(2000);
             startLine = Title.Length;
 
@@ -353,7 +353,7 @@ namespace MainClasses
             string message3 = "This world is inhabited by magical creatures called Pokefraud!";
             string message4 = "For some people, Pokefraud are pets. Others use them for fights.";
             string message5 = "Myself...I study Pokefraud as a profession.";
-            string message6 = "First, what is your name? ";            
+            string message6 = "First, what is your name? ";
             StaticMessageBox(GBText, GBBackground);
             System.Threading.Thread.Sleep(1000);
             int proY = 8;
@@ -496,8 +496,8 @@ namespace MainClasses
             string message13 = "SALIX: You first need to choose a Pokefraud companion.";
             string message14 = "SALIX: Here are 3 excellent starters that bond quickly with their trainers.";
             ScrollMessage(message12, 50, 1500, GBText, GBBackground);
-            ScrollMessage(message13, 50, 1500, GBText, GBBackground);    
-            
+            ScrollMessage(message13, 50, 1500, GBText, GBBackground);
+
             #region Animates Professor Movement
 
             ResetHalfScreen(8, GBText, GBBackground);
@@ -543,7 +543,7 @@ namespace MainClasses
                 Console.SetCursorPosition(40, proY);
                 Console.Write(line);
                 proY += 1;
-            }                                   
+            }
             System.Threading.Thread.Sleep(25);
             ResetHalfScreen(3, GBText, GBBackground);
             proY = 2;
@@ -645,7 +645,7 @@ namespace MainClasses
                     Console.Write("GROUND");
                     Console.ForegroundColor = GBText;
                     Console.Write(" Types)");
-                }                
+                }
                 navPlayerMenu = Console.ReadKey().Key;
                 switch (navPlayerMenu)
                 {
@@ -664,7 +664,7 @@ namespace MainClasses
                             Console.SetCursorPosition(posX, 19);
                             Console.Write("                   ");
                             reloadStarters = true;
-                        }                        
+                        }
                         break;
                     case ConsoleKey.LeftArrow:
                     case ConsoleKey.A:
@@ -733,7 +733,7 @@ namespace MainClasses
                                                                         }
                                                                         string messageRare3 = "SALIX: This is NEO. The ";
                                                                         StaticMessageBox(GBText, GBBackground);
-                                                                        posX = 8;                                                                        
+                                                                        posX = 8;
                                                                         foreach (char letter in messageRare3)
                                                                         {
                                                                             Console.SetCursorPosition(posX, 22);
@@ -892,7 +892,7 @@ namespace MainClasses
                     default:
                         reloadStarters = true;
                         break;
-                }                
+                }
             } while (reloadStarters);
 
             ResetHalfScreen(12, GBText, GBBackground);
@@ -1429,14 +1429,14 @@ namespace MainClasses
                 #endregion
             }
             string message16 = "SALIX: Your very own Pokefraud legend is about to unfold!";
-            string message17 = "SALIX: A world of dreams and adventures with Pokefraud awaits! Let's go!";            
+            string message17 = "SALIX: A world of dreams and adventures with Pokefraud awaits! Let's go!";
             ScrollMessage(message16, 50, 1500, GBText, GBBackground);
-            ScrollMessage(message17, 50, 1500, GBText, GBBackground);            
+            ScrollMessage(message17, 50, 1500, GBText, GBBackground);
 
             #endregion
 
             InstantMessage("Press any key to continue..", GBText, GBBackground);
-                
+
             navPlayerMenu = Console.ReadKey().Key;
 
             //SFX.Route2();
@@ -1526,6 +1526,983 @@ namespace MainClasses
             }
             Console.SetCursorPosition(90, 42);
         }
+
+        #region Characters
+
+        public static void DisplayNPC(string npc, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            //If the player gender == Male USE the Male movement animations, else use the female animations
+            //Create an updating int that knows which foot to step forward when going forwards or backwards
+            //OR Just for the UP and DOWN movements, display two frames
+
+            //Center Player Position: (42,10)
+
+            #region Male Movement
+            string[] MoveRight1 = new string[]
+            {
+                "▄▄███▄ ",                  //"▄▄███▄ ",
+                "▀██","▄","▀",              // "▀██▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] MoveRight2 = new string[]
+            {
+                 "▄▄███▄ ",                 //"▄▄███▄ ",
+                 "▀██","▄","▀",             // "▀██▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] MoveLeft1 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                 "▀","▄","██▀",             // "▀▄██▀", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] MoveLeft2 = new string[]
+            {
+                 " ▄███▄▄",                 //" ▄███▄▄",
+                  "▀","▄","██▀",            // "▀▄██▀",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] MoveUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] MoveDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] MoveDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "▀","▄█▄","▀",            // "▀███▀",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            #endregion
+            #region Female Movement
+            string[] FemaleHeadRight = new string[]
+            {
+                " ▄███▄ ",                  //" ▄███▄ ",
+                "██","█▄","▀",              // "███▄▀",
+                "▄","███","▀",              // "▄███▀",
+                "▀   ▀"                     // "▀   ▀"  
+            };
+            string[] FemaleHeadRight2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "██","█▄","▀",             // "███▄▀",
+                 " ","█▀█"," ",             // " █▀█ ",
+                 " ▀ ▀ "                    // " ▀ ▀ "  
+            };
+            string[] FemaleHeadLeft = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                 "▀","▄█","██",             // "▀▄███", 
+                 "▀","███▄",                // "▀███▄", 
+                 "▀   ▀"                    // "▀   ▀"  
+            };
+            string[] FemaleHeadLeft2 = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",
+                  "▀","▄█","██",            // "▀▄███",
+                  " █","▀","█ ",            // " █▀█ ",
+                  " ▀ ▀ "                   // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadUpLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadUpIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█████",                  // "█████",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownRF = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " █   "                   // " █ ▀ "           // " ▀ ▀ "  
+            };
+            string[] FemaleHeadDownLF = new string[]
+{
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+};
+            string[] FemaleHeadDownIdle = new string[]
+            {
+                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+                  " ▀ ▀ "                   // " ▀ ▀ "           // " ▀ ▀ "  
+            };
+            #endregion
+
+            //TODO Create Female Version
+
+            //1 = Face Left
+            //2 = Face Right
+            //5/6 = Face Up 
+            //3/4 = Face Down 
+
+            if (posX <= 80 && posX >= 4 && posY <= 25 && posY >= 0)
+            {
+                //Male Movement
+                if (direction == 2 && npc == "trainerMale")
+                {
+                    #region IDLE LEFT
+
+                    if (posY >= 2)
+                    {
+                        //HAT
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveLeft2[0]); //.Substring(3, 20)                    
+
+                        //HEAD
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveLeft2[1]);
+
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(MoveLeft2[2]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveLeft2[3]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(MoveLeft2[4]);
+
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveLeft2[5]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveLeft2[6]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(MoveLeft2[7]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 1 && npc == "trainerMale")
+                {
+                    #region IDLE RIGHT
+
+                    if (posY >= 2)
+                    {
+                        //HAT
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveRight2[0]);
+
+                        //HEAD
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveRight2[1]);
+
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(MoveRight2[2]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveRight2[3]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.Write(MoveRight2[4]);
+
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveRight2[5]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveRight2[6]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(MoveRight2[7]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 5 && npc == "trainerMale" || direction == 6 && npc == "trainerMale")
+                {
+                    #region IDLE UP
+
+                    if (posY >= 2)
+                    {
+                        //HAT *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveUpIdle[0]);
+
+                        //HEAD *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveUpIdle[1]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveUpIdle[2]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveUpIdle[3]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 3 && npc == "trainerMale" || direction == 4 && npc == "trainerMale")
+                {
+                    #region IDLE DOWN
+                    if (posY >= 2)
+                    {
+                        //HAT *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveDownIdle[0]);
+
+                        //HEAD *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveDownIdle[1]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(MoveDownIdle[2]);
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveDownIdle[3]);
+                    }                    
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(MoveDownIdle[4]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(MoveDownIdle[5]);
+                    }                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+
+                //Female Movement
+                if (direction == 2 && npc == "trainerFemale")
+                {
+                    #region IDLE LEFT
+
+                    if (posY >= 2)
+                    {
+                        //HAT
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadLeft2[0]);
+
+                        //HEAD
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(FemaleHeadLeft2[1]);
+
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(FemaleHeadLeft2[2]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(FemaleHeadLeft2[3]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write(FemaleHeadLeft2[4]);
+
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(FemaleHeadLeft2[5]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadLeft2[6]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(FemaleHeadLeft2[7]);
+                    }
+                   
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 1 && npc == "trainerFemale")
+                {
+                    #region IDLE RIGHT
+
+                    if (posY >= 2)
+                    {
+                        //HAT
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadRight2[0]);
+
+                        //HEAD
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(FemaleHeadRight2[1]);
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(FemaleHeadRight2[2]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadRight2[3]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.Write(FemaleHeadRight2[4]);
+
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(FemaleHeadRight2[5]);
+
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadRight2[6]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(FemaleHeadRight2[7]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 5 && npc == "trainerFemale" || direction == 6 && npc == "trainerFemale")
+                {
+                    #region IDLE UP
+
+                    if (posY >= 2)
+                    {
+                        //HAT *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadUpIdle[0]);
+
+                        //HEAD *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(FemaleHeadUpIdle[1]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(FemaleHeadUpIdle[2]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadUpIdle[3]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+                if (direction == 3 && npc == "trainerFemale" || direction == 4 && npc == "trainerFemale")
+                {
+                    #region IDLE DOWN
+
+                    if (posY >= 2)
+                    {
+                        //HAT *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX, posY);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadDownIdle[0]);
+
+                        //HEAD *SAME COLOR SCEME
+                        Console.SetCursorPosition(posX + 1, posY + 1);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(FemaleHeadDownIdle[1]);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(FemaleHeadDownIdle[2]);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadDownIdle[3]);
+                    }
+
+                    if (posY <= 23)
+                    {
+                        //SHIRT
+                        Console.SetCursorPosition(posX + 1, posY + 2);
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(FemaleHeadDownIdle[4]);
+
+                        //PANTS
+                        Console.SetCursorPosition(posX + 1, posY + 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.BackgroundColor = gbBackground;
+                        Console.Write(FemaleHeadDownIdle[5]);
+                    }
+                    
+
+                    Console.SetCursorPosition(90, 42);
+                    #endregion
+                }
+            }
+        }
+
+        #region Original
+        //        public static void DisplayNPC(string npc, int direction, int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
+        //        {
+        //            //If the player gender == Male USE the Male movement animations, else use the female animations
+        //            //Create an updating int that knows which foot to step forward when going forwards or backwards
+        //            //OR Just for the UP and DOWN movements, display two frames
+
+        //            //Center Player Position: (42,10)
+
+        //            #region Male Movement
+        //            string[] MoveRight1 = new string[]
+        //            {
+        //                "▄▄███▄ ",                  //"▄▄███▄ ",
+        //                "▀██","▄","▀",              // "▀██▄▀",
+        //                "▄","███","▀",              // "▄███▀",
+        //                "▀   ▀"                     // "▀   ▀"  
+        //            };
+        //            string[] MoveRight2 = new string[]
+        //            {
+        //                 "▄▄███▄ ",                 //"▄▄███▄ ",
+        //                 "▀██","▄","▀",             // "▀██▄▀",
+        //                 " ","█▀█"," ",             // " █▀█ ",
+        //                 " ▀ ▀ "                    // " ▀ ▀ "  
+        //            };
+        //            string[] MoveLeft1 = new string[]
+        //            {
+        //                 " ▄███▄▄",                 //" ▄███▄▄",
+        //                 "▀","▄","██▀",             // "▀▄██▀", 
+        //                 "▀","███▄",                // "▀███▄", 
+        //                 "▀   ▀"                    // "▀   ▀"  
+        //            };
+        //            string[] MoveLeft2 = new string[]
+        //            {
+        //                 " ▄███▄▄",                 //" ▄███▄▄",
+        //                  "▀","▄","██▀",            // "▀▄██▀",
+        //                  " █","▀","█ ",            // " █▀█ ",
+        //                  " ▀ ▀ "                   // " ▀ ▀ "  
+        //            };
+        //            string[] MoveUpRF = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            string[] MoveUpLF = new string[]
+        //{
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //};
+        //            string[] MoveUpIdle = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            string[] MoveDownRF = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            string[] MoveDownLF = new string[]
+        //{
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀","▄█▄","▀",            // "▀▄█▄▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //};
+        //            string[] MoveDownIdle = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "▀","▄█▄","▀",            // "▀███▀",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            #endregion
+        //            #region Female Movement
+        //            string[] FemaleHeadRight = new string[]
+        //            {
+        //                " ▄███▄ ",                  //" ▄███▄ ",
+        //                "██","█▄","▀",              // "███▄▀",
+        //                "▄","███","▀",              // "▄███▀",
+        //                "▀   ▀"                     // "▀   ▀"  
+        //            };
+        //            string[] FemaleHeadRight2 = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",
+        //                 "██","█▄","▀",             // "███▄▀",
+        //                 " ","█▀█"," ",             // " █▀█ ",
+        //                 " ▀ ▀ "                    // " ▀ ▀ "  
+        //            };
+        //            string[] FemaleHeadLeft = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",
+        //                 "▀","▄█","██",             // "▀▄███", 
+        //                 "▀","███▄",                // "▀███▄", 
+        //                 "▀   ▀"                    // "▀   ▀"  
+        //            };
+        //            string[] FemaleHeadLeft2 = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",
+        //                  "▀","▄█","██",            // "▀▄███",
+        //                  " █","▀","█ ",            // " █▀█ ",
+        //                  " ▀ ▀ "                   // " ▀ ▀ "  
+        //            };
+        //            string[] FemaleHeadUpRF = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█████",                  // "█████",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " █   "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            string[] FemaleHeadUpLF = new string[]
+        //{
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█████",                  // "█████",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //};
+        //            string[] FemaleHeadUpIdle = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█████",                  // "█████",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " ▀ ▀ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //            };
+        //            string[] FemaleHeadDownRF = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " █   "                   // " █ ▀ "           // " ▀ ▀ "  
+        //            };
+        //            string[] FemaleHeadDownLF = new string[]
+        //{
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  "   █ "                   // " ▀ █ "           // " ▀ ▀ "  
+        //};
+        //            string[] FemaleHeadDownIdle = new string[]
+        //            {
+        //                 " ▄███▄ ",                 //" ▄███▄ ",         //" ▄███▄ ",
+        //                  "█","▄█▄","█",            // "█▄█▄█",          // "▀███▀", 
+        //                  "▀███▀",                  // "▀███▀",          // "▀███▀", 
+        //                  " ▀ ▀ "                   // " ▀ ▀ "           // " ▀ ▀ "  
+        //            };
+        //            #endregion
+
+        //            //TODO Create Female Version
+
+        //            //1 = Face Left
+        //            //2 = Face Right
+        //            //3 = Face Up 
+        //            //4 = Face Down 
+
+        //            if (posX <= 80 && posX >= 4 && posY <= 21 && posY >= 2)
+        //            {
+        //                //Male Movement
+        //                if (direction == 2 && npc == "trainerMale")
+        //                {
+        //                    #region IDLE LEFT
+        //                    //HAT
+        //                    Console.SetCursorPosition(47, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveLeft2[0]);
+
+        //                    //HEAD
+        //                    Console.SetCursorPosition(48, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveLeft2[1]);
+
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(MoveLeft2[2]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveLeft2[3]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(48, 12);
+        //                    Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                    Console.Write(MoveLeft2[4]);
+
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveLeft2[5]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveLeft2[6]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(48, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.Write(MoveLeft2[7]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 1 && npc == "trainerMale")
+        //                {
+        //                    #region IDLE RIGHT
+        //                    //HAT
+        //                    Console.SetCursorPosition(37, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveRight2[0]);
+
+        //                    //HEAD
+        //                    Console.SetCursorPosition(38, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveRight2[1]);
+
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(MoveRight2[2]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveRight2[3]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(38, 12);
+        //                    Console.Write(MoveRight2[4]);
+
+        //                    Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveRight2[5]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveRight2[6]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(38, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.Write(MoveRight2[7]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 5 && npc == "trainerMale" || direction == 6 && npc == "trainerMale")
+        //                {
+        //                    #region IDLE UP
+        //                    //HAT *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(42, 14);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveUpIdle[0]);
+
+        //                    //HEAD *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(43, 15);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveUpIdle[1]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 16);
+        //                    Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveUpIdle[2]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 17);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveUpIdle[3]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 3 && npc == "trainerMale" || direction == 4 && npc == "trainerMale")
+        //                {
+        //                    #region IDLE DOWN
+        //                    //HAT *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(42, 8);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveDownIdle[0]);
+
+        //                    //HEAD *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(43, 9);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveDownIdle[1]);
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(MoveDownIdle[2]);
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveDownIdle[3]);
+
+        //                    //if (posX != )
+        //                    //{
+
+        //                    //}
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 10);
+        //                    Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(MoveDownIdle[4]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(MoveDownIdle[5]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+
+        //                //Female Movement
+        //                if (direction == 1 && npc == "trainerFemale")
+        //                {
+        //                    #region IDLE LEFT
+        //                    //HAT
+        //                    Console.SetCursorPosition(42, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadLeft2[0]);
+
+        //                    //HEAD
+        //                    Console.SetCursorPosition(43, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(FemaleHeadLeft2[1]);
+
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(FemaleHeadLeft2[2]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.Write(FemaleHeadLeft2[3]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 12);
+        //                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        //                    Console.Write(FemaleHeadLeft2[4]);
+
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(FemaleHeadLeft2[5]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadLeft2[6]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.Write(FemaleHeadLeft2[7]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 2 && npc == "trainerFemale")
+        //                {
+        //                    #region IDLE RIGHT
+        //                    //HAT
+        //                    Console.SetCursorPosition(42, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadRight2[0]);
+
+        //                    //HEAD
+        //                    Console.SetCursorPosition(43, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.Write(FemaleHeadRight2[1]);
+
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(FemaleHeadRight2[2]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadRight2[3]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 12);
+        //                    Console.Write(FemaleHeadRight2[4]);
+
+        //                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(FemaleHeadRight2[5]);
+
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadRight2[6]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.Write(FemaleHeadRight2[7]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 3 && npc == "trainerFemale")
+        //                {
+        //                    #region IDLE UP
+        //                    //HAT *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(42, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadUpIdle[0]);
+
+        //                    //HEAD *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(43, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.Write(FemaleHeadUpIdle[1]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 12);
+        //                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(FemaleHeadUpIdle[2]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadUpIdle[3]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //                if (direction == 4 && npc == "trainerFemale")
+        //                {
+        //                    #region IDLE DOWN
+        //                    //HAT *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(42, 10);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadDownIdle[0]);
+
+        //                    //HEAD *SAME COLOR SCEME
+        //                    Console.SetCursorPosition(43, 11);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.Write(FemaleHeadDownIdle[1]);
+        //                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                    Console.BackgroundColor = ConsoleColor.Black;
+        //                    Console.Write(FemaleHeadDownIdle[2]);
+        //                    Console.ForegroundColor = ConsoleColor.Red;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadDownIdle[3]);
+
+        //                    //SHIRT
+        //                    Console.SetCursorPosition(43, 12);
+        //                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        //                    Console.BackgroundColor = ConsoleColor.Yellow;
+        //                    Console.Write(FemaleHeadDownIdle[4]);
+
+        //                    //PANTS
+        //                    Console.SetCursorPosition(43, 13);
+        //                    Console.ForegroundColor = ConsoleColor.Blue;
+        //                    Console.BackgroundColor = gbBackground;
+        //                    Console.Write(FemaleHeadDownIdle[5]);
+
+        //                    Console.SetCursorPosition(90, 42);
+        //                    #endregion
+        //                }
+        //            }
+        //        }
+        #endregion
+
+
+        #endregion
 
         public static void PlayerForward(ConsoleColor gbText, ConsoleColor gbBackground)
         {
@@ -2677,7 +3654,7 @@ namespace MainClasses
 
             //Male Movement
             if (direction == 1 && player.Gender == '♂')
-            {                
+            {
                 #region IDLE LEFT
                 //HAT
                 Console.SetCursorPosition(42, 10);
@@ -3088,7 +4065,7 @@ namespace MainClasses
                 Console.SetCursorPosition(90, 42);
                 #endregion
             }
-        }        
+        }
 
         public static void RegionNoEncounter(string[] Map, Player player, int currentPosX, int currentPosY, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
@@ -3251,8 +4228,8 @@ namespace MainClasses
                         break;
                     case ConsoleKey.M:
                         Player_Menus.PlayerMenu(player, navPlayerMenu, gbText, gbBackground);
-                        reloadTestMap = true;   
-                        break;  
+                        reloadTestMap = true;
+                        break;
                     default:
                         reloadTestMap = true;
                         break;
@@ -5450,7 +6427,7 @@ namespace MainClasses
                     break;
                 default:
                     break;
-            }          
+            }
             ANIPlayerSend(player, gbText, gbBackground);
             Combat.DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
         }
@@ -5509,7 +6486,7 @@ namespace MainClasses
             if (monster.Health > 0)
             {
                 Combat.DoAttackMonster(monster, player, monster.EquippedMoves.Move1, gbText, gbBackground);
-            }            
+            }
         }
 
         public static void ANIPlayerSwitchSendNPCFaint(Player player, int slot, Monster monster, ConsoleColor gbText, ConsoleColor gbBackground)
@@ -5557,7 +6534,7 @@ namespace MainClasses
         }
 
         public static void ANINPCNext(Player player, Player npc, int slot, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
-        {                        
+        {
             string message = "";
             if (slot == 2)
             {
@@ -5698,7 +6675,7 @@ namespace MainClasses
         {
             bool reloadPC = false;
             int posX = 66;
-            int posY = 3;            
+            int posY = 3;
             posY = 4;
             do
             {
@@ -5770,7 +6747,7 @@ namespace MainClasses
                         reloadPC = false;
                         break;
                 }
-            } while (reloadPC);           
+            } while (reloadPC);
         }
 
         public static void StaticMessageBox(ConsoleColor GameText, ConsoleColor GameBackground)
@@ -5808,6 +6785,26 @@ namespace MainClasses
             Console.Write(Message);
         }
 
+        public static void InstantMessageMulti(string message1, string message2, ConsoleColor GameText, ConsoleColor GameBackground)
+        {
+            Console.ForegroundColor = GameText;
+            Console.BackgroundColor = GameBackground;
+            Console.SetCursorPosition(4, 21);
+            Console.WriteLine(" ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄ ");
+            Console.SetCursorPosition(4, 22);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 23);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 24);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 25);
+            Console.WriteLine("  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ");
+            Console.SetCursorPosition(8, 22);
+            Console.Write(message1);
+            Console.SetCursorPosition(8, 23);
+            Console.Write(message2);
+        }
+
         /****DISPLAYS A SCROLLING MESSAGE ([Speed/Delay] FOR BATTLE: 50/1000, FOR ESCAPE: 15/2000, FOR CATCH SUCCESS: 50/2000****/
         public static void ScrollMessage(string Message, int Speed, int Delay, ConsoleColor GameText, ConsoleColor GameBackground)
         {
@@ -5832,13 +6829,42 @@ namespace MainClasses
             System.Threading.Thread.Sleep(Delay);
         }
 
+        public static void ScrollMessageMulti(string message1, string message2, int Speed, int Delay, ConsoleColor GameText, ConsoleColor GameBackground)
+        {
+            Console.ForegroundColor = GameText;
+            Console.BackgroundColor = GameBackground;
+            Console.SetCursorPosition(4, 21);
+            Console.WriteLine(" ▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄ ");
+            Console.SetCursorPosition(4, 22);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 23);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 24);
+            Console.WriteLine(" █                                                                               █ ");
+            Console.SetCursorPosition(4, 25);
+            Console.WriteLine("  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ");
+            Console.SetCursorPosition(8, 22);
+            foreach (char c in message1)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(Speed);
+            }
+            Console.SetCursorPosition(8, 23);
+            foreach (char c in message2)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(Speed);
+            }
+            System.Threading.Thread.Sleep(Delay);
+        }
+
         /****TODO: CREATE METHODS FOR OBJECTS WITH COLOR TO BE PASTED IN THE MAPS****/
         public static void CharacterMale(int posX, int posY, ConsoleColor gbText, ConsoleColor gbBackground)
         {
             //(42, 10) **Top Left of Player at Center Screen
             //(4,2) **Top Left of Screen
             //(87,25) **Bottom Right of Screen
-            
+
             string[] defaultMale = new string[]
             {
                 "▄▄███▄",
@@ -6080,6 +7106,67 @@ namespace MainClasses
         {
 
         }
+
+        public static void SmallMenu(int posX, int posY, string[] menuOptions, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            Console.SetCursorPosition(posX, posY);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");
+            foreach (string option in menuOptions)
+            {
+                int optionPosX = posX + 3;
+                int optionPosY = posY + 1;
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("█                    █");
+                Console.SetCursorPosition(optionPosX, optionPosY);
+                Console.Write(option);
+                posY += 1;
+            }
+            Console.SetCursorPosition(posX, posY + 1);
+            Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+        }
+
+        public static void MediumMenu(int posX, int posY, string[] menuOptions, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            Console.SetCursorPosition(posX, posY);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");
+            foreach (string option in menuOptions)
+            {
+                int optionPosX = posX + 3;
+                int optionPosY = posY + 1;
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("█                                     █");
+                Console.SetCursorPosition(optionPosX, optionPosY);
+                Console.Write(option);
+                posY += 1;
+            }
+            Console.SetCursorPosition(posX, posY + 1);
+            Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+        }
+
+        public static void LargeMenu(int posX, int posY, string[] menuOptions, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+            Console.SetCursorPosition(posX, posY);
+            Console.Write("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");
+            foreach (string option in menuOptions)
+            {
+                int optionPosX = posX + 3;
+                int optionPosY = posY + 1;
+                Console.SetCursorPosition(posX, posY + 1);
+                Console.Write("█                                                      █");
+                Console.SetCursorPosition(optionPosX, optionPosY);
+                Console.Write(option);
+                posY += 1;
+            }
+            Console.SetCursorPosition(posX, posY + 1);
+            Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
+        }
+
         #endregion
 
         #region ASCII: String[] Templates
@@ -6643,7 +7730,7 @@ namespace MainClasses
             "                                                           ",
             "                                                           ",
             "                                                           ",
-            "                                                           " 
+            "                                                           "
         };
 
         public static string[] pokedexRefreshLEFT = new string[]
@@ -7320,6 +8407,15 @@ namespace MainClasses
             @"                                                                                                                                               "
 };
 
+        public static string[] pokeMartInitial = new string[]
+        {
+            $"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+            $"█  SUMMARY        █",
+            $"█  SWITCH         █",
+            $"█  ITEM           █",
+            $"█  CANCEL         █",
+            $"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
+        };
 
         #endregion
 
