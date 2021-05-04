@@ -123,7 +123,14 @@ namespace DungeonApplication
             int currentPosX = 167;
             int currentPosY = 56;
 
-            //navPlayerMenu = Console.ReadKey().Key;
+            //ASCII.BagMenuSelect(2, ASCII.PMBagItemSelect, gbText, gbBackground);
+            //ASCII.BagMenuRight(gbText, gbBackground);
+            //ASCII.StaticMessageBox(gbText, gbBackground);
+
+            Player_Menus.BagMenu(player1, navPlayerMenu, gbText, gbBackground);
+            //Player_Menus.PlayerBagMenu(player1, false, false, navPlayerMenu, gbText, gbBackground);
+
+            navPlayerMenu = Console.ReadKey().Key;
 
             //ASCII.DEMO(navPlayerMenu, currentPosX, currentPosY);
             //SFX.Route2();

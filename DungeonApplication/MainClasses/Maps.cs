@@ -2040,8 +2040,11 @@ namespace MainClasses
                         reloadTestMap = true;
                         break;
                     case ConsoleKey.Enter:
-                        Player_Menus.PokeMartVendor(player, currentPosX, currentPosY, posX, posY, direction, navPlayerMenu, gbText, gbBackground);
-                        DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        if (currentPosX == 15 && currentPosY == 7 && direction >= 3 && direction <= 4)
+                        {
+                            Player_Menus.PokeMartVendor(player, currentPosX, currentPosY, posX, posY, direction, navPlayerMenu, gbText, gbBackground);
+                            DEMOPokeMartStatic(player, currentPosX, currentPosY, direction, posX, posY, gbText, gbBackground);
+                        }                                                
                         reloadTestMap = true;
                         break;
                     default:

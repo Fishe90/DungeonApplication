@@ -7167,6 +7167,55 @@ namespace MainClasses
             Console.Write("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
         }
 
+        public static void BagMenuRight(ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            int posX = 49;
+            int posY = 2;
+
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+
+            foreach (string line in PMBagRight)
+            {
+                Console.SetCursorPosition(posX, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+        }
+
+        public static void BagMenuSelect(int tabNum, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            int posX = 4;
+            int posY = 16;
+            string[] tab = PMBagItemSelect;
+            if (tabNum == 1)
+            {
+                tab = PMBagItemSelect;
+            }
+            if (tabNum == 2)
+            {
+                tab = PMBagMedSelect;
+            }
+            if (tabNum == 3)
+            {
+                tab = PMBagMoveSelect;
+            }
+            if (tabNum == 4)
+            {
+                tab = PMBagBattleSelect;
+            }
+
+            Console.ForegroundColor = gbText;
+            Console.BackgroundColor = gbBackground;
+
+            foreach (string line in tab)
+            {
+                Console.SetCursorPosition(posX, posY);
+                Console.Write(line);
+                posY += 1;
+            }
+        }
+
         #endregion
 
         #region ASCII: String[] Templates
@@ -7507,6 +7556,87 @@ namespace MainClasses
                @"  █                     █",
                @"   █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
             };
+
+        public static string[] PMBag = new string[]
+        {
+            "                                             ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            "                                             █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            "                                             █ █                                   ",
+            " ▄▄▄▄▄▄▄▄▄                                   █ █                                   ",
+            " █ ITEMS █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ █ █                                   ",
+            " █       | MEDICINE | MOVES | BATTLE ITEMS █ █ █                                   ",
+            " █                                         █ █ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ " 
+        };
+
+        public static string[] PMBagRight = new string[]
+        {
+            "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            "█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ █                                   ",
+            "█ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ ",
+            "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ " 
+        };
+
+        public static string[] PMBagItemSelect = new string[]
+        {
+            " ▄▄▄▄▄▄▄▄▄                                   ",
+            " █ ITEMS █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █       █ MEDICINE █ MOVES █ BATTLE ITEMS █ ",
+            " █                                         █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        public static string[] PMBagMedSelect = new string[]
+        {
+            "         ▄▄▄▄▄▄▄▄▄▄▄▄                        ",
+            " ▄▄▄▄▄▄▄▄█ MEDICINE █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █ ITEMS █          █ MOVES █ BATTLE ITEMS █ ",
+            " █                                         █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        public static string[] PMBagMoveSelect = new string[]
+        {
+            "                    ▄▄▄▄▄▄▄▄▄                ",
+            " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ MOVES █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " █ ITEMS █ MEDICINE █       █ BATTLE ITEMS █ ",
+            " █                                         █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
+
+        public static string[] PMBagBattleSelect = new string[]
+        {
+            "                            ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ",
+            " ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ BATTLE ITEMS █ ",
+            " █ ITEMS █ MEDICINE █ MOVES █              █ ",
+            " █                                         █ ",
+            " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ "
+        };
 
         #endregion
 
@@ -8920,9 +9050,9 @@ namespace MainClasses
         public static string ItemSection = @"
  _______________________________________________________________________________________
 |  ___________________________________________________________________________________  |
-| |                                             ____________________________________  | |
 | |                                             ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ | |
 | |                                             █ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ | |
+| |                                             █ █                                   | |
 | |                                             █ █                                   | |
 | |                                             █ █                                   | |
 | |                                             █ █                                   | |

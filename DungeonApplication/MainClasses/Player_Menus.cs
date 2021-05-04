@@ -2567,7 +2567,8 @@ namespace MainClasses
                                         {
                                             case ConsoleKey.Enter:
                                                 //SFX.Select();
-                                                //PlayerItemSection(player, )
+                                                PlayerBagMenu(player, false, false, navPlayerMenu, gbText, gbBackground);
+                                                PlayerSelect(player, ASCII.PMBagSelect, gbText, gbBackground);
                                                 reloadPlayerBag = true;
                                                 break;
                                             case ConsoleKey.UpArrow:
@@ -4254,6 +4255,1446 @@ namespace MainClasses
 
         #region Player Menu Inventory
 
+        public static void BagMenu(Player player, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadMenu = true;
+            int posX = 4;
+            int posY = 2;
+            int selectPosX = 53;
+            int selectPosY = 4;
+            int disItemX = 55;
+            int disItemY = 4;
+            int tabSelect = 1;
+            Item itemSelected = new Item();
+            int navMainX = 53;
+            int navMainY = 4;
+            int selectionMin = 0;
+            int extra = 0;
+
+            do
+            {
+                List<Item> playerItems = new List<Item>();
+                List<Item> playerMeds = new List<Item>();
+                List<Item> playerMoves = new List<Item>();
+                List<Item> playerBattle = new List<Item>();
+                int itemCount = 0;
+                while (itemCount < player.Inventory.ItemSection.Length)
+                {
+                    if (player.Inventory.ItemSection[itemCount].Amount > 0)
+                    {
+                        playerItems.Add(player.Inventory.ItemSection[itemCount]);
+                    }
+                    itemCount += 1;
+                }
+                itemCount = 0;
+                while (itemCount < player.Inventory.MedSection.Length)
+                {
+                    if (player.Inventory.MedSection[itemCount].Amount > 0)
+                    {
+                        playerMeds.Add(player.Inventory.MedSection[itemCount]);
+                    }
+                    itemCount += 1;
+                }
+                itemCount = 0;
+                while (itemCount < player.Inventory.MoveSection.Length)
+                {
+                    if (player.Inventory.MoveSection[itemCount].Amount > 0)
+                    {
+                        playerMoves.Add(player.Inventory.MoveSection[itemCount]);
+                    }
+                    itemCount += 1;
+                }
+                itemCount = 0;
+                while (itemCount < player.Inventory.BattleSection.Length)
+                {
+                    if (player.Inventory.BattleSection[itemCount].Amount > 0)
+                    {
+                        playerBattle.Add(player.Inventory.BattleSection[itemCount]);
+                    }
+                    itemCount += 1;
+                }
+                List<Item> currentTab = playerItems;
+
+                ASCII.ResetScreen(gbText, gbBackground);
+                ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                ASCII.BagMenuRight(gbText, gbBackground);
+
+                if (tabSelect == 1)
+                {
+                    if (playerItems.Count > 0)
+                    {
+                        currentTab = playerItems;
+                        if (player.Inventory.ItemSection.Length != 0)
+                        {
+                            itemSelected = currentTab.ElementAt(navMainY - 4);
+                        }
+                    }
+                    else
+                    {
+                        currentTab = playerItems;
+                        currentTab.Add(Item.empty);
+
+                        itemSelected = currentTab.ElementAt(navMainY - 4);
+                    }
+                    //currentTab = playerItems;
+                    //if (player.Inventory.ItemSection.Length != 0)
+                    //{
+                    //    itemSelected = currentTab.ElementAt(navMainY - 4);
+                    //}
+                }
+                if (tabSelect == 2)
+                {
+                    if (playerMeds.Count > 0)
+                    {
+                        currentTab = playerMeds;
+                        if (player.Inventory.MedSection.Length != 0)
+                        {
+                            itemSelected = currentTab.ElementAt(navMainY - 4);
+                        }
+                    }
+                    else
+                    {
+                        currentTab = playerMeds;
+                        currentTab.Add(Item.empty);
+                        itemSelected = currentTab.ElementAt(navMainY - 4);
+                    }
+                    //currentTab = playerMeds;
+                    //if (player.Inventory.MedSection.Length != 0)
+                    //{
+                    //    itemSelected = currentTab.ElementAt(navMainY - 4);
+                    //}
+                }
+                if (tabSelect == 3)
+                {
+                    if (playerMoves.Count > 0)
+                    {
+                        currentTab = playerMoves;
+                        if (player.Inventory.MoveSection.Length != 0)
+                        {
+                            itemSelected = currentTab.ElementAt(navMainY - 4);
+                        }
+                    }
+                    else
+                    {
+                        currentTab = playerMoves;
+                        currentTab.Add(Item.empty);
+                        itemSelected = currentTab.ElementAt(navMainY - 4);
+                    }
+                    //currentTab = playerMoves;
+                    //if (player.Inventory.MoveSection.Length != 0)
+                    //{
+                    //    itemSelected = currentTab.ElementAt(navMainY - 4);
+                    //}
+                    //else
+                    //{
+                    //    itemSelected = Item.empty;
+                    //}
+                }
+                if (tabSelect == 4)
+                {
+                    if (playerBattle.Count > 0)
+                    {
+                        currentTab = playerBattle;
+                        if (player.Inventory.BattleSection.Length != 0)
+                        {
+                            itemSelected = currentTab.ElementAt(navMainY - 4 + extra);
+                        }
+                    }
+                    else
+                    {
+                        currentTab = playerBattle;
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.repel);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.pokeCatcher);
+                        currentTab.Add(Item.attackUp);
+                        currentTab.Add(Item.hpUp);
+                        currentTab.Add(Item.fullHeal);
+                        currentTab.Add(Item.revive);
+                        currentTab.Add(Item.mindStone);
+                        currentTab.Add(Item.earthStone);
+                        currentTab.Add(Item.aquaStone);
+                        currentTab.Add(Item.repel);
+                        currentTab.Add(Item.blazeStone);
+                        currentTab.Add(Item.attackUp);
+                        currentTab.Add(Item.hpUp);
+                        currentTab.Add(Item.fullHeal);
+                        currentTab.Add(Item.revive);
+                        currentTab.Add(Item.mindStone);
+                        currentTab.Add(Item.earthStone);
+                        currentTab.Add(Item.aquaStone);
+                        currentTab.Add(Item.repel);
+                        currentTab.Add(Item.blazeStone);
+
+                        itemSelected = currentTab.ElementAt(navMainY - 4 + extra);
+                    }
+                }
+                //Displays List of Items
+                disItemY = 4;
+                foreach (Item item in currentTab)
+                {
+                    if (item.Name != "empty" && disItemY < 19)
+                    {
+                        Console.SetCursorPosition(disItemX, disItemY);
+                        Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                        Console.SetCursorPosition(disItemX + 23, disItemY);
+                        Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                        int selectionMax = selectionMin;
+                        disItemY += 1;
+                    }
+                }
+                //Displays Item Description
+                if (itemSelected.Description.Length <= 70 && itemSelected.Name != "empty")
+                {
+                    ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                }
+                else if (itemSelected.Description.Length > 70 && itemSelected.Name != "empty")
+                {
+                    ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                }
+                else
+                {
+                    ASCII.InstantMessage("empty", gbText, gbBackground);
+                }
+
+                Console.SetCursorPosition(navMainX, navMainY);
+                Console.Write(">");
+                navPlayerMenu = Console.ReadKey().Key;
+
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(navMainX, navMainY);
+                        Console.Write("  ");
+                        navMainY -= 1;
+                        if (currentTab.Count > 15 && navMainY == 8 && selectionMin > 0)
+                        {
+                            navMainY += 1;
+                            selectionMin -= 1;
+                            extra -= 1;
+                        }
+                        if (navMainY < 4)
+                        {
+                            navMainY = 4;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(navMainX, navMainY);
+                        Console.Write("  ");
+                        navMainY += 1;
+                        if (currentTab.Count > 15 && navMainY == 14 && currentTab.Count > disItemY - 4 + selectionMin)
+                        {
+                            navMainY -= 1;
+                            selectionMin += 1;
+                            extra += 1;
+                        }
+                        if (currentTab.Count <= 15)
+                        {
+                            if (navMainY > currentTab.Count + 3)
+                            {
+                                navMainY = currentTab.Count + 3;
+                                if (navMainY == 3)
+                                {
+                                    navMainY = 4;
+                                }
+                            }
+                        }
+                        if (navMainY > 18)
+                        {
+                            navMainY = 18;
+                        }
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        int preTab = tabSelect;
+                        Console.SetCursorPosition(navMainX, navMainY);
+                        Console.Write("  ");
+                        tabSelect -= 1;
+                        if (tabSelect < 1)
+                        {
+                            tabSelect = 1;
+                        }
+                        if (tabSelect != preTab)
+                        {
+                            navMainY = 4;
+                            selectionMin = 0;
+                            extra = 0;
+                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                            ASCII.BagMenuRight(gbText, gbBackground);
+                        }
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        preTab = tabSelect;
+                        Console.SetCursorPosition(navMainX, navMainY);
+                        Console.Write("  ");
+                        tabSelect += 1;
+                        if (tabSelect > 4)
+                        {
+                            tabSelect = 4;
+                        }
+                        if (tabSelect != preTab)
+                        {
+                            navMainY = 4;
+                            selectionMin = 0;
+                            extra = 0;
+                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                            ASCII.BagMenuRight(gbText, gbBackground);
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        bool reloadOptions = true;
+                        int optionsPosX = 61;
+                        int optionsPosY = 20;
+                        string[] optionsList1 = new string[]
+                        {
+                            "USE",
+                            "GIVE",
+                            "TOSS",
+                            "CANCEL"
+                        };
+                        string[] optionsList2 = new string[]
+                        {
+                            "USE",
+                            "GIVE",
+                            "CANCEL"
+                        };
+                        string[] optionsList = optionsList1;
+                        if (true/*currentTab.Count != 0*/)
+                        {
+                            ASCII.InstantMessage($"{itemSelected.Name} is selected.", gbText, gbBackground);
+                            if (tabSelect == 1 || tabSelect == 2)
+                            {
+                                optionsList = optionsList1;
+                                optionsPosY = 20;
+                                ASCII.SmallMenu(60, 19, optionsList, gbText, gbBackground);
+                            }
+                            if (tabSelect == 3 || tabSelect == 4)
+                            {
+                                optionsList = optionsList2;
+                                optionsPosY = 21;
+                                ASCII.SmallMenu(60, 20, optionsList, gbText, gbBackground);
+                            }
+
+                            do
+                            {
+                                Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                Console.Write(">");
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        optionsPosY -= 1;
+                                        if (optionsPosY < 20 && tabSelect == 1 ||
+                                            optionsPosY < 20 && tabSelect == 2 ||
+                                            optionsPosY < 21 && tabSelect == 3 ||
+                                            optionsPosY < 21 && tabSelect == 4)
+                                        {
+                                            optionsPosY = 23;
+                                        }
+                                        break;
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        optionsPosY += 1;
+                                        if (optionsPosY > 23)
+                                        {
+                                            if (tabSelect == 1 || tabSelect == 2)
+                                            {
+                                                optionsPosY = 20;
+                                            }
+                                            if (tabSelect == 3 || tabSelect == 4)
+                                            {
+                                                optionsPosY = 21;
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+                                        //USE Feature
+                                        if (optionsPosY == 20 && tabSelect == 1 ||
+                                            optionsPosY == 20 && tabSelect == 2 ||
+                                            optionsPosY == 21 && tabSelect == 3 ||
+                                            optionsPosY == 21 && tabSelect == 4)
+                                        {
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                if (item.Name != "empty" && disItemY < 19)
+                                                {
+                                                    Console.SetCursorPosition(disItemX, disItemY);
+                                                    Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                    Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                    int selectionMax = selectionMin;
+                                                    disItemY += 1;
+                                                }
+                                            }
+                                            if (itemSelected.Section == Type.Item)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Med)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Move)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Battle)
+                                            {
+
+                                            }
+                                            //if (inCave == true || inWater == true)
+                                            //{
+
+                                            //}
+                                            else
+                                            {
+                                                ASCII.BagMenuRight(gbText, gbBackground);
+                                                disItemY = 4;
+
+                                                //Displays a list of items in the selected tab
+                                                foreach (Item item in currentTab)
+                                                {
+                                                    if (item.Name != "empty" && disItemY < 19)
+                                                    {
+                                                        Console.SetCursorPosition(disItemX, disItemY);
+                                                        Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                        Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                        Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                        int selectionMax = selectionMin;
+                                                        disItemY += 1;
+                                                    }
+                                                }
+                                                ASCII.ScrollMessageMulti("Salix's words echoed...", $"{player.Name.ToUpper()}! There's a time and place for everything!", 25, 1000, gbText, gbBackground);
+                                                ASCII.ScrollMessage("But not now.", 25, 1000, gbText, gbBackground);
+                                                reloadOptions = false;
+                                            }
+                                        }
+                                        //GIVE Feature
+                                        if (optionsPosY == 21 && tabSelect == 1 ||
+                                            optionsPosY == 21 && tabSelect == 2 ||
+                                            optionsPosY == 22 && tabSelect == 3 ||
+                                            optionsPosY == 22 && tabSelect == 4)
+                                        {
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                if (item.Name != "empty" && disItemY < 19)
+                                                {
+                                                    Console.SetCursorPosition(disItemX, disItemY);
+                                                    Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                    Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                    int selectionMax = selectionMin;
+                                                    disItemY += 1;
+                                                }
+                                            }
+                                            ASCII.InstantMessage("Testing Testing Give feature", gbText, gbBackground);
+                                        }
+                                        //TOSS Feature
+                                        if (optionsPosY == 22 && tabSelect == 1 ||
+                                            optionsPosY == 22 && tabSelect == 2)
+                                        {
+                                            bool reloadToss = true;
+                                            int tossX = 63;
+                                            int tossY = 22;
+                                            int tossCount = 1;
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                if (item.Name != "empty" && disItemY < 19)
+                                                {
+                                                    Console.SetCursorPosition(disItemX, disItemY);
+                                                    Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                    Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                    int selectionMax = selectionMin;
+                                                    disItemY += 1;
+                                                }
+                                            }
+                                            ASCII.InstantMessageMulti("Toss out how many", $"{itemSelected.Name}(s)?", gbText, gbBackground);
+                                            ASCII.SmallMenu(60, 20, new string[] { "^", "", "v" }, gbText, gbBackground);
+                                            do
+                                            {
+                                                Console.SetCursorPosition(tossX, tossY);
+                                                Console.Write("x" + tossCount);
+                                                navPlayerMenu = Console.ReadKey().Key;
+                                                switch (navPlayerMenu)
+                                                {
+                                                    case ConsoleKey.UpArrow:
+                                                    case ConsoleKey.W:
+                                                        Console.SetCursorPosition(tossX, tossY);
+                                                        Console.Write("     ");
+                                                        tossCount += 1;
+                                                        if (tossCount > itemSelected.Amount)
+                                                        {
+                                                            tossCount = 1;
+                                                        }
+                                                        break;
+                                                    case ConsoleKey.DownArrow:
+                                                    case ConsoleKey.S:
+                                                        Console.SetCursorPosition(tossX, tossY);
+                                                        Console.Write("     ");
+                                                        tossCount -= 1;
+                                                        if (tossCount < 1)
+                                                        {
+                                                            tossCount = itemSelected.Amount;
+                                                        }
+                                                        break;
+                                                    case ConsoleKey.Enter:
+                                                    case ConsoleKey.K:
+                                                        int confirmTossX = 61;
+                                                        int confirmTossY = 18;
+                                                        bool reloadConfirmToss = true;
+                                                        if (tossCount == 1)
+                                                        {
+                                                            ASCII.ScrollMessageMulti("Is it OK to throw away", $"{tossCount} {itemSelected.Name}?", 10, 0, gbText, gbBackground);
+                                                        }
+                                                        else
+                                                        {
+                                                            ASCII.ScrollMessageMulti("Is it OK to throw away", $"{tossCount} {itemSelected.Name}s?", 10, 0, gbText, gbBackground);
+                                                        }
+                                                        ASCII.SmallMenu(60, 17, new string[] { "YES", "NO" }, gbText, gbBackground);
+                                                        do
+                                                        {
+                                                            Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                            Console.Write(">");
+                                                            navPlayerMenu = Console.ReadKey().Key;
+                                                            switch (navPlayerMenu)
+                                                            {
+                                                                case ConsoleKey.UpArrow:
+                                                                case ConsoleKey.W:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    confirmTossY -= 1;
+                                                                    if (confirmTossY == 17)
+                                                                    {
+                                                                        confirmTossY = 19;
+                                                                    }
+                                                                    break;
+                                                                case ConsoleKey.DownArrow:
+                                                                case ConsoleKey.S:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    confirmTossY += 1;
+                                                                    if (confirmTossY == 20)
+                                                                    {
+                                                                        confirmTossY = 18;
+                                                                    }
+                                                                    break;
+                                                                case ConsoleKey.Enter:
+                                                                case ConsoleKey.K:
+                                                                    if (confirmTossY == 18)
+                                                                    {
+                                                                        int count = 0;
+                                                                        while (count < player.Inventory.ItemSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.ItemSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.ItemSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.MedSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.MedSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.MedSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.MoveSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.MoveSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.MoveSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.BattleSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.BattleSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.BattleSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        ASCII.ResetScreen(gbText, gbBackground);
+                                                                        ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                                                        disItemY = 4;
+                                                                        //Displays a list of items in the selected tab
+                                                                        foreach (Item item in currentTab)
+                                                                        {
+                                                                            if (item.Name != "empty" && disItemY < 19)
+                                                                            {
+                                                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                                                Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                                Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                                                int selectionMax = selectionMin;
+                                                                                disItemY += 1;
+                                                                            }
+                                                                        }
+                                                                        if (tossCount == 1)
+                                                                        {
+                                                                            ASCII.ScrollMessage($"Threw away {tossCount} {itemSelected.Name}.", 25, 0, gbText, gbBackground);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            ASCII.ScrollMessage($"Threw away {tossCount} {itemSelected.Name}s.", 25, 0, gbText, gbBackground);
+                                                                        }
+                                                                        navPlayerMenu = Console.ReadKey().Key;
+                                                                    }
+                                                                    //if (confirmTossY == 19)
+                                                                    //{
+                                                                    //    reloadConfirmToss = false;
+                                                                    //    reloadToss = false;
+                                                                    //    reloadOptions = false;
+                                                                    //    reloadMenu = true;
+                                                                    //}
+                                                                    ASCII.ResetScreen(gbText, gbBackground);
+                                                                    ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                    ASCII.BagMenuRight(gbText, gbBackground);
+                                                                    disItemY = 4;
+                                                                    //Displays a list of items in the selected tab
+                                                                    foreach (Item item in currentTab)
+                                                                    {
+                                                                        if (item.Name != "empty" && disItemY < 19)
+                                                                        {
+                                                                            Console.SetCursorPosition(disItemX, disItemY);
+                                                                            Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                                            Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                            Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                                            int selectionMax = selectionMin;
+                                                                            disItemY += 1;
+                                                                        }
+                                                                    }
+
+                                                                    //Displays Item Description
+                                                                    if (itemSelected.Description.Length <= 70 && currentTab.Count != 0)
+                                                                    {
+                                                                        ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                                    }
+                                                                    else if (itemSelected.Description.Length > 70 && currentTab.Count != 0)
+                                                                    {
+                                                                        ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                                    }
+                                                                    reloadConfirmToss = false;
+                                                                    reloadToss = false;
+                                                                    reloadOptions = false;
+                                                                    reloadMenu = true;
+                                                                    break;
+                                                                case ConsoleKey.Backspace:
+                                                                case ConsoleKey.O:
+                                                                    ASCII.ResetScreen(gbText, gbBackground);
+                                                                    ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                    ASCII.BagMenuRight(gbText, gbBackground);
+                                                                    disItemY = 4;
+                                                                    //Displays a list of items in the selected tab
+                                                                    foreach (Item item in currentTab)
+                                                                    {
+                                                                        if (item.Name != "empty" && disItemY < 19)
+                                                                        {
+                                                                            Console.SetCursorPosition(disItemX, disItemY);
+                                                                            Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                                            Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                            Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                                            int selectionMax = selectionMin;
+                                                                            disItemY += 1;
+                                                                        }
+                                                                    }
+
+                                                                    //Displays Item Description
+                                                                    if (itemSelected.Description.Length <= 70 && currentTab.Count != 0)
+                                                                    {
+                                                                        ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                                    }
+                                                                    else if (itemSelected.Description.Length > 70 && currentTab.Count != 0)
+                                                                    {
+                                                                        ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                                    }
+                                                                    reloadConfirmToss = false;
+                                                                    reloadToss = false;
+                                                                    reloadOptions = false;
+                                                                    reloadMenu = true;
+                                                                    break;
+                                                                default:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    break;
+                                                            }
+                                                        } while (reloadConfirmToss);
+                                                        break;
+                                                    case ConsoleKey.Backspace:
+                                                    case ConsoleKey.O:
+                                                        ASCII.ResetScreen(gbText, gbBackground);
+                                                        ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                                        disItemY = 4;
+                                                        //Displays a list of items in the selected tab
+                                                        foreach (Item item in currentTab)
+                                                        {
+                                                            if (item.Name != "empty" && disItemY < 19)
+                                                            {
+                                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                                Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                                int selectionMax = selectionMin;
+                                                                disItemY += 1;
+                                                            }
+                                                        }
+
+                                                        //Displays Item Description
+                                                        if (itemSelected.Description.Length <= 70 && currentTab.Count != 0)
+                                                        {
+                                                            ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                        }
+                                                        else if (itemSelected.Description.Length > 70 && currentTab.Count != 0)
+                                                        {
+                                                            ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                        }
+                                                        else
+                                                        {
+                                                            ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                        }
+                                                        reloadToss = false;
+                                                        reloadOptions = false;
+                                                        reloadMenu = true;
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            } while (reloadToss);
+                                        }
+                                        //CANCEL Feature
+                                        if (optionsPosY == 23 && tabSelect == 1 ||
+                                            optionsPosY == 23 && tabSelect == 2 ||
+                                            optionsPosY == 23 && tabSelect == 3 ||
+                                            optionsPosY == 23 && tabSelect == 4)
+                                        {
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                if (item.Name != "empty" && disItemY < 19)
+                                                {
+                                                    Console.SetCursorPosition(disItemX, disItemY);
+                                                    Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                    Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                    int selectionMax = selectionMin;
+                                                    disItemY += 1;
+                                                }
+                                            }
+                                            reloadOptions = false;
+                                        }
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                        disItemY = 4;
+                                        //Displays a list of items in the selected tab
+                                        foreach (Item item in currentTab)
+                                        {
+                                            if (item.Name != "empty" && disItemY < 19)
+                                            {
+                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                Console.Write(currentTab.ElementAt(disItemY - 4 + selectionMin).Name);
+                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                Console.Write($"x  {currentTab.ElementAt(disItemY - 4 + selectionMin).Amount}");
+                                                int selectionMax = selectionMin;
+                                                disItemY += 1;
+                                            }
+                                        }
+                                        reloadOptions = false;
+                                        break;
+                                    default:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        break;
+                                }
+                            } while (reloadOptions);
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadMenu = false;
+                        break;
+                    default:
+                        break;
+                }
+            } while (reloadMenu);
+        }
+
+        public static void PlayerBagMenu(Player player, bool inCave, bool inWater, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
+        {
+            bool reloadMenu = true;
+            int posX = 4;
+            int posY = 2;
+            int selectPosX = 53;
+            int selectPosY = 4;
+            int disItemX = 55;
+            int disItemY = 4;
+            int tabSelect = 1;
+            Item itemSelected = new Item();
+            Item[] currentTab = player.Inventory.ItemSection;
+
+            ASCII.ResetScreen(gbText, gbBackground);
+            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+            ASCII.BagMenuRight(gbText, gbBackground);
+            do
+            {
+                if (tabSelect == 1)
+                {
+                    currentTab = player.Inventory.ItemSection;
+                    if (player.Inventory.ItemSection.Length != 0)
+                    {
+                        itemSelected = player.Inventory.ItemSection[selectPosY - 4];
+                    }
+                }
+                if (tabSelect == 2)
+                {
+                    currentTab = player.Inventory.MedSection;
+                    if (player.Inventory.MedSection.Length != 0)
+                    {
+                        itemSelected = player.Inventory.MedSection[selectPosY - 4];
+                    }
+                }
+                if (tabSelect == 3)
+                {
+                    currentTab = player.Inventory.MoveSection;
+                    if (player.Inventory.MoveSection.Length != 0)
+                    {
+                        itemSelected = player.Inventory.MoveSection[selectPosY - 4];
+                    }
+                }
+                if (tabSelect == 4)
+                {
+                    currentTab = player.Inventory.BattleSection;
+                    if (player.Inventory.BattleSection.Length != 0)
+                    {
+                        itemSelected = player.Inventory.BattleSection[selectPosY - 4];
+                    }
+                }
+                disItemY = 4;
+
+                //Displays a list of items in the selected tab
+                foreach (Item item in currentTab)
+                {
+                    Console.SetCursorPosition(disItemX, disItemY);
+                    Console.Write(item.Name);
+                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                    Console.Write($"x  {item.Amount}");
+                    disItemY += 1;
+                }
+
+                //Displays Item Description
+                if (itemSelected.Description.Length <= 70 && currentTab.Length != 0)
+                {
+                    ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                }
+                else if (itemSelected.Description.Length > 70 && currentTab.Length != 0)
+                {
+                    ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                }
+                else
+                {
+                    ASCII.InstantMessage("empty", gbText, gbBackground);
+                }
+
+                Console.SetCursorPosition(selectPosX, selectPosY);
+                Console.Write(">");
+                navPlayerMenu = Console.ReadKey().Key;
+                switch (navPlayerMenu)
+                {
+                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.W:
+                        Console.SetCursorPosition(selectPosX, selectPosY);
+                        Console.Write("  ");
+                        selectPosY -= 1;
+                        if (selectPosY < 4)
+                        {
+                            selectPosY = 4;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.S:
+                        Console.SetCursorPosition(selectPosX, selectPosY);
+                        Console.Write("  ");
+                        selectPosY += 1;
+                        if (tabSelect == 1 && selectPosY - 3 > player.Inventory.ItemSection.Length ||
+                            tabSelect == 2 && selectPosY - 3 > player.Inventory.MedSection.Length ||
+                            tabSelect == 3 && selectPosY - 3 > player.Inventory.MoveSection.Length ||
+                            tabSelect == 4 && selectPosY - 3 > player.Inventory.BattleSection.Length)
+                        {
+                            selectPosY -= 1;
+                        }
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.A:
+                        int preTab = tabSelect;
+                        Console.SetCursorPosition(selectPosX, selectPosY);
+                        Console.Write("  ");
+                        tabSelect -= 1;
+                        if (tabSelect < 1)
+                        {
+                            tabSelect = 1;
+                        }
+                        if (tabSelect != preTab)
+                        {
+                            selectPosY = 4;
+                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                            ASCII.BagMenuRight(gbText, gbBackground);
+                        }
+                        break;
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.D:
+                        preTab = tabSelect;
+                        Console.SetCursorPosition(selectPosX, selectPosY);
+                        Console.Write("  ");
+                        tabSelect += 1;
+                        if (tabSelect > 4)
+                        {
+                            tabSelect = 4;
+                        }
+                        if (tabSelect != preTab)
+                        {
+                            selectPosY = 4;
+                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                            ASCII.BagMenuRight(gbText, gbBackground);
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.K:
+                        bool reloadOptions = true;
+                        int optionsPosX = 61;
+                        int optionsPosY = 20;
+                        string[] optionsList1 = new string[]
+                        {
+                            "USE",
+                            "GIVE",
+                            "TOSS",
+                            "CANCEL"
+                        };
+                        string[] optionsList2 = new string[]
+                        {
+                            "USE",
+                            "GIVE",
+                            "CANCEL"
+                        };
+                        string[] optionsList = optionsList1;
+                        if (true/*currentTab.Length != 0*/)
+                        {
+                            ASCII.InstantMessage($"{itemSelected.Name} is selected.", gbText, gbBackground);
+                            optionsList = optionsList1;
+                            optionsPosY = 20;
+                            ASCII.SmallMenu(60, 19, optionsList, gbText, gbBackground);
+                            //if (tabSelect == 1 || tabSelect == 2)
+                            //{
+                            //    optionsList = optionsList1;
+                            //    optionsPosY = 20;
+                            //    ASCII.SmallMenu(60, 19, optionsList, gbText, gbBackground);
+                            //}
+                            //if (tabSelect == 3 || tabSelect == 4)
+                            //{
+                            //    optionsList = optionsList2;
+                            //    optionsPosY = 21;
+                            //    ASCII.SmallMenu(60, 20, optionsList, gbText, gbBackground);
+                            //}
+
+                            do
+                            {
+                                Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                Console.Write(">");
+                                navPlayerMenu = Console.ReadKey().Key;
+                                switch (navPlayerMenu)
+                                {
+                                    case ConsoleKey.UpArrow:
+                                    case ConsoleKey.W:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        optionsPosY -= 1;
+                                        //if (optionsPosY < 20 && tabSelect == 1 ||
+                                        //    optionsPosY < 20 && tabSelect == 2 ||
+                                        //    optionsPosY < 21 && tabSelect == 3 ||
+                                        //    optionsPosY < 21 && tabSelect == 4)
+                                        //{
+                                        //    optionsPosY = 23;
+                                        //}
+                                        if (optionsPosY < 20)
+                                        {
+                                            optionsPosY = 23;
+                                        }
+                                        break;
+                                    case ConsoleKey.DownArrow:
+                                    case ConsoleKey.S:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        optionsPosY += 1;
+                                        if (optionsPosY > 23)
+                                        {
+                                            if (tabSelect == 1 || tabSelect == 2)
+                                            {
+                                                optionsPosY = 20;
+                                            }
+                                            if (tabSelect == 3 || tabSelect == 4)
+                                            {
+                                                optionsPosY = 21;
+                                            }
+                                        }
+                                        break;
+                                    case ConsoleKey.Enter:
+                                    case ConsoleKey.K:
+                                        //USE Feature
+                                        if (optionsPosY == 20 && tabSelect == 1 ||
+                                            optionsPosY == 20 && tabSelect == 2 ||
+                                            optionsPosY == 21 && tabSelect == 3 ||
+                                            optionsPosY == 21 && tabSelect == 4)
+                                        {
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                Console.Write(item.Name);
+                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                Console.Write($"x  {item.Amount}");
+                                                disItemY += 1;
+                                            }
+                                            if (itemSelected.Section == Type.Item)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Med)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Move)
+                                            {
+
+                                            }
+                                            if (itemSelected.Section == Type.Battle)
+                                            {
+
+                                            }
+                                            if (inCave == true || inWater == true)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                ASCII.BagMenuRight(gbText, gbBackground);
+                                                disItemY = 4;
+
+                                                //Displays a list of items in the selected tab
+                                                foreach (Item item in currentTab)
+                                                {
+                                                    Console.SetCursorPosition(disItemX, disItemY);
+                                                    Console.Write(item.Name);
+                                                    Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                    Console.Write($"x  {item.Amount}");
+                                                    disItemY += 1;
+                                                }
+                                                ASCII.ScrollMessageMulti("Salix's words echoed...", $"{player.Name.ToUpper()}! There's a time and place for everything!", 25, 1000, gbText, gbBackground);
+                                                ASCII.ScrollMessage("But not now.", 25, 1000, gbText, gbBackground);
+                                                reloadOptions = false;
+                                            }
+                                        }
+                                        //GIVE Feature
+                                        if (optionsPosY == 21 && tabSelect == 1 ||
+                                            optionsPosY == 21 && tabSelect == 2 ||
+                                            optionsPosY == 22 && tabSelect == 3 ||
+                                            optionsPosY == 22 && tabSelect == 4)
+                                        {
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                Console.Write(item.Name);
+                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                Console.Write($"x  {item.Amount}");
+                                                disItemY += 1;
+                                            }
+                                            ASCII.InstantMessage("Testing Testing Give feature", gbText, gbBackground);
+                                        }
+                                        //TOSS Feature
+                                        if (optionsPosY == 22 && tabSelect == 1 ||
+                                            optionsPosY == 22 && tabSelect == 2)
+                                        {
+                                            bool reloadToss = true;
+                                            int tossX = 63;
+                                            int tossY = 22;
+                                            int tossCount = 1;
+                                            ASCII.ResetScreen(gbText, gbBackground);
+                                            ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                Console.Write(item.Name);
+                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                Console.Write($"x  {item.Amount}");
+                                                disItemY += 1;
+                                            }
+                                            ASCII.InstantMessageMulti("Toss out how many", $"{itemSelected.Name}(s)?", gbText, gbBackground);
+                                            ASCII.SmallMenu(60, 20, new string[] { "^", "", "v" }, gbText, gbBackground);
+                                            do
+                                            {
+                                                Console.SetCursorPosition(tossX, tossY);
+                                                Console.Write("x" + tossCount);
+                                                navPlayerMenu = Console.ReadKey().Key;
+                                                switch (navPlayerMenu)
+                                                {
+                                                    case ConsoleKey.UpArrow:
+                                                    case ConsoleKey.W:
+                                                        Console.SetCursorPosition(tossX, tossY);
+                                                        Console.Write("     ");
+                                                        tossCount += 1;
+                                                        if (tossCount > itemSelected.Amount)
+                                                        {
+                                                            tossCount = 1;
+                                                        }
+                                                        break;
+                                                    case ConsoleKey.DownArrow:
+                                                    case ConsoleKey.S:
+                                                        Console.SetCursorPosition(tossX, tossY);
+                                                        Console.Write("     ");
+                                                        tossCount -= 1;
+                                                        if (tossCount < 1)
+                                                        {
+                                                            tossCount = itemSelected.Amount;
+                                                        }
+                                                        break;
+                                                    case ConsoleKey.Enter:
+                                                    case ConsoleKey.K:
+                                                        int confirmTossX = 61;
+                                                        int confirmTossY = 18;
+                                                        bool reloadConfirmToss = true;
+                                                        if (tossCount == 1)
+                                                        {
+                                                            ASCII.ScrollMessageMulti("Is it OK to throw away", $"{tossCount} {itemSelected.Name}?", 10, 0, gbText, gbBackground);
+                                                        }
+                                                        else
+                                                        {
+                                                            ASCII.ScrollMessageMulti("Is it OK to throw away", $"{tossCount} {itemSelected.Name}s?", 10, 0, gbText, gbBackground);
+                                                        }
+                                                        ASCII.SmallMenu(60, 17, new string[] { "YES", "NO" }, gbText, gbBackground);
+                                                        do
+                                                        {
+                                                            Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                            Console.Write(">");
+                                                            navPlayerMenu = Console.ReadKey().Key;
+                                                            switch (navPlayerMenu)
+                                                            {
+                                                                case ConsoleKey.UpArrow:
+                                                                case ConsoleKey.W:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    confirmTossY -= 1;
+                                                                    if (confirmTossY == 17)
+                                                                    {
+                                                                        confirmTossY = 19;
+                                                                    }
+                                                                    break;
+                                                                case ConsoleKey.DownArrow:
+                                                                case ConsoleKey.S:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    confirmTossY += 1;
+                                                                    if (confirmTossY == 20)
+                                                                    {
+                                                                        confirmTossY = 18;
+                                                                    }
+                                                                    break;
+                                                                case ConsoleKey.Enter:
+                                                                case ConsoleKey.K:
+                                                                    if (confirmTossY == 18)
+                                                                    {
+                                                                        int count = 0;
+                                                                        while (count < player.Inventory.ItemSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.ItemSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.ItemSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.MedSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.MedSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.MedSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.MoveSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.MoveSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.MoveSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        count = 0;
+                                                                        while (count < player.Inventory.BattleSection.Length)
+                                                                        {
+                                                                            if (itemSelected.Name == player.Inventory.BattleSection[count].Name)
+                                                                            {
+                                                                                player.Inventory.BattleSection[count].Amount -= tossCount;
+                                                                            }
+                                                                            count += 1;
+                                                                        }
+                                                                        ASCII.ResetScreen(gbText, gbBackground);
+                                                                        ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                                                        disItemY = 4;
+                                                                        //Displays a list of items in the selected tab
+                                                                        foreach (Item item in currentTab)
+                                                                        {
+                                                                            Console.SetCursorPosition(disItemX, disItemY);
+                                                                            Console.Write(item.Name);
+                                                                            Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                            Console.Write($"x  {item.Amount}");
+                                                                            disItemY += 1;
+                                                                        }
+                                                                        if (tossCount == 1)
+                                                                        {
+                                                                            ASCII.ScrollMessage($"Threw away {tossCount} {itemSelected.Name}.", 25, 0, gbText, gbBackground);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            ASCII.ScrollMessage($"Threw away {tossCount} {itemSelected.Name}s.", 25, 0, gbText, gbBackground);
+                                                                        }
+                                                                        navPlayerMenu = Console.ReadKey().Key;
+                                                                    }
+                                                                    //if (confirmTossY == 19)
+                                                                    //{
+                                                                    //    reloadConfirmToss = false;
+                                                                    //    reloadToss = false;
+                                                                    //    reloadOptions = false;
+                                                                    //    reloadMenu = true;
+                                                                    //}
+                                                                    ASCII.ResetScreen(gbText, gbBackground);
+                                                                    ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                    ASCII.BagMenuRight(gbText, gbBackground);
+                                                                    disItemY = 4;
+                                                                    //Displays a list of items in the selected tab
+                                                                    foreach (Item item in currentTab)
+                                                                    {
+                                                                        Console.SetCursorPosition(disItemX, disItemY);
+                                                                        Console.Write(item.Name);
+                                                                        Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                        Console.Write($"x  {item.Amount}");
+                                                                        disItemY += 1;
+                                                                    }
+
+                                                                    //Displays Item Description
+                                                                    if (itemSelected.Description.Length <= 70 && currentTab.Length != 0)
+                                                                    {
+                                                                        ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                                    }
+                                                                    else if (itemSelected.Description.Length > 70 && currentTab.Length != 0)
+                                                                    {
+                                                                        ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                                    }
+                                                                    reloadConfirmToss = false;
+                                                                    reloadToss = false;
+                                                                    reloadOptions = false;
+                                                                    reloadMenu = true;
+                                                                    break;
+                                                                case ConsoleKey.Backspace:
+                                                                case ConsoleKey.O:
+                                                                    ASCII.ResetScreen(gbText, gbBackground);
+                                                                    ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                                    ASCII.BagMenuRight(gbText, gbBackground);
+                                                                    disItemY = 4;
+                                                                    //Displays a list of items in the selected tab
+                                                                    foreach (Item item in currentTab)
+                                                                    {
+                                                                        Console.SetCursorPosition(disItemX, disItemY);
+                                                                        Console.Write(item.Name);
+                                                                        Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                                        Console.Write($"x  {item.Amount}");
+                                                                        disItemY += 1;
+                                                                    }
+
+                                                                    //Displays Item Description
+                                                                    if (itemSelected.Description.Length <= 70 && currentTab.Length != 0)
+                                                                    {
+                                                                        ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                                    }
+                                                                    else if (itemSelected.Description.Length > 70 && currentTab.Length != 0)
+                                                                    {
+                                                                        ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                                    }
+                                                                    reloadConfirmToss = false;
+                                                                    reloadToss = false;
+                                                                    reloadOptions = false;
+                                                                    reloadMenu = true;
+                                                                    break;
+                                                                default:
+                                                                    Console.SetCursorPosition(confirmTossX, confirmTossY);
+                                                                    Console.Write("  ");
+                                                                    break;
+                                                            }
+                                                        } while (reloadConfirmToss);
+                                                        break;
+                                                    case ConsoleKey.Backspace:
+                                                    case ConsoleKey.O:
+                                                        ASCII.ResetScreen(gbText, gbBackground);
+                                                        ASCII.BagMenuSelect(tabSelect, gbText, gbBackground);
+                                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                                        disItemY = 4;
+                                                        //Displays a list of items in the selected tab
+                                                        foreach (Item item in currentTab)
+                                                        {
+                                                            Console.SetCursorPosition(disItemX, disItemY);
+                                                            Console.Write(item.Name);
+                                                            Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                            Console.Write($"x  {item.Amount}");
+                                                            disItemY += 1;
+                                                        }
+
+                                                        //Displays Item Description
+                                                        if (itemSelected.Description.Length <= 70 && currentTab.Length != 0)
+                                                        {
+                                                            ASCII.InstantMessage(itemSelected.Description, gbText, gbBackground);
+                                                        }
+                                                        else if (itemSelected.Description.Length > 70 && currentTab.Length != 0)
+                                                        {
+                                                            ASCII.InstantMessageMulti(itemSelected.Description.Substring(0, 70), itemSelected.Description.Substring(70), gbText, gbBackground);
+                                                        }
+                                                        else
+                                                        {
+                                                            ASCII.InstantMessage("empty", gbText, gbBackground);
+                                                        }
+                                                        reloadToss = false;
+                                                        reloadOptions = false;
+                                                        reloadMenu = true;
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            } while (reloadToss);
+                                        }
+                                        //CANCEL Feature
+                                        if (optionsPosY == 23 && tabSelect == 1 ||
+                                            optionsPosY == 23 && tabSelect == 2 ||
+                                            optionsPosY == 23 && tabSelect == 3 ||
+                                            optionsPosY == 23 && tabSelect == 4)
+                                        {
+                                            ASCII.BagMenuRight(gbText, gbBackground);
+                                            disItemY = 4;
+                                            //Displays a list of items in the selected tab
+                                            foreach (Item item in currentTab)
+                                            {
+                                                Console.SetCursorPosition(disItemX, disItemY);
+                                                Console.Write(item.Name);
+                                                Console.SetCursorPosition(disItemX + 23, disItemY);
+                                                Console.Write($"x  {item.Amount}");
+                                                disItemY += 1;
+                                            }
+                                            reloadOptions = false;
+                                        }
+                                        break;
+                                    case ConsoleKey.Backspace:
+                                    case ConsoleKey.O:
+                                        ASCII.BagMenuRight(gbText, gbBackground);
+                                        disItemY = 4;
+                                        //Displays a list of items in the selected tab
+                                        foreach (Item item in currentTab)
+                                        {
+                                            Console.SetCursorPosition(disItemX, disItemY);
+                                            Console.Write(item.Name);
+                                            Console.SetCursorPosition(disItemX + 23, disItemY);
+                                            Console.Write($"x  {item.Amount}");
+                                            disItemY += 1;
+                                        }
+                                        reloadOptions = false;
+                                        break;
+                                    default:
+                                        Console.SetCursorPosition(optionsPosX, optionsPosY);
+                                        Console.Write("  ");
+                                        break;
+                                }
+                            } while (reloadOptions);
+                        }
+                        break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.O:
+                        reloadMenu = false;
+                        break;
+                    default:
+                        Console.SetCursorPosition(selectPosX, selectPosY);
+                        Console.Write("  ");
+                        break;
+                }
+            } while (reloadMenu);
+        }
+
         public static void PlayerItemSection(Player player, Monster monster, ConsoleKey navPlayerMenu, ConsoleColor GameScreenText, ConsoleColor GameScreenBackground)
         {
             bool reloadItemRepel = false;
@@ -5931,7 +7372,6 @@ namespace MainClasses
 
         public static void PokeMartVendor(Player player, int mapPosX, int mapPosY, int posX, int posY, int direction, ConsoleKey navPlayerMenu, ConsoleColor gbText, ConsoleColor gbBackground)
         {
-            bool buyORsell = false;
             bool reloadMenu = true;
             bool reloadInnerMenu = true;
             bool reloadBuyMenu = true;
@@ -5976,7 +7416,7 @@ namespace MainClasses
                     case ConsoleKey.K:
                         Maps.DEMOPokeMartStatic(player, mapPosX, mapPosY, direction, posX, posY, gbText, gbBackground);
                         if (menuPosY == 4 || menuPosY == 5)
-                        {                            
+                        {
                             int innerMenuPosY = 4;
                             int itemPosX = 32;
                             int itemPosY = 4;
@@ -6129,7 +7569,7 @@ namespace MainClasses
                                                             itemCount += 1;
                                                             if (itemCount * Item.PokeMartItems[innerMenuPosY - 4].PriceBuy > player.Money)
                                                             {
-                                                                itemCount -= 1;
+                                                                itemCount = 1;
                                                             }
                                                             break;
                                                         case ConsoleKey.DownArrow:
@@ -6141,7 +7581,8 @@ namespace MainClasses
                                                             itemCount -= 1;
                                                             if (itemCount == 0)
                                                             {
-                                                                itemCount = 1;
+                                                                //itemCount = 1;
+                                                                itemCount = player.Money / Item.PokeMartItems[innerMenuPosY - 4].PriceBuy;
                                                             }
                                                             break;
                                                         case ConsoleKey.Enter:
@@ -6392,7 +7833,7 @@ namespace MainClasses
                                                             itemCount += 1;
                                                             if (itemCount > Item.PokeMartItems[innerMenuPosY - 4].Amount)
                                                             {
-                                                                itemCount -= 1;
+                                                                itemCount = 1;
                                                             }
                                                             break;
                                                         case ConsoleKey.DownArrow:
@@ -6404,7 +7845,7 @@ namespace MainClasses
                                                             itemCount -= 1;
                                                             if (itemCount == 0)
                                                             {
-                                                                itemCount = 1;
+                                                                itemCount = Item.PokeMartItems[innerMenuPosY - 4].Amount;
                                                             }
                                                             break;
                                                         case ConsoleKey.Enter:
@@ -6447,7 +7888,7 @@ namespace MainClasses
                                                                 itemPosY += 1;
                                                             }
                                                             #endregion
-                                                            ASCII.ScrollMessageMulti($"I can pay ${Item.PokeMartItems[innerMenuPosY - 4].PriceSell*itemCount}.", $"Would that be OK?", 5, 0, gbText, gbBackground);
+                                                            ASCII.ScrollMessageMulti($"I can pay ${Item.PokeMartItems[innerMenuPosY - 4].PriceSell * itemCount}.", $"Would that be OK?", 5, 0, gbText, gbBackground);
                                                             ASCII.SmallMenu(60, 16, new string[] { "YES", "NO" }, gbText, gbBackground);
                                                             int confirmY = 17;
                                                             reloadConfirmBuy = true;
@@ -6720,10 +8161,6 @@ namespace MainClasses
                                         break;
                                 }
                             } while (reloadInnerMenu);
-                        }
-                        if (menuPosY == 5)
-                        {
-
                         }
                         if (menuPosY == 6)
                         {

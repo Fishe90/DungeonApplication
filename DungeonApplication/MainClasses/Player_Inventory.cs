@@ -74,6 +74,7 @@ namespace MainClasses
             PriceSell = priceSell;
         }
 
+        public static Item empty = new Item("empty", "emptyasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf", Type.Move, Monster_Race.NONE, false, 1, 0, 0);
         public static Item pokeCatcher = new Item("Catcher", "A device for catching wild PokeFraud. It is thrown like a ball at the target. It is designed as a capsule system.", Type.Item, Monster_Race.BATTLE, false, 50, 200, 100);
         public static Item repel = new Item("Repel", "An item that prevents weak wild PokeFraud from appearing for 100 steps after its use.", Type.Item, Monster_Race.NONE, false, 5, 350, 175);
         public static Item blazeStone = new Item("Blaze Stone", "A curious rock that powers up Fire-Type moves.", Type.Item, Monster_Race.Fire, false, 5, 1000, 500);
